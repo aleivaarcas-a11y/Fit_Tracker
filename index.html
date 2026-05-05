@@ -1892,6 +1892,61 @@ function toggleNCheck(key,el){
 }
 
 // Init nutrition when tab opens
+// ─── NUTRITION TIMING ─────────────────────────────────────────────────────────
+let nTimeMode='morning';
+
+const MEAL_TIMES={
+  morning:{
+    gym:{
+      b:{time:'07:30h',note:'Pre-entreno ligero (sales a las 9h). Tostar y comer rapido.'},
+      mm:{time:'10:30h',note:'Batido POST-GYM inmediato al salir. Maximo 60 min post-entreno.'},
+      l:{time:'13:00h',note:'Comida principal. Ya tienes el batido post-gym hecho.'},
+      s:{time:'17:00h',note:'Merienda — snack proteico.'},
+      d:{time:'20:30h',note:'Cena.'},
+    },
+    rest:{
+      b:{time:'08:30h',note:''},mm:{time:'11:00h',note:''},l:{time:'14:00h',note:''},s:{time:'17:00h',note:''},d:{time:'20:30h',note:''},
+    }
+  },
+  midday:{
+    gym:{
+      b:{time:'08:00h',note:'Desayuno normal. Tienes 5h de digestion antes del gym.'},
+      mm:{time:'11:00h',note:'PRE-ENTRENO perfecto. Yogur con miel 2h antes del gym — energia sin pesadez.'},
+      l:{time:'15:00h',note:'Batido POST-GYM al llegar + comida principal 30 min despues.'},
+      s:{time:'18:00h',note:'Snack ligero de tarde.'},
+      d:{time:'21:00h',note:'Cena.'},
+    },
+    rest:{
+      b:{time:'09:00h',note:''},mm:{time:'12:00h',note:''},l:{time:'14:30h',note:''},s:{time:'17:30h',note:''},d:{time:'21:00h',note:''},
+    }
+  }
+};
+
+function getMealTime(mealId, dayType){
+  const dt=dayType==='rest'?'rest':'gym';
+  const t=MEAL_TIMES[nTimeMode]&&MEAL_TIMES[nTimeMode][dt]&&MEAL_TIMES[nTimeMode][dt][mealId];
+  return t||{time:'',note:''};
+}
+
+function getMealName(meal, dayType){
+  if(nTimeMode==='morning'&&dayType!=='rest'){
+    if(meal.id==='mm') return 'Batido post-gym de recuperacion';
+  }
+  if(nTimeMode==='midday'&&dayType!=='rest'){
+    if(meal.id==='l') return meal.name+' (+ batido post-gym al llegar)';
+  }
+  return meal.name;
+}
+
+function setNutriTime(mode){
+  nTimeMode=mode;
+  const btnM=document.getElementById('nt-morning');
+  const btnD=document.getElementById('nt-midday');
+  if(btnM){btnM.style.background=mode==='morning'?'#1b4332':'var(--card)';btnM.style.color=mode==='morning'?'#fff':'var(--muted)';btnM.style.fontWeight=mode==='morning'?'700':'500';}
+  if(btnD){btnD.style.background=mode==='midday'?'#1b4332':'var(--card)';btnD.style.color=mode==='midday'?'#fff':'var(--muted)';btnD.style.fontWeight=mode==='midday'?'700':'500';}
+  renderNDayContent();
+}
+
 function initNutri(){
   renderNDayScroll();
   renderNDayContent();
@@ -2777,233 +2832,360 @@ function showMuscleModal(exName){
 let runCurWeek = 0;
 
 const RUN_PROGRAM = [
-  // SEMANA 1 - Run/Walk 1:2 (1 min corriendo, 2 caminando)
-  {week:1, title:'Semana 1 — Primeros pasos', subtitle:'Alternamos correr y caminar. El cuerpo se adapta al impacto.',
+  // ── SEMANA 1 ──────────────────────────────────────────────────────────────
+  {week:1, title:'Semana 1 — Primeros pasos en la pista',
+   subtitle:'Tu cuerpo nunca ha corrido (o hace mucho). El objetivo NO es correr rapido. Es acostumbrarte al impacto y al movimiento. Si puedes hablar con frases completas, vas bien.',
    sessions:[
-    {day:'Sesion 1', duration:'20 min total', fc:'113-125 ppm',
+    {day:'Sesion 1 — Martes o Miercoles',
+     duration:'20 min total', fc:'113-120 ppm', ritmo:'Sin ritmo — muy suave. Si tienes movil con GPS: 8:00-9:00 min/km al correr.',
+     focus:'Sentir el impacto. No te preocupes por la velocidad.',
+     tech:'Zancada corta, pies aterrizan bajo las caderas (no delante). Brazos en 90 grados, relajados. Cabeza alta, mirada al frente unos 10 metros.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':'Calentamiento. Ritmo paseo.'},
-       {type:'run','text':'Correr suave','dur':'1 min','note':'Muy suave. Si no puedes hablar, mas lento.'},
-       {type:'walk','text':'Caminar activo','dur':'2 min','note':'Recuperacion. No pares del todo.'},
-       {type:'repeat','text':'Repetir x5','dur':'15 min','note':'5 ciclos de 1 min corriendo + 2 caminando.'},
-       {type:'cool','text':'Caminar suave de vuelta a la calma','dur':'5 min','note':'Nunca pares en seco.'},
-     ]},
-    {day:'Sesion 2', duration:'20 min total', fc:'113-125 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:'Activa las piernas. Mueve los brazos. Respira hondo.'},
+       {type:'run',text:'Trote muy suave',dur:'1 min',note:'Casi como caminar rapido pero con ambos pies en el aire. Si no puedes hablar, VAS DEMASIADO RAPIDO. Baja el ritmo.'},
+       {type:'walk',text:'Caminar activo',dur:'2 min',note:'No pares. Camina con paso decidido. Recupera la respiracion.'},
+       {type:'repeat',text:'Repetir 5 ciclos',dur:'15 min total',note:'5 veces: 1 min trotando + 2 min caminando. Cada vuelta a la pista (400m) tardas unos 3-4 min caminando.'},
+       {type:'cool',text:'Caminar suave vuelta a la calma',dur:'5 min',note:'Reduce el paso progresivamente. Nunca pares en seco: el corazon necesita bajar gradualmente.'},
+     ],
+     tips:['Si en algun momento no puedes hablar, camina. No importa. Es la semana 1.','La pista de atletismo son 400m por vuelta. En 5 ciclos de 3 min recorres unas 3-4 vueltas.','Puede que notes los gemelos tensos al dia siguiente. Es normal. Estira bien al acabar.']
+    },
+    {day:'Sesion 2 — Jueves o Viernes',
+     duration:'20 min total', fc:'113-120 ppm', ritmo:'Mismo que sesion 1. No subas el ritmo.',
+     focus:'Repetir exactamente igual. La consistencia es mas importante que el progreso en semana 1.',
+     tech:'Pon atencion en no golpear el talon. Intenta que el pie aterrice plano o de metatarso (parte delantera). Reduce el impacto en rodillas.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'1 min','note':''},
-       {type:'walk','text':'Caminar activo','dur':'2 min','note':''},
-       {type:'repeat','text':'Repetir x5','dur':'15 min','note':'Igual que el martes. La consistencia es la clave.'},
-       {type:'cool','text':'Vuelta a la calma','dur':'5 min','note':''},
-     ]},
-    {day:'Sesion 3', duration:'22 min total', fc:'113-125 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote muy suave',dur:'1 min',note:'Mismo ritmo que el martes. El objetivo es repetir, no mejorar.'},
+       {type:'walk',text:'Caminar activo',dur:'2 min',note:''},
+       {type:'repeat',text:'Repetir 5 ciclos',dur:'15 min total',note:''},
+       {type:'cool',text:'Caminar suave',dur:'5 min',note:'Estira gemelos y cuadriceps al terminar: 30 segundos cada pierna.'},
+     ],
+     tips:['Si la sesion 1 fue dura, esta sera mas facil. El cuerpo aprende rapido.','Bebe agua antes de salir. La pista en Murcia puede hacer calor incluso a las 8h.']
+    },
+    {day:'Sesion 3 — Sabado o Domingo',
+     duration:'22 min total', fc:'113-120 ppm', ritmo:'8:00-9:00 min/km al trotar. Sube ligeramente si te sientes bien.',
+     focus:'Un ciclo mas que las sesiones anteriores. Primera pequeña progresion.',
+     tech:'Respiracion 2:2 — inhala 2 pasos, exhala 2 pasos. Si te cuesta, prueba 3:2. Nunca aguantes la respiracion.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'1 min','note':''},
-       {type:'walk','text':'Caminar activo','dur':'2 min','note':''},
-       {type:'repeat','text':'Repetir x6','dur':'18 min','note':'Un ciclo mas que las sesiones anteriores.'},
-       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
-     ]},
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote suave',dur:'1 min',note:''},
+       {type:'walk',text:'Caminar activo',dur:'2 min',note:''},
+       {type:'repeat',text:'Repetir 6 ciclos',dur:'18 min total',note:'Un ciclo mas que las sesiones anteriores. Notaras que ya no es tan duro.'},
+       {type:'cool',text:'Caminar suave',dur:'4 min',note:'Estira: gemelos, cuadriceps, isquios. 30 seg cada uno.'},
+     ],
+     tips:['Has completado la semana 1. 3 sesiones, ~5km caminando y trotando. El mayor logro es haber empezado.','La semana que viene el ritmo de carrera sube a 90 segundos.']
+    },
    ]},
 
-  // SEMANA 2 - Run/Walk 1.5:1.5
-  {week:2, title:'Semana 2 — Igualando tiempos', subtitle:'Ya corremos tanto como caminamos. El ritmo sigue siendo muy suave.',
+  // ── SEMANA 2 ──────────────────────────────────────────────────────────────
+  {week:2, title:'Semana 2 — Igualando tiempos',
+   subtitle:'Ya corremos tanto como caminamos. El cuerpo empieza a adaptarse al impacto. El ritmo sigue siendo MUY suave — la tentacion de ir mas rapido es el mayor error del principiante.',
    sessions:[
-    {day:'Sesion 1', duration:'24 min total', fc:'115-128 ppm',
+    {day:'Sesion 1',
+     duration:'24 min total', fc:'115-125 ppm', ritmo:'7:30-8:30 min/km al trotar. Ligera mejora respecto semana 1.',
+     focus:'Mantener el ritmo constante en cada bloque de carrera. No empezar rapido y acabar lento.',
+     tech:'Cadencia: intenta dar unos 160-170 pasos por minuto. Cuenta tus pasos del pie derecho durante 30 segundos: deberian ser unos 40-43.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'90 seg','note':'30 segundos mas que la semana pasada.'},
-       {type:'walk','text':'Caminar activo','dur':'90 seg','note':''},
-       {type:'repeat','text':'Repetir x6','dur':'18 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
-     ]},
-    {day:'Sesion 2', duration:'24 min total', fc:'115-128 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote suave — 90 segundos',dur:'1:30 min',note:'30 segundos mas que la semana pasada. Notaras que ya no es tan duro como el primer dia.'},
+       {type:'walk',text:'Caminar activo',dur:'90 seg',note:'Misma duracion que el trote. Recuperacion completa.'},
+       {type:'repeat',text:'Repetir 6 ciclos',dur:'18 min total',note:'6 ciclos de 90s corriendo + 90s caminando.'},
+       {type:'cool',text:'Caminar suave',dur:'4 min',note:''},
+     ],
+     tips:['El ritmo 1:1 (mismo tiempo corriendo que caminando) es un hito importante.','Si notas las rodillas, para. Nunca entrenes con dolor articular. Con agujetas si, con dolor articular no.']
+    },
+    {day:'Sesion 2',
+     duration:'24 min total', fc:'115-125 ppm', ritmo:'7:30-8:30 min/km.',
+     focus:'Tecnica de brazos: codos a 90 grados, manos relajadas (como si sostuvieras una patata chip sin romperla). Los brazos van hacia atras, no cruzados al pecho.',
+     tech:'El movimiento de brazos impulsa las piernas. Si los brazos van rectos y rapidos, las piernas siguen. Pruebalo.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'90 seg','note':''},
-       {type:'walk','text':'Caminar activo','dur':'90 seg','note':''},
-       {type:'repeat','text':'Repetir x6','dur':'18 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
-     ]},
-    {day:'Sesion 3', duration:'26 min total', fc:'115-128 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote suave — 90 segundos',dur:'1:30 min',note:'Pon atencion en los brazos esta sesion. Codos a 90, manos relajadas.'},
+       {type:'walk',text:'Caminar activo',dur:'90 seg',note:''},
+       {type:'repeat',text:'Repetir 6 ciclos',dur:'18 min total',note:''},
+       {type:'cool',text:'Caminar suave',dur:'4 min',note:''},
+     ],
+     tips:['Sesion de tecnica. No es sobre ir mas rapido, es sobre hacerlo mejor.']
+    },
+    {day:'Sesion 3 — Progresion',
+     duration:'26 min total', fc:'115-125 ppm', ritmo:'7:30-8:30 min/km al correr.',
+     focus:'Primera vez que llegas a 2 minutos seguidos corriendo. Puede que cueste al principio — es normal.',
+     tech:'Si en los 2 minutos te falta el aire: acorta la zancada, no bajes el ritmo de los pasos. La zancada corta gasta menos energia.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'2 min','note':'Subimos a 2 minutos corriendo.'},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'repeat','text':'Repetir x7','dur':'21 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
-     ]},
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote suave — 2 minutos',dur:'2 min',note:'El salto de 90s a 2 min parece poco pero se nota. Si no puedes mantenerlo, vuelve a 90s. No pasa nada.'},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:'Solo 1 minuto de recuperacion. Empiezas a pasar mas tiempo corriendo que caminando.'},
+       {type:'repeat',text:'Repetir 7 ciclos',dur:'21 min total',note:''},
+       {type:'cool',text:'Caminar suave',dur:'4 min',note:'Estira bien. La semana 3 sube a 3 minutos.'},
+     ],
+     tips:['Has completado la semana 2. Ya corres en bloques de 2 minutos. La semana que viene: 3 minutos.','Fecha de hoy en la app. Dentro de 6 semanas volveras a ver esto y no lo creerás.']
+    },
    ]},
 
-  // SEMANA 3 - Run/Walk 2:1
-  {week:3, title:'Semana 3 — Mas correr que caminar', subtitle:'El cuerpo ya se ha adaptado al impacto. Aumentamos el tiempo corriendo.',
+  // ── SEMANA 3 ──────────────────────────────────────────────────────────────
+  {week:3, title:'Semana 3 — Mas correr que caminar',
+   subtitle:'Bloques de 2-3 minutos corriendo. La base aerobica empieza a construirse. Notaras que cada sesion es algo mas facil que la anterior — eso es la adaptacion cardiovascular.',
    sessions:[
-    {day:'Sesion 1', duration:'26 min total', fc:'118-130 ppm',
+    {day:'Sesion 1',
+     duration:'26 min total', fc:'118-128 ppm', ritmo:'7:00-8:00 min/km. Empiezas a encontrar "tu ritmo".',
+     focus:'Encontrar el ritmo sostenible. El ritmo al que podrias correr 20-30 minutos es MAS lento de lo que crees.',
+     tech:'Test del ritmo: intenta decir en voz alta "estoy corriendo a buen ritmo" mientras corres. Si puedes, vas bien. Si no puedes terminar la frase, ve mas lento.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'2 min','note':''},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'repeat','text':'Repetir x7','dur':'21 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
-     ]},
-    {day:'Sesion 2', duration:'26 min total', fc:'118-130 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote suave — 2 minutos',dur:'2 min',note:'Ya consolidado de la semana pasada. Deberia sentirse mas facil.'},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:''},
+       {type:'repeat',text:'Repetir 7 ciclos',dur:'21 min total',note:''},
+       {type:'cool',text:'Caminar suave',dur:'4 min',note:''},
+     ],
+     tips:['Sesion de consolidacion antes del salto a 3 minutos.']
+    },
+    {day:'Sesion 2',
+     duration:'26 min total', fc:'118-128 ppm', ritmo:'7:00-8:00 min/km.',
+     focus:'Postura: cuerpo ligeramente inclinado hacia delante (5-10 grados). No te encorves. Imagina que hay una cuerda tirando de la coronilla hacia arriba.',
+     tech:'La inclinacion correcta es desde los tobillos, no desde la cintura. Inclinate como un palo recto, no doblado por el centro.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'2 min','note':''},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'repeat','text':'Repetir x7','dur':'21 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
-     ]},
-    {day:'Sesion 3', duration:'28 min total', fc:'118-130 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote suave — 2 minutos',dur:'2 min',note:'Pon atencion en la postura esta sesion.'},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:''},
+       {type:'repeat',text:'Repetir 7 ciclos',dur:'21 min total',note:''},
+       {type:'cool',text:'Caminar suave',dur:'4 min',note:''},
+     ],
+     tips:[]
+    },
+    {day:'Sesion 3 — Gran salto',
+     duration:'28 min total', fc:'118-128 ppm', ritmo:'7:00-8:00 min/km. Conservador en los primeros bloques.',
+     focus:'3 minutos seguidos por primera vez. Psicologicamente es un hito. Fisicamente es alcanzable si has hecho las sesiones anteriores.',
+     tech:'Estrategia para los 3 minutos: primer minuto suave, segundo igual, tercer minuto "aguanta". Si te cuesta el tercero, el primero fue demasiado rapido.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'3 min','note':'Primera vez que llegas a 3 minutos seguidos.'},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'repeat','text':'Repetir x5','dur':'20 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
-     ]},
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:'Calentamiento un poco mas largo hoy.'},
+       {type:'run',text:'Trote suave — 3 minutos',dur:'3 min',note:'PRIMER BLOQUE DE 3 MINUTOS. Empieza muy suave los primeros 60 segundos. Luego mantén. Si en el minuto 2 ya no puedes, vuelve a 2 minutos — no pasa nada.'},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:'Solo 1 minuto. Ya pasas el 75% del tiempo corriendo.'},
+       {type:'repeat',text:'Repetir 5 ciclos',dur:'20 min total',note:'5 bloques de 3 min corriendo + 1 min caminando.'},
+       {type:'cool',text:'Caminar suave',dur:'4 min',note:'Estiras bien. Semana 4 consolida los 3 minutos.'},
+     ],
+     tips:['Si has llegado aqui, lo mas duro ya paso. De 0 a 3 minutos seguidos en 3 semanas.','La semana 4 es de consolidacion — misma estructura, mas solido.']
+    },
    ]},
 
-  // SEMANA 4 - Consolidacion
-  {week:4, title:'Semana 4 — Consolidando la base', subtitle:'Semana de consolidacion. El cuerpo asimila las adaptaciones de las 3 semanas anteriores.',
+  // ── SEMANA 4 ──────────────────────────────────────────────────────────────
+  {week:4, title:'Semana 4 — Consolidacion y primer hito: 5 minutos',
+   subtitle:'Semana clave. Los 3 minutos ya son solidos. Al final de esta semana llegaras a 5 minutos seguidos. Es el momento donde muchos principiantes sienten que "ya son runners".',
    sessions:[
-    {day:'Sesion 1', duration:'28 min total', fc:'118-130 ppm',
+    {day:'Sesion 1',
+     duration:'28 min total', fc:'118-130 ppm', ritmo:'6:45-7:45 min/km. Ya puedes apretar un poco.',
+     focus:'Consolidar los 3 minutos. Que se sientan faciles — eso es la base para subir a 5.',
+     tech:'Aterriza el pie bajo las caderas, no delante. Si el pie aterriza delante del cuerpo (taloneando), es como frenar en cada paso. Consume el doble de energia.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'3 min','note':''},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'repeat','text':'Repetir x5','dur':'20 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
-     ]},
-    {day:'Sesion 2', duration:'28 min total', fc:'118-130 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote sostenido — 3 minutos',dur:'3 min',note:'Deberia sentirse comodo ya. Si no, la semana 3 necesitaba una sesion mas.'},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:''},
+       {type:'repeat',text:'Repetir 5 ciclos',dur:'20 min total',note:''},
+       {type:'cool',text:'Caminar suave',dur:'4 min',note:''},
+     ],
+     tips:[]
+    },
+    {day:'Sesion 2',
+     duration:'28 min total', fc:'118-130 ppm', ritmo:'6:45-7:45 min/km.',
+     focus:'Respiracion por la boca o la nariz? Ambas. A ritmo suave puedes respirar por la nariz. Si te falta el aire, abre la boca. No hay regla fija — lo que te permita rendir.',
+     tech:'Respiracion abdominal: al inhalar, el vientre sale (no el pecho). Esto usa todo el volumen pulmonar. Pruebalo caminando antes de intentarlo corriendo.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'3 min','note':''},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'repeat','text':'Repetir x5','dur':'20 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
-     ]},
-    {day:'Sesion 3', duration:'30 min total', fc:'118-130 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote sostenido — 3 minutos',dur:'3 min',note:''},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:''},
+       {type:'repeat',text:'Repetir 5 ciclos',dur:'20 min total',note:''},
+       {type:'cool',text:'Caminar suave',dur:'4 min',note:''},
+     ],
+     tips:[]
+    },
+    {day:'Sesion 3 — Hito: 5 minutos',
+     duration:'30 min total', fc:'118-130 ppm', ritmo:'7:00-8:00 min/km — vuelve a ser conservador para aguantar los 5 minutos.',
+     focus:'5 minutos seguidos. El primer hito psicologico real. Mucha gente recuerda el dia que corrio 5 minutos sin parar.',
+     tech:'Divide los 5 minutos en tu cabeza: 2 min + 2 min + 1 min de "ya casi". El truco mental de dividir el esfuerzo funciona muy bien en running.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'5 min','note':'5 minutos seguidos. Hito importante.'},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'repeat','text':'Repetir x4','dur':'24 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'3 min','note':''},
-     ]},
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:'Calentamiento completo. Hoy es un dia importante.'},
+       {type:'run',text:'Trote sostenido — 5 minutos',dur:'5 min',note:'PRIMER BLOQUE DE 5 MINUTOS. Primeros 2 min muy suaves. Minutos 3-4 mantén. Minuto 5: "ya casi". Si en el minuto 4 no puedes mas, para — 4 minutos tambien es un exito.'},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:''},
+       {type:'repeat',text:'Repetir 4 ciclos',dur:'24 min total',note:'4 bloques de 5 min corriendo + 1 min caminando. Total: 20 min corriendo en una sesion.'},
+       {type:'cool',text:'Caminar suave',dur:'3 min',note:'Estiras muy bien hoy. Te lo mereces.'},
+     ],
+     tips:['20 minutos corriendo en una sesion (en bloques). Hace 4 semanas no podias correr 1 minuto.','La semana 5 sube a bloques de 8 minutos. Ya estas preparado.']
+    },
    ]},
 
-  // SEMANA 5 - Run/Walk 5:1
-  {week:5, title:'Semana 5 — Bloques largos', subtitle:'Ya corremos en bloques de 5-8 minutos. El cardio base esta solido.',
+  // ── SEMANA 5 ──────────────────────────────────────────────────────────────
+  {week:5, title:'Semana 5 — Bloques largos: 8 minutos',
+   subtitle:'El cardio base ya esta construido. Los bloques se alargan significativamente. El descanso entre bloques se reduce. Esta semana marca la diferencia entre "he empezado a correr" y "soy runner".',
    sessions:[
-    {day:'Sesion 1', duration:'30 min total', fc:'120-132 ppm',
+    {day:'Sesion 1',
+     duration:'30 min total', fc:'120-130 ppm', ritmo:'6:30-7:30 min/km. Puedes ir algo mas rapido ahora.',
+     focus:'Mantener el ritmo constante dentro de cada bloque de 5 minutos. El ritmo del primer minuto debe ser el mismo que el del quinto.',
+     tech:'Pacing: si el primer minuto es tu ritmo objetivo, el quinto tambien. Si el quinto se hace muy duro, empezaste demasiado rapido.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'5 min','note':''},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'repeat','text':'Repetir x4','dur':'24 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'3 min','note':''},
-     ]},
-    {day:'Sesion 2', duration:'30 min total', fc:'120-132 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote sostenido — 5 minutos',dur:'5 min',note:'Ya consolidados de la semana pasada. Se sienten mas faciles.'},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:''},
+       {type:'repeat',text:'Repetir 4 ciclos',dur:'24 min total',note:''},
+       {type:'cool',text:'Caminar suave',dur:'3 min',note:''},
+     ],
+     tips:[]
+    },
+    {day:'Sesion 2 — Primer bloque de 6 minutos',
+     duration:'30 min total', fc:'120-130 ppm', ritmo:'6:30-7:30 min/km.',
+     focus:'6 minutos seguidos. Ya no es tan diferente a 5. La adaptacion es exponencial: de 0 a 1 fue lo mas duro, de 5 a 6 es casi nada.',
+     tech:'Zancada al cansarte: cuando llevas varios minutos corriendo, la zancada tiende a alargarse y el cuerpo a encorvarse. Corrige: acorta la zancada, eleva un poco las rodillas.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'6 min','note':'6 minutos seguidos.'},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'repeat','text':'Repetir x3','dur':'21 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
-     ]},
-    {day:'Sesion 3', duration:'32 min total', fc:'120-132 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote sostenido — 6 minutos',dur:'6 min',note:'Un minuto mas. La estrategia: igual que antes. Si el minuto 6 cuesta, normal.'},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:''},
+       {type:'repeat',text:'Repetir 3 ciclos',dur:'21 min total',note:'Solo 3 bloques pero de 6 minutos.'},
+       {type:'cool',text:'Caminar suave',dur:'4 min',note:''},
+     ],
+     tips:[]
+    },
+    {day:'Sesion 3 — Gran salto: 8 minutos',
+     duration:'32 min total', fc:'120-132 ppm', ritmo:'6:45-7:45 min/km — ligeramente mas conservador para aguantar los 8.',
+     focus:'8 minutos seguidos. El mayor salto del programa hasta ahora. Psicologicamente parece mucho. Fisicamente ya tienes la base.',
+     tech:'Divide los 8 minutos: 3+3+2. Primer bloque de 3 suave, segundo mantienes, ultimos 2 "casi". Cuando llegues al minuto 6 piensa: "solo me quedan 2 minutos".',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'8 min','note':'8 minutos. El salto mas grande del programa.'},
-       {type:'walk','text':'Caminar activo','dur':'2 min','note':'Mas descanso por el esfuerzo mayor.'},
-       {type:'repeat','text':'Repetir x2','dur':'20 min','note':'Solo 2 bloques pero de 8 minutos.'},
-       {type:'cool','text':'Vuelta a la calma','dur':'5 min','note':''},
-     ]},
+       {type:'warm',text:'Caminar rapido con aceleraciones',dur:'5 min',note:'Los ultimos 60 seg del calentamiento camina mas rapido. Prepara el cuerpo para el esfuerzo mayor.'},
+       {type:'run',text:'Trote sostenido — 8 minutos',dur:'8 min',note:'8 MINUTOS. Empieza LENTO los primeros 2 minutos. Mas lento de lo que crees necesario. Luego mantén. Si en el minuto 6 no puedes seguir: 6 minutos tambien es un exito enorme.'},
+       {type:'walk',text:'Caminar activo',dur:'2 min',note:'Mas descanso por el esfuerzo mayor. Mereces estos 2 minutos.'},
+       {type:'repeat',text:'Repetir 2 ciclos',dur:'20 min total',note:'Solo 2 bloques de 8 minutos. Pero son 16 minutos corriendo en total.'},
+       {type:'cool',text:'Caminar suave',dur:'5 min',note:'Hoy estiras especialmente bien. Gemelos, cuadriceps e isquios.'},
+     ],
+     tips:['16 minutos corriendo en una sesion. Hace 5 semanas no podias correr 1 minuto.','La semana 6: bloques de 10 y 12 minutos. Ya estas preparado aunque no lo parezca.']
+    },
    ]},
 
-  // SEMANA 6 - Bloques 8-10 min
-  {week:6, title:'Semana 6 — Resistencia real', subtitle:'Ya eres un corredor. Los bloques son largos y el descanso es minimo.',
+  // ── SEMANA 6 ──────────────────────────────────────────────────────────────
+  {week:6, title:'Semana 6 — Resistencia real: 10-12 minutos',
+   subtitle:'Aqui empieza el running de verdad. Los bloques son lo suficientemente largos para que el cuerpo entre en modo aerobico estable. Notaras que en el minuto 8-10 la respiracion se regula sola.',
    sessions:[
-    {day:'Sesion 1', duration:'32 min total', fc:'120-132 ppm',
+    {day:'Sesion 1 — 8 minutos consolidados',
+     duration:'32 min total', fc:'120-132 ppm', ritmo:'6:30-7:30 min/km.',
+     focus:'Consolidar los 8 minutos. Ya no son un reto, son la base.',
+     tech:'Si tienes movil con GPS (Strava, Nike Run Club, Garmin), ahora es buen momento para empezar a usarlo. Ver el ritmo en tiempo real es muy util para no salir demasiado rapido.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'8 min','note':''},
-       {type:'walk','text':'Caminar activo','dur':'2 min','note':''},
-       {type:'repeat','text':'Repetir x2','dur':'20 min','note':''},
-       {type:'run','text':'Correr suave','dur':'5 min','note':'Bloque final extra.'},
-       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
-     ]},
-    {day:'Sesion 2', duration:'33 min total', fc:'120-132 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote sostenido — 8 minutos',dur:'8 min',note:'Deberian sentirse mas manejables que la semana pasada.'},
+       {type:'walk',text:'Caminar activo',dur:'2 min',note:''},
+       {type:'repeat',text:'2 ciclos + bloque final de 5 min',dur:'26 min total',note:'2 bloques de 8 min + 1 bloque de 5 min al final. Total: 21 min corriendo.'},
+       {type:'cool',text:'Caminar suave',dur:'4 min',note:''},
+     ],
+     tips:[]
+    },
+    {day:'Sesion 2 — Primer bloque de 10 minutos',
+     duration:'33 min total', fc:'120-132 ppm', ritmo:'6:30-7:30 min/km.',
+     focus:'10 minutos seguidos. A partir de aqui el cuerpo entra en modo aerobico estable — notaras que la respiracion se regula sola entre el minuto 5 y 8.',
+     tech:'El "segundo aliento": entre el minuto 5 y 10 de carrera continua muchos runners notan que de repente la respiracion se regulariza y se hace mas facil. Es real — el cuerpo cambia de sistema energetico. Si lo notas, disfruta.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'10 min','note':'10 minutos seguidos por primera vez.'},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'run','text':'Correr suave','dur':'8 min','note':''},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'run','text':'Correr suave','dur':'5 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'3 min','note':''},
-     ]},
-    {day:'Sesion 3', duration:'35 min total', fc:'120-132 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote sostenido — 10 minutos',dur:'10 min',note:'10 MINUTOS. Los primeros 3 muy suaves. Del minuto 4 al 7 mantén. Del 8 al 10 ya sabes que puedes. Si notas que la respiracion se regula sobre el minuto 6-8, eso es normal — es el segundo aliento.'},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:''},
+       {type:'run',text:'Trote sostenido — 8 minutos',dur:'8 min',note:'Segundo bloque. Mas corto que el primero.'},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:''},
+       {type:'run',text:'Trote suave — 5 minutos',dur:'5 min',note:'Tercer bloque. Ya casi lo tienes.'},
+       {type:'cool',text:'Caminar suave',dur:'3 min',note:''},
+     ],
+     tips:['23 minutos corriendo en una sesion. El objetivo son 30 — ya estas muy cerca.']
+    },
+    {day:'Sesion 3 — 12 minutos y objetivo a la vista',
+     duration:'35 min total', fc:'120-132 ppm', ritmo:'6:30-7:30 min/km al correr.',
+     focus:'12 minutos seguidos. Desde aqui hasta 30 minutos es solo cuestion de tiempo y constancia.',
+     tech:'A partir de bloques de 10+ minutos tu cuerpo usa principalmente grasa como combustible (zona 2). Eso es exactamente lo que queremos para recomposicion corporal — maximo quema de grasa con minimo dano muscular.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'12 min','note':''},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'run','text':'Correr suave','dur':'10 min','note':''},
-       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
-       {type:'run','text':'Correr suave','dur':'5 min','note':''},
-       {type:'cool','text':'Vuelta a la calma','dur':'3 min','note':''},
-     ]},
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote sostenido — 12 minutos',dur:'12 min',note:'12 minutos. Divide: 4+4+4. Primer cuarto suave, segundo mantén, tercer cuarto ya sabes que puedes. Piensa en la pista: en 12 minutos a 7 min/km recorres casi 1.7km.'},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:''},
+       {type:'run',text:'Trote sostenido — 10 minutos',dur:'10 min',note:''},
+       {type:'walk',text:'Caminar activo',dur:'1 min',note:''},
+       {type:'run',text:'Trote suave — 5 minutos',dur:'5 min',note:'Bloque final. Ya son 27 minutos corriendo en la sesion.'},
+       {type:'cool',text:'Caminar suave',dur:'3 min',note:'Estiras muy bien. Esta es la semana del mayor salto cualitativo.'},
+     ],
+     tips:['27 minutos corriendo en la sesion. El objetivo de 30 minutos continuos esta a 2 semanas.','Tu cuerpo ha cambiado mucho en 6 semanas aunque todavia no lo notes en el espejo — el corazon, los pulmones y los tendones se han reforzado enormemente.']
+    },
    ]},
 
-  // SEMANA 7 - Pre-final
-  {week:7, title:'Semana 7 — A las puertas del objetivo', subtitle:'Casi ahi. Esta semana tocamos los 25 minutos corriendo.',
+  // ── SEMANA 7 ──────────────────────────────────────────────────────────────
+  {week:7, title:'Semana 7 — A las puertas: 20-25 minutos continuos',
+   subtitle:'Esta semana quitamos los intervalos de caminar en las sesiones principales. Corres de forma continua. Puede que el ritmo sea mas lento — es correcto. Tiempo continuo es mas importante que velocidad ahora.',
    sessions:[
-    {day:'Sesion 1', duration:'33 min total', fc:'122-132 ppm',
+    {day:'Sesion 1 — 20 minutos continuos',
+     duration:'32 min total', fc:'120-132 ppm', ritmo:'7:00-8:00 min/km — mas lento de lo que has corrido en bloques. Es normal y correcto.',
+     focus:'20 minutos SIN PARAR. Sin caminar. El secreto: los primeros 5 minutos MUY lentos. Tan lentos que parezca tonto. Luego te lo agradeces.',
+     tech:'Regla de oro del running continuo: si puedes hablar, puedes correr. Si no puedes hablar, vas demasiado rapido. Esta regla te protege de ir demasiado rapido y tener que parar.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'20 min','note':'20 minutos seguidos. Sin parar.'},
-       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':'Lo lograste.'},
-       {type:'walk','text':'Estiramientos','dur':'5 min','note':'Piernas, gemelos, cuadriceps.'},
-     ]},
-    {day:'Sesion 2', duration:'33 min total', fc:'122-132 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:'Calentamiento completo. Hoy es la primera vez que corres 20 minutos sin parar.'},
+       {type:'run',text:'Trote continuo — 20 minutos',dur:'20 min',note:'20 MINUTOS SIN PARAR. Primeros 5 min: muy despacio, casi vergonzoso. Min 5-15: tu ritmo natural. Min 15-20: "ya casi". Si en el minuto 12 no puedes: camina 1 minuto y sigue. No abandones la sesion.'},
+       {type:'cool',text:'Caminar suave vuelta a la calma',dur:'5 min',note:'Nunca pares en seco despues de 20 minutos corriendo. El corazon necesita bajar gradualmente.'},
+       {type:'walk',text:'Estiramientos completos',dur:'5 min',note:'Gemelos 45 seg cada lado. Cuadriceps 45 seg. Isquios 45 seg. Cadera. Hoy te lo mereces.'},
+     ],
+     tips:['Lo conseguiste. 20 minutos seguidos. Este es el momento donde muchos se enganchan al running.','Tu ritmo es probablemente 7:30-8:30 min/km. No importa. Usain Bolt tampoco podia correr 20 min el primer dia.']
+    },
+    {day:'Sesion 2 — 22 minutos continuos',
+     duration:'34 min total', fc:'120-132 ppm', ritmo:'7:00-8:00 min/km.',
+     focus:'22 minutos. Solo 2 mas que el martes. Ya sabes que puedes — lo demostraste.',
+     tech:'Musica o sin musica? Ambas opciones funcionan. Con musica: elige canciones de 130-140 BPM (late al mismo ritmo que tus pasos). Sin musica: te conectas mas con el cuerpo y la respiracion.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'22 min','note':'2 minutos mas.'},
-       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':''},
-       {type:'walk','text':'Estiramientos','dur':'3 min','note':''},
-     ]},
-    {day:'Sesion 3', duration:'35 min total', fc:'122-132 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote continuo — 22 minutos',dur:'22 min',note:'2 minutos mas que el martes. Misma estrategia: empieza muy suave.'},
+       {type:'cool',text:'Caminar suave',dur:'5 min',note:''},
+       {type:'walk',text:'Estiramientos',dur:'3 min',note:''},
+     ],
+     tips:[]
+    },
+    {day:'Sesion 3 — 25 minutos continuos',
+     duration:'35 min total', fc:'120-132 ppm', ritmo:'7:00-8:00 min/km.',
+     focus:'25 minutos. El objetivo final de 30 esta a 5 minutos. Puedes verlo.',
+     tech:'Hidratacion en la pista: en sesiones de menos de 30 minutos no necesitas agua durante la carrera si has bebido antes. Pero en Murcia en verano con calor: lleva agua si.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'25 min','note':'25 minutos. El objetivo final esta a la vista.'},
-       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':''},
-     ]},
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote continuo — 25 minutos',dur:'25 min',note:'25 minutos. A 7:30 min/km eso son unos 3.3km. Hace 7 semanas no podias correr 1 minuto.'},
+       {type:'cool',text:'Caminar suave',dur:'5 min',note:''},
+     ],
+     tips:['La semana 8 es el objetivo final: 30 minutos continuos.','Prepara mentalmente el dia: la sesion 3 de la semana 8 es el gran dia.']
+    },
    ]},
 
-  // SEMANA 8 - OBJETIVO
-  {week:8, title:'Semana 8 — 30 minutos corriendo', subtitle:'El objetivo del programa. De 0 a 30 minutos en 8 semanas.',
+  // ── SEMANA 8 ──────────────────────────────────────────────────────────────
+  {week:8, title:'Semana 8 — 30 minutos continuos: el objetivo',
+   subtitle:'8 semanas de trabajo constante. Hoy culminan. La sesion 3 es el gran dia: 30 minutos corriendo sin parar. De 0 a 30 minutos en 8 semanas.',
    sessions:[
-    {day:'Sesion 1', duration:'38 min total', fc:'122-132 ppm',
+    {day:'Sesion 1 — 25 minutos',
+     duration:'37 min total', fc:'120-132 ppm', ritmo:'7:00-7:45 min/km. Esta semana puedes ir un poco mas rapido.',
+     focus:'Preparacion mental para el gran dia. Consolida los 25 minutos.',
+     tech:'Esta semana: si quieres, empieza a medir distancia en lugar de tiempo. A 7:30 min/km en 25 minutos recorres 3.3km. En 30 minutos: 4km. Estos son tus nuevos objetivos despues del programa.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':'El ultimo lunes del programa.'},
-       {type:'run','text':'Correr suave','dur':'25 min','note':''},
-       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':''},
-       {type:'walk','text':'Estiramientos','dur':'3 min','note':''},
-     ]},
-    {day:'Sesion 2', duration:'40 min total', fc:'122-132 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote continuo — 25 minutos',dur:'25 min',note:'Sesion de preparacion. Dejate energia para el gran dia.'},
+       {type:'cool',text:'Caminar suave',dur:'5 min',note:''},
+       {type:'walk',text:'Estiramientos',dur:'3 min',note:''},
+     ],
+     tips:[]
+    },
+    {day:'Sesion 2 — 28 minutos',
+     duration:'40 min total', fc:'120-132 ppm', ritmo:'7:00-7:45 min/km.',
+     focus:'28 minutos. A 2 de l objetivo. Esta sesion es casi tan importante como la final.',
+     tech:'Ultima sesion antes del gran dia. No te machaques — deja las piernas con ganas para el sabado.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
-       {type:'run','text':'Correr suave','dur':'28 min','note':'Casi ahi.'},
-       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':''},
-       {type:'walk','text':'Estiramientos','dur':'3 min','note':''},
-     ]},
-    {day:'Sesion 3 — DIA DEL OBJETIVO', duration:'40 min total', fc:'120-132 ppm',
+       {type:'warm',text:'Caminar rapido',dur:'5 min',note:''},
+       {type:'run',text:'Trote continuo — 28 minutos',dur:'28 min',note:'28 minutos. Casi ahi. Corre a un ritmo que te permita llegar bien al final — no es el dia de romper marcas.'},
+       {type:'cool',text:'Caminar suave',dur:'5 min',note:''},
+       {type:'walk',text:'Estiramientos completos',dur:'3 min',note:'Mañana descansas. Pasado mañana es el gran dia.'},
+     ],
+     tips:['Descansa bien la noche antes del gran dia. Come normal. Hidratate.']
+    },
+    {day:'Sesion 3 — EL GRAN DIA: 30 MINUTOS',
+     duration:'42 min total', fc:'120-132 ppm', ritmo:'7:15-8:00 min/km — conservador. El objetivo es llegar, no ir rapido.',
+     focus:'30 minutos corriendo sin parar. De 0 a 30 minutos en 8 semanas. Este es el momento.',
+     tech:'Protocolo del gran dia: come algo ligero 1.5-2h antes. Bebe agua. Llega a la pista 5 min antes. Calentamiento completo. Empieza MAS LENTO que de costumbre — los primeros 5 minutos deben parecer casi ridiculos de lentos. El exito esta garantizado si empiezas lento.',
      intervals:[
-       {type:'warm','text':'Caminar suave','dur':'5 min','note':'El gran dia. Tomate tu tiempo en el calentamiento.'},
-       {type:'run','text':'CORRER 30 MINUTOS SEGUIDOS','dur':'30 min','note':'Este es el objetivo. Ritmo muy suave, conversacion posible. No importa la velocidad, importa el tiempo.'},
-       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':'Lo conseguiste. De 0 a 30 minutos en 8 semanas.'},
-     ]},
+       {type:'warm',text:'Caminar rapido — calentamiento especial',dur:'7 min',note:'Hoy el calentamiento es mas largo. Ultimos 60 seg: algunas zancadas mas largas y rapidas para activar las piernas.'},
+       {type:'run',text:'CORRER 30 MINUTOS SEGUIDOS',dur:'30 min',note:'EL MOMENTO. Primeros 7 min: TAN LENTO que parece ridiculo. Min 8-20: tu ritmo natural, conversacion posible. Min 20-27: mantén, ya sabes que puedes. Min 27-30: "ya casi". Cuando llegues al minuto 30: has llegado. No importa si has corrido 3.5km o 4.5km. Importa el tiempo.'},
+       {type:'cool',text:'Caminar de vuelta a la calma — disfruta',dur:'5 min',note:'Camina estos 5 minutos consciente de lo que acabas de conseguir. Hace 8 semanas no podias correr 1 minuto.'},
+     ],
+     tips:['LO CONSEGUISTE. 30 minutos corriendo. De 0 a 30 minutos en 8 semanas.','Que sigue: 5km en menos de 35 minutos es el siguiente objetivo natural. Con este programa como base, necesitas 4-6 semanas mas.','El running ya es parte de tu vida. Tu corazon, pulmones y tendones son los de otra persona comparados con hace 8 semanas.']
+    },
    ]},
 ];
 
@@ -3037,29 +3219,35 @@ function renderRunWeek(){
   w.sessions.forEach((s,si)=>{
     const key = 'run_w'+runCurWeek+'_s'+si;
     const done = !!runChecked[key];
-    html += `<div class="card" style="${done?'border-color:#16a34a;background:#f0fdf4':''}">
+    html += `<div class="card" style="${done?'border-color:#16a34a;background:#f0fdf4;border-left:3px solid #16a34a':'border-left:3px solid #c2410c'}">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-        <div>
+        <div style="flex:1">
           <div style="font-size:14px;font-weight:700;color:${done?'#16a34a':'var(--text)'}">${s.day} ${done?'✓':''}</div>
-          <div style="font-size:11px;color:var(--muted)">${s.duration} · FC objetivo: ${s.fc}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">${s.duration} · FC: ${s.fc}</div>
+          <div style="font-size:11px;color:#c2410c;font-weight:600;margin-top:2px">🏃 ${s.ritmo}</div>
         </div>
-        <button onclick="toggleRunSession('${key}')" style="padding:8px 14px;border-radius:20px;border:none;background:${done?'#16a34a':'#c2410c'};color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">
-          ${done?'Hecho ✓':'Marcar hecho'}
+        <button onclick="toggleRunSession('${key}')" style="padding:8px 12px;border-radius:20px;border:none;background:${done?'#16a34a':'#c2410c'};color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;flex-shrink:0;margin-left:8px">
+          ${done?'Hecho ✓':'Marcar'}
         </button>
       </div>
-      <div style="display:flex;flex-direction:column;gap:6px">
+      ${s.focus?`<div style="background:#fff7ed;border-radius:var(--rs);padding:8px 10px;margin-bottom:8px;font-size:12px;color:#92400e;line-height:1.5"><strong>🎯 Objetivo:</strong> ${s.focus}</div>`:''}
+      ${s.tech?`<div style="background:#dbeafe;border-radius:var(--rs);padding:8px 10px;margin-bottom:8px;font-size:12px;color:#1e40af;line-height:1.5"><strong>🔧 Tecnica:</strong> ${s.tech}</div>`:''}
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:${s.tips&&s.tips.length?'8px':'0'}">
         ${s.intervals.map(iv=>`
           <div style="display:flex;gap:10px;align-items:flex-start;padding:8px 10px;background:${typeColors[iv.type]||'#f8fafc'};border-radius:var(--rs)">
             <span style="font-size:16px;flex-shrink:0">${typeIcons[iv.type]||'▶'}</span>
             <div style="flex:1">
-              <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
                 <span style="font-size:12px;font-weight:700;color:${iv.type==='run'?'#166534':'#1e293b'}">${iv.type==='run'?iv.text.toUpperCase():iv.text}</span>
-                <span style="font-size:13px;font-weight:800;color:${iv.type==='run'?'#16a34a':'#475569'}">${iv.dur}</span>
+                <span style="font-size:13px;font-weight:800;color:${iv.type==='run'?'#16a34a':'#475569'};flex-shrink:0">${iv.dur}</span>
               </div>
-              ${iv.note?`<div style="font-size:11px;color:#64748b;margin-top:3px">${iv.note}</div>`:''}
+              ${iv.note?`<div style="font-size:11px;color:#64748b;margin-top:3px;line-height:1.5">${iv.note}</div>`:''}
             </div>
           </div>`).join('')}
       </div>
+      ${s.tips&&s.tips.length?`<div style="background:#f0fdf4;border-radius:var(--rs);padding:8px 10px">
+        ${s.tips.map(t=>`<div style="font-size:11px;color:#166534;line-height:1.6;padding:2px 0">💡 ${t}</div>`).join('')}
+      </div>`:''}
     </div>`;
   });
 
