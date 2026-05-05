@@ -505,7 +505,16 @@ canvas{display:block;width:100%!important;height:100%!important}
   <button class="bn" onclick="showScr('pr',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Records</button>
   <button class="bn" onclick="showScr('prog',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Progreso</button>
   <button class="bn" onclick="showScr('bio',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Bio</button>
-  <button class="bn" onclick="showScr('nutri',this)"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Nutricion</button>
+  <button class="bn" onclick="showScr('nutri',this);initNutri()"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Nutricion</button>
+  <button class="bn" onclick="showScr('guia',this);renderGuide()">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Guia
+  </button>
+  <button class="bn" onclick="showScr('suplem',this)">
+    <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>Suplem.
+  </button>
+  <button class="bn" onclick="showScr('running',this);initRunning()">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M10.5 8.5L8 21M10.5 8.5L14 12l3 3M10.5 8.5L7 11l-2 3M14 12l1 5"/></svg>Running
+  </button>
 </nav>
 
 <!-- DIAGRAM MODAL -->
@@ -729,6 +738,23 @@ const V={
   posterior:[{n:'Curl femoral tumbado maquina',yt:'https://www.youtube.com/shorts/1Tq3QdYUuHs',g:'posterior'},{n:'Curl femoral sentado maquina',yt:'https://www.youtube.com/shorts/ELOCsoDSmrg',g:'posterior'},{n:'RDL con mancuernas',yt:'https://www.youtube.com/shorts/1uDiW5--rAE',g:'posterior'},{n:'RDL en Smith',yt:'https://www.youtube.com/shorts/1uDiW5--rAE',g:'posterior'},{n:'Hip thrust maquina',yt:'https://www.youtube.com/shorts/xDmFkJxPzeM',g:'posterior'},{n:'Hip thrust barra en banco',yt:'https://www.youtube.com/shorts/xDmFkJxPzeM',g:'posterior'},{n:'Patada gluteo en polea',yt:'https://www.youtube.com/shorts/KGMeEHbibT0',g:'posterior'},{n:'Step-up con mancuernas',yt:'https://www.youtube.com/shorts/dQqApCGd5Ss',g:'posterior'}],
   gemelo:[{n:'Gemelo maquina sentado',yt:'https://www.youtube.com/shorts/JbyjNymZOt0',g:'gemelo'},{n:'Gemelo prensa de piernas',yt:'https://www.youtube.com/shorts/JbyjNymZOt0',g:'gemelo'},{n:'Gemelo maquina de pie',yt:'https://www.youtube.com/shorts/JbyjNymZOt0',g:'gemelo'},{n:'Gemelo mancuerna unilateral',yt:'https://www.youtube.com/shorts/JbyjNymZOt0',g:'gemelo'}],
   abduccion:[{n:'Abduccion cadera maquina',yt:'https://www.youtube.com/shorts/KGMeEHbibT0',g:'abduccion'},{n:'Elevacion lateral cadera polea',yt:'https://www.youtube.com/shorts/KGMeEHbibT0',g:'abduccion'},{n:'Clamshell banda elastica',yt:'https://www.youtube.com/shorts/KGMeEHbibT0',g:'abduccion'}],
+  core:[
+    {n:'Cable crunch en polea alta',yt:'https://www.youtube.com/shorts/AV5ZbAz-tW0',g:'abdomen'},
+    {n:'Plancha abdominal',yt:'https://www.youtube.com/shorts/ASdvN_XEl_c',g:'abdomen'},
+    {n:'Crunch en maquina abdominal',yt:'https://www.youtube.com/shorts/AV5ZbAz-tW0',g:'abdomen'},
+    {n:'Rueda abdominal (ab wheel)',yt:'https://www.youtube.com/shorts/ASdvN_XEl_c',g:'abdomen'},
+  ],
+  core_obl:[
+    {n:'Rotaciones en polea de pie',yt:'https://www.youtube.com/shorts/ASdvN_XEl_c',g:'abdomen'},
+    {n:'Plancha lateral',yt:'https://www.youtube.com/shorts/ASdvN_XEl_c',g:'abdomen'},
+    {n:'Crunch bicicleta',yt:'https://www.youtube.com/shorts/ASdvN_XEl_c',g:'abdomen'},
+  ],
+  lateral_extra:[
+    {n:'Elevaciones laterales maquina',yt:'https://www.youtube.com/shorts/3VcKaXpzqRo',g:'lateral'},
+    {n:'Elevaciones laterales polea baja',yt:'https://www.youtube.com/shorts/PPaw8jW8kzY',g:'lateral'},
+    {n:'Elevaciones laterales inclinado',yt:'https://www.youtube.com/shorts/PPaw8jW8kzY',g:'lateral'},
+    {n:'Elevaciones laterales mancuernas',yt:'https://www.youtube.com/shorts/3VcKaXpzqRo',g:'lateral'},
+  ],
 };
 
 // build reverse map name->group
@@ -770,60 +796,172 @@ function mkEx(arr,w,off,sets,reps,badge,isSuper,rest){
 
 function buildProg(){
   const prog=[];
+  const cardio45={n:'Cardio Zona 2 — 45 min',s:'Manana: Spinning 45 min | Mediodia: Eliptica 45 min | Cinta inclinacion 8% 45 min',r:null,badge:'cardio',yt:'https://www.youtube.com/shorts/kZgebMJmGdI',g:null,cardio:true,rest:0};
+  const cardio45b={n:'Cardio Zona 2-3 — 45 min',s:'Manana: Spinning bloques (3x8 min Z3 + 2 min recuperacion) | Mediodia: Eliptica intervals (3x8 min ritmo alto + 2 min suave)',r:null,badge:'cardio',yt:'https://www.youtube.com/shorts/kZgebMJmGdI',g:null,cardio:true,rest:0};
+  const cardio30={n:'Cardio Zona 2 — 30 min',s:'Eliptica 30 min | Bici estatica 30 min | Cinta inclinacion 8% 30 min (113-132 ppm)',r:null,badge:'cardio',yt:null,g:null,cardio:true,rest:0};
+
   for(let w=0;w<4;w++){
     const dl=w===3; const week=[];
-    week.push({type:'gym',label:'Push A',icon:'💪',color:'gym',spinning:true,calmType:'push',isDeload:dl,duration:'Gym ~60 min + Spinning 45 min',desc:'Pecho - Hombros - Triceps',blocks:[
-      {label:'Pecho - compuesto principal',exs:[mkEx(V.pecho,w,0,dl?'3x5':'4x5',5,'amrap',false,180)]},
-      {label:'Hombros',exs:[mkEx(V.hombro,w,0,dl?'2x10':'3x10',10,'prog',false,120),mkEx(V.lateral,w,0,dl?'2x15':'4x15',15,null,false,90)]},
-      {label:'Pecho accesorio y Triceps',exs:[mkEx(V.pecho_acc,w,0,dl?'2x12':'3x12',12,null,true,0),mkEx(V.triceps,w,0,dl?'2x12':'3x12',12,'super',true,90),mkEx(V.triceps,w,2,dl?'2x12':'3x12',12,'super',true,90)]},
-      {label:'Cardio',exs:[{n:'Spinning - Zona 2 constante',s:'45 min',r:null,badge:'cardio',yt:'https://www.youtube.com/shorts/kZgebMJmGdI',g:null,cardio:true,rest:0}]},
+
+    // ── DIA 1: PUSH A — Pecho + Hombros + Triceps + CORE ─────────────────────
+    // Beach body focus: extra lateral raises, pec deck for definition, core block
+    week.push({type:'gym',label:'Push A',icon:'💪',color:'gym',spinning:true,calmType:'push',isDeload:dl,
+      duration:'Gym ~70 min + Cardio 45 min',desc:'Pecho · Hombros · Triceps · Core',blocks:[
+      {label:'Pecho — compuesto principal',exs:[
+        mkEx(V.pecho,w,0,dl?'3x5':'4x6',6,'amrap',false,180),
+      ]},
+      {label:'Hombros — press + laterales (clave cuerpo playa)',exs:[
+        mkEx(V.hombro,w,0,dl?'2x10':'3x10',10,'prog',false,120),
+        mkEx(V.lateral,w,0,dl?'2x15':'4x15',15,null,false,60),
+        mkEx(V.lateral_extra,w,0,dl?'2x15':'3x15',15,null,false,60),
+      ]},
+      {label:'Pecho accesorio + Triceps superserie',exs:[
+        mkEx(V.pecho_acc,w,0,dl?'2x12':'3x12',12,null,true,0),
+        mkEx(V.triceps,w,0,dl?'2x12':'3x12',12,'super',true,90),
+        mkEx(V.triceps,w,2,dl?'2x12':'3x12',12,'super',true,90),
+      ]},
+      {label:'CORE — 10 min (reducir vientre)',exs:[
+        mkEx(V.core,w,0,dl?'2x15':'3x15',15,null,false,45),
+        mkEx(V.core,w,1,dl?'2x20s':'3x30s','30s plank',null,false,45),
+        mkEx(V.core_obl,w,0,dl?'2x12':'3x12',12,null,false,45),
+      ]},
+      {label:'Cardio',exs:[cardio45]},
     ]});
-    week.push({type:'gym',label:'Pull A',icon:'🏋️',color:'gym',eliptica:true,calmType:'pull',isDeload:dl,duration:'Gym ~60 min + Eliptica 30 min',desc:'Espalda - Biceps',blocks:[
-      {label:'Espalda - tiron vertical',exs:[mkEx(V.espalda_v,w,0,dl?'3x8':'4x8',8,'amrap',false,180)]},
-      {label:'Espalda horizontal y posterior',exs:[mkEx(V.espalda_h,w,0,dl?'3x5':'4x5',5,'prog',false,180),mkEx(V.face_pull,w,0,dl?'2x15':'3x15',15,null,false,90)]},
-      {label:'Biceps superserie',exs:[mkEx(V.biceps,w,0,dl?'2x10':'3x10',10,'super',true,0),mkEx(V.biceps,w,3,dl?'2x10':'3x10',10,'super',true,90)]},
-      {label:'Cardio',exs:[{n:'Eliptica - Zona 2',s:'30 min',r:null,badge:'cardio',yt:null,g:null,cardio:true,rest:0}]},
+
+    // ── DIA 2: PULL A — Espalda (V shape) + Oblicuos + Biceps ────────────────
+    // Beach body: prioritize lat pulldown wide grip (V shape), add oblique work
+    week.push({type:'gym',label:'Pull A',icon:'🏋️',color:'gym',eliptica:true,calmType:'pull',isDeload:dl,
+      duration:'Gym ~65 min + Cardio 30 min',desc:'Espalda (forma V) · Oblicuos · Biceps',blocks:[
+      {label:'Jalon — tiron vertical (forma V espalda)',exs:[
+        mkEx(V.espalda_v,w,0,dl?'3x8':'4x8',8,'amrap',false,180),
+        mkEx(V.espalda_v,w,2,dl?'2x10':'3x10',10,'prog',false,120),
+      ]},
+      {label:'Remo horizontal + Face pulls (postura)',exs:[
+        mkEx(V.espalda_h,w,0,dl?'2x10':'3x10',10,'prog',false,120),
+        mkEx(V.face_pull,w,0,dl?'2x15':'3x15',15,null,false,60),
+      ]},
+      {label:'Oblicuos — cintura definida',exs:[
+        mkEx(V.core_obl,w,0,dl?'2x12':'3x12',12,null,false,45),
+        mkEx(V.core_obl,w,1,dl?'2x20s':'3x30s','30s',null,false,45),
+      ]},
+      {label:'Biceps superserie',exs:[
+        mkEx(V.biceps,w,0,dl?'2x10':'3x10',10,'super',true,0),
+        mkEx(V.biceps,w,3,dl?'2x10':'3x10',10,'super',true,90),
+      ]},
+      {label:'Cardio',exs:[cardio30]},
     ]});
-    week.push({type:'gym',label:'Push B',icon:'💪',color:'gym',spinning:true,calmType:'push',isDeload:dl,duration:'Gym ~60 min + Spinning 45 min',desc:'Hombros - Pecho - Triceps',blocks:[
-      {label:'Hombros - compuesto principal',exs:[mkEx(V.hombro,w,1,dl?'3x5':'4x5',5,'amrap',false,180)]},
-      {label:'Pecho',exs:[mkEx(V.pecho,w,1,dl?'2x10':'3x10',10,'prog',false,120),mkEx(V.pecho_acc,w,1,dl?'2x12':'3x12',12,null,false,90)]},
-      {label:'Laterales y Triceps superserie',exs:[mkEx(V.lateral,w,1,dl?'2x15':'4x15',15,null,false,90),mkEx(V.triceps,w,1,dl?'2x12':'3x12',12,'super',true,0),mkEx(V.triceps,w,4,dl?'2x12':'3x12',12,'super',true,90)]},
-      {label:'Cardio',exs:[{n:'Spinning - Bloques Zona 3',s:'3x8 min + 2 min recuperacion',r:null,badge:'cardio',yt:'https://www.youtube.com/shorts/kZgebMJmGdI',g:null,cardio:true,rest:0}]},
+
+    // ── DIA 3: PUSH B — Hombros (prioridad) + Pecho + Triceps + CORE ─────────
+    // Beach body: shoulders lead, more lateral raises, cable flyes for definition
+    week.push({type:'gym',label:'Push B',icon:'💪',color:'gym',spinning:true,calmType:'push',isDeload:dl,
+      duration:'Gym ~70 min + Cardio 45 min',desc:'Hombros (prioridad) · Pecho · Triceps · Core',blocks:[
+      {label:'Hombros — compuesto principal (hombros anchos)',exs:[
+        mkEx(V.hombro,w,1,dl?'3x8':'4x8',8,'amrap',false,180),
+      ]},
+      {label:'Laterales — 5 series (el ejercicio mas importante para el cuerpo playa)',exs:[
+        mkEx(V.lateral,w,1,dl?'2x15':'3x15',15,null,false,60),
+        mkEx(V.lateral_extra,w,1,dl?'2x15':'3x15',15,null,false,60),
+        mkEx(V.lateral,w,2,dl?'1x20':'2x20',20,null,false,45),
+      ]},
+      {label:'Pecho — enfasis en forma y definicion',exs:[
+        mkEx(V.pecho_acc,w,1,dl?'2x12':'3x12',12,'prog',false,90),
+        mkEx(V.pecho,w,2,dl?'2x10':'3x10',10,null,false,90),
+      ]},
+      {label:'Triceps superserie',exs:[
+        mkEx(V.triceps,w,1,dl?'2x12':'3x12',12,'super',true,0),
+        mkEx(V.triceps,w,4,dl?'2x12':'3x12',12,'super',true,90),
+      ]},
+      {label:'CORE — 10 min',exs:[
+        mkEx(V.core,w,2,dl?'2x15':'3x15',15,null,false,45),
+        mkEx(V.core,w,3,dl?'2x20s':'3x30s','30s',null,false,45),
+        mkEx(V.core_obl,w,2,dl?'2x12':'3x12',12,null,false,45),
+      ]},
+      {label:'Cardio',exs:[cardio45b]},
     ]});
-    week.push({type:'gym',label:'Pull B',icon:'🏋️',color:'gym',eliptica:true,calmType:'pull',isDeload:dl,duration:'Gym ~60 min + Eliptica 30 min',desc:'Espalda - Hombro post. - Biceps',blocks:[
-      {label:'Espalda - horizontal',exs:[mkEx(V.espalda_h,w,1,dl?'3x5':'4x5',5,'amrap',false,180)]},
-      {label:'Espalda vertical y posterior',exs:[mkEx(V.espalda_v,w,1,dl?'2x10':'3x10',10,'prog',false,120),mkEx(V.face_pull,w,1,dl?'2x15':'3x15',15,null,false,90)]},
-      {label:'Biceps superserie',exs:[mkEx(V.biceps,w,1,dl?'2x10':'3x10',10,'super',true,0),mkEx(V.biceps,w,5,dl?'2x10':'3x10',10,'super',true,90)]},
-      {label:'Cardio',exs:[{n:'Eliptica - Zona 2',s:'30 min',r:null,badge:'cardio',yt:null,g:null,cardio:true,rest:0}]},
+
+    // ── DIA 4: PULL B — Espalda + Deltoides posterior + Oblicuos + Biceps ────
+    week.push({type:'gym',label:'Pull B',icon:'🏋️',color:'gym',eliptica:true,calmType:'pull',isDeload:dl,
+      duration:'Gym ~65 min + Cardio 30 min',desc:'Espalda · Hombro posterior · Oblicuos · Biceps',blocks:[
+      {label:'Remo horizontal — grosor de espalda',exs:[
+        mkEx(V.espalda_h,w,1,dl?'3x8':'4x8',8,'amrap',false,180),
+        mkEx(V.espalda_h,w,3,dl?'2x10':'3x10',10,'prog',false,120),
+      ]},
+      {label:'Jalon + Face pulls (salud del hombro)',exs:[
+        mkEx(V.espalda_v,w,1,dl?'2x10':'3x10',10,'prog',false,120),
+        mkEx(V.face_pull,w,1,dl?'2x15':'3x15',15,null,false,60),
+      ]},
+      {label:'Oblicuos — cintura definida',exs:[
+        mkEx(V.core_obl,w,1,dl?'2x15':'3x15',15,null,false,45),
+        mkEx(V.core_obl,w,2,dl?'2x12':'3x12',12,null,false,45),
+      ]},
+      {label:'Biceps superserie',exs:[
+        mkEx(V.biceps,w,1,dl?'2x10':'3x10',10,'super',true,0),
+        mkEx(V.biceps,w,5,dl?'2x10':'3x10',10,'super',true,90),
+      ]},
+      {label:'Cardio',exs:[cardio30]},
     ]});
-    week.push({type:'gym',label:'Legs A',icon:'🦵',color:'gym',eliptica:true,calmType:'legs',isDeload:dl,duration:'Gym ~60 min + Eliptica 30 min',desc:'Cuadriceps - Isquios - Gemelos',blocks:[
-      {label:'Cuadriceps - compuesto principal',exs:[mkEx(V.cuad,w,0,dl?'3x5':'4x5',5,'amrap',false,180)]},
-      {label:'Cuadriceps accesorio',exs:[mkEx(V.cuad,w,2,dl?'2x12':'3x12',12,'prog',false,120)]},
-      {label:'Posterior e isquios',exs:[mkEx(V.posterior,w,0,dl?'2x10':'3x10',10,null,false,120),mkEx(V.posterior,w,3,dl?'2x12':'3x12',12,null,false,90)]},
-      {label:'Cadera y gemelo',exs:[mkEx(V.abduccion,w,0,dl?'2x15':'3x15',15,null,false,60),mkEx(V.gemelo,w,0,dl?'3x15':'4x15',15,null,false,60)]},
-      {label:'Cardio',exs:[{n:'Eliptica - Zona 2',s:'30 min',r:null,badge:'cardio',yt:null,g:null,cardio:true,rest:0}]},
+
+    // ── DIA 5: LEGS A — Cuadriceps + Isquios + Core + Cardio ─────────────────
+    week.push({type:'gym',label:'Legs A',icon:'🦵',color:'gym',eliptica:true,calmType:'legs',isDeload:dl,
+      duration:'Gym ~65 min + Cardio 30 min',desc:'Cuadriceps · Isquios · Gemelos · Core',blocks:[
+      {label:'Cuadriceps — compuesto principal',exs:[
+        mkEx(V.cuad,w,0,dl?'3x8':'4x8',8,'amrap',false,180),
+      ]},
+      {label:'Cuadriceps accesorio',exs:[
+        mkEx(V.cuad,w,2,dl?'2x12':'3x12',12,'prog',false,120),
+      ]},
+      {label:'Posterior e isquios',exs:[
+        mkEx(V.posterior,w,0,dl?'2x10':'3x10',10,null,false,120),
+        mkEx(V.posterior,w,3,dl?'2x12':'3x12',12,null,false,90),
+      ]},
+      {label:'Cadera y gemelo',exs:[
+        mkEx(V.abduccion,w,0,dl?'2x15':'3x15',15,null,false,60),
+        mkEx(V.gemelo,w,0,dl?'3x15':'4x15',15,null,false,60),
+      ]},
+      {label:'Core rapido — 5 min',exs:[
+        mkEx(V.core,w,0,dl?'2x15':'2x15',15,null,false,30),
+        mkEx(V.core,w,1,dl?'2x20s':'2x30s','30s',null,false,30),
+      ]},
+      {label:'Cardio',exs:[cardio30]},
     ]});
-    week.push({type:'gym',label:'Legs B',icon:'🦵',color:'gym',calmType:'legs',isDeload:dl,duration:'Gym ~60 min',desc:'Gluteo - Isquios - Full legs',blocks:[
-      {label:'Gluteo e isquios',exs:[mkEx(V.posterior,w,4,dl?'3x10':'4x10',10,'amrap',false,180)]},
-      {label:'Cuadriceps',exs:[mkEx(V.cuad,w,3,dl?'2x10':'3x10',10,'prog',false,120)]},
-      {label:'Isquios y gluteo accesorio',exs:[mkEx(V.posterior,w,1,dl?'2x12':'3x12',12,null,false,90),mkEx(V.posterior,w,6,dl?'2x10':'3x10',10,null,false,90)]},
-      {label:'Cadera y gemelo',exs:[mkEx(V.abduccion,w,1,dl?'2x15':'3x15',15,null,false,60),mkEx(V.gemelo,w,1,dl?'3x15':'4x15',15,null,false,60)]},
+
+    // ── DIA 6: LEGS B — Gluteo + Isquios + Full legs ─────────────────────────
+    week.push({type:'gym',label:'Legs B',icon:'🦵',color:'gym',calmType:'legs',isDeload:dl,
+      duration:'Gym ~65 min',desc:'Gluteo · Isquios · Full legs',blocks:[
+      {label:'Gluteo — compuesto principal',exs:[
+        mkEx(V.posterior,w,4,dl?'3x10':'4x10',10,'amrap',false,180),
+      ]},
+      {label:'Cuadriceps',exs:[
+        mkEx(V.cuad,w,3,dl?'2x10':'3x10',10,'prog',false,120),
+      ]},
+      {label:'Isquios y gluteo accesorio',exs:[
+        mkEx(V.posterior,w,1,dl?'2x12':'3x12',12,null,false,90),
+        mkEx(V.posterior,w,6,dl?'2x10':'3x10',10,null,false,90),
+      ]},
+      {label:'Cadera y gemelo',exs:[
+        mkEx(V.abduccion,w,1,dl?'2x15':'3x15',15,null,false,60),
+        mkEx(V.gemelo,w,1,dl?'3x15':'4x15',15,null,false,60),
+      ]},
     ]});
-    week.push({type:'rest',label:'Descanso',icon:'😴',color:'rest',calmType:null,isDeload:false,duration:'Recuperacion activa',desc:'Senderismo - Patinaje - Movilidad',blocks:[
+
+    // ── DIA 7: DESCANSO ACTIVO ────────────────────────────────────────────────
+    week.push({type:'rest',label:'Descanso',icon:'😴',color:'rest',calmType:null,isDeload:false,
+      duration:'Recuperacion activa',desc:'Senderismo · Patinaje · Movilidad',blocks:[
       {label:'Actividad libre',exs:[
         {n:'Senderismo o caminata larga',s:'2-3h a ritmo comodo',r:null,badge:null,yt:null,g:null,cardio:false,rest:0},
         {n:'Patinaje (opcional)',s:'30-45 min',r:null,badge:null,yt:null,g:null,cardio:false,rest:0},
         {n:'Estiramientos generales',s:'15-20 min',r:null,badge:null,yt:'https://www.youtube.com/shorts/sTxC3J3gQEU',g:null,cardio:false,rest:0},
       ]}
     ]});
+
     prog.push(week);
   }
   return prog;
 }
 
 const PROG=buildProg();
-const DAYS=['Lun','Mar','Mie','Jue','Vie','Sab','Dom'];
-const DAYS_F=['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
+const DAYS=['Día 1','Día 2','Día 3','Día 4','Día 5','Día 6','Día 7'];
+const DAYS_F=['Día 1 — Push A','Día 2 — Pull A','Día 3 — Push B','Día 4 — Pull B','Día 5 — Legs A','Día 6 — Legs B','Día 7 — Descanso'];
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let curDay=(new Date().getDay()+6)%7;
@@ -1530,7 +1668,7 @@ function showScr(id,btn){
 }
 
 // ─── NUTRITION DATA ───────────────────────────────────────────────────────────
-const NDAYS_F=['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
+const NDAYS_F=['Día 1','Día 2','Día 3','Día 4','Día 5','Día 6','Día 7'];
 let nCurWeek=0;
 let nCurDay=0;
 let nChecked=JSON.parse(localStorage.getItem('ft_nutri_shop')||'{}');
@@ -1663,8 +1801,8 @@ function renderNDayContent(){
       <div class="meal-header" onclick="toggleNMeal('nm-${meal.id}-${nCurDay}-${nCurWeek}')">
         <div class="meal-ico ${meal.iconClass}">${icon}</div>
         <div class="meal-info">
-          <div class="meal-time">${meal.time}</div>
-          <div class="meal-name">${meal.name}</div>
+          <div class="meal-time">${getMealTime(meal.id,day.dayType).time||meal.time}</div>
+          <div class="meal-name">${getMealName(meal,day.dayType)}</div>
         </div>
         <div class="meal-kcal">${meal.kcal} kcal</div>
       </div>
@@ -1674,6 +1812,7 @@ function renderNDayContent(){
           <span class="mpill mc">C: ${meal.c}g</span>
           <span class="mpill mf">G: ${meal.f}g</span>
         </div>
+        ${getMealTime(meal.id,day.dayType).note ? `<div style="background:#f0fdf4;border-radius:6px;padding:7px 10px;margin-bottom:8px;font-size:11px;color:#166534;border-left:3px solid #16a34a"><strong>${nTimeMode==='morning'?'🌅 Mañana':'☀️ Mediodía'}:</strong> ${getMealTime(meal.id,day.dayType).note}</div>` : ''}
         <div class="calbar-wrap">
           <div class="calbar-lbl"><span>Proteina</span><span>Carbos</span><span>Grasas</span></div>
           <div class="calbar">
@@ -2632,6 +2771,316 @@ function showMuscleModal(exName){
   document.getElementById('muscle-modal').classList.add('open');
 }
 
+
+
+// ─── RUNNING PROGRAM ──────────────────────────────────────────────────────────
+let runCurWeek = 0;
+
+const RUN_PROGRAM = [
+  // SEMANA 1 - Run/Walk 1:2 (1 min corriendo, 2 caminando)
+  {week:1, title:'Semana 1 — Primeros pasos', subtitle:'Alternamos correr y caminar. El cuerpo se adapta al impacto.',
+   sessions:[
+    {day:'Sesion 1', duration:'20 min total', fc:'113-125 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':'Calentamiento. Ritmo paseo.'},
+       {type:'run','text':'Correr suave','dur':'1 min','note':'Muy suave. Si no puedes hablar, mas lento.'},
+       {type:'walk','text':'Caminar activo','dur':'2 min','note':'Recuperacion. No pares del todo.'},
+       {type:'repeat','text':'Repetir x5','dur':'15 min','note':'5 ciclos de 1 min corriendo + 2 caminando.'},
+       {type:'cool','text':'Caminar suave de vuelta a la calma','dur':'5 min','note':'Nunca pares en seco.'},
+     ]},
+    {day:'Sesion 2', duration:'20 min total', fc:'113-125 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'1 min','note':''},
+       {type:'walk','text':'Caminar activo','dur':'2 min','note':''},
+       {type:'repeat','text':'Repetir x5','dur':'15 min','note':'Igual que el martes. La consistencia es la clave.'},
+       {type:'cool','text':'Vuelta a la calma','dur':'5 min','note':''},
+     ]},
+    {day:'Sesion 3', duration:'22 min total', fc:'113-125 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'1 min','note':''},
+       {type:'walk','text':'Caminar activo','dur':'2 min','note':''},
+       {type:'repeat','text':'Repetir x6','dur':'18 min','note':'Un ciclo mas que las sesiones anteriores.'},
+       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
+     ]},
+   ]},
+
+  // SEMANA 2 - Run/Walk 1.5:1.5
+  {week:2, title:'Semana 2 — Igualando tiempos', subtitle:'Ya corremos tanto como caminamos. El ritmo sigue siendo muy suave.',
+   sessions:[
+    {day:'Sesion 1', duration:'24 min total', fc:'115-128 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'90 seg','note':'30 segundos mas que la semana pasada.'},
+       {type:'walk','text':'Caminar activo','dur':'90 seg','note':''},
+       {type:'repeat','text':'Repetir x6','dur':'18 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
+     ]},
+    {day:'Sesion 2', duration:'24 min total', fc:'115-128 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'90 seg','note':''},
+       {type:'walk','text':'Caminar activo','dur':'90 seg','note':''},
+       {type:'repeat','text':'Repetir x6','dur':'18 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
+     ]},
+    {day:'Sesion 3', duration:'26 min total', fc:'115-128 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'2 min','note':'Subimos a 2 minutos corriendo.'},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'repeat','text':'Repetir x7','dur':'21 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
+     ]},
+   ]},
+
+  // SEMANA 3 - Run/Walk 2:1
+  {week:3, title:'Semana 3 — Mas correr que caminar', subtitle:'El cuerpo ya se ha adaptado al impacto. Aumentamos el tiempo corriendo.',
+   sessions:[
+    {day:'Sesion 1', duration:'26 min total', fc:'118-130 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'2 min','note':''},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'repeat','text':'Repetir x7','dur':'21 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
+     ]},
+    {day:'Sesion 2', duration:'26 min total', fc:'118-130 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'2 min','note':''},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'repeat','text':'Repetir x7','dur':'21 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
+     ]},
+    {day:'Sesion 3', duration:'28 min total', fc:'118-130 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'3 min','note':'Primera vez que llegas a 3 minutos seguidos.'},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'repeat','text':'Repetir x5','dur':'20 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
+     ]},
+   ]},
+
+  // SEMANA 4 - Consolidacion
+  {week:4, title:'Semana 4 — Consolidando la base', subtitle:'Semana de consolidacion. El cuerpo asimila las adaptaciones de las 3 semanas anteriores.',
+   sessions:[
+    {day:'Sesion 1', duration:'28 min total', fc:'118-130 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'3 min','note':''},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'repeat','text':'Repetir x5','dur':'20 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
+     ]},
+    {day:'Sesion 2', duration:'28 min total', fc:'118-130 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'3 min','note':''},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'repeat','text':'Repetir x5','dur':'20 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
+     ]},
+    {day:'Sesion 3', duration:'30 min total', fc:'118-130 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'5 min','note':'5 minutos seguidos. Hito importante.'},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'repeat','text':'Repetir x4','dur':'24 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'3 min','note':''},
+     ]},
+   ]},
+
+  // SEMANA 5 - Run/Walk 5:1
+  {week:5, title:'Semana 5 — Bloques largos', subtitle:'Ya corremos en bloques de 5-8 minutos. El cardio base esta solido.',
+   sessions:[
+    {day:'Sesion 1', duration:'30 min total', fc:'120-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'5 min','note':''},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'repeat','text':'Repetir x4','dur':'24 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'3 min','note':''},
+     ]},
+    {day:'Sesion 2', duration:'30 min total', fc:'120-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'6 min','note':'6 minutos seguidos.'},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'repeat','text':'Repetir x3','dur':'21 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
+     ]},
+    {day:'Sesion 3', duration:'32 min total', fc:'120-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'8 min','note':'8 minutos. El salto mas grande del programa.'},
+       {type:'walk','text':'Caminar activo','dur':'2 min','note':'Mas descanso por el esfuerzo mayor.'},
+       {type:'repeat','text':'Repetir x2','dur':'20 min','note':'Solo 2 bloques pero de 8 minutos.'},
+       {type:'cool','text':'Vuelta a la calma','dur':'5 min','note':''},
+     ]},
+   ]},
+
+  // SEMANA 6 - Bloques 8-10 min
+  {week:6, title:'Semana 6 — Resistencia real', subtitle:'Ya eres un corredor. Los bloques son largos y el descanso es minimo.',
+   sessions:[
+    {day:'Sesion 1', duration:'32 min total', fc:'120-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'8 min','note':''},
+       {type:'walk','text':'Caminar activo','dur':'2 min','note':''},
+       {type:'repeat','text':'Repetir x2','dur':'20 min','note':''},
+       {type:'run','text':'Correr suave','dur':'5 min','note':'Bloque final extra.'},
+       {type:'cool','text':'Vuelta a la calma','dur':'4 min','note':''},
+     ]},
+    {day:'Sesion 2', duration:'33 min total', fc:'120-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'10 min','note':'10 minutos seguidos por primera vez.'},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'run','text':'Correr suave','dur':'8 min','note':''},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'run','text':'Correr suave','dur':'5 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'3 min','note':''},
+     ]},
+    {day:'Sesion 3', duration:'35 min total', fc:'120-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'12 min','note':''},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'run','text':'Correr suave','dur':'10 min','note':''},
+       {type:'walk','text':'Caminar activo','dur':'1 min','note':''},
+       {type:'run','text':'Correr suave','dur':'5 min','note':''},
+       {type:'cool','text':'Vuelta a la calma','dur':'3 min','note':''},
+     ]},
+   ]},
+
+  // SEMANA 7 - Pre-final
+  {week:7, title:'Semana 7 — A las puertas del objetivo', subtitle:'Casi ahi. Esta semana tocamos los 25 minutos corriendo.',
+   sessions:[
+    {day:'Sesion 1', duration:'33 min total', fc:'122-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'20 min','note':'20 minutos seguidos. Sin parar.'},
+       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':'Lo lograste.'},
+       {type:'walk','text':'Estiramientos','dur':'5 min','note':'Piernas, gemelos, cuadriceps.'},
+     ]},
+    {day:'Sesion 2', duration:'33 min total', fc:'122-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'22 min','note':'2 minutos mas.'},
+       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':''},
+       {type:'walk','text':'Estiramientos','dur':'3 min','note':''},
+     ]},
+    {day:'Sesion 3', duration:'35 min total', fc:'122-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'25 min','note':'25 minutos. El objetivo final esta a la vista.'},
+       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':''},
+     ]},
+   ]},
+
+  // SEMANA 8 - OBJETIVO
+  {week:8, title:'Semana 8 — 30 minutos corriendo', subtitle:'El objetivo del programa. De 0 a 30 minutos en 8 semanas.',
+   sessions:[
+    {day:'Sesion 1', duration:'38 min total', fc:'122-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':'El ultimo lunes del programa.'},
+       {type:'run','text':'Correr suave','dur':'25 min','note':''},
+       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':''},
+       {type:'walk','text':'Estiramientos','dur':'3 min','note':''},
+     ]},
+    {day:'Sesion 2', duration:'40 min total', fc:'122-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':''},
+       {type:'run','text':'Correr suave','dur':'28 min','note':'Casi ahi.'},
+       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':''},
+       {type:'walk','text':'Estiramientos','dur':'3 min','note':''},
+     ]},
+    {day:'Sesion 3 — DIA DEL OBJETIVO', duration:'40 min total', fc:'120-132 ppm',
+     intervals:[
+       {type:'warm','text':'Caminar suave','dur':'5 min','note':'El gran dia. Tomate tu tiempo en el calentamiento.'},
+       {type:'run','text':'CORRER 30 MINUTOS SEGUIDOS','dur':'30 min','note':'Este es el objetivo. Ritmo muy suave, conversacion posible. No importa la velocidad, importa el tiempo.'},
+       {type:'cool','text':'Caminar de vuelta a la calma','dur':'5 min','note':'Lo conseguiste. De 0 a 30 minutos en 8 semanas.'},
+     ]},
+   ]},
+];
+
+let runChecked = JSON.parse(localStorage.getItem('ft_run_done')||'{}');
+function saveRunChecked(){ localStorage.setItem('ft_run_done', JSON.stringify(runChecked)); }
+
+function changeRunWeek(d){
+  runCurWeek = Math.max(0, Math.min(7, runCurWeek+d));
+  document.getElementById('run-wk-lbl').textContent = 'Semana ' + (runCurWeek+1);
+  renderRunWeek();
+}
+
+function toggleRunSession(key){
+  runChecked[key] = !runChecked[key];
+  saveRunChecked();
+  renderRunWeek();
+}
+
+function renderRunWeek(){
+  const w = RUN_PROGRAM[runCurWeek];
+  const typeColors = {
+    warm:'#dbeafe', run:'#dcfce7', walk:'#fef9c3', repeat:'#ede9fe', cool:'#f1f5f9'
+  };
+  const typeIcons = {warm:'🚶',run:'🏃',walk:'🚶',repeat:'🔄',cool:'🧘'};
+  const typeLabels = {warm:'Calentamiento',run:'CORRER',walk:'Caminar',repeat:'Repetir',cool:'Vuelta calma'};
+
+  let html = `<div style="background:#fff7ed;border-left:3px solid #c2410c;border-radius:0 var(--r) var(--r) 0;padding:12px;margin-bottom:12px;font-size:12px;color:#7c2d12;line-height:1.6">
+    <strong>${w.title}</strong><br>${w.subtitle}
+  </div>`;
+
+  w.sessions.forEach((s,si)=>{
+    const key = 'run_w'+runCurWeek+'_s'+si;
+    const done = !!runChecked[key];
+    html += `<div class="card" style="${done?'border-color:#16a34a;background:#f0fdf4':''}">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:${done?'#16a34a':'var(--text)'}">${s.day} ${done?'✓':''}</div>
+          <div style="font-size:11px;color:var(--muted)">${s.duration} · FC objetivo: ${s.fc}</div>
+        </div>
+        <button onclick="toggleRunSession('${key}')" style="padding:8px 14px;border-radius:20px;border:none;background:${done?'#16a34a':'#c2410c'};color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">
+          ${done?'Hecho ✓':'Marcar hecho'}
+        </button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        ${s.intervals.map(iv=>`
+          <div style="display:flex;gap:10px;align-items:flex-start;padding:8px 10px;background:${typeColors[iv.type]||'#f8fafc'};border-radius:var(--rs)">
+            <span style="font-size:16px;flex-shrink:0">${typeIcons[iv.type]||'▶'}</span>
+            <div style="flex:1">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:12px;font-weight:700;color:${iv.type==='run'?'#166534':'#1e293b'}">${iv.type==='run'?iv.text.toUpperCase():iv.text}</span>
+                <span style="font-size:13px;font-weight:800;color:${iv.type==='run'?'#16a34a':'#475569'}">${iv.dur}</span>
+              </div>
+              ${iv.note?`<div style="font-size:11px;color:#64748b;margin-top:3px">${iv.note}</div>`:''}
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  });
+
+  // Progress bar
+  const totalSessions = RUN_PROGRAM.reduce((a,w)=>a+w.sessions.length,0);
+  const doneSessions = Object.values(runChecked).filter(Boolean).length;
+  const pct = Math.round(doneSessions/totalSessions*100);
+  html += `<div class="card">
+    <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px">Progreso total: ${doneSessions}/${totalSessions} sesiones (${pct}%)</div>
+    <div style="height:8px;background:var(--border);border-radius:4px;overflow:hidden">
+      <div style="height:100%;background:#c2410c;border-radius:4px;width:${pct}%;transition:width .3s"></div>
+    </div>
+  </div>`;
+
+  document.getElementById('run-week-content').innerHTML = html;
+}
+
+function initRunning(){
+  renderRunWeek();
+}
+
 </script>
 
 <div class="sum-ov" id="sum-ov">
@@ -2665,6 +3114,396 @@ function showMuscleModal(exName){
     <div id="mus-diagrams"></div>
     <div id="mus-tags"></div>
     <div id="mus-tips"></div>
+  </div>
+</div>
+
+<!-- SUPPLEMENTS SCREEN -->
+<div id="scr-suplem" class="scr">
+
+  <!-- HERO -->
+  <div style="background:linear-gradient(135deg,#1e3a5f,#1e40af);border-radius:14px;padding:20px;margin-bottom:14px;color:#fff">
+    <div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#93c5fd;margin-bottom:6px;font-weight:600">Plan de suplementación</div>
+    <div style="font-family:Georgia,serif;font-size:22px;font-weight:700;margin-bottom:6px">Solo lo que <em style="color:#93c5fd">funciona</em></div>
+    <div style="font-size:12px;color:#bfdbfe;line-height:1.5">Basado en evidencia científica. Sin marketing. Sin gastos innecesarios.</div>
+  </div>
+
+  <!-- ESENCIALES -->
+  <div class="section-label">Suplementos esenciales — empieza con estos</div>
+
+  <!-- WHEY -->
+  <div class="card" style="border-left:3px solid #7c3aed;border-radius:0 var(--r) var(--r) 0">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">🥛</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:var(--text)">Proteína de suero (Whey)</div>
+        <div style="font-size:11px;color:var(--muted)">Imprescindible para llegar a 180g/día de proteína</div>
+      </div>
+      <div style="margin-left:auto;background:#ede9fe;color:#5b21b6;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px">PRIORIDAD 1</div>
+    </div>
+    <div style="background:#f5f3ff;border-radius:var(--rs);padding:12px;margin-bottom:10px">
+      <div style="font-size:10px;font-weight:700;color:#5b21b6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Protocolo</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="background:#fff;border-radius:var(--rs);padding:8px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:#7c3aed">30g</div>
+          <div style="font-size:10px;color:var(--muted)">por toma</div>
+        </div>
+        <div style="background:#fff;border-radius:var(--rs);padding:8px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:#7c3aed">1x/día</div>
+          <div style="font-size:10px;color:var(--muted)">post-gym</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.7;margin-bottom:10px">
+      <strong>Cuándo:</strong> En los 30-60 min post-entrenamiento. Es el momento de máxima absorción de aminoácidos del músculo.<br>
+      <strong>Cómo:</strong> 30g en polvo mezclado con 200-300ml de leche desnatada o agua fría. Batir bien.<br>
+      <strong>Qué es:</strong> Proteína de suero de leche — subproducto del queso. No es un esteroide. Es literalmente leche concentrada.
+    </div>
+    <div style="background:#dbeafe;border-radius:var(--rs);padding:10px;margin-bottom:8px">
+      <div style="font-size:10px;font-weight:700;color:#1e40af;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Dónde comprar</div>
+      <div style="font-size:12px;color:#1e3a5f;line-height:1.6">
+        🥇 <strong>Bulk Pure Whey</strong> — bulk.com/es. 1kg ~25€, 22-23g proteina/toma, +20 sabores. Tu eleccion.<br>
+        🥈 <strong>Myprotein Impact Whey</strong> — myprotein.es. Similar calidad, vigila ofertas.<br>
+        ❌ Evita los de supermercado (MaxProtein, etc.) — peor ratio proteina/precio.
+      </div>
+      <div style="background:#fef2f2;border-radius:var(--rs);padding:10px;margin-top:8px;border-left:3px solid #ef4444">
+        <div style="font-size:10px;font-weight:700;color:#991b1b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">⚠️ Importante con Rybelsus</div>
+        <div style="font-size:12px;color:#7f1d1d;line-height:1.6">Toma el Rybelsus al despertar con agua y espera 30 min. El batido de proteina siempre <strong>minimo 2 horas despues</strong> del medicamento. Nunca mezcles el batido con la toma del Rybelsus — puede reducir su absorcion y causar molestias digestivas.</div>
+      </div>
+    </div>
+    <div style="background:#fef3c7;border-radius:var(--rs);padding:8px">
+      <div style="font-size:11px;color:#92400e;line-height:1.5">💡 <strong>Sabor recomendado para empezar:</strong> Chocolate o vainilla. Evita sabores muy artificiales (chicle, caramelo). El sabor neutro mezclado con leche y platano es el más versátil.</div>
+    </div>
+  </div>
+
+  <!-- CREATINA -->
+  <div class="card" style="border-left:3px solid #059669;border-radius:0 var(--r) var(--r) 0">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">⚡</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:var(--text)">Creatina monohidrato</div>
+        <div style="font-size:11px;color:var(--muted)">El suplemento más estudiado de la historia</div>
+      </div>
+      <div style="margin-left:auto;background:#d1fae5;color:#065f46;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px">PRIORIDAD 2</div>
+    </div>
+    <div style="background:#ecfdf5;border-radius:var(--rs);padding:12px;margin-bottom:10px">
+      <div style="font-size:10px;font-weight:700;color:#065f46;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Protocolo</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+        <div style="background:#fff;border-radius:var(--rs);padding:8px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:#059669">5g</div>
+          <div style="font-size:10px;color:var(--muted)">por día</div>
+        </div>
+        <div style="background:#fff;border-radius:var(--rs);padding:8px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:#059669">Diario</div>
+          <div style="font-size:10px;color:var(--muted)">sin descansos</div>
+        </div>
+        <div style="background:#fff;border-radius:var(--rs);padding:8px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:#059669">~15€</div>
+          <div style="font-size:10px;color:var(--muted)">4 meses</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.7;margin-bottom:10px">
+      <strong>Qué hace:</strong> Recarga el ATP muscular (energía inmediata) más rápido entre series. Tradución práctica: 1-2 repeticiones extra en los sets duros, recuperación más rápida entre series.<br>
+      <strong>Cuándo:</strong> Cualquier momento del día. Con o sin comida. Lo más fácil: añade 5g al batido de proteína post-gym.<br>
+      <strong>Evidencia:</strong> Más de 500 estudios científicos. Seguro a largo plazo. Reconocido por todas las organizaciones deportivas mundiales.<br>
+      <strong>Efecto secundario:</strong> Retención leve de agua intramuscular los primeros días (normal y deseable — el músculo trabaja con más agua). No es grasa.
+    </div>
+    <div style="background:#dbeafe;border-radius:var(--rs);padding:10px">
+      <div style="font-size:10px;font-weight:700;color:#1e40af;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Dónde comprar</div>
+      <div style="font-size:12px;color:#1e3a5f;line-height:1.6">
+        🥇 <strong>Foodelis Creatina Monohidrato</strong> — foodelis.com. 500g ~10€, pura sin aditivos, micronizada 200 mesh. Tu eleccion.<br>
+        ⭐ <strong>Foodelis Creapure</strong> — version premium con sello de pureza aleman. Algo mas cara pero la mas estudiada del mundo.<br>
+        ⚠️ El dosificador de Foodelis mide 6g pero la dosis es 3-5g. Usa una cucharita de cafe rasa o una bascula pequena.
+      </div>
+      <div style="background:#fef2f2;border-radius:var(--rs);padding:10px;margin-top:8px;border-left:3px solid #ef4444">
+        <div style="font-size:10px;font-weight:700;color:#991b1b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">⚠️ Rybelsus + Creatina</div>
+        <div style="font-size:12px;color:#7f1d1d;line-height:1.6">Anade los 5g de creatina directamente al batido post-gym. Nunca en ayunas con el Rybelsus. La cafeina puede reducir ligeramente el efecto de la creatina — si tomas cafe pre-gym, toma la creatina despues del entreno, no antes.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VITAMINA D -->
+  <div class="card" style="border-left:3px solid #f59e0b;border-radius:0 var(--r) var(--r) 0">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">☀️</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:var(--text)">Vitamina D3 + K2</div>
+        <div style="font-size:11px;color:var(--muted)">El 80% de españoles tiene déficit. Especialmente en invierno.</div>
+      </div>
+      <div style="margin-left:auto;background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px">PRIORIDAD 3</div>
+    </div>
+    <div style="background:#fffbeb;border-radius:var(--rs);padding:12px;margin-bottom:10px">
+      <div style="font-size:10px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Protocolo</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="background:#fff;border-radius:var(--rs);padding:8px;text-align:center">
+          <div style="font-size:16px;font-weight:700;color:#f59e0b">2.000 UI</div>
+          <div style="font-size:10px;color:var(--muted)">Vitamina D3/día</div>
+        </div>
+        <div style="background:#fff;border-radius:var(--rs);padding:8px;text-align:center">
+          <div style="font-size:16px;font-weight:700;color:#f59e0b">100 mcg</div>
+          <div style="font-size:10px;color:var(--muted)">Vitamina K2/día</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.7;margin-bottom:10px">
+      <strong>Por qué D3 + K2 juntas:</strong> La D3 mejora la absorción de calcio. La K2 dirige ese calcio a los huesos en lugar de las arterias. Son simbióticas.<br>
+      <strong>Cuándo:</strong> Con la comida principal (es liposoluble — necesita grasa para absorberse).<br>
+      <strong>En verano:</strong> Si tomas el sol 20-30 min al día puedes reducir a 1.000 UI o parar. En Murcia con sol abundante, de mayo a septiembre puedes prescindir.
+    </div>
+    <div style="background:#dbeafe;border-radius:var(--rs);padding:10px">
+      <div style="font-size:10px;font-weight:700;color:#1e40af;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Dónde comprar</div>
+      <div style="font-size:12px;color:#1e3a5f;line-height:1.6">
+        🥇 <strong>NOW Foods D3 + K2</strong> — Amazon ~12€, dura 4-5 meses.<br>
+        🥈 <strong>Solgar D3 2000 UI</strong> — farmacias o Amazon.<br>
+        💡 Busca siempre D3 (colecalciferol), no D2. La D3 es 3x más efectiva.
+      </div>
+    </div>
+  </div>
+
+  <!-- MAGNESIO -->
+  <div class="card" style="border-left:3px solid #6366f1;border-radius:0 var(--r) var(--r) 0">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">🌙</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:var(--text)">Magnesio bisglicinato</div>
+        <div style="font-size:11px;color:var(--muted)">Sueño, recuperación y prevención de calambres</div>
+      </div>
+      <div style="margin-left:auto;background:#e0e7ff;color:#3730a3;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px">OPCIONAL</div>
+    </div>
+    <div style="background:#eef2ff;border-radius:var(--rs);padding:12px;margin-bottom:10px">
+      <div style="font-size:10px;font-weight:700;color:#3730a3;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Protocolo</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="background:#fff;border-radius:var(--rs);padding:8px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:#6366f1">300mg</div>
+          <div style="font-size:10px;color:var(--muted)">por noche</div>
+        </div>
+        <div style="background:#fff;border-radius:var(--rs);padding:8px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:#6366f1">Noche</div>
+          <div style="font-size:10px;color:var(--muted)">antes de dormir</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.7;margin-bottom:10px">
+      <strong>Por qué:</strong> El entrenamiento de fuerza agota el magnesio muscular. El déficit provoca calambres nocturnos, peor calidad de sueño y más fatiga.<br>
+      <strong>Cuándo:</strong> 30-60 min antes de dormir. Tiene efecto relajante muscular y mejora la calidad del sueño (fase REM).<br>
+      <strong>Qué forma:</strong> Solo bisglicinato o glicinato. El óxido de magnesio (el más barato) apenas se absorbe y da diarrea.
+    </div>
+    <div style="background:#dbeafe;border-radius:var(--rs);padding:10px">
+      <div style="font-size:10px;font-weight:700;color:#1e40af;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Dónde comprar</div>
+      <div style="font-size:12px;color:#1e3a5f;line-height:1.6">
+        🥇 <strong>NOW Foods Magnesium Glycinate</strong> — Amazon ~18€, dura 3 meses.<br>
+        🥈 <strong>Myprotein Magnesio Bisglicinato</strong> — myprotein.es ~12€.
+      </div>
+    </div>
+  </div>
+
+  <!-- SHAKER GUIDE -->
+  <div class="section-label">Como preparar y llevar el batido — guia para principiantes</div>
+  <div class="card">
+    <div style="display:flex;gap:10px;margin-bottom:12px">
+      <div style="font-size:28px">🥤</div>
+      <div>
+        <div style="font-size:14px;font-weight:700">El shaker — que es y como funciona</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">Un vaso de plastico con tapa de rosca y una bola metalica o rejilla dentro que mezcla el polvo al agitar.</div>
+      </div>
+    </div>
+
+    <div style="font-size:11px;font-weight:700;color:#c2410c;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Como prepararlo — paso a paso</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px">
+      <div style="display:flex;gap:10px;padding:8px;background:#fff7ed;border-radius:var(--rs);align-items:flex-start">
+        <div style="background:#c2410c;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">1</div>
+        <div style="font-size:12px;line-height:1.6"><strong>Anade primero el liquido</strong> — 200-300ml de leche desnatada o agua fria. Leche da mejor sabor y textura. Agua es mas ligero y rapido.</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:8px;background:#fff7ed;border-radius:var(--rs);align-items:flex-start">
+        <div style="background:#c2410c;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">2</div>
+        <div style="font-size:12px;line-height:1.6"><strong>Anade el polvo encima</strong> — 1 cazo raso de proteina (30g). Si ademas pones creatina, añade aqui los 5g (1 cucharita de cafe rasa).</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:8px;background:#fff7ed;border-radius:var(--rs);align-items:flex-start">
+        <div style="background:#c2410c;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">3</div>
+        <div style="font-size:12px;line-height:1.6"><strong>Cierra bien la tapa</strong> — rosca hasta el final. Comprueba que esta cerrado antes de agitar o ira todo al techo.</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:8px;background:#fff7ed;border-radius:var(--rs);align-items:flex-start">
+        <div style="background:#c2410c;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">4</div>
+        <div style="font-size:12px;line-height:1.6"><strong>Agita 10-15 segundos</strong> — con energia. La bola metalica rompe los grumos. Si queda polvo en las paredes agita mas.</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:8px;background:#f0fdf4;border-radius:var(--rs);align-items:flex-start">
+        <div style="background:#16a34a;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">5</div>
+        <div style="font-size:12px;line-height:1.6"><strong>Beber en los primeros 30 min</strong> — la proteina en liquido empieza a degradarse. No lo dejes horas. Si sobra, a la nevera maximo 2h.</div>
+      </div>
+    </div>
+
+    <div style="font-size:11px;font-weight:700;color:#1e40af;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Como llevarlo al gym</div>
+    <div style="font-size:12px;color:var(--text);line-height:1.8;margin-bottom:10px">
+      <strong>Opcion A — Preparado en casa:</strong> Mezcla el batido justo antes de salir de casa y bebelo al llegar al gym o nada mas terminar. El shaker cabe en cualquier bolsa de deporte.<br><br>
+      <strong>Opcion B — En polvo hasta el gym (la mejor):</strong> Pon el polvo en el shaker seco en casa. Lleva una botella de agua o leche por separado. Al terminar el entreno, abre el grifo del vestuario, llena el shaker y agita. Batido perfectamente fresco al momento.
+    </div>
+
+    <div style="background:#fef3c7;border-radius:var(--rs);padding:10px;margin-bottom:10px">
+      <div style="font-size:10px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Donde comprar el shaker</div>
+      <div style="font-size:12px;color:#78350f;line-height:1.6">
+        🥇 <strong>Decathlon</strong> — shaker basico 500ml ~3€. Cumple perfectamente para empezar.<br>
+        🥈 <strong>BlenderBottle Classic</strong> — Amazon ~10€. El mas popular, no pierde liquido, facil de limpiar.<br>
+        💡 Foodelis y Bulk incluyen un shaker de regalo en pedidos grandes — aprovechalo.
+      </div>
+    </div>
+
+    <div style="background:#fef2f2;border-radius:var(--rs);padding:10px">
+      <div style="font-size:10px;font-weight:700;color:#991b1b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Limpieza — importante</div>
+      <div style="font-size:12px;color:#7f1d1d;line-height:1.6">Lavar siempre con agua caliente y jabon justo despues de usarlo. Si lo dejas cerrado con restos de batido unas horas huele fatal y es muy dificil de limpiar. En el gym: enjuagalo en el vestuario antes de meterlo en la bolsa.</div>
+    </div>
+  </div>
+
+  <!-- LO QUE NO NECESITAS -->
+  <div class="section-label">Lo que NO necesitas (ahorra tu dinero)</div>
+  <div class="card">
+    <div style="font-size:13px;color:var(--text);line-height:1.8">
+      <div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:#ef4444;font-size:16px">✗</span><div><strong>BCAA / Aminoácidos</strong> — inútiles si ya tomas suficiente proteína. El whey ya los contiene todos.</div></div>
+      <div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:#ef4444;font-size:16px">✗</span><div><strong>Pre-workouts</strong> — básicamente cafeína cara con colorantes. Un café antes de entrenar hace lo mismo gratis.</div></div>
+      <div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:#ef4444;font-size:16px">✗</span><div><strong>Gainers / Mass gainers</strong> — azúcar cara. Tu objetivo es recomposición, no subir peso.</div></div>
+      <div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:#ef4444;font-size:16px">✗</span><div><strong>Quemadores de grasa</strong> — sin evidencia. El déficit calórico y el entreno son los únicos quemadores reales.</div></div>
+      <div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:#ef4444;font-size:16px">✗</span><div><strong>Testosterona natural / Boosters</strong> — sin evidencia sólida. Duerme bien, entrena fuerte y come proteína — eso sí sube la testosterona.</div></div>
+      <div style="display:flex;gap:8px;padding:6px 0"><span style="color:#ef4444;font-size:16px">✗</span><div><strong>Glutamina / HMB / ZMA</strong> — beneficio marginal a nulo si la dieta y el descanso son correctos.</div></div>
+    </div>
+  </div>
+
+  <!-- RYBELSUS PROTOCOL -->
+  <div class="section-label">Tu protocolo diario con Rybelsus 7mg</div>
+  <div class="card" style="border-left:3px solid #ef4444;border-radius:0 var(--r) var(--r) 0">
+    <div style="display:flex;gap:10px;margin-bottom:12px">
+      <div style="font-size:28px">💊</div>
+      <div>
+        <div style="font-size:14px;font-weight:700">Rybelsus (semaglutida oral 7mg)</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">Medicamento prescrito. Reduce el apetito y ralentiza el vaciado gastrico. Potencia la recomposicion corporal combinado con el programa.</div>
+      </div>
+    </div>
+    <div style="font-size:11px;font-weight:700;color:#991b1b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Protocolo diario — orden estricto</div>
+    <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:12px">
+      <div style="display:flex;gap:10px;padding:8px;background:#fef2f2;border-radius:var(--rs);align-items:center">
+        <div style="font-size:13px;font-weight:800;color:#991b1b;min-width:52px">07:00h</div>
+        <div style="font-size:12px;line-height:1.5"><strong>Rybelsus</strong> con un vaso de agua (120-240ml). En ayunas total. Sentado o de pie, no tumbado.</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:8px;background:#f4f4f1;border-radius:var(--rs);align-items:center">
+        <div style="font-size:13px;font-weight:800;color:var(--muted);min-width:52px">07:30h</div>
+        <div style="font-size:12px;line-height:1.5"><strong>Desayuno</strong> — minimo 30 min despues. Tostada + Philadelphia + proteina + cafe.</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:8px;background:#f0fdf4;border-radius:var(--rs);align-items:center">
+        <div style="font-size:13px;font-weight:800;color:#16a34a;min-width:52px">Post-gym</div>
+        <div style="font-size:12px;line-height:1.5"><strong>Batido Bulk Whey + Creatina Foodelis</strong> — siempre minimo 2h despues del Rybelsus. Sin problema.</div>
+      </div>
+    </div>
+    <div style="background:#fff7ed;border-radius:var(--rs);padding:10px;font-size:12px;color:#92400e;line-height:1.6">
+      <strong>Por que perdiste 20kg y volviste a engordar:</strong> La semaglutida reduce el apetito pero sin entrenamiento de fuerza, parte del peso perdido es musculo. Menos musculo = metabolismo mas lento = recuperas grasa mas facil al parar. <strong>Esta vez el combo Rybelsus + fuerza + proteina alta preserva el musculo mientras pierdes grasa.</strong> Es el protocolo correcto.
+    </div>
+  </div>
+
+  <!-- RESUMEN -->
+  <div class="section-label">Resumen — orden de prioridad y coste mensual</div>
+  <div class="card">
+    <div style="font-size:12px;color:var(--text);line-height:1.8">
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+        <div><strong>1. Whey protein</strong> (30g/día post-gym)</div><div style="color:#7c3aed;font-weight:700">~13€/mes</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+        <div><strong>2. Creatina monohidrato</strong> (5g/día)</div><div style="color:#059669;font-weight:700">~4€/mes</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+        <div><strong>3. Vitamina D3 + K2</strong> (oct-abril)</div><div style="color:#f59e0b;font-weight:700">~2,5€/mes</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+        <div><strong>4. Magnesio bisglicinato</strong> (opcional)</div><div style="color:#6366f1;font-weight:700">~5€/mes</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;background:#f0fdf4;border-radius:var(--rs);padding:10px;margin-top:8px">
+        <div style="font-weight:700">TOTAL (con magnesio)</div><div style="color:#16a34a;font-weight:700;font-size:15px">~24€/mes</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- RUNNING SCREEN -->
+<div id="scr-running" class="scr">
+
+  <!-- HERO -->
+  <div style="background:linear-gradient(135deg,#7c2d12,#c2410c);border-radius:14px;padding:20px;margin-bottom:14px;color:#fff">
+    <div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#fed7aa;margin-bottom:6px;font-weight:600">Programa de iniciacion al running</div>
+    <div style="font-family:Georgia,serif;font-size:22px;font-weight:700;margin-bottom:6px">De 0 a correr <em style="color:#fed7aa">30 min</em></div>
+    <div style="font-size:12px;color:#ffedd5;line-height:1.5">8 semanas · 3 dias/semana · Pista de atletismo · Metodo Run/Walk</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px">
+      <div style="background:rgba(255,255,255,.1);border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:18px;font-weight:700">8</div>
+        <div style="font-size:10px;color:#fed7aa">semanas</div>
+      </div>
+      <div style="background:rgba(255,255,255,.1);border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:18px;font-weight:700">3</div>
+        <div style="font-size:10px;color:#fed7aa">dias/semana</div>
+      </div>
+      <div style="background:rgba(255,255,255,.1);border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:18px;font-weight:700">30'</div>
+        <div style="font-size:10px;color:#fed7aa">objetivo final</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK SELECTOR -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+    <button onclick="changeRunWeek(-1)" style="padding:8px 16px;border-radius:var(--rs);border:1px solid var(--border);background:var(--card);font-size:13px;cursor:pointer;font-family:inherit">←</button>
+    <span id="run-wk-lbl" style="font-size:15px;font-weight:700;color:#c2410c">Semana 1</span>
+    <button onclick="changeRunWeek(1)" style="padding:8px 16px;border-radius:var(--rs);border:1px solid var(--border);background:var(--card);font-size:13px;cursor:pointer;font-family:inherit">→</button>
+  </div>
+
+  <div id="run-week-content"></div>
+
+  <!-- TIPS -->
+  <div class="section-label">Reglas de oro para empezar</div>
+  <div class="card">
+    <div style="font-size:12px;color:var(--text);line-height:1.8">
+      <div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:18px">🗣️</span>
+        <div><strong>Test de conversacion:</strong> Si no puedes hablar con frases completas mientras corres, vas demasiado rapido. Baja el ritmo. Siempre.</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:18px">👟</span>
+        <div><strong>Zapatillas:</strong> Las mas importantes de tu vida ahora mismo. Ve a una tienda especializada (Decathlon Running o similar) y pide que te analicen la pisada. Presupuesto minimo 60-80€.</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:18px">⏱️</span>
+        <div><strong>Nunca dos dias seguidos:</strong> El tendon de Aquiles y las rodillas necesitan 48h para adaptarse al impacto. Respeta siempre el dia de descanso entre sesiones.</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:18px">🔄</span>
+        <div><strong>Si una semana falla, repitela:</strong> No avances de semana si no has completado las 3 sesiones. No hay prisa. La lesion es el unico enemigo real.</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:18px">🌡️</span>
+        <div><strong>En Murcia en verano:</strong> Corre antes de las 9h o despues de las 20h. El calor extremo hace imposible la zona 2 y aumenta el riesgo de lesion por deshidratacion.</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:7px 0">
+        <span style="font-size:18px">💧</span>
+        <div><strong>Hidratacion:</strong> Bebe 500ml de agua 30 min antes. En sesiones de mas de 30 min lleva agua a la pista. En verano, electrolitos (una pizca de sal en el agua).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZAPATILLAS GUIDE -->
+  <div class="section-label">Zapatillas recomendadas para tu perfil</div>
+  <div class="card">
+    <div style="font-size:12px;color:var(--text);line-height:1.8">
+      <div style="background:#fff7ed;border-radius:var(--rs);padding:10px;margin-bottom:10px;border-left:3px solid #c2410c">
+        <strong style="color:#c2410c">Tu perfil:</strong> Principiante, 90kg, objetivo recomposicion. Necesitas maxima amortiguacion y soporte. La pista de atletismo ya ayuda mucho (mas blanda que asfalto).
+      </div>
+      <div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:18px">🥇</span>
+        <div><strong>ASICS Gel-Kayano / Gel-Nimbus</strong> — maxima amortiguacion, ideal para principiantes con peso. ~120-150€</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:18px">🥈</span>
+        <div><strong>Brooks Adrenaline GTS</strong> — soporte y amortiguacion. Muy popular entre runners con sobrepeso inicial. ~120€</div>
+      </div>
+      <div style="display:flex;gap:10px;padding:7px 0">
+        <span style="font-size:18px">💡</span>
+        <div><strong>Opcion economica:</strong> Decathlon Kiprun KS500 o KS900 — excelente calidad/precio para empezar. ~50-70€. Mucho mejor que cualquier zapatilla de moda.</div>
+      </div>
+    </div>
   </div>
 </div>
 </body>
