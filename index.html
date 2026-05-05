@@ -14,7 +14,7 @@ body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI
 .topbar-sub{font-size:11px;color:var(--muted);margin-top:2px}
 .wbadge{background:var(--pul);color:var(--pud);font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px}
 .bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--card);border-top:1px solid var(--border);display:flex;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
-.bn{flex:1;padding:8px 2px 6px;text-align:center;border:none;background:transparent;color:var(--muted);font-size:9px;font-family:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+.bn{flex:1;padding:10px 2px 8px;text-align:center;border:none;background:transparent;color:var(--muted);font-size:9px;font-family:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
 .bn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .bn.active{color:var(--pu)}
 .scr{display:none;padding:12px 12px 0}.scr.active{display:block}
@@ -298,6 +298,8 @@ canvas{display:block;width:100%!important;height:100%!important}
 .shop-qty{font-size:11px;color:var(--muted)}
 .day-totals{background:var(--card);border-radius:var(--r);border:1px solid var(--border);padding:12px;margin-top:4px}
 
+
+#muscle-modal.open{display:flex!important}
 </style>
 </head>
 <body>
@@ -959,7 +961,7 @@ function getSuggestion(w,d,bi,ei,ps,pr,isLegs){
 let sessionStartTime=null;
 let sessionTimerInt=null;
 let sessionPRsToday=[];
-let defaultRest=120;
+let defaultRest=90;
 
 function startSession(){
   if(sessionStartTime) return;
@@ -1020,7 +1022,8 @@ function renderSessionBanner(){
       <button class="rchip ${defaultRest===180?'active':''}" onclick="setRest(180)">3 min</button>
       <button class="rchip ${defaultRest===240?'active':''}" onclick="setRest(240)">4 min</button>
     </div>
-    <button class="btn-end" onclick="endSession()">&#9209; Finalizar sesion</button>`;
+    <button class="btn-end" onclick="endSession()">&#9209; Finalizar sesion</button>
+    <button onclick="resetSession()" style="width:100%;padding:12px;border-radius:var(--rs);border:1px solid var(--border);background:var(--card);color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;margin-bottom:10px">&#8635; Reiniciar entrenamiento</button>`;
   clearInterval(sessionTimerInt);
   sessionTimerInt=setInterval(()=>{
     const el=document.getElementById('live-time');
@@ -1057,6 +1060,14 @@ function showSumModal(elapsedSec){
     const pw=document.getElementById('sum-prs-wrap');if(pw)pw.style.display='none';
   }
   const ov=document.getElementById('sum-ov');if(ov)ov.classList.add('open');
+}
+
+function resetSession(){
+  if(!confirm('Reiniciar el entrenamiento? Se perdera el tiempo pero no las series registradas.')) return;
+  sessionStartTime=null;
+  sessionPRsToday=[];
+  clearInterval(sessionTimerInt);
+  renderSessionBanner();
 }
 
 function closeSumModal(){
@@ -1417,7 +1428,9 @@ const MEALS=[
   {time:'Cena - 21:00h',name:'Proteina ligera y verdura',kcal:380,p:'42g',c:'18g',f:'14g',desc:'A: Tortilla 3 huevos + ensalada grande AOVE.\nB: Pechuga (130g) + verduras asadas.\nC: Atun natural (2 latas) + espinacas con huevo duro.'},
 ];
 function renderNutri(){
-  document.getElementById('meal-list').innerHTML=MEALS.map(m=>`
+  const mlEl=document.getElementById('meal-list');
+  if(!mlEl) return;
+  mlEl.innerHTML=MEALS.map(m=>`
     <div class="meal-card"><div class="meal-time">${m.time}</div><div class="meal-name">${m.name}</div>
     <div class="meal-desc">${m.desc.replace(/\n/g,'<br>')}</div>
     <div class="macros"><span class="mpill mp">P: ${m.p}</span><span class="mpill mc">C: ${m.c}</span><span class="mpill mf">G: ${m.f}</span><span class="mpill mk">${m.kcal} kcal</span></div>
@@ -1454,17 +1467,8 @@ function showScr(id,btn){
   if(btn)btn.classList.add('active');
   if(id==='prog'){renderWeekOv();}
   if(id==='pr'){renderPR();}
+  if(id==='nutri'){initNutri();}
 }
-
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-const di=document.getElementById('bio-date');
-if(di)di.value=new Date().toISOString().split('T')[0];
-['bio-peso','bio-grasa'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',calcBioAuto);});
-renderDayScroll();
-renderSession();
-renderNutri();
-renderGuide();
-
 
 // ─── NUTRITION DATA ───────────────────────────────────────────────────────────
 const NDAYS_F=['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
@@ -1694,6 +1698,16 @@ const NSHOPPING={
     {n:'Crema de verduras brick (Hacendado)',q:'1-2 bricks ~1€ cada uno'},
   ],
 };
+
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+const di=document.getElementById('bio-date');
+if(di)di.value=new Date().toISOString().split('T')[0];
+['bio-peso','bio-grasa'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',calcBioAuto);});
+renderDayScroll();
+renderSession();
+renderGuide();
+
 
 function showNutriTab(tab,btn){
   document.querySelectorAll('.n-scr').forEach(s=>s.classList.remove('active'));
@@ -2052,5 +2066,17 @@ function showMuscleModal(exName){
   </div>
 </div>
 
+
+<!-- MUSCLE / COACHING MODAL -->
+<div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;align-items:flex-end" id="muscle-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div style="background:var(--card);border-radius:14px 14px 0 0;padding:20px 16px 40px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto">
+    <button style="float:right;background:none;border:none;font-size:24px;color:var(--muted);cursor:pointer;margin-top:-4px" onclick="document.getElementById('muscle-modal').classList.remove('open')">&#10005;</button>
+    <div style="font-size:16px;font-weight:700;margin-bottom:4px;padding-right:30px" id="mus-title"></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:14px" id="mus-sub"></div>
+    <div id="mus-diagrams"></div>
+    <div id="mus-tags"></div>
+    <div id="mus-tips"></div>
+  </div>
+</div>
 </body>
 </html>
