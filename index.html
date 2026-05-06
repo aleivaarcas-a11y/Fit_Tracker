@@ -783,7 +783,14 @@ function buildProg(){
     const dl=w===3;
     const week=[];
     // Sets string helper
-    function sets(n,r){return dl?`${Math.max(2,n-1)}x${r}`:`${n}x${r}`;}
+    // Weeks 1-2: n-1 sets (learning, lower volume)
+    // Week 3: n sets (peak volume)
+    // Week 4: deload, n-2 sets
+    function sets(n,r){
+      if(dl) return `${Math.max(2,n-1)}x${r}`;
+      if(w<2) return `${Math.max(2,n-1)}x${r}`;
+      return `${n}x${r}`;
+    }
 
     // ── DAY 1: PUSH A — Pecho prioritario ─────────────────────────────────
     week.push({type:'gym',label:'Push A',icon:'💪',color:'gym',calmType:'push',isDeload:dl,
@@ -870,7 +877,7 @@ function buildProg(){
         {label:'Cadera y gemelo',exs:[
           ex('Abducción cadera máquina',sets(3,'15-20'),15,null,null,'abduccion',60),
           ex(w===0?'Gemelo prensa de piernas':w===1?'Gemelo máquina de pie':w===2?'Gemelo máquina sentado (sóleo)':'Gemelo prensa de piernas',
-            sets(4,'15-20'),15,null,null,'gemelo',60),
+            sets(3,'15-20'),15,null,null,'gemelo',60),
         ]},
       ]
     });
@@ -1323,6 +1330,9 @@ function renderSession(){
   let html='<div id="warmup-block"></div><div class="card">';
   html+=`<div class="shdr"><div class="sico ${s.type}">${s.icon}</div>
     <div><div class="stitle">${DAYS_F[curDay]} - ${s.label}</div><div class="smeta">${s.duration}</div></div></div>`;
+  if(s.isDeload)html+=`<div class="warnbox">Semana 4 — DESCARGA: 60% volumen. El cuerpo consolida y crece durante la recuperación.</div>`;
+  else if(curWeek<2)html+=`<div class="warnbox" style="background:#eff6ff;border-color:#3b82f6;color:#1e40af">Sem ${curWeek+1}/4 — Volumen base: 2 series/ejercicio. Aprende los movimientos, registra tus pesos.</div>`;
+  else html+=`<div class="warnbox" style="background:#f0fdf4;border-color:#16a34a;color:#065f46">Sem ${curWeek+1}/4 — Volumen máximo: 3 series/ejercicio. Aquí es donde se construye el músculo.</div>`;
   if(s.isDeload)html+=`<div class="warnbox">Semana de descarga - 60% del volumen. Tecnica perfecta.</div>`;
   if(s.spinning)html+=`<div class="tipbox">Doble sesion: gym primero, spinning despues.</div>`;
   if(s.eliptica)html+=`<div class="tipbox">Eliptica 30 min al terminar. Zona 2: 118-127 ppm.</div>`;
