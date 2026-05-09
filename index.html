@@ -811,7 +811,7 @@ function buildProg(){
         {label:'Superserie — Laterales + Apertura mancuernas',exs:[
           ...ss(
             ex('Elevaciones laterales mancuernas',sets(3,'15-20'),15,null,null,'lateral'),
-            ex(w===0?'Apertura mancuernas plano':w===1?'Apertura mancuernas inclinado':w===2?'Pec Deck — aperturas máquina':'Apertura mancuernas plano',sets(3,'12-15'),12,null,null,'pecho'),
+            ex(w===0?'Pec Deck — aperturas máquina (DX)':w===1?'Cruce polea bajo (DX)':w===2?'Apertura mancuernas inclinado':'Pec Deck — aperturas máquina (DX)',sets(3,'12-15'),12,null,null,'pecho'),
             90)
         ]},
         {label:'Superserie polea — Cruce + Tríceps overhead',exs:[
@@ -1368,7 +1368,10 @@ function renderSession(){
       }
 
       let setsHtml='';
-      if(!e.cardio){
+      if(e.cardio){
+        const cDone=!!(logs['cd-'+k]&&logs['cd-'+k].done);
+        setsHtml=`<div class="log-panel" style="padding:10px"><div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:13px;color:var(--muted)">${e.s}</div><button onclick="event.stopPropagation();toggleCardio('cd-${k}')" style="padding:7px 14px;border-radius:20px;border:none;background:${cDone?'#16a34a':'#64748b'};color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">${cDone?'✓ Completado':'Marcar completado'}</button></div></div>`;
+      } else if(!e.cardio){
         setsHtml=`<div class="log-panel"><div class="lp-title">Registrar series</div>`;
         lg.sets.forEach((st,si)=>{
           const pSets=parseInt(e.s)||3;
@@ -1397,7 +1400,7 @@ function renderSession(){
           </div>
         </div>
         ${prevHtml}
-        <div id="lp-${k}" style="display:none">${setsHtml}</div>
+        <div id="lp-${k}" style="display:${(e.super&&ei%2===1)||e.cardio?'block':'none'}">${setsHtml}</div>
       </div>`;
     });
   });
@@ -1406,9 +1409,7 @@ function renderSession(){
   if(s.calmType&&CALM[s.calmType]){
     html+=`</div><div class="calm-block"><div class="calm-title">Vuelta a la calma - ${s.calmType==='legs'?'~20 min':'~15 min'}</div>`;
     CALM[s.calmType].forEach((c,i)=>{
-      html+=`<div class="calm-row"><div class="calm-num">${i+1}</div>
-        <div class="calm-info"><div class="calm-name">${c.n} <span style="font-size:11px;color:#16a34a;font-weight:400">${c.dur}</span></div>
-        <div class="calm-detail">${c.detail}</div></div></div>`;
+      html+=`<div class="calm-row"><div class="calm-num">${i+1}</div><div class="calm-info" style="flex:1"><div class="calm-name">${c.n} <span style="font-size:11px;color:#16a34a">${c.dur}</span></div><div class="calm-detail">${c.detail}</div></div><button onclick="event.stopPropagation();toggleCalm('cl-${curSession}-${i}')" style="padding:5px 10px;border-radius:20px;border:none;background:${logs['cl-'+curSession+'-'+i]&&logs['cl-'+curSession+'-'+i].done?'#16a34a':'#e2e8f0'};color:${logs['cl-'+curSession+'-'+i]&&logs['cl-'+curSession+'-'+i].done?'#fff':'#64748b'};font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;margin-left:8px;font-family:inherit">${logs['cl-'+curSession+'-'+i]&&logs['cl-'+curSession+'-'+i].done?'✓':'Hecho'}</button></div>`;
     });
     html+='</div><div class="card">';
   }
@@ -1615,7 +1616,19 @@ function generateExport(){
   lines.push('Ten en cuenta: records personales, progresion de volumen, biometria y notas.');
   lines.push('Usuario: 39 anos, 173cm, objetivo perdida de grasa y mejora composicion corporal.');
   lines.push('Estructura: PPL 6 dias, spinning lun/mie, eliptica mar/jue/vie.');
-  document.getElementById('export-text').value=lines.join('\n');
+    const txt=lines.join('\n');
+  const el=document.getElementById('export-text');
+  if(el) el.value=txt;
+  // Also copy to clipboard
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(()=>{
+      showToast('✓ Resumen copiado al portapapeles — pégalo en Claude');
+    }).catch(()=>{
+      showToast('Resumen generado — cópialo del cuadro de texto');
+    });
+  } else {
+    showToast('Resumen generado — cópialo del cuadro de texto');
+  }
 }
 function copyExport(){
   const ta=document.getElementById('export-text');
@@ -3097,6 +3110,17 @@ function toggleRunSession(key){
   saveRun();renderRunWeek();
 }
 function initRunning(){renderRunWeek();}
+
+function toggleCardio(key){
+  if(!logs[key])logs[key]={done:false};
+  logs[key].done=!logs[key].done;
+  saveL();renderSession();renderSessionBanner();updateStats();
+}
+function toggleCalm(key){
+  if(!logs[key])logs[key]={done:false};
+  logs[key].done=!logs[key].done;
+  saveL();renderSession();
+}
 </script>
 
 <div class="sum-ov" id="sum-ov">
