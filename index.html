@@ -524,6 +524,20 @@ canvas{display:block;width:100%!important;height:100%!important}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script>
+// Pre-load today's training data (Push A, 9 mayo 2026)
+(function(){
+  const existing = JSON.parse(localStorage.getItem('ft4_logs')||'{}');
+  const todayData = {"s0b0e0": {"sets": [{"kg": "40", "reps": "8", "done": true}, {"kg": "40", "reps": "7", "done": true}]}, "s0b1e0": {"sets": [{"kg": "20", "reps": "10", "done": true}, {"kg": "20", "reps": "10", "done": true}]}, "s0b2e0": {"sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "13", "done": true}]}, "s0b2e1": {"sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s0b3e0": {"sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s0b3e1": {"sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}};
+  // Only inject if not already present
+  if(!existing['s0b0e0']){
+    Object.assign(existing, todayData);
+    localStorage.setItem('ft4_logs', JSON.stringify(existing));
+    localStorage.setItem('ft_sess', '0');
+    console.log('Today training data restored');
+  }
+})();
+</script>
+<script>
 // ─── SVG DIAGRAMS ────────────────────────────────────────────────────────────
 // Each diagram: muscles highlighted + movement arrows
 const DIAGRAMS = {
