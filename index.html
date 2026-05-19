@@ -505,9 +505,11 @@ canvas{display:block;width:100%!important;height:100%!important}
   <button class="bn active" onclick="showScr('hoy',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Hoy</button>
   <button class="bn" onclick="showScr('pr',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Records</button>
   <button class="bn" onclick="showScr('prog',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Progreso</button>
+  <button class="bn" onclick="showScr('abs',this)"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="3" y="14" width="18" height="4" rx="1"/><line x1="12" y1="8" x2="12" y2="18"/></svg>Abs</button>
   <button class="bn" onclick="showScr('bio',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Bio</button>
   <button class="bn" onclick="showScr('nutri',this)"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Nutricion</button>
   <button class="bn" onclick="showScr('running',this)"><svg viewBox="0 0 24 24"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0M6.7 8.5L11 7l2.5 3.5-2 4.5H16v2h-6l1.5-5L9 9.5l-2.3 1zm8.5 5.5l2 5h-2l-1.5-4"/></svg>Running</button>
+  <button class="bn" onclick="showScr('abs',this)"><svg viewBox="0 0 24 24"><path d="M6 4h12v4H6zM6 12h12v4H6zM6 20h12"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Abs</button>
   <button class="bn" onclick="showScr('suplem',this)"><svg viewBox="0 0 24 24"><path d="M8 3h8l1 7H7zm1 7v11m6-11v11M3 10h18"/></svg>Suplem.</button>
 </nav>
 
@@ -538,180 +540,36 @@ canvas{display:block;width:100%!important;height:100%!important}
 })();
 </script>
 <script>
+(function(){
+  try{
+    const ex=JSON.parse(localStorage.getItem('ft4_logs')||'{}');
+    const seed={"s0b0e0": {"sets": [{"kg": "40", "reps": "8", "done": true}, {"kg": "40", "reps": "7", "done": true}]}, "s0b1e0": {"sets": [{"kg": "20", "reps": "10", "done": true}, {"kg": "20", "reps": "10", "done": true}]}, "s0b2e0": {"sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "13", "done": true}]}, "s0b2e1": {"sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s0b3e0": {"sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s0b3e1": {"sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s1b0e0": {"sets": [{"kg": "45", "reps": "10", "done": true}, {"kg": "45", "reps": "10", "done": true}, {"kg": "50", "reps": "13", "done": true}]}, "s1b1e0": {"sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "10", "done": true}]}, "s1b2e0": {"sets": [{"kg": "35", "reps": "15", "done": true}, {"kg": "35", "reps": "15", "done": true}]}, "s1b3e0": {"sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s1b3e1": {"sets": [{"kg": "7.5", "reps": "8", "done": true}, {"kg": "5", "reps": "4", "done": true}, {"kg": "7.5", "reps": "6", "done": true}, {"kg": "5", "reps": "4", "done": true}]}, "s2b0e0": {"sets": [{"kg": "96", "reps": "12", "done": true}, {"kg": "102", "reps": "12", "done": true}, {"kg": "102", "reps": "21", "done": true}]}, "s2b1e0": {"sets": [{"kg": "45", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b2e0": {"sets": [{"kg": "50", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b3e0": {"sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "35", "reps": "12", "done": true}]}, "s2b4e0": {"sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "45", "reps": "15", "done": true}]}, "s2b4e1": {"sets": [{"kg": "40", "reps": "15", "done": true}, {"kg": "40", "reps": "15", "done": true}]}, "s3b0e0": {"sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "11", "done": true}]}, "s3b1e0": {"sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s3b1e1": {"sets": [{"kg": "10", "reps": "10", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s3b2e0": {"sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "55", "reps": "15", "done": true}, {"kg": "55", "reps": "12", "done": true}]}, "s3b2e1": {"sets": [{"kg": "15", "reps": "15", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s4b0e0": {"sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "12", "done": true}, {"kg": "45", "reps": "12", "done": true}]}, "s4b1e0": {"sets": [{"kg": "50", "reps": "10", "done": true}, {"kg": "50", "reps": "10", "done": true}]}, "s4b2e0": {"sets": [{"kg": "5", "reps": "15", "done": true}, {"kg": "5", "reps": "15", "done": true}]}, "s4b2e1": {"sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s4b3e0": {"sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "cd-s0b4e0": {"done": true}, "cd-s1b4e0": {"done": true}};
+    let ch=false;
+    Object.keys(seed).forEach(k=>{if(!ex[k]||!ex[k].sets||!ex[k].sets.some(s=>s.done)){ex[k]=seed[k];ch=true;}});
+    if(ch)localStorage.setItem('ft4_logs',JSON.stringify(ex));
+    if(!localStorage.getItem('ft_sess'))localStorage.setItem('ft_sess','5');
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){try{var e=JSON.parse(localStorage.getItem("ft4_logs")||"{}");var d={"s0b0e0": {"name": "Press pecho maquina palancas", "sets": [{"kg": "40", "reps": "8", "done": true}, {"kg": "40", "reps": "7", "done": true}]}, "s0b1e0": {"name": "Press hombros maquina", "sets": [{"kg": "20", "reps": "10", "done": true}, {"kg": "20", "reps": "10", "done": true}]}, "s0b2e0": {"name": "Elevaciones laterales mancuernas", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "13", "done": true}]}, "s0b2e1": {"name": "Pec Deck aperturas maquina", "sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s0b3e0": {"name": "Cruce polea alto", "sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s0b3e1": {"name": "Extension overhead cuerda", "sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "cd-s0b4e0": {"done": true}, "s1b0e0": {"name": "Jalon polea agarre ancho", "sets": [{"kg": "45", "reps": "10", "done": true}, {"kg": "45", "reps": "10", "done": true}, {"kg": "50", "reps": "13", "done": true}]}, "s1b1e0": {"name": "Remo maquina Hammer", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "10", "done": true}]}, "s1b2e0": {"name": "Face pulls polea", "sets": [{"kg": "35", "reps": "15", "done": true}, {"kg": "35", "reps": "15", "done": true}]}, "s1b3e0": {"name": "Curl predicador mancuerna", "sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s1b3e1": {"name": "Curl martillo mancuernas", "sets": [{"kg": "7.5", "reps": "8", "done": true}, {"kg": "5", "reps": "4", "done": true}, {"kg": "7.5", "reps": "6", "done": true}, {"kg": "5", "reps": "4", "done": true}]}, "cd-s1b4e0": {"done": true}, "s2b0e0": {"name": "Prensa de piernas", "sets": [{"kg": "96", "reps": "12", "done": true}, {"kg": "102", "reps": "12", "done": true}, {"kg": "102", "reps": "21", "done": true}]}, "s2b1e0": {"name": "Extension cuadriceps maquina", "sets": [{"kg": "45", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b2e0": {"name": "Curl femoral tumbado maquina", "sets": [{"kg": "50", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b3e0": {"name": "Hip thrust maquina", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "35", "reps": "12", "done": true}]}, "s2b4e0": {"name": "Abduccion cadera maquina", "sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "45", "reps": "15", "done": true}]}, "s2b4e1": {"name": "Gemelo prensa de piernas", "sets": [{"kg": "40", "reps": "15", "done": true}, {"kg": "40", "reps": "15", "done": true}]}, "s3b0e0": {"name": "Press Arnold mancuernas", "sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "11", "done": true}]}, "s3b1e0": {"name": "Elevaciones laterales mancuernas", "sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "6", "done": true}, {"kg": "5", "reps": "4", "done": true}]}, "s3b1e1": {"name": "Press inclinado mancuernas", "sets": [{"kg": "10", "reps": "10", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s3b2e0": {"name": "Pec Deck aperturas maquina", "sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "55", "reps": "15", "done": true}, {"kg": "55", "reps": "12", "done": true}]}, "s3b2e1": {"name": "Pushdown polea cuerda", "sets": [{"kg": "15", "reps": "15", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "cd-s3b3e0": {"done": true}, "s4b0e0": {"name": "Remo polea agarre neutro", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "12", "done": true}, {"kg": "45", "reps": "12", "done": true}]}, "s4b1e0": {"name": "Jalon polea agarre supino", "sets": [{"kg": "50", "reps": "10", "done": true}, {"kg": "50", "reps": "10", "done": true}]}, "s4b2e0": {"name": "Pajaro mancuernas", "sets": [{"kg": "5", "reps": "15", "done": true}, {"kg": "5", "reps": "15", "done": true}]}, "s4b2e1": {"name": "Curl alterno mancuernas", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s4b3e0": {"name": "Curl concentrado mancuerna", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "cd-s4b4e0": {"done": true}};Object.keys(d).forEach(function(k){if(!e[k]||(!e[k].done&&(!e[k].sets||!e[k].sets.some(function(x){return x.done;}))))e[k]=d[k];});localStorage.setItem("ft4_logs",JSON.stringify(e));}catch(err){}})();
+</script>
+<script>
 // ─── SVG DIAGRAMS ────────────────────────────────────────────────────────────
 // Each diagram: muscles highlighted + movement arrows
-const DIAGRAMS = {
-  pecho: {
-    muscle: 'Pectoral mayor - Deltoides anterior - Triceps',
-    svg: `<svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="80" cy="80" rx="45" ry="55" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="80" cy="75" rx="32" ry="38" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.85"/>
-      <ellipse cx="42" cy="72" rx="14" ry="20" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.5" opacity="0.7"/>
-      <ellipse cx="118" cy="72" rx="14" ry="20" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.5" opacity="0.7"/>
-      <ellipse cx="80" cy="140" rx="22" ry="30" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="80" cy="145" rx="15" ry="22" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.5" opacity="0.6"/>
-      <line x1="80" y1="30" x2="80" y2="10" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="80,5 75,14 85,14" fill="#0f766e"/>
-      <line x1="80" y1="115" x2="80" y2="135" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="80,140 75,131 85,131" fill="#0f766e"/>
-      <text x="80" y="196" text-anchor="middle" font-size="10" fill="#64748b">Movimiento vertical</text>
-    </svg>`,
-    steps: ['Agarra las asas a la altura del pecho con codos ligeramente flexionados.','Empuja hacia delante juntando las manos. Expira al empujar.','Vuelve controlado sin abrir demasiado los codos. Inspira al bajar.']
-  },
-  hombro: {
-    muscle: 'Deltoides (cabeza anterior y lateral) - Trapecio superior',
-    svg: `<svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="80" cy="90" rx="40" ry="50" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="40" cy="80" rx="20" ry="28" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.9"/>
-      <ellipse cx="120" cy="80" rx="20" ry="28" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.9"/>
-      <ellipse cx="80" cy="50" rx="30" ry="16" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.5" opacity="0.8"/>
-      <circle cx="80" cy="35" rx="18" ry="18" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <line x1="40" y1="52" x2="20" y2="30" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="16,26 22,35 28,27" fill="#0f766e"/>
-      <line x1="120" y1="52" x2="140" y2="30" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="144,26 138,35 132,27" fill="#0f766e"/>
-      <text x="80" y="155" text-anchor="middle" font-size="10" fill="#64748b">Empuje vertical</text>
-    </svg>`,
-    steps: ['Sienta con la espalda recta. Agarra las asas a la altura de los hombros.','Empuja hacia arriba extendiendo los brazos sin bloquear los codos.','Baja controlado hasta la posicion inicial. No arquees la lumbar.']
-  },
-  espalda_v: {
-    muscle: 'Dorsal ancho - Redondo mayor - Biceps (secundario)',
-    svg: `<svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="80" cy="100" rx="50" ry="65" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <path d="M50,60 Q30,100 55,150 Q80,165 105,150 Q130,100 110,60 Q80,45 50,60Z" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.85"/>
-      <ellipse cx="80" cy="55" rx="20" ry="15" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <line x1="50" y1="40" x2="30" y2="15" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="26,11 32,20 38,12" fill="#0f766e"/>
-      <line x1="110" y1="40" x2="130" y2="15" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="134,11 128,20 122,12" fill="#0f766e"/>
-      <line x1="80" y1="35" x2="80" y2="55" stroke="#0f766e" stroke-width="2" stroke-dasharray="4,3"/>
-      <text x="80" y="185" text-anchor="middle" font-size="10" fill="#64748b">Tirón vertical</text>
-    </svg>`,
-    steps: ['Agarra la barra un poco mas ancho que los hombros. Columna recta.','Tira del codo hacia abajo y atras. El codo marca el camino.','Baja controlado sin soltar la tension del dorsal.']
-  },
-  espalda_h: {
-    muscle: 'Dorsal ancho - Romboides - Trapecio medio',
-    svg: `<svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="80" cy="100" rx="50" ry="65" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <path d="M50,60 Q30,100 55,150 Q80,165 105,150 Q130,100 110,60 Q80,45 50,60Z" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.85"/>
-      <ellipse cx="80" cy="95" rx="25" ry="30" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.5" opacity="0.8"/>
-      <line x1="30" y1="100" x2="10" y2="100" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="5,100 14,95 14,105" fill="#0f766e"/>
-      <line x1="130" y1="100" x2="150" y2="100" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="155,100 146,95 146,105" fill="#0f766e"/>
-      <text x="80" y="185" text-anchor="middle" font-size="10" fill="#64748b">Tirón horizontal</text>
-    </svg>`,
-    steps: ['Sienta erguido frente a la polea. Agarra el triangulo con los codos pegados al cuerpo.','Tira hacia el abdomen apretando los omoplatos al final del movimiento.','Extiende los brazos controlado sin que los hombros se vayan hacia delante.']
-  },
-  biceps: {
-    muscle: 'Biceps braquial - Braquial anterior - Braquiorradial',
-    svg: `<svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <rect x="55" y="50" width="22" height="110" rx="11" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <rect x="83" y="50" width="22" height="110" rx="11" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="66" cy="95" rx="11" ry="35" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.9"/>
-      <ellipse cx="94" cy="95" rx="11" ry="35" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.9"/>
-      <path d="M55,90 Q45,70 55,55" stroke="#0f766e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <polygon points="55,50 50,60 60,58" fill="#0f766e"/>
-      <path d="M105,90 Q115,70 105,55" stroke="#0f766e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <polygon points="105,50 100,60 110,58" fill="#0f766e"/>
-      <text x="80" y="185" text-anchor="middle" font-size="10" fill="#64748b">Flexion de codo</text>
-    </svg>`,
-    steps: ['Coloca los codos pegados al cuerpo o apoyados (predicador). No los muevas.','Flexiona el codo llevando la mano hacia el hombro. Supina la muneca al final.','Baja lentamente hasta extension completa para maximo estiramiento.']
-  },
-  triceps: {
-    muscle: 'Triceps braquial (3 cabezas) - Anconeo',
-    svg: `<svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <rect x="55" y="50" width="22" height="110" rx="11" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <rect x="83" y="50" width="22" height="110" rx="11" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="66" cy="110" rx="11" ry="40" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.9"/>
-      <ellipse cx="94" cy="110" rx="11" ry="40" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.9"/>
-      <path d="M55,115 Q45,140 55,155" stroke="#0f766e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <polygon points="55,160 50,150 60,148" fill="#0f766e"/>
-      <path d="M105,115 Q115,140 105,155" stroke="#0f766e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <polygon points="105,160 100,150 110,148" fill="#0f766e"/>
-      <text x="80" y="185" text-anchor="middle" font-size="10" fill="#64748b">Extension de codo</text>
-    </svg>`,
-    steps: ['Agarra la cuerda o barra a la altura del pecho. Codos fijos pegados al cuerpo.','Extiende los codos hacia abajo hasta bloqueo completo. Aprieta el triceps.','Vuelve controlado hasta 90 grados. No dejes que los codos se abran.']
-  },
-  cuad: {
-    muscle: 'Cuadriceps (4 cabezas) - Gluteo mayor (secundario)',
-    svg: `<svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="55" cy="110" rx="28" ry="65" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="105" cy="110" rx="28" ry="65" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="55" cy="100" rx="20" ry="52" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.85"/>
-      <ellipse cx="105" cy="100" rx="20" ry="52" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.85"/>
-      <ellipse cx="55" cy="40" rx="20" ry="18" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.5" opacity="0.7"/>
-      <ellipse cx="105" cy="40" rx="20" ry="18" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.5" opacity="0.7"/>
-      <line x1="55" y1="60" x2="55" y2="45" stroke="#0f766e" stroke-width="2.5"/>
-      <polygon points="55,40 50,49 60,49" fill="#0f766e"/>
-      <line x1="105" y1="60" x2="105" y2="45" stroke="#0f766e" stroke-width="2.5"/>
-      <polygon points="105,40 100,49 110,49" fill="#0f766e"/>
-      <text x="80" y="195" text-anchor="middle" font-size="10" fill="#64748b">Extension de rodilla</text>
-    </svg>`,
-    steps: ['Regula el asiento para que la rodilla quede en linea con el eje de la maquina.','Extiende las piernas hasta casi bloqueo. Aprieta el cuadriceps en el punto alto.','Baja controlado en 3 segundos. No dejes caer el peso.']
-  },
-  posterior: {
-    muscle: 'Isquiotibiales - Gluteo mayor - Erector espinal',
-    svg: `<svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="55" cy="110" rx="28" ry="65" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="105" cy="110" rx="28" ry="65" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="55" cy="120" rx="20" ry="50" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.85"/>
-      <ellipse cx="105" cy="120" rx="20" ry="50" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.85"/>
-      <ellipse cx="80" cy="35" rx="45" ry="22" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.5" opacity="0.8"/>
-      <line x1="55" y1="155" x2="55" y2="172" stroke="#0f766e" stroke-width="2.5"/>
-      <polygon points="55,177 50,168 60,168" fill="#0f766e"/>
-      <line x1="105" y1="155" x2="105" y2="172" stroke="#0f766e" stroke-width="2.5"/>
-      <polygon points="105,177 100,168 110,168" fill="#0f766e"/>
-      <text x="80" y="197" text-anchor="middle" font-size="10" fill="#64748b">Flexion de rodilla</text>
-    </svg>`,
-    steps: ['Coloca el rodillo justo por encima del talon (no en el tendon de Aquiles).','Flexiona la rodilla tirando el talon hacia el gluteo. Expira en el esfuerzo.','Baja controlado hasta extension completa. Mantén las caderas pegadas al banco.']
-  },
-  lateral: {
-    muscle: 'Deltoides lateral - Trapecio superior (secundario)',
-    svg: `<svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="80" cy="80" rx="40" ry="50" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="32" cy="75" rx="22" ry="28" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.9"/>
-      <ellipse cx="128" cy="75" rx="22" ry="28" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.9"/>
-      <circle cx="80" cy="35" rx="18" ry="18" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <line x1="32" y1="48" x2="15" y2="30" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="11,26 17,35 23,27" fill="#0f766e"/>
-      <line x1="128" y1="48" x2="145" y2="30" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="149,26 143,35 137,27" fill="#0f766e"/>
-      <text x="80" y="155" text-anchor="middle" font-size="10" fill="#64748b">Elevacion lateral</text>
-    </svg>`,
-    steps: ['De pie o sentado. Codos ligeramente flexionados (no rectos).','Eleva los brazos lateralmente hasta la altura del hombro. Codo lidera el movimiento.','Baja controlado. No uses el trapecio encogiendo los hombros.']
-  },
-  gemelo: {
-    muscle: 'Gastrocnemio - Soleo',
-    svg: `<svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="55" cy="120" rx="22" ry="55" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="105" cy="120" rx="22" ry="55" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="55" cy="105" rx="16" ry="35" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.9"/>
-      <ellipse cx="105" cy="105" rx="16" ry="35" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.9"/>
-      <ellipse cx="55" cy="130" rx="12" ry="22" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.5" opacity="0.7"/>
-      <ellipse cx="105" cy="130" rx="12" ry="22" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.5" opacity="0.7"/>
-      <line x1="55" y1="68" x2="55" y2="52" stroke="#0f766e" stroke-width="2.5"/>
-      <polygon points="55,47 50,56 60,56" fill="#0f766e"/>
-      <line x1="105" y1="68" x2="105" y2="52" stroke="#0f766e" stroke-width="2.5"/>
-      <polygon points="105,47 100,56 110,56" fill="#0f766e"/>
-      <text x="80" y="193" text-anchor="middle" font-size="10" fill="#64748b">Plantar flexion</text>
-    </svg>`,
-    steps: ['Coloca las puntas en el borde de la plataforma. Talon colgando.','Sube en puntillas lo mas alto posible. Mantén 1 segundo arriba.','Baja el talon por debajo de la plataforma para estiramiento completo.']
-  },
-  abduccion: {
-    muscle: 'Gluteo medio - Gluteo menor - Tensor fascia lata',
-    svg: `<svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="80" cy="90" rx="55" ry="60" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-      <ellipse cx="40" cy="80" rx="28" ry="35" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.85"/>
-      <ellipse cx="120" cy="80" rx="28" ry="35" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" opacity="0.85"/>
-      <line x1="40" y1="45" x2="15" y2="30" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="11,26 17,35 23,27" fill="#0f766e"/>
-      <line x1="120" y1="45" x2="145" y2="30" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="149,26 143,35 137,27" fill="#0f766e"/>
-      <text x="80" y="170" text-anchor="middle" font-size="10" fill="#64748b">Abduccion de cadera</text>
-    </svg>`,
-    steps: ['Sienta con la espalda recta. Las almohadillas en la parte externa de las rodillas.','Abre las piernas hacia fuera apretando el gluteo medio. Mantén 1 segundo.','Cierra controlado sin dejar que las rodillas colapsen hacia dentro.']
-  },
+const DIAGRAMS={
+  pecho:['✅ CÓMO HACERLO BIEN\n• Retrae escápulas: junta omóplatos ANTES de bajar y no los sueltes\n• Pies firmes en el suelo — base estable = más fuerza\n• Baja controlado 2-3s hasta sentir estiramiento, sube explosivo\n• Arco lumbar natural, no exagerado\n• Pec Deck DX: codos a 90°, mueve desde el codo no desde la muñeca\n\n❌ ERRORES MÁS COMUNES\n• Rebotar el peso (rompe tensión muscular, riesgo de lesión)\n• Despegar escápulas de la banca al subir\n• Bloquear codos completamente arriba\n• Bajar demasiado con mancuernas: riesgo de hombro\n\n💡 DIFERENCIAS ENTRE SEMANAS\n• Sem 1 — Máquina palancas DX: movimiento guiado, aprende el patrón sin compensaciones\n• Sem 2 — Press inclinado máquina: énfasis porción clavicular (más visible con camiseta)\n• Sem 3 — Banca mancuernas: mayor rango, más estabilización escapular\n• Pec Deck siempre mejor que aperturas mancuernas: sin asimetría, sin temblor\n\n🔬 POR QUÉ FUNCIONA\nEl pectoral tiene dos porciones: esternocosal (inferior/media, la más grande) y clavicular (superior). El press plano trabaja ambas. El inclinado enfatiza la superior. El cruce de polea y Pec Deck añaden tensión en máxima contracción — zona que el press no alcanza bien.'],
+  hombro:['✅ CÓMO HACERLO BIEN\n• Núcleo activado: no arquees la lumbar al subir — señal de peso excesivo\n• Codos ligeramente adelantados del plano del cuerpo\n• Baja hasta altura de orejas, no más abajo (riesgo manguito rotador)\n• Press Arnold: rota muñecas lentamente durante el movimiento\n• Agarre neutro (palmas enfrentadas): menos estrés en el manguito rotador\n\n❌ ERRORES\n• Arquear lumbar: el core debe estar activado todo el tiempo\n• Encogerse de hombros al subir: el trapecio roba el trabajo\n• Subir con inercia o balancear el cuerpo\n• Bajar en exceso: riesgo de impingement\n\n💡 DIFERENCIAS ENTRE SEMANAS\n• Sem 1 — Press hombros máquina: movimiento guiado, aprende la trayectoria\n• Sem 2 — Press Arnold: rotación que activa las 3 cabezas del deltoides\n• Sem 3 — Press militar mancuernas: máxima activación y estabilización\n• Sem 4 — Deload: menos peso, misma técnica\n\n🔬 POR QUÉ FUNCIONA\nEl deltoides tiene 3 cabezas: anterior (frente), medial (lado — da anchura) y posterior (detrás — postura). El press trabaja principalmente anterior y medial. Las elevaciones laterales aíslan la medial. El Face pull trabaja la posterior.'],
+  lateral:['✅ CÓMO HACERLO BIEN\n• Ligera inclinación del tronco hacia adelante (10-15°): más deltoides medial, menos trapecio\n• Codos ligeramente doblados y FIJOS durante todo el movimiento\n• Sube hasta altura del hombro — ni más ni menos\n• Meñique ligeramente más alto que el pulgar (como si vaciaras un vaso)\n• Baja en 2-3 segundos: el excéntrico construye más músculo\n• Peso correcto: si llegas a 15 reps cómodo, sube 1-2kg\n\n❌ ERRORES\n• Subir por encima del hombro: el trapecio roba el trabajo\n• Usar inercia o balancear el tronco\n• Codo completamente recto: riesgo en el manguito rotador\n• Bajar demasiado rápido: pierdes el trabajo excéntrico\n\n💡 TU CASO\nEn semana 1 con 7.5kg llegaste a 12-13 reps (objetivo 15). Es normal para el primer entreno. No bajes el peso — sigue con 7.5kg hasta llegar a 15 reps limpias en 2 series. Luego sube a 9kg.'],
+  triceps:['✅ CÓMO HACERLO BIEN — EXTENSIÓN OVERHEAD CUERDA\n• Brazos por encima de la cabeza: estira la cabeza LARGA (la más grande, da volumen al brazo)\n• Codos fijos junto a las orejas — solo se mueve el antebrazo\n• Baja hasta sentir el estiramiento completo del tríceps\n• Extiende completamente arriba apretando el tríceps\n\n✅ CÓMO HACERLO BIEN — PUSHDOWN CUERDA\n• Codos pegados al cuerpo durante todo el movimiento\n• Extiende completamente abajo — no te quedes a medias\n• Tronco ligeramente inclinado hacia adelante\n• La cuerda se separa al bajar: activa las dos cabezas por separado\n\n❌ ERRORES\n• Mover los codos (overhead): el codo es el eje, solo el antebrazo trabaja\n• No extender completamente: pierdes la contracción máxima\n• Usar inercia o balancear el cuerpo\n• Peso excesivo: mejor rango completo con menos peso\n\n🔬 POR QUÉ EL OVERHEAD ES MEJOR\nEl tríceps tiene 3 cabezas. La cabeza larga (la más grande, da el volumen del brazo) solo se estira completamente con el brazo por encima de la cabeza. El pushdown no la estira. Por eso el overhead overhead debe ser el ejercicio prioritario.'],
+  espalda_v:['✅ CÓMO HACERLO BIEN — JALÓN POLEA\n• Agarre algo más ancho que los hombros\n• Inclínate ligeramente hacia atrás (10-15°) antes de tirar\n• Tira hacia el pecho, no hacia la barbilla\n• INICIA el movimiento con los codos, no con los bíceps\n• Aprieta los codos hacia abajo y hacia atrás al final del recorrido\n• Aguanta 1 segundo abajo con los omóplatos juntos\n\n❌ ERRORES\n• Tirar con los brazos en lugar de con la espalda\n• Inclinar demasiado el tronco (se convierte en remo)\n• No llevar el movimiento hasta el pecho (rango incompleto)\n• Dejar subir el peso sin control (excéntrico desperdiciado)\n\n💡 DIFERENCIAS ENTRE AGARRES\n• Agarre ancho (Sem 1): más activación del dorsal superior, da anchura\n• Agarre supino/bíceps (Sem 2): más bíceps y dorsal inferior, más recorrido\n• Agarre neutro (Sem 3): posición más natural, menos estrés en la muñeca\n\n🔬 POR QUÉ FUNCIONA\nEl jalón trabaja el dorsal ancho — el músculo que da la forma de "V" a la espalda. También activa el redondo mayor y bíceps. La clave es iniciar con los codos, no con las manos: así el dorsal trabaja primero y el bíceps como asistente.'],
+  espalda_h:['✅ CÓMO HACERLO BIEN — REMO\n• Espalda recta y ligeramente inclinada — NO redondees la lumbar\n• Retrae las escápulas ANTES de empezar a tirar\n• Tira hacia el ombligo/cintura baja, no hacia el pecho\n• Codos cerca del cuerpo, no en ángulo de 90°\n• Aguanta 1 segundo en la posición final con escápulas juntas\n• Baja controlado en 2-3 segundos\n\n❌ ERRORES\n• Redondear la espalda: riesgo de lesión lumbar, especialmente con cargas altas\n• Tirar con los brazos en lugar de con la espalda\n• Balancear el tronco hacia atrás para usar inercia\n• No completar el recorrido por exceso de peso\n\n💡 DIFERENCIAS ENTRE VARIANTES\n• Remo Hammer (Sem 1): movimiento guiado, peso más alto posible\n• Remo polea neutro (Sem 2): rango más completo, agarre cómodo\n• Remo mancuerna unilateral (Sem 3): corrige desequilibrios izquierda/derecha\n\n🔬 POR QUÉ FUNCIONA\nEl remo trabaja el dorsal ancho, romboides, trapecio medio e infraespinoso. Los romboides son los que "cierran" las escápulas — su fortaleza es fundamental para la postura y para proteger el hombro.'],
+  face_pull:['✅ CÓMO HACERLO BIEN\n• Polea a la altura de los ojos o ligeramente por encima\n• Agarra las cuerdas con los pulgares hacia arriba\n• Tira hacia la cara separando las manos (como si hicieras doble bíceps)\n• Codos arriba y atrás — los codos deben quedar por encima de las muñecas\n• Aguanta 1-2 segundos en la posición final\n• Peso LIGERO: este ejercicio es de control, no de fuerza\n\n❌ ERRORES\n• Bajar los codos al tirar (se convierte en remo)\n• Peso excesivo: pierde toda su efectividad\n• No abrir completamente las manos al final\n• Inclinar el cuerpo hacia atrás para tirar\n\n🔬 POR QUÉ ES OBLIGATORIO\nEl face pull trabaja el deltoides posterior y el manguito rotador externo. Son los músculos más olvidados del gym y los más importantes para la salud del hombro. Sin ellos, el desequilibrio anterior/posterior causa lesiones de manguito. Es el ejercicio de "seguro de vida" del hombro.'],
+  biceps:['✅ CÓMO HACERLO BIEN\n• Codos FIJOS al costado durante todo el movimiento\n• Supina la muñeca (gira la palma hacia arriba) al subir — activa más el bíceps\n• Baja completamente hasta extensión total: el estiramiento construye músculo\n• Baja en 2-3 segundos (excéntrico controlado)\n• Curl predicador: el banco fija el codo — elimina cualquier trampa\n• Curl concentrado: codo apoyado en el muslo, movimiento puro de bíceps\n\n❌ ERRORES\n• Mover los codos hacia adelante al subir (roba el trabajo al bíceps)\n• No bajar completamente (pierdes el rango de estiramiento)\n• Usar inercia o balancear el cuerpo\n• En superserie predicador+martillo: baja el peso del martillo 1-2kg porque llegas fatigado\n\n💡 TU CASO\nEn semana 1 tuviste que bajar de 7.5kg a 5kg en el curl martillo dentro de la superserie. Eso es normal — el predicador agota el bíceps. Solución: empieza el martillo directamente con 5-6kg, no con 7.5kg.\n\n🔬 CURL MARTILLO VS CURL NORMAL\nEl curl con agarre neutro (martillo) trabaja el braquial y braquiorradial además del bíceps. Estos músculos están debajo del bíceps y cuando crecen "empujan" el bíceps hacia arriba, haciendo el brazo más voluminoso.'],
+  cuad:['✅ CÓMO HACERLO BIEN — PRENSA DE PIERNAS\n• Pies a la anchura de caderas, ligeramente abiertos (10-15° hacia fuera)\n• Baja hasta 90° de rodilla — el cuádriceps debe estar paralelo a la plataforma\n• Rodillas SIEMPRE alineadas con los pies: ni hacia dentro ni hacia fuera\n• Empuja con toda la planta del pie, no solo con los dedos\n• NO bloquees las rodillas arriba del todo: mantén tensión muscular\n• Espalda y glúteos pegados al asiento en todo momento\n\n❌ ERRORES CRÍTICOS\n• Bajar demasiado: la pelvis se despega del asiento (señal de que bajas demasiado) → riesgo lumbar\n• Rodillas hacia dentro (valgo): el error más peligroso en prensa\n• Pies demasiado abajo en la plataforma: más cuádriceps pero más estrés en rodilla\n• Pies altos en la plataforma: más glúteo e isquio, menos cuádriceps\n\n💡 TU CASO\nEn semana 1 llegaste a 102kg×21 reps. Es un número excelente. El dolor de espalda que notaste probablemente fue por bajar demasiado — la pelvis se despegó del asiento. Solución: ajusta el tope de recorrido y asegúrate de que la espalda baja NUNCA se separa del asiento.\n\n💡 DIFERENCIAS ENTRE SEMANAS\n• Sem 1 — Prensa posición neutral: aprende el patrón\n• Sem 2 — Pies altos: más énfasis en glúteo e isquio (más transferencia al hip thrust)\n• Sem 3 — Prensa unilateral: corrige desequilibrios izquierda/derecha\n\n🔬 POR QUÉ LA PRENSA ES MEJOR QUE LA SENTADILLA PARA EMPEZAR\nLa prensa elimina la carga axial sobre la columna. Puedes trabajar con mucha más carga y enfocarte en el movimiento sin preocuparte por la estabilización del tronco. Para alguien volviendo al gym, es la opción más segura y efectiva.'],
+  posterior:['✅ CÓMO HACERLO BIEN — HIP THRUST MÁQUINA\n• La barra/almohada apoya en las caderas, NO en el abdomen ni en las costillas\n• Espalda apoyada en el banco a la altura de los OMÓPLATOS (no del cuello ni de la cintura)\n• Pies planos a la anchura de caderas — talones bajo las rodillas o ligeramente más lejos\n• Empuja con los TALONES hacia el suelo\n• Sube hasta que cuerpo forme una línea recta de hombros a rodillas\n• APRIETA el glúteo fuerte en la parte alta y aguanta 1-2 segundos\n• Chin to chest: mantén la barbilla hacia el pecho durante todo el movimiento\n\n❌ ERRORES CRÍTICOS\n• Hiperextender la lumbar arriba: la pelvis se inclina hacia adelante y la lumbar trabaja en lugar del glúteo\n• Banco demasiado bajo o demasiado alto: cambia el ángulo de activación del glúteo\n• Empujar con los dedos del pie en lugar de los talones\n• No apretar el glúteo arriba: pierdes el 40% del trabajo\n• Dejar caer el peso sin control (excéntrico es importante)\n\n✅ CÓMO HACERLO BIEN — CURL FEMORAL TUMBADO\n• Tumbado boca abajo, caderas pegadas al banco en todo momento\n• Curva los pies hacia el glúteo de forma controlada\n• Aguanta 1 segundo arriba con los isquios contraídos\n• Baja lentamente (2-3s): el excéntrico del isquio es donde más crece\n• Si la cadera se despega al subir: el peso es excesivo\n\n❌ ERRORES CURL FEMORAL\n• Despegar la cadera del banco al subir (el cuádriceps compensa)\n• Bajar demasiado rápido (pierdes el excéntrico)\n• Rango parcial — baja hasta extensión completa\n\n🔬 POR QUÉ EL HIP THRUST ES EL REY DEL GLÚTEO\nEl hip thrust activa el glúteo mayor al 200% más que la sentadilla estándar (Contreras, 2015). La diferencia clave: en la extensión completa de cadera con la pelvis en posición neutra, el glúteo es el único motor. La sentadilla comparte el trabajo con el cuádriceps.'],
+  abduccion:['✅ CÓMO HACERLO BIEN\n• Espalda recta pegada al respaldo en todo momento\n• Siéntate en el borde delantero del asiento para mayor activación del glúteo medio\n• Abre hasta el punto de tensión máxima con control total\n• Aguanta 1 segundo en la apertura máxima\n• Cierra CONTROLADO — no dejes caer el peso: el excéntrico es igual de importante\n• Inclinación ligera del tronco hacia adelante (unos 20°): activa más el glúteo medio\n\n❌ ERRORES\n• Inclinar el tronco hacia atrás: trabaja más el piriforme que el glúteo medio\n• Dejar caer el peso al cerrar (excéntrico desperdiciado)\n• Rango parcial: solo en apertura completa se activa el glúteo medio al máximo\n• Peso excesivo que impide el rango completo\n\n🔬 POR QUÉ EL GLÚTEO MEDIO IMPORTA\nEl glúteo medio es el estabilizador lateral de la cadera. Su debilidad causa: rodillas que se van hacia dentro en sentadilla, asimetría en el glúteo, y lesiones de rodilla a largo plazo. También es el responsable de la redondez lateral del glúteo — el que da forma al "lado" del trasero visto de frente.'],
+  gemelo:['✅ CÓMO HACERLO BIEN\n• Rango COMPLETO obligatorio: baja hasta sentir estiramiento máximo en el tendón de Aquiles\n• Sube de puntillas hasta la máxima contracción — aprieta el gemelo arriba\n• Subida explosiva, bajada lenta (3-4 segundos)\n• Mantén 1 segundo arriba en contracción máxima\n• Pie neutro: gemelo general. Punta hacia fuera: gemelo interno. Punta hacia dentro: externo\n\n❌ ERRORES\n• Rango parcial: el gemelo es un músculo muy resistente que SOLO responde a rango completo\n• Bajar demasiado rápido: el rebote en el tendón de Aquiles puede causar lesión\n• Peso excesivo que impide el rango completo\n• No llegar a la máxima punta de pie: la contracción queda incompleta\n\n🔬 POR QUÉ EL GEMELO NECESITA RANGO COMPLETO\nEl gemelo (gastrocnemio) es un músculo de fibras mixtas pero con alta proporción de fibras lentas. Responde mejor a altas repeticiones Y rango completo. A diferencia del cuádriceps, el gemelo no responde bien a cargas altas con rango parcial. Mejor 20 reps con rango completo que 10 reps con rango parcial.'],
 };
 
 // Muscle group mapping
@@ -753,29 +611,25 @@ Object.entries(V).forEach(([grp, arr]) => arr.forEach(e => { EX_TO_GROUP[e.n] = 
 
 const CALM={
   push:[
-    {n:'Respiracion diafragmatica',detail:'Tumbado boca arriba. Inspira 4s por nariz, expira 6s por boca. Activa el sistema parasimpatico.',dur:'2 min'},
-    {n:'Estiramiento pecho en marco',detail:'Apoya el antebrazo en el marco, gira el cuerpo hacia fuera. Siente el pectoral. Cambia de lado.',dur:'30s cada lado'},
-    {n:'Estiramiento triceps sobre cabeza',detail:'Lleva el codo detras de la cabeza, empuja suavemente con la mano contraria. Cuello neutro.',dur:'30s cada lado'},
-    {n:'Estiramiento hombro cruzado',detail:'Lleva el brazo al pecho, usa el brazo contrario para presionar. Hombros bajos.',dur:'30s cada lado'},
-    {n:'Abdominales hipopresivos',detail:'De pie ligeramente inclinado. Expira todo el aire, apnea y abre costillas 8-10s. Repite 5 veces.',dur:'3-4 min'},
-    {n:'Circulos de hombros y movilidad cervical',detail:'Circulos lentos hacia atras (10 rep). Luego rotacion suave de cuello. Sin forzar.',dur:'2 min'},
+    {n:'Estiramiento pectoral en marco',detail:'Apoya el antebrazo en la pared a 90°. Gira el cuerpo hacia fuera. Siente el pectoral y hombro anterior. El pectoral acortado tira de los hombros hacia adelante — esto lo corrige.',dur:'45s cada lado'},
+    {n:'Estiramiento tríceps overhead',detail:'Lleva el codo detrás de la cabeza, empuja suavemente con la otra mano. Siente la cabeza larga del tríceps en toda su longitud.',dur:'30s cada lado'},
+    {n:'Estiramiento trapecio y cuello',detail:'Inclina la oreja al hombro. Mano en la cabeza sin forzar. Alivia tensión acumulada en el cuello tras el press.',dur:'30s cada lado'},
+    {n:'Rotaciones de hombro',detail:'Círculos lentos hacia atrás x10. Luego cruza el brazo al pecho y mantén. Mantiene la salud del manguito rotador a largo plazo.',dur:'10 círculos + 30s cruce'},
+    {n:'Respiración diafragmática',detail:'Tumbado. Mano en el vientre. Inhala 4s expandiendo el vientre. Exhala 6s por boca. Activa el sistema parasimpático y baja el cortisol post-entreno.',dur:'10 respiraciones'},
   ],
   pull:[
-    {n:'Respiracion diafragmatica',detail:'Tumbado boca arriba. Inspira 4s, expira 6s. Relaja la espalda.',dur:'2 min'},
-    {n:'Estiramiento espalda colgado',detail:'Agarra una barra o polea baja, deja que el peso estire la espalda. Rodillas ligeramente flexionadas.',dur:'45s'},
-    {n:'Estiramiento biceps (antepecho)',detail:'Extiende el brazo hacia atras con el pulgar al suelo. Usa la pared de apoyo.',dur:'30s cada lado'},
-    {n:'Rotacion toracica tumbado',detail:'Tumbado de lado, rodillas 90 grados. Abre el brazo superior al otro lado rotando el pecho.',dur:'30s cada lado'},
-    {n:'Plancha modificada sobre rodillas',detail:'Plancha sobre rodillas y antebrazos. Espalda recta, respiracion normal.',dur:'3x20s con 15s descanso'},
-    {n:'Movilidad de cadera world greatest stretch',detail:'Paso largo al frente, rodilla trasera en suelo. Lleva el codo al pie. Rota abriendo el pecho.',dur:'5 rep cada lado'},
+    {n:'Estiramiento dorsal en polea o poste',detail:'Agarra la barra de jalón o un poste. Deja caer el peso del cuerpo hacia atrás con los brazos extendidos. El mejor estiramiento de espalda tras el jalón.',dur:'45s'},
+    {n:'Estiramiento bíceps en pared',detail:'Apoya la palma en la pared con el brazo extendido y el pulgar hacia abajo. Gira el cuerpo hacia fuera. El bíceps se estira desde el hombro hasta el codo.',dur:'30s cada lado'},
+    {n:'Estiramiento trapecio y cuello',detail:'Inclina la oreja al hombro. El trapecio acumula tensión en el remo y jalón.',dur:'30s cada lado'},
+    {n:'Rotación torácica en el suelo',detail:'Tumbado de lado, rodillas dobladas. Abre el brazo superior siguiendo el techo. Moviliza la columna torácica bloqueada por el trabajo de espalda.',dur:'8 cada lado'},
+    {n:'Respiración diafragmática',detail:'10 respiraciones lentas. Cierra siempre el entreno de espalda con esto.',dur:'10 respiraciones'},
   ],
   legs:[
-    {n:'Caminata lenta de vuelta a la calma',detail:'Camina muy suave 3-5 minutos antes de estirarte. Cinta a 3-4 km/h.',dur:'3-5 min'},
-    {n:'Estiramiento cuadriceps de pie',detail:'Dobla la rodilla llevando el pie al gluteo. Mano en la pared si tienes equilibrio inestable.',dur:'45s cada pierna'},
-    {n:'Estiramiento isquios tumbado',detail:'Tumbado, lleva una pierna al pecho y extiendela. Usa una toalla si no alcanzas el pie.',dur:'45s cada pierna'},
-    {n:'Estiramiento cadera figura 4',detail:'Tumbado, cruza un tobillo sobre la rodilla contraria. Lleva las piernas al pecho.',dur:'45s cada lado'},
-    {n:'Movilidad de tobillo en pared',detail:'Pie a 10 cm de la pared. Dobla la rodilla intentando tocar la pared sin levantar el talon.',dur:'10 rep cada tobillo'},
-    {n:'Curl abdominal suave',detail:'Tumbado boca arriba, rodillas dobladas. Eleva solo los omoplatos llevando el menton al pecho. Lento.',dur:'2x12 rep'},
-    {n:'Respiracion de cierre con piernas en pared',detail:'Piernas elevadas en la pared. Inspira 4s, mantén 2s, expira 6s. Drena el lactato.',dur:'3-4 min'},
+    {n:'Estiramiento glúteo — figura 4',detail:'Tumbado boca arriba. Cruza el tobillo sobre la rodilla contraria. Lleva las piernas hacia el pecho. ESENCIAL tras el hip thrust. El glúteo mayor se estira profundamente.',dur:'60s cada lado'},
+    {n:'Estiramiento isquiotibial',detail:'Pierna estirada en el suelo. Flexiona el pie. Dobla el tronco con la ESPALDA RECTA — eso es lo que estira el isquio, no tocar la punta del pie.',dur:'45s cada pierna'},
+    {n:'Estiramiento cuádriceps de pie',detail:'De pie, talón hacia el glúteo. Caderas neutras, rodillas juntas. Si notas diferencia entre pierna derecha e izquierda, el lado más tenso necesita más trabajo.',dur:'30s cada pierna'},
+    {n:'Estiramiento aductores — mariposa',detail:'Sentado, plantas de los pies juntas. Presiona suavemente las rodillas hacia el suelo. Los aductores limitan el rango en prensa y sentadilla.',dur:'60s'},
+    {n:'Child pose — postura del niño',detail:'Rodillas separadas, brazos al frente. Descomprime la columna lumbar tras la prensa. No es opcional si tienes tensión lumbar.',dur:'60s'},
   ],
 };
 
@@ -825,7 +679,7 @@ function buildProg(){
         {label:'Superserie — Laterales + Apertura mancuernas',exs:[
           ...ss(
             ex('Elevaciones laterales mancuernas',sets(3,'15-20'),15,null,null,'lateral'),
-            ex(w===0?'Pec Deck — aperturas máquina (DX)':w===1?'Cruce polea bajo (DX)':w===2?'Apertura mancuernas inclinado':'Pec Deck — aperturas máquina (DX)',sets(3,'12-15'),12,null,null,'pecho'),
+            ex(w===0?'Pec Deck — aperturas máquina (DX)':w===1?'Pec Deck — aperturas máquina (DX)':w===2?'Apertura mancuernas inclinado':'Pec Deck — aperturas máquina (DX)',sets(3,'12-15'),12,null,null,'pecho'),
             90)
         ]},
         {label:'Superserie polea — Cruce + Tríceps overhead',exs:[
@@ -834,7 +688,8 @@ function buildProg(){
             ex('Extensión overhead cuerda (cabeza larga)',sets(3,'12-15'),12,null,null,'triceps'),
             90)
         ]},
-        {label:'Cardio',exs:[cardio('Spinning Zona 2','30 min')]},
+        {label:'Salud articular — face pulls',exs:[{n:'Face pulls polea',s:sets(3,'15-20'),r:'15',badge:null,yt:null,g:'face_pull',super:false,cardio:false,rest:60}]},
+        {label:'Cardio',exs:[cardio('Bici estática Zona 2','30 min — 130-145 ppm')]},
       ]
     });
 
@@ -862,7 +717,7 @@ function buildProg(){
             ex(w===0?'Curl martillo mancuernas':w===1?'Curl alterno supinando':w===2?'Curl martillo mancuernas':'Curl martillo mancuernas',sets(3,'12-15'),12,null,null,'biceps'),
             90)
         ]},
-        {label:'Cardio',exs:[cardio('Elíptica Zona 2','30 min')]},
+        {label:'Cardio',exs:[cardio('Bici estática Zona 2','25 min — 130-145 ppm')]},
       ]
     });
 
@@ -880,6 +735,7 @@ function buildProg(){
         {label:'Cuádriceps — accesorio',exs:[
           ex('Extensión cuádriceps máquina',sets(3,'12-15'),12,'prog',null,'cuad',120)
         ]},
+        {label:'Cuádriceps — accesorio',exs:[ex('Extensión cuádriceps máquina',sets(3,'12-15'),12,'prog',null,'cuad',90)]},
         {label:'Isquios',exs:[
           ex(w===0?'Curl femoral tumbado máquina':w===1?'Curl femoral sentado máquina':w===2?'Curl femoral tumbado máquina':'Curl femoral tumbado máquina',
             sets(3,'10-12'),10,null,null,'posterior',120)
@@ -919,7 +775,7 @@ function buildProg(){
             ex(w===0?'Pushdown polea cuerda':w===1?'Press francés barra EZ (skullcrusher)':w===2?'Extensión overhead cuerda':'Pushdown polea cuerda',sets(3,'12-15'),12,null,null,'triceps'),
             90)
         ]},
-        {label:'Cardio',exs:[cardio('Spinning o Elíptica Zona 2','20 min')]},
+        {label:'Cardio',exs:[cardio('Bici estática Zona 2','20 min — 130-145 ppm')]},
       ]
     });
 
@@ -948,7 +804,7 @@ function buildProg(){
           ex(w===0?'Curl concentrado mancuerna':w===1?'Curl martillo mancuernas':w===2?'Curl predicador mancuerna':'Curl concentrado mancuerna',
             sets(3,'12-15'),12,null,null,'biceps',90)
         ]},
-        {label:'Cardio',exs:[cardio('Elíptica Zona 2','20 min')]},
+        {label:'Cardio',exs:[cardio('Bici estática + Elíptica','20 min: 10 min bici Z2 + 10 min elíptica Z2-3')]},
       ]
     });
 
@@ -1067,30 +923,22 @@ function renderPR(){
 // ─── DIAGRAM MODAL ────────────────────────────────────────────────────────────
 function showDiagram(exName, group){
   const key=group||EX_TO_GROUP[exName];
-  const tips=COACHING_TIPS[key];
-  if(!tips) return;
+  const diag=DIAGRAMS[key];
+  if(!diag||!diag.length) return;
   const modal=document.getElementById('diag-modal');
   if(!modal) return;
   document.getElementById('diag-title').textContent=exName;
-  document.getElementById('diag-muscle').textContent=tips.muscles;
-  // Anatomy SVG
-  const svgs=ANATOMY_SVG[key]||[];
-  const labels=['Vista frontal','Vista posterior'];
-  document.getElementById('diag-svg').innerHTML=svgs.length
-    ? `<div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px">${svgs.map((s,i)=>`<div style="flex:1;max-width:160px"><div style="font-size:9px;text-align:center;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">${labels[i]||''}</div>${s}</div>`).join('')}</div>`
-    : '';
-  // Legend
-  const legend=`<div style="display:flex;gap:12px;justify-content:center;margin-bottom:12px;font-size:10px;color:var(--muted)">
-    <span style="display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:12px;height:12px;background:#7c3aed;border-radius:2px"></span>Musculo principal</span>
-    <span style="display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:12px;height:12px;background:#e4e4e7;border-radius:2px;border:1px solid #a1a1aa"></span>Secundario</span>
-  </div>`;
-  const stepsHtml=tips.tips.map((t,i)=>`<div class="diag-step"><div class="diag-step-n">${i+1}</div><div>${t}</div></div>`).join('');
-  const extraHtml=`<div style="background:var(--grl);border-radius:var(--rs);padding:10px 12px;margin-top:10px;font-size:12px;color:var(--te)"><strong>Descanso:</strong> ${tips.rest}</div>
-  <div style="background:var(--aml);border-radius:var(--rs);padding:10px 12px;margin-top:6px;font-size:12px;color:var(--am)"><strong>Progresion:</strong> ${tips.weight_tip}</div>`;
-  const whyHtml=tips.why ? `<div style="background:#faf5ff;border-left:3px solid #7c3aed;border-radius:0 var(--rs) var(--rs) 0;padding:11px 13px;margin-bottom:12px"><div style="font-size:10px;font-weight:700;color:#5b21b6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">&#129504; La ciencia detras</div><div style="font-size:12px;color:#3b0764;line-height:1.7">${tips.why}</div></div>` : '';
-  document.getElementById('diag-steps').innerHTML=whyHtml+legend+stepsHtml+extraHtml;
-  modal.classList.add('open');
+  document.getElementById('diag-muscle').textContent='';
+  const svgEl=document.getElementById('diag-svg');
+  if(svgEl) svgEl.innerHTML='';
+  const stepsEl=document.getElementById('diag-steps');
+  if(stepsEl){
+    const text=diag[0]||'';
+    stepsEl.innerHTML='<div style="font-size:13px;color:#1e293b;line-height:1.8;white-space:pre-line;padding:4px 0">'+text+'</div>';
+  }
+  modal.style.display='flex';
 }
+
 function closeDiag(e){if(!e||e.target===document.getElementById('diag-modal'))document.getElementById('diag-modal').classList.remove('open');}
 
 // ─── TIMER ────────────────────────────────────────────────────────────────────
@@ -1634,6 +1482,13 @@ function generateExport(){
   const el=document.getElementById('export-text');
   if(el) el.value=txt;
   // Also copy to clipboard
+  // Open mailto with report
+  const subject=encodeURIComponent('FitTracker Export — '+new Date().toLocaleDateString('es-ES'));
+  const body=encodeURIComponent(txt);
+  const mailtoLink='mailto:a.leiva.arcas@gmail.com?subject='+subject+'&body='+body;
+  const mailBtn=document.getElementById('mail-export-btn');
+  if(mailBtn) mailBtn.href=mailtoLink;
+  var ml='mailto:a.leiva.arcas@gmail.com?subject='+encodeURIComponent('FitTracker '+new Date().toLocaleDateString('es-ES'))+'&body='+encodeURIComponent(txt.slice(0,1800));window.open(ml);
   if(navigator.clipboard){
     navigator.clipboard.writeText(txt).then(()=>{
       showToast('✓ Resumen copiado al portapapeles — pégalo en Claude');
@@ -1709,6 +1564,7 @@ function showScr(id,btn){
   if(id==='prog'){renderWeekOv();}
   if(id==='pr'){renderPR();}
   if(id==='nutri'){initNutri();}
+  if(id==='abs'){}
 }
 
 // ─── NUTRITION DATA ───────────────────────────────────────────────────────────
@@ -3226,6 +3082,168 @@ function toggleCalm(key){
       🌞 <strong>Vitamina D3+K2:</strong> 2.000 UI D3 + 200mcg MK7 (365 comp.) — la tienes. Con comida. Mayo-sept en Murcia puedes pausarla.<br>
       🌙 <strong>Bisglicinato Magnesio PharmaZen:</strong> 1500mg sal = ~300mg magnesio elemental. 1 cápsula por la noche. Reduce calambres al empezar. Ya lo tienes — llega el viernes.<br>
       💰 <strong>Coste total:</strong> ~24€/mes (creatina + whey + vitaminas). Sin suscripciones ni complicaciones.
+    </div>
+  </div>
+</div>
+
+<div id="scr-abs" class="scr">
+  <div class="section-label">Programa Abs — Bosu + Fitball en casa</div>
+  <div class="card" style="background:#fef3c7;border-color:#f59e0b;margin-bottom:12px">
+    <div style="font-size:13px;font-weight:700;color:#92400e;margin-bottom:6px">💡 Cómo usar este programa</div>
+    <div style="font-size:12px;color:#78350f;line-height:1.7">
+      Haz esta rutina <strong>3 días a la semana en casa</strong> — los días que no vas al gym. 15-20 minutos son suficientes.<br>
+      El Bosu y la Fitball <strong>activan el core profundo</strong> (transverso abdominal) mucho más que los abdominales en suelo porque el cuerpo tiene que estabilizarse constantemente.<br>
+      <strong>Progresión:</strong> Semana 1-2 empiezas con los ejercicios base. Semana 3-4 añades las variantes avanzadas.
+    </div>
+  </div>
+
+  <div class="section-label">Rutina A — Core profundo + Estabilización (Bosu)</div>
+  <div class="card">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="border-bottom:1px solid var(--border);padding-bottom:12px">
+        <div style="font-size:14px;font-weight:700">1. Plancha sobre Bosu <span style="font-size:11px;background:#dcfce7;color:#166534;border-radius:8px;padding:2px 8px;font-weight:700">Base</span></div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 30-40 segundos · Descanso 45s</div>
+        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Bosu con la parte plana hacia abajo (la curva hacia arriba). Apoya los antebrazos en la curva. Mantén el cuerpo recto como una tabla.</div>
+        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: el Bosu inestable activa el transverso abdominal 40% más que la plancha en el suelo. Es el músculo que "aprieta" la cintura.</div>
+      </div>
+      <div style="border-bottom:1px solid var(--border);padding-bottom:12px">
+        <div style="font-size:14px;font-weight:700">2. Dead bug sobre Fitball</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 8 cada lado · Descanso 45s</div>
+        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Tumbado boca arriba con los pies apoyados en la Fitball. Extiende el brazo derecho y la pierna izquierda simultáneamente. Mantén la espalda baja pegada al suelo.</div>
+        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: el punto de apoyo inestable (la Fitball) obliga al core a trabajar para no rodar. Activa multífidos y erector espinal.</div>
+      </div>
+      <div style="border-bottom:1px solid var(--border);padding-bottom:12px">
+        <div style="font-size:14px;font-weight:700">3. Crunch sobre Fitball <span style="font-size:11px;background:#dcfce7;color:#166534;border-radius:8px;padding:2px 8px;font-weight:700">Base</span></div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 15-20 reps · Descanso 45s</div>
+        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Siéntate sobre la Fitball y deslízate hasta que la parte baja de la espalda quede apoyada. Cruza los brazos en el pecho o lleva las manos a las orejas. Sube contrayendo el abdomen.</div>
+        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: la Fitball permite un rango de movimiento mayor que el suelo. El abdomen trabaja en toda su longitud, no solo en el rango final.</div>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:700">4. Palancas sobre Bosu <span style="font-size:11px;background:#fef3c7;color:#92400e;border-radius:8px;padding:2px 8px;font-weight:700">Sem 3-4</span></div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 10 cada lado · Descanso 60s</div>
+        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Bosu con curva hacia arriba. Siéntate encima en equilibrio. Lleva las rodillas al pecho y luego extiende las piernas. Agarra los bordes del Bosu para estabilizarte.</div>
+        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: combina flexión de cadera, recto abdominal y estabilización de core simultáneamente. Más completo que cualquier crunch tradicional.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Rutina B — Oblicuos + Rotación (Semana 3-4)</div>
+  <div class="card">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="border-bottom:1px solid var(--border);padding-bottom:12px">
+        <div style="font-size:14px;font-weight:700">1. Plancha lateral sobre Bosu</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 20-30s cada lado · Descanso 45s</div>
+        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Bosu curva hacia arriba. Apoya el antebrazo lateral en la curva. Cuerpo en línea recta. El oblicuo y cuadrado lumbar trabajan para no colapsar.</div>
+        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: los oblicuos dan la forma de cintura y estabilizan la columna en el plano frontal. Directamente relacionado con la reducción de la cintura visible.</div>
+      </div>
+      <div style="border-bottom:1px solid var(--border);padding-bottom:12px">
+        <div style="font-size:14px;font-weight:700">2. Russian twist sobre Fitball</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 12 cada lado · Descanso 45s</div>
+        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Espalda baja apoyada en la Fitball, caderas levantadas. Gira el tronco de lado a lado. Puedes añadir un peso ligero (2-4kg) cuando el movimiento sea fluido.</div>
+        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: la rotación sobre superficie inestable activa los oblicuos internos y externos en todo el rango de rotación. Mucho más efectivo que el crunch lateral.</div>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:700">3. Pike sobre Fitball</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 10 reps · Descanso 60s</div>
+        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Posición de plancha con los pies encima de la Fitball. Lleva las caderas hacia arriba formando una V invertida. Vuelve a la posición de plancha controlado.</div>
+        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: uno de los ejercicios de core más completos que existen. Activa todo el abdomen más el serrato anterior. Requiere fuerza de hombros también.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Progresión recomendada</div>
+  <div class="card" style="font-size:12px;line-height:1.9">
+    <strong>Semana 1-2 (adaptación):</strong> Rutina A completa × 3 días<br>
+    <strong>Semana 3-4 (volumen):</strong> Rutina A + Rutina B alternadas × 3 días<br>
+    <strong>A partir del Ciclo 2:</strong> Añadir peso en Russian twist, aumentar tiempo en planchas<br>
+    <br>
+    <strong>Cuándo hacerlos:</strong> Días sin gym — lunes, miércoles o viernes. 15-20 minutos son suficientes. No hace falta más.
+  </div>
+</div>
+
+<div id="scr-abs" class="scr">
+  <div class="section-label">Programa Abs — Bosu + Fitball en casa</div>
+  <div class="card" style="background:#eff6ff;border-color:#bfdbfe;margin-bottom:12px">
+    <div style="font-size:13px;font-weight:700;color:#1e40af;margin-bottom:6px">Por que entrenamos abs por separado</div>
+    <div style="font-size:12px;color:#1e3a5f;line-height:1.7">El core no es solo estetico. Es el sistema de estabilizacion de toda la columna. Un core fuerte protege la lumbar en la prensa, estabiliza el peso en el press, y es el eslabón entre la fuerza del tren superior e inferior.<br><br>
+    El <strong>Bosu</strong> e introduce inestabilidad que activa el core profundo (transverso abdominal) — el musculo que crea presion intraabdominal y protege los discos.<br>
+    La <strong>Fitball</strong> permite trabajar el recto abdominal en un rango de movimiento mayor que el crunch en el suelo.</div>
+  </div>
+
+  <div class="section-label">Rutina A — Core profundo (15 min)</div>
+  <div class="card">
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Hacer 2-3 dias a la semana. Sin equipamiento o con Bosu.</div>
+    <div class="exrow">
+      <div style="font-weight:700;font-size:13px">1. Plancha en Bosu <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 30-45s</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">Antebrazos sobre el Bosu (lado plano abajo). El Bosu obliga al core a estabilizarse constantemente.</div>
+      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">Progresion: sem 1-2 sin Bosu → sem 3 con Bosu → sem 4 plancha lateral en Bosu</div>
+    </div>
+    <div class="exrow">
+      <div style="font-weight:700;font-size:13px">2. Dead bug <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 8 cada lado</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">Tumbado boca arriba. Extiende brazo derecho y pierna izquierda simultaneamente manteniendo la lumbar pegada al suelo. La lumbar NUNCA debe despegarse.</div>
+      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">Es el ejercicio mas eficiente para el transverso abdominal segun la evidencia.</div>
+    </div>
+    <div class="exrow">
+      <div style="font-weight:700;font-size:13px">3. Bird dog <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 10 cada lado</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">A cuatro patas. Extiende brazo y pierna contrarios. Aguanta 2 segundos. Espalda plana.</div>
+      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">Progresion: sem 3 hazlo sobre el Bosu (lado plano abajo). Nivel muy superior.</div>
+    </div>
+    <div class="exrow" style="border-bottom:none">
+      <div style="font-weight:700;font-size:13px">4. Hollow hold <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 20-30s</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">Tumbado boca arriba. Brazos sobre la cabeza, piernas juntas a 45°, espalda baja pegada al suelo. Aguanta la posicion.</div>
+      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">El core isometrico es mas funcional que el crunch clasico.</div>
+    </div>
+  </div>
+
+  <div class="section-label">Rutina B — Fitball (15 min)</div>
+  <div class="card">
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">2 dias a la semana. Requiere Fitball.</div>
+    <div class="exrow">
+      <div style="font-weight:700;font-size:13px">1. Crunch en Fitball <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 15-20</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">La espalda baja sobre la pelota. Baja hasta hiperextension — aqui el recto abdominal trabaja desde su maxima longitud. Sube contrayendo el abdomen.</div>
+      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">El crunch en fitball activa el recto abdominal un 40% mas que el crunch en el suelo por el mayor rango de movimiento.</div>
+    </div>
+    <div class="exrow">
+      <div style="font-weight:700;font-size:13px">2. Pike en Fitball <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 10-12</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">Posicion de plancha con los pies sobre la pelota. Lleva las caderas hacia arriba formando una V invertida. Core y serrato anterior.</div>
+      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">Ejercicio avanzado — empieza por plancha con pies en fitball antes de hacer el pike.</div>
+    </div>
+    <div class="exrow">
+      <div style="font-weight:700;font-size:13px">3. Rollout con Fitball <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 8-10</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">Rodillas en el suelo, manos sobre la pelota. Rueda hacia adelante extendiendo los brazos mientras mantienes el core activado. Vuelve.</div>
+      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">El rollout activa el core en un patron de anti-extension — mas funcional que el crunch.</div>
+    </div>
+    <div class="exrow" style="border-bottom:none">
+      <div style="font-weight:700;font-size:13px">4. Oblicuos en Fitball <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 12 cada lado</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">Lado sobre la pelota, caderas apoyadas. Baja el tronco hacia el lado y sube contrayendo el oblicuo.</div>
+      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">Los oblicuos estabilizan la columna en rotacion — fundamentales para proteger la lumbar.</div>
+    </div>
+  </div>
+
+  <div class="section-label">Rutina C — Bosu avanzado (sem 3-4)</div>
+  <div class="card">
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Solo cuando domines A y B. 1-2 dias a la semana.</div>
+    <div class="exrow">
+      <div style="font-weight:700;font-size:13px">1. Sentadilla en Bosu <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 15</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">De pie sobre el lado curvo del Bosu. Sentadilla con peso corporal. Core activado en todo momento para mantener el equilibrio.</div>
+    </div>
+    <div class="exrow">
+      <div style="font-weight:700;font-size:13px">2. Plancha lateral en Bosu <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 20-30s cada lado</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">Antebrazo sobre el Bosu. Cuerpo recto lateral. El oblicuo y cuadrado lumbar trabajan maximos.</div>
+    </div>
+    <div class="exrow" style="border-bottom:none">
+      <div style="font-weight:700;font-size:13px">3. Mountain climbers en Bosu <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 20</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">Manos sobre el Bosu (lado plano arriba), posicion de plancha. Lleva las rodillas alternadamente hacia el pecho rapido.</div>
+    </div>
+  </div>
+
+  <div class="section-label">Cuando y como integrar</div>
+  <div class="card">
+    <div style="font-size:13px;line-height:1.9">
+      📅 <strong>Dias recomendados:</strong> cualquier dia en casa, preferiblemente mañana o tarde — nunca justo antes del gym porque fatigan el core que necesitas para los compuestos.<br>
+      ⏱ <strong>Duracion:</strong> 15 minutos es suficiente. La calidad importa mas que la cantidad.<br>
+      📈 <strong>Progresion:</strong> Sem 1-2 → Rutina A sin Bosu. Sem 3 → Rutina A con Bosu + empezar Rutina B. Sem 4+ → las 3 rutinas rotando.<br>
+      🎯 <strong>Objetivo real:</strong> el sixpack se ve cuando el porcentaje de grasa baja. El entrenamiento de abs no quema la grasa del abdomen — eso es un mito. Lo que hace es fortalecer y definir el musculo que se vera cuando el Rybelsus + deficit calorico hagan su trabajo.
     </div>
   </div>
 </div>
