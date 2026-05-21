@@ -1608,9 +1608,36 @@ function findNextIncomplete(){
   return 0;
 }
 document.addEventListener('DOMContentLoaded',()=>{
+  // Bio date field
   const di=document.getElementById('bio-date');
   if(di)di.value=new Date().toISOString().split('T')[0];
   ['bio-peso','bio-grasa'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',calcBioAuto);});
+  // Auto-jump to correct session respecting completedSessions
+  let best=0;
+  for(let i=0;i<20;i++){
+    if(isSessionDone(i))continue;
+    const sess=PROG[i];if(!sess)break;
+    let allDone=true;
+    sess.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
+      if(e.cardio)return;
+      const lg=logs['s'+i+'b'+bi+'e'+ei];
+      if(!lg||!lg.sets||!lg.sets.some(st=>st.done))allDone=false;
+    }));
+    if(!allDone){best=i;break;}
+  }
+  curSession=best;
+  curWeek=Math.floor(curSession/5);
+  curDay=curSession%5;
+  // Render everything
+  renderDayScroll();
+  renderSession();
+  renderSessionBanner();
+  renderStepsWidget();
+  // Scroll chips to current session
+  setTimeout(()=>{
+    const chip=document.querySelector('.dchip.today');
+    if(chip)chip.scrollIntoView({block:'nearest',inline:'center'});
+  },100);
 });
 function calcBioAuto(){
   const peso=parseFloat(document.getElementById('bio-peso').value)||0;
