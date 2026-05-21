@@ -300,6 +300,71 @@ canvas{display:block;width:100%!important;height:100%!important}
 
 
 #muscle-modal.open{display:flex!important}
+
+/* Steps */
+.steps-row{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:var(--r);border:1px solid var(--border);padding:14px;margin-bottom:10px}
+.steps-icon{font-size:28px}
+.steps-info{flex:1}
+.steps-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.steps-val{font-size:28px;font-weight:800;color:var(--pu);line-height:1.1}
+.steps-goal{font-size:11px;color:var(--muted);margin-top:2px}
+.steps-input{width:110px;padding:8px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:18px;text-align:center;font-weight:700;font-family:inherit;color:var(--pu)}
+.steps-bar{height:6px;background:var(--border);border-radius:3px;margin-top:8px;overflow:hidden}
+.steps-fill{height:100%;background:var(--pu);border-radius:3px;transition:width .3s}
+/* Abs */
+.abs-session-tag{display:inline-block;background:var(--pul);color:var(--pu);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.abs-ex{padding:10px 0;border-bottom:1px solid var(--border)}
+.abs-ex:last-child{border:none}
+.abs-ex-name{font-size:14px;font-weight:700;margin-bottom:2px}
+.abs-ex-sets{font-size:12px;color:var(--muted);margin-bottom:4px}
+.abs-ex-equip{font-size:11px;color:var(--pu);font-weight:600;margin-bottom:4px}
+.abs-ex-how{font-size:12px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:6px 8px;line-height:1.5}
+.abs-why{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 var(--rs) var(--rs) 0;padding:8px 12px;font-size:12px;color:#92400e;margin-bottom:12px;line-height:1.5}
+/* Food diary */
+.food-franja{margin-bottom:10px}
+.food-franja-label{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.food-textarea{width:100%;padding:9px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:13px;font-family:inherit;resize:none;min-height:60px;line-height:1.5;color:var(--text)}
+.food-textarea:focus{outline:none;border-color:var(--pu)}
+.food-day-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.food-day-label{font-size:15px;font-weight:700}
+
+/* Dashboard */
+.dash-section{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:18px 0 8px;padding:0 2px}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.kpi{background:var(--card);border-radius:var(--r);border:1px solid var(--border);padding:14px;text-align:center}
+.kpi-val{font-size:26px;font-weight:800;color:var(--pu);line-height:1.1}
+.kpi-lbl{font-size:10px;color:var(--muted);margin-top:3px;font-weight:600}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.kpi.green .kpi-val{color:#16a34a}
+.kpi.orange .kpi-val{color:#d97706}
+.pr-dash-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}
+.pr-dash-row:last-child{border:none}
+.pr-dash-name{font-size:13px;font-weight:600;flex:1}
+.pr-dash-val{font-size:13px;font-weight:800;color:var(--pu)}
+.pr-dash-date{font-size:10px;color:var(--muted);margin-top:1px}
+.week-bar-wrap{margin-bottom:8px}
+.week-bar-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:3px}
+.week-bar-track{height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.week-bar-fill{height:100%;background:var(--pu);border-radius:4px;transition:width .4s}
+.steps-week-row{display:flex;gap:4px;margin-bottom:8px}
+.steps-day{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.steps-day-bar-wrap{width:100%;height:50px;display:flex;align-items:flex-end;justify-content:center}
+.steps-day-bar{width:70%;border-radius:3px 3px 0 0;transition:height .3s;min-height:2px}
+.steps-day-lbl{font-size:9px;color:var(--muted);font-weight:600}
+.steps-day-val{font-size:9px;color:var(--muted)}
+.bio-trend{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border)}
+.bio-trend:last-child{border:none}
+.bio-trend-label{font-size:12px;color:var(--muted);width:60px}
+.bio-trend-val{font-size:15px;font-weight:800}
+.bio-trend-change{font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px}
+.bio-change-up{background:#fef2f2;color:#dc2626}
+.bio-change-down{background:#f0fdf4;color:#16a34a}
+.bio-change-same{background:var(--bg);color:var(--muted)}
+.sess-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:4px}
+.sess-dot{height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
+.sess-done{background:#dcfce7;color:#16a34a}
+.sess-today{background:var(--pul);color:var(--pu)}
+.sess-future{background:var(--bg);color:var(--muted);border:1px solid var(--border)}
 </style>
 </head>
 <body>
@@ -321,7 +386,17 @@ canvas{display:block;width:100%!important;height:100%!important}
   </div>
   <div class="pbar"><div class="pfill" id="main-prog" style="width:0%"></div></div>
   <div class="dscroll" id="day-scroll"></div>
-  <div id="session-banner-area"></div><div id="timer-area"></div>
+  <div class="steps-row">
+  <div class="steps-icon">👟</div>
+  <div class="steps-info">
+    <div class="steps-label">Pasos hoy</div>
+    <div class="steps-val" id="steps-display">0</div>
+    <div class="steps-goal" id="steps-goal-txt">0 / 10.000 pasos</div>
+    <div class="steps-bar"><div class="steps-fill" id="steps-fill" style="width:0%"></div></div>
+  </div>
+  <input class="steps-input" id="steps-input" type="number" min="0" max="99999" placeholder="0" oninput="saveSteps(this.value)" onclick="this.select()">
+</div>
+<div id="session-banner-area"></div><div id="timer-area"></div>
   <div id="session-area"></div>
 </div>
 
@@ -333,18 +408,8 @@ canvas{display:block;width:100%!important;height:100%!important}
 </div>
 
 <div id="scr-prog" class="scr">
-  <div class="wk-nav">
-    <button class="wk-btn" onclick="changeWeek(-1)">&#8592;</button>
-    <span class="wk-lbl" id="wk-lbl">Semana 1</span>
-    <button class="wk-btn" onclick="changeWeek(1)">&#8594;</button>
-  </div>
-  <div id="week-sum"></div>
-  <div class="chart-wrap">
-    <div class="chart-title">Progreso por ejercicio</div>
-    <select class="chart-select" id="chart-ex-sel" onchange="renderExChart()"></select>
-    <div class="chart-area"><canvas id="prog-chart"></canvas></div>
-  </div>
-  <div class="card" id="week-ov"></div>
+  <!-- DASHBOARD -->
+  <div id="dash-content"></div>
 </div>
 
 <div id="scr-bio" class="scr">
@@ -501,62 +566,42 @@ canvas{display:block;width:100%!important;height:100%!important}
   <div class="card"><div class="card-title">Glosario</div><div id="glos-list"></div></div>
 </div>
 
-<nav class="bnav">
-  <button class="bn active" onclick="showScr('hoy',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Hoy</button>
-  <button class="bn" onclick="showScr('pr',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Records</button>
-  <button class="bn" onclick="showScr('prog',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Progreso</button>
-  <button class="bn" onclick="showScr('abs',this)"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="3" y="14" width="18" height="4" rx="1"/><line x1="12" y1="8" x2="12" y2="18"/></svg>Abs</button>
-  <button class="bn" onclick="showScr('bio',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Bio</button>
-  <button class="bn" onclick="showScr('nutri',this)"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Nutricion</button>
-  <button class="bn" onclick="showScr('running',this)"><svg viewBox="0 0 24 24"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0M6.7 8.5L11 7l2.5 3.5-2 4.5H16v2h-6l1.5-5L9 9.5l-2.3 1zm8.5 5.5l2 5h-2l-1.5-4"/></svg>Running</button>
-  <button class="bn" onclick="showScr('abs',this)"><svg viewBox="0 0 24 24"><path d="M6 4h12v4H6zM6 12h12v4H6zM6 20h12"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Abs</button>
-  <button class="bn" onclick="showScr('suplem',this)"><svg viewBox="0 0 24 24"><path d="M8 3h8l1 7H7zm1 7v11m6-11v11M3 10h18"/></svg>Suplem.</button>
-</nav>
-
-<!-- DIAGRAM MODAL -->
-<div class="diag-modal" id="diag-modal" onclick="closeDiag(event)">
-  <div class="diag-box">
-    <button class="diag-close" onclick="closeDiag()">x</button>
-    <div class="diag-title" id="diag-title"></div>
-    <div class="diag-muscle" id="diag-muscle"></div>
-    <div class="diag-svg-wrap" id="diag-svg"></div>
-    <div class="diag-steps" id="diag-steps"></div>
+<div id="scr-abs" class="scr">
+  <div id="abs-content"></div>
+</div>
+<div id="scr-food" class="scr">
+  <div class="food-day-nav">
+    <button onclick="foodPrevDay()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--pu)">‹</button>
+    <div class="food-day-label" id="food-day-label">Hoy</div>
+    <button onclick="foodNextDay()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--pu)">›</button>
+  </div>
+  <div class="card" id="food-diary-card">
+    <div class="food-franja">
+      <div class="food-franja-label">☀️ Desayuno</div>
+      <textarea class="food-textarea" id="food-0" placeholder="¿Qué has desayunado?" oninput="saveFood()" rows="2"></textarea>
+    </div>
+    <div class="food-franja">
+      <div class="food-franja-label">🍎 Almuerzo</div>
+      <textarea class="food-textarea" id="food-1" placeholder="Media mañana..." oninput="saveFood()" rows="2"></textarea>
+    </div>
+    <div class="food-franja">
+      <div class="food-franja-label">🍽️ Comida</div>
+      <textarea class="food-textarea" id="food-2" placeholder="Comida principal..." oninput="saveFood()" rows="3"></textarea>
+    </div>
+    <div class="food-franja">
+      <div class="food-franja-label">🍵 Merienda</div>
+      <textarea class="food-textarea" id="food-3" placeholder="Merienda..." oninput="saveFood()" rows="2"></textarea>
+    </div>
+    <div class="food-franja">
+      <div class="food-franja-label">🌙 Cena</div>
+      <textarea class="food-textarea" id="food-4" placeholder="Cena..." oninput="saveFood()" rows="3"></textarea>
+    </div>
   </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<nav class="bnav">
+  <button class="bn active" onclick="showScr('hoy',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" wid
 <script>
-// Pre-load today's training data (Push A, 9 mayo 2026)
-(function(){
-  const existing = JSON.parse(localStorage.getItem('ft4_logs')||'{}');
-  const todayData = {"s0b0e0": {"sets": [{"kg": "40", "reps": "8", "done": true}, {"kg": "40", "reps": "7", "done": true}]}, "s0b1e0": {"sets": [{"kg": "20", "reps": "10", "done": true}, {"kg": "20", "reps": "10", "done": true}]}, "s0b2e0": {"sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "13", "done": true}]}, "s0b2e1": {"sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s0b3e0": {"sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s0b3e1": {"sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}};
-  // Only inject if not already present
-  if(!existing['s0b0e0']){
-    Object.assign(existing, todayData);
-    localStorage.setItem('ft4_logs', JSON.stringify(existing));
-    localStorage.setItem('ft_sess', '0');
-    console.log('Today training data restored');
-  }
-})();
-</script>
-<script>
-(function(){
-  try{
-    const ex=JSON.parse(localStorage.getItem('ft4_logs')||'{}');
-    const seed={"s0b0e0": {"sets": [{"kg": "40", "reps": "8", "done": true}, {"kg": "40", "reps": "7", "done": true}]}, "s0b1e0": {"sets": [{"kg": "20", "reps": "10", "done": true}, {"kg": "20", "reps": "10", "done": true}]}, "s0b2e0": {"sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "13", "done": true}]}, "s0b2e1": {"sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s0b3e0": {"sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s0b3e1": {"sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s1b0e0": {"sets": [{"kg": "45", "reps": "10", "done": true}, {"kg": "45", "reps": "10", "done": true}, {"kg": "50", "reps": "13", "done": true}]}, "s1b1e0": {"sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "10", "done": true}]}, "s1b2e0": {"sets": [{"kg": "35", "reps": "15", "done": true}, {"kg": "35", "reps": "15", "done": true}]}, "s1b3e0": {"sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s1b3e1": {"sets": [{"kg": "7.5", "reps": "8", "done": true}, {"kg": "5", "reps": "4", "done": true}, {"kg": "7.5", "reps": "6", "done": true}, {"kg": "5", "reps": "4", "done": true}]}, "s2b0e0": {"sets": [{"kg": "96", "reps": "12", "done": true}, {"kg": "102", "reps": "12", "done": true}, {"kg": "102", "reps": "21", "done": true}]}, "s2b1e0": {"sets": [{"kg": "45", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b2e0": {"sets": [{"kg": "50", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b3e0": {"sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "35", "reps": "12", "done": true}]}, "s2b4e0": {"sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "45", "reps": "15", "done": true}]}, "s2b4e1": {"sets": [{"kg": "40", "reps": "15", "done": true}, {"kg": "40", "reps": "15", "done": true}]}, "s3b0e0": {"sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "11", "done": true}]}, "s3b1e0": {"sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s3b1e1": {"sets": [{"kg": "10", "reps": "10", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s3b2e0": {"sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "55", "reps": "15", "done": true}, {"kg": "55", "reps": "12", "done": true}]}, "s3b2e1": {"sets": [{"kg": "15", "reps": "15", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s4b0e0": {"sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "12", "done": true}, {"kg": "45", "reps": "12", "done": true}]}, "s4b1e0": {"sets": [{"kg": "50", "reps": "10", "done": true}, {"kg": "50", "reps": "10", "done": true}]}, "s4b2e0": {"sets": [{"kg": "5", "reps": "15", "done": true}, {"kg": "5", "reps": "15", "done": true}]}, "s4b2e1": {"sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s4b3e0": {"sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "cd-s0b4e0": {"done": true}, "cd-s1b4e0": {"done": true}};
-    let ch=false;
-    Object.keys(seed).forEach(k=>{if(!ex[k]||!ex[k].sets||!ex[k].sets.some(s=>s.done)){ex[k]=seed[k];ch=true;}});
-    if(ch)localStorage.setItem('ft4_logs',JSON.stringify(ex));
-    if(!localStorage.getItem('ft_sess'))localStorage.setItem('ft_sess','5');
-  }catch(e){}
-})();
-</script>
-<script>
-(function(){try{var e=JSON.parse(localStorage.getItem("ft4_logs")||"{}");var d={"s0b0e0": {"name": "Press pecho maquina palancas", "sets": [{"kg": "40", "reps": "8", "done": true}, {"kg": "40", "reps": "7", "done": true}]}, "s0b1e0": {"name": "Press hombros maquina", "sets": [{"kg": "20", "reps": "10", "done": true}, {"kg": "20", "reps": "10", "done": true}]}, "s0b2e0": {"name": "Elevaciones laterales mancuernas", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "13", "done": true}]}, "s0b2e1": {"name": "Pec Deck aperturas maquina", "sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s0b3e0": {"name": "Cruce polea alto", "sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s0b3e1": {"name": "Extension overhead cuerda", "sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "cd-s0b4e0": {"done": true}, "s1b0e0": {"name": "Jalon polea agarre ancho", "sets": [{"kg": "45", "reps": "10", "done": true}, {"kg": "45", "reps": "10", "done": true}, {"kg": "50", "reps": "13", "done": true}]}, "s1b1e0": {"name": "Remo maquina Hammer", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "10", "done": true}]}, "s1b2e0": {"name": "Face pulls polea", "sets": [{"kg": "35", "reps": "15", "done": true}, {"kg": "35", "reps": "15", "done": true}]}, "s1b3e0": {"name": "Curl predicador mancuerna", "sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s1b3e1": {"name": "Curl martillo mancuernas", "sets": [{"kg": "7.5", "reps": "8", "done": true}, {"kg": "5", "reps": "4", "done": true}, {"kg": "7.5", "reps": "6", "done": true}, {"kg": "5", "reps": "4", "done": true}]}, "cd-s1b4e0": {"done": true}, "s2b0e0": {"name": "Prensa de piernas", "sets": [{"kg": "96", "reps": "12", "done": true}, {"kg": "102", "reps": "12", "done": true}, {"kg": "102", "reps": "21", "done": true}]}, "s2b1e0": {"name": "Extension cuadriceps maquina", "sets": [{"kg": "45", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b2e0": {"name": "Curl femoral tumbado maquina", "sets": [{"kg": "50", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b3e0": {"name": "Hip thrust maquina", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "35", "reps": "12", "done": true}]}, "s2b4e0": {"name": "Abduccion cadera maquina", "sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "45", "reps": "15", "done": true}]}, "s2b4e1": {"name": "Gemelo prensa de piernas", "sets": [{"kg": "40", "reps": "15", "done": true}, {"kg": "40", "reps": "15", "done": true}]}, "s3b0e0": {"name": "Press Arnold mancuernas", "sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "11", "done": true}]}, "s3b1e0": {"name": "Elevaciones laterales mancuernas", "sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "6", "done": true}, {"kg": "5", "reps": "4", "done": true}]}, "s3b1e1": {"name": "Press inclinado mancuernas", "sets": [{"kg": "10", "reps": "10", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s3b2e0": {"name": "Pec Deck aperturas maquina", "sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "55", "reps": "15", "done": true}, {"kg": "55", "reps": "12", "done": true}]}, "s3b2e1": {"name": "Pushdown polea cuerda", "sets": [{"kg": "15", "reps": "15", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "cd-s3b3e0": {"done": true}, "s4b0e0": {"name": "Remo polea agarre neutro", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "12", "done": true}, {"kg": "45", "reps": "12", "done": true}]}, "s4b1e0": {"name": "Jalon polea agarre supino", "sets": [{"kg": "50", "reps": "10", "done": true}, {"kg": "50", "reps": "10", "done": true}]}, "s4b2e0": {"name": "Pajaro mancuernas", "sets": [{"kg": "5", "reps": "15", "done": true}, {"kg": "5", "reps": "15", "done": true}]}, "s4b2e1": {"name": "Curl alterno mancuernas", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s4b3e0": {"name": "Curl concentrado mancuerna", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "cd-s4b4e0": {"done": true}};Object.keys(d).forEach(function(k){if(!e[k]||(!e[k].done&&(!e[k].sets||!e[k].sets.some(function(x){return x.done;}))))e[k]=d[k];});localStorage.setItem("ft4_logs",JSON.stringify(e));}catch(err){}})();
-</script>
-<script>
-// ─── SVG DIAGRAMS ────────────────────────────────────────────────────────────
-// Each diagram: muscles highlighted + movement arrows
+(function(){try{var e=JSON.parse(localStorage.getItem("ft4_logs")||"{}");var d={"s0b0e0": {"name": "Press pecho maquina palancas", "sets": [{"kg": "40", "reps": "8", "done": true}, {"kg": "40", "reps": "7", "done": true}]}, "s0b1e0": {"name": "Press hombros maquina", "sets": [{"kg": "20", "reps": "10", "done": true}, {"kg": "20", "reps": "10", "done": true}]}, "s0b2e0": {"name": "Elevaciones laterales mancuernas", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "13", "done": true}]}, "s0b2e1": {"name": "Pec Deck aperturas maquina", "sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s0b3e0": {"name": "Cruce polea alto", "sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s0b3e1": {"name": "Extension overhead cuerda", "sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "cd-s0b4e0": {"done": true}};Object.keys(d).forEach(function(k){if(!e[k]||(!e[k].done&&(!e[k].sets||!e[k].sets.some(function(x){return x.done;}))))e[k]=d[k];});localStorage.setItem("ft4_logs",JSON.stringify(e));}catch(err){}})();
 const DIAGRAMS={
   pecho:['✅ CÓMO HACERLO BIEN\n• Retrae escápulas: junta omóplatos ANTES de bajar y no los sueltes\n• Pies firmes en el suelo — base estable = más fuerza\n• Baja controlado 2-3s hasta sentir estiramiento, sube explosivo\n• Arco lumbar natural, no exagerado\n• Pec Deck DX: codos a 90°, mueve desde el codo no desde la muñeca\n\n❌ ERRORES MÁS COMUNES\n• Rebotar el peso (rompe tensión muscular, riesgo de lesión)\n• Despegar escápulas de la banca al subir\n• Bloquear codos completamente arriba\n• Bajar demasiado con mancuernas: riesgo de hombro\n\n💡 DIFERENCIAS ENTRE SEMANAS\n• Sem 1 — Máquina palancas DX: movimiento guiado, aprende el patrón sin compensaciones\n• Sem 2 — Press inclinado máquina: énfasis porción clavicular (más visible con camiseta)\n• Sem 3 — Banca mancuernas: mayor rango, más estabilización escapular\n• Pec Deck siempre mejor que aperturas mancuernas: sin asimetría, sin temblor\n\n🔬 POR QUÉ FUNCIONA\nEl pectoral tiene dos porciones: esternocosal (inferior/media, la más grande) y clavicular (superior). El press plano trabaja ambas. El inclinado enfatiza la superior. El cruce de polea y Pec Deck añaden tensión en máxima contracción — zona que el press no alcanza bien.'],
   hombro:['✅ CÓMO HACERLO BIEN\n• Núcleo activado: no arquees la lumbar al subir — señal de peso excesivo\n• Codos ligeramente adelantados del plano del cuerpo\n• Baja hasta altura de orejas, no más abajo (riesgo manguito rotador)\n• Press Arnold: rota muñecas lentamente durante el movimiento\n• Agarre neutro (palmas enfrentadas): menos estrés en el manguito rotador\n\n❌ ERRORES\n• Arquear lumbar: el core debe estar activado todo el tiempo\n• Encogerse de hombros al subir: el trapecio roba el trabajo\n• Subir con inercia o balancear el cuerpo\n• Bajar en exceso: riesgo de impingement\n\n💡 DIFERENCIAS ENTRE SEMANAS\n• Sem 1 — Press hombros máquina: movimiento guiado, aprende la trayectoria\n• Sem 2 — Press Arnold: rotación que activa las 3 cabezas del deltoides\n• Sem 3 — Press militar mancuernas: máxima activación y estabilización\n• Sem 4 — Deload: menos peso, misma técnica\n\n🔬 POR QUÉ FUNCIONA\nEl deltoides tiene 3 cabezas: anterior (frente), medial (lado — da anchura) y posterior (detrás — postura). El press trabaja principalmente anterior y medial. Las elevaciones laterales aíslan la medial. El Face pull trabaja la posterior.'],
@@ -836,12 +881,15 @@ const DAYS=['Lun','Mar','Mie','Jue','Vie','Sab','Dom'];
 const DAYS_F=['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
-let curSession=Math.min(19,Math.max(0,parseInt(localStorage.getItem('ft_sess')||'0')));
-let curWeek=Math.floor(curSession/6);
-let curDay=curSession%6;
+let curSession=(function(){var saved=parseInt(localStorage.getItem('ft_sess')||'0');var allLogs=JSON.parse(localStorage.getItem('ft4_logs')||'{}');for(var i=saved;i<20;i++){var s=PROG[i];if(!s)break;var done=true;s.blocks.forEach(function(b,bi){b.exs.forEach(function(e,ei){if(e.cardio)return;var lg=allLogs['s'+i+'b'+bi+'e'+ei];if(!lg||!lg.sets||!lg.sets.some(function(st){return st.done;}))done=false;});});if(!done)return Math.min(19,Math.max(0,i));}return Math.min(19,Math.max(0,saved));})();
+let curWeek=Math.floor(curSession/5);
+let curDay=curSession%5;
 function saveSess(){localStorage.setItem('ft_sess',curSession);}
-function jumpSess(i){curSession=i;curWeek=Math.floor(i/6);curDay=i%6;sessionStartTime=null;clearInterval(sessionTimerInt);renderDayScroll();renderSession();renderSessionBanner();renderWarmupBlock(curWeek,curDay);updateBadge();}
+function jumpSess(i){curSession=i;curWeek=Math.floor(i/5);curDay=i%5;sessionStartTime=null;clearInterval(sessionTimerInt);renderDayScroll();renderSession();renderSessionBanner();renderWarmupBlock(curWeek,curDay);updateBadge();}
 let logs=JSON.parse(localStorage.getItem('ft4_logs')||'{}');
+let completedSessions=JSON.parse(localStorage.getItem('ft_done')||'[]');
+function markSessionDone(i){if(!completedSessions.includes(i))completedSessions.push(i);localStorage.setItem('ft_done',JSON.stringify(completedSessions));}
+function isSessionDone(i){return completedSessions.includes(i);}
 let bioData=JSON.parse(localStorage.getItem('ft4_bio')||'[]');
 let sessionNotes=JSON.parse(localStorage.getItem('ft4_notes')||'{}');
 let timerInt=null,timerSec=0,timerOn=false;
@@ -851,28 +899,31 @@ let prFilter='all';
 function saveL(){localStorage.setItem('ft4_logs',JSON.stringify(logs));}
 function saveBioD(){localStorage.setItem('ft4_bio',JSON.stringify(bioData));}
 function saveNotes(){localStorage.setItem('ft4_notes',JSON.stringify(sessionNotes));}
-function exKey(w,d,bi,ei){return`s${w*6+d}b${bi}e${ei}`;}
+function exKey(w,d,bi,ei){return`s${w*5+d}b${bi}e${ei}`;}
 function noteKey(w,d){return`w${w}d${d}`;}
 
 // ─── PR ENGINE ────────────────────────────────────────────────────────────────
 function computePRs(){
   const prs={};
-  for(let w=0;w<4;w++) Array.from({length:6},(_,d)=>PROG[w*6+d]||{blocks:[]}).forEach((day,d)=>day.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
-    if(e.cardio||!e.n) return;
-    const lg=logs[exKey(w,d,bi,ei)];
-    if(!lg||!lg.sets) return;
-    lg.sets.forEach(st=>{
-      if(!st.done||!st.kg||!st.reps) return;
-      const kg=parseFloat(st.kg)||0;
-      const reps=parseInt(st.reps)||0;
-      if(!prs[e.n]) prs[e.n]={maxKg:0,maxReps:0,history:[],group:e.g||EX_TO_GROUP[e.n]||'other'};
-      const entry={kg,reps,week:w+1,day:DAYS_F[d],date:`S${w+1} ${DAYS[d]}`};
-      prs[e.n].history.push(entry);
-      if(kg>prs[e.n].maxKg||(kg===prs[e.n].maxKg&&reps>prs[e.n].maxReps)){
-        prs[e.n].maxKg=kg; prs[e.n].maxReps=reps; prs[e.n].bestDate=entry.date;
-      }
-    });
-  })));
+  for(let i=0;i<PROG.length;i++){
+    const sess=PROG[i];
+    if(!sess||!sess.blocks)continue;
+    const w=Math.floor(i/5),d=i%5;
+    sess.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
+      if(e.cardio||!e.n)return;
+      const lg=logs[exKey(w,d,bi,ei)];
+      if(!lg||!lg.sets)return;
+      lg.sets.forEach(st=>{
+        if(!st.done||!st.kg||!st.reps)return;
+        const kg=parseFloat(st.kg)||0,reps=parseInt(st.reps)||0;
+        if(!prs[e.n])prs[e.n]={maxKg:0,maxReps:0,history:[],group:e.g||null,bestDate:''};
+        if(kg>prs[e.n].maxKg||(kg===prs[e.n].maxKg&&reps>prs[e.n].maxReps)){
+          prs[e.n].maxKg=kg;prs[e.n].maxReps=reps;
+        }
+        prs[e.n].history.push({kg,reps,date:''});
+      });
+    }));
+  }
   return prs;
 }
 
@@ -939,7 +990,7 @@ function showDiagram(exName, group){
   modal.style.display='flex';
 }
 
-function closeDiag(e){if(!e||e.target===document.getElementById('diag-modal'))document.getElementById('diag-modal').classList.remove('open');}
+function closeDiag(){var m=document.getElementById('diag-modal');if(m)m.style.display='none';}
 
 // ─── TIMER ────────────────────────────────────────────────────────────────────
 function startTimer(sec){
@@ -1010,6 +1061,7 @@ function renderSessionBanner(){
   // Check if all exercises completed
   if(sessionStartTime){
     const sess=PROG[curSession];
+    if(!sess||!sess.blocks)return;
     let totalEx=0, doneEx=0;
     sess.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
       if(e.cardio) return;
@@ -1054,6 +1106,7 @@ function renderSessionBanner(){
   const m=Math.floor(elapsed/60),sec=elapsed%60;
   const timeStr=m+':'+(sec.toString().padStart(2,'0'));
   let wVol=0,wSeries=0;
+  if(!s||!s.blocks)return;
   s.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
     if(e.cardio)return;
     const lg=logs[exKey(curWeek,curDay,bi,ei)];
@@ -1095,6 +1148,7 @@ function showSumModal(elapsedSec){
   const tEl=document.getElementById('sum-time');
   if(tEl) tEl.textContent=m+':'+(s.toString().padStart(2,'0'));
   const sess=PROG[curSession];
+  if(!sess||!sess.blocks){return;}
   let vol=0,series=0,exDone=0;
   sess.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
     if(e.cardio)return;
@@ -1106,7 +1160,7 @@ function showSumModal(elapsedSec){
   const vEl=document.getElementById('sum-vol');if(vEl)vEl.textContent=Math.round(vol).toLocaleString('es-ES');
   const sEl=document.getElementById('sum-series');if(sEl)sEl.textContent=series;
   const eEl=document.getElementById('sum-exdone');if(eEl)eEl.textContent=exDone;
-  const hEl=document.getElementById('sum-hsub');if(hEl)hEl.textContent=DAYS_F[curDay]+' - Semana '+(curWeek+1);
+  const sub=document.getElementById('tb-sub');if(sub&&PROG[curSession])sub.textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
   if(sessionPRsToday.length){
     const pw=document.getElementById('sum-prs-wrap');if(pw)pw.style.display='block';
     const pl=document.getElementById('sum-prs-list');if(pl)pl.innerHTML=sessionPRsToday.map(p=>'<div class="sum-pr-r">'+p.name+': '+p.kg+' kg</div>').join('');
@@ -1144,13 +1198,13 @@ function renderDayScroll(){
   const el=document.getElementById('day-scroll');
   if(!el) return;
   el.innerHTML=PROG.map((sess,i)=>{
-    const wk=Math.floor(i/6)+1;
-    const done=isDayDone(Math.floor(i/6),i%6);
+    const wk=Math.floor(i/5)+1;
+    const done=isDayDone(i);
     const isActive=i===curSession;
     const mainEx=sess.blocks&&sess.blocks[0]&&sess.blocks[0].exs&&sess.blocks[0].exs[0];
     const exCode=mainEx?mainEx.n.split(' ').slice(0,2).join(' ').toUpperCase():'';
-    return`<div class="dchip ${isActive?'active':''} ${done&&!isActive?'done-chip':''}" onclick="jumpSess(${i})">
-      <span class="dcn">S${wk}·${i%6+1}</span>
+    return`<div class="dchip ${isActive?'today':(isDayDone(i)?'done-chip':'future-chip')}" onclick="jumpSess(${i})">
+      <span class="dcn">S${wk}·${i%5+1}</span>
       <strong class="dct">${sess.label}</strong>
       <span style="font-size:7px;color:${isActive?'var(--pud)':'var(--pu)'};display:block;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:68px">${exCode}</span>
       <div class="dcd ${sess.type}"></div></div>`;
@@ -1160,8 +1214,8 @@ function renderDayScroll(){
 }
 
 
-function isDayDone(w,d){
-  const s=PROG[w*6+d];if(s.type==='rest')return false;
+function isDayDone(i){var w=Math.floor(i/5);var d=i%5;if(typeof isSessionDone!=="undefined"&&isSessionDone(i))return true;
+  const s=(PROG[w*5+d]);if(!s||s.type==='rest'||!s.blocks)return false;
   let tot=0,dn=0;
   s.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{if(e.cardio)return;tot++;const lg=logs[exKey(w,d,bi,ei)];if(lg&&lg.sets&&lg.sets.some(st=>st.done))dn++;}));
   return tot>0&&dn===tot;
@@ -1174,6 +1228,7 @@ function getExPR(exName){
 function renderSession(){
   const s=PROG[curSession];
   const bMap={amrap:'<span class="badge b-amrap">AMRAP</span>',super:'<span class="badge b-super">Superserie</span>',prog:'<span class="badge b-prog">Progresion</span>',cardio:'<span class="badge b-cardio">Cardio</span>'};
+  if(!s||!s.blocks){document.getElementById('session-area').innerHTML='<div class="card" style="text-align:center;padding:30px;color:var(--muted)">Cargando sesion...</div>';return;}
   const isLegs=s.label.startsWith('Legs');
   let ts=0,ds=0,tv=0;
   s.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
@@ -1186,12 +1241,12 @@ function renderSession(){
   document.getElementById('s-total-s').textContent=`de ${ts} series`;
   document.getElementById('s-vol').textContent=Math.round(tv).toLocaleString('es-ES');
   document.getElementById('main-prog').style.width=pct+'%';
-  document.getElementById('tb-sub').textContent=`${DAYS_F[curDay]} - Semana ${curWeek+1}${s.isDeload?' - DESCARGA':''}`;
+  document.getElementById('tb-sub').textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
   document.getElementById('tb-badge').textContent=`Sem ${curWeek+1}`;
 
   let html='<div id="warmup-block"></div><div class="card">';
-  html+=`<div class="shdr"><div class="sico ${s.type}">${s.icon}</div>
-    <div><div class="stitle">${DAYS_F[curDay]} - ${s.label}</div><div class="smeta">${s.duration}</div></div></div>`;
+  const sub=document.getElementById('tb-sub');if(sub&&PROG[curSession])sub.textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
+  html+=`<div class="shdr"><div class="sico ${s.type}">${s.icon}</div><div class="sinfo"><div class="stitle">${s.label}</div><div class="smeta">${s.duration}</div></div></div>`;
   if(s.isDeload)html+=`<div class="warnbox">Semana 4 — DESCARGA: 60% volumen. El cuerpo consolida y crece durante la recuperación.</div>`;
   else if(curWeek<2)html+=`<div class="warnbox" style="background:#eff6ff;border-color:#3b82f6;color:#1e40af">Sem ${curWeek+1}/4 — Volumen base: 2 series/ejercicio. Aprende los movimientos, registra tus pesos.</div>`;
   else html+=`<div class="warnbox" style="background:#f0fdf4;border-color:#16a34a;color:#065f46">Sem ${curWeek+1}/4 — Volumen máximo: 3 series/ejercicio. Aquí es donde se construye el músculo.</div>`;
@@ -1280,6 +1335,7 @@ function renderSession(){
   html+=`<div class="blabel">Notas de la sesion</div>
     <textarea class="notes-area" placeholder="Como te has sentido? Dolor en alguna zona? Energia alta o baja?..." onchange="saveNote('${nk}',this.value)">${sessionNotes[nk]||''}</textarea>
   </div>`;
+  var alreadyDone=typeof isSessionDone!=='undefined'&&isSessionDone(curSession);html+='<div style="padding:16px 0 4px"><button onclick="confirmSessionDone()" style="width:100%;padding:14px;border-radius:var(--r);border:none;background:'+(alreadyDone?'#16a34a':'var(--pu)')+';color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">'+(alreadyDone?'✓ Entrenado':'🏁 Marcar entreno como completado')+'</button></div>';
   document.getElementById('session-area').innerHTML=html;
   saveL();
   renderSessionBanner();
@@ -1310,7 +1366,7 @@ function updateExCheck(k){
   if(ck)ck.classList.toggle('done',all);if(nm)nm.classList.toggle('done',all);
 }
 function updateStats(){
-  const s=PROG[curSession];let ts=0,ds=0,tv=0;
+  const s=PROG[curSession];if(!s||!s.blocks)return;let ts=0,ds=0,tv=0;
   s.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
     if(e.cardio)return;ts+=parseInt(e.s)||3;
     const lg=logs[exKey(curWeek,curDay,bi,ei)];
@@ -1327,49 +1383,190 @@ function selDay(i){curDay=i;sessionStartTime=null;clearInterval(sessionTimerInt)
 
 // ─── PROGRESS ─────────────────────────────────────────────────────────────────
 let curWeek2=0;
-function renderWeekOv(){
-  document.getElementById('wk-lbl').textContent=`Semana ${curWeek2+1}`;
-  let wV=0,wS=0,pwV=0,pwS=0;
-  for(let d=0;d<7;d++){
-    PROG[curWeek2*6+d].blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
-      if(e.cardio)return;const lg=logs[exKey(curWeek2,d,bi,ei)];
-      if(lg&&lg.sets)lg.sets.forEach(st=>{if(st.done){wS++;wV+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}});
-    }));
-    if(curWeek2>0)PROG[curWeek2-1][d].blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
-      if(e.cardio)return;const lg=logs[exKey(curWeek2-1,d,bi,ei)];
-      if(lg&&lg.sets)lg.sets.forEach(st=>{if(st.done){pwS++;pwV+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}});
-    }));
+function renderWeekOv(){renderDashboard();}
+function changeWeek(d){curWeek2=Math.max(0,Math.min(3,curWeek2+d));renderDashboard();}
+
+function renderDashboard(){
+  var el=document.getElementById('dash-content');
+  if(!el)return;
+  var today=new Date().toISOString().split('T')[0];
+  var html='';
+
+  // ── KPI ROW 1: sesiones y volumen total ──────────────────────────────────
+  var totalSess=completedSessions.length;
+  var totalVol=0,totalSer=0;
+  Object.keys(logs).forEach(function(k){
+    var lg=logs[k];
+    if(lg&&lg.sets)lg.sets.forEach(function(st){
+      if(st.done){totalSer++;totalVol+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}
+    });
+  });
+  var pct=Math.round(totalSess/20*100);
+  html+='<div class="dash-section">Resumen general</div>';
+  html+='<div class="kpi-grid">';
+  html+='<div class="kpi"><div class="kpi-val">'+totalSess+'<span style="font-size:14px;color:var(--muted)">/20</span></div><div class="kpi-lbl">Sesiones completadas</div><div class="kpi-sub">'+pct+'% del programa</div></div>';
+  html+='<div class="kpi"><div class="kpi-val">'+Math.round(totalVol/1000)+'<span style="font-size:14px;color:var(--muted)">t</span></div><div class="kpi-lbl">Volumen total</div><div class="kpi-sub">'+totalSer+' series hechas</div></div>';
+  html+='</div>';
+
+  // ── Progreso del programa (dots) ─────────────────────────────────────────
+  html+='<div class="card" style="margin-bottom:10px"><div class="dash-section" style="margin-top:0">Sesiones del programa</div>';
+  html+='<div class="sess-grid">';
+  for(var i=0;i<20;i++){
+    var isDone=isSessionDone(i);
+    var isCur=i===curSession;
+    var cls=isDone?'sess-done':isCur?'sess-today':'sess-future';
+    var lbl=PROG[i]?PROG[i].label.replace(' ','').substring(0,3):(i+1);
+    html+='<div class="sess-dot '+cls+'">'+(isDone?'✓':isCur?'●':i+1)+'</div>';
   }
-  const vd=wV-pwV,sd=wS-pwS;
-  const dc=(d)=>d>0?'diff-up':d<0?'diff-down':'diff-same';
-  const ds2=(d,u)=>d===0?'igual sem. ant.':`${d>0?'+':''}${Math.round(d).toLocaleString('es-ES')} ${u}`;
-  document.getElementById('week-sum').innerHTML=`<div class="sum-grid">
-    <div class="sum-card"><div class="sum-val">${Math.round(wV).toLocaleString('es-ES')}</div><div class="sum-lbl">kg esta semana</div><div class="sum-diff ${dc(vd)}">${curWeek2>0?ds2(vd,'kg'):''}</div></div>
-    <div class="sum-card"><div class="sum-val">${wS}</div><div class="sum-lbl">series completadas</div><div class="sum-diff ${dc(sd)}">${curWeek2>0?ds2(sd,'series'):''}</div></div>
-  </div>`;
-  const cm={gym:'#7c3aed',rest:'#a1a1aa'};
-  document.getElementById('week-ov').innerHTML=Array.from({length:6},(_,i)=>PROG[curWeek2*6+i]||{type:"gym",label:"",blocks:[]}).map((s,i)=>{
-    let ts=0,ds3=0;
-    s.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{if(e.cardio)return;ts+=parseInt(e.s)||3;const lg=logs[exKey(curWeek2,i,bi,ei)];if(lg&&lg.sets)ds3+=lg.sets.filter(s=>s.done).length;}));
-    const pct=ts?Math.min(100,Math.round(ds3/ts*100)):0;const c=cm[s.type]||'#a1a1aa';
-    return`<div class="ov-row" onclick="selDay(${i});showScr('hoy',document.querySelector('.bn'))">
-      <div class="ov-ico">${s.icon}</div>
-      <div class="ov-info"><div class="ov-title">${DAYS_F[i]} - ${s.label}${s.isDeload?' (Descarga)':''}</div>
-      <div class="ov-meta">${s.desc}</div>
-      ${ts>0?`<div class="pbar" style="margin-top:5px;height:4px"><div class="pfill" style="width:${pct}%;background:${c}"></div></div>`:''}</div>
-      <div class="ov-pct" style="color:${c}">${ts>0?pct+'%':'--'}</div></div>`;
-  }).join('');
-  const sel=document.getElementById('chart-ex-sel');
-  const names=new Set();
-  for(let w=0;w<4;w++)Array.from({length:6},(_,d)=>PROG[w*6+d]||{blocks:[]}).forEach(d=>d.blocks.forEach(b=>b.exs.forEach(e=>{if(!e.cardio)names.add(e.n);})));
-  const prev=sel.value;
-  sel.innerHTML=Array.from(names).sort().map(n=>`<option value="${n}" ${n===prev?'selected':''}>${n}</option>`).join('');
-  renderExChart();
+  html+='</div>';
+  html+='<div style="display:flex;gap:12px;margin-top:8px;font-size:11px;color:var(--muted)">';
+  html+='<span><span style="color:#16a34a">✓</span> Completada</span>';
+  html+='<span><span style="color:var(--pu)">●</span> Hoy</span>';
+  html+='<span style="color:var(--muted)">Pendiente</span>';
+  html+='</div></div>';
+
+  // ── Volumen por semana (barras) ───────────────────────────────────────────
+  html+='<div class="card" style="margin-bottom:10px"><div class="dash-section" style="margin-top:0">Volumen por semana</div>';
+  var weekVols=[];
+  var maxVol=0;
+  for(var w=0;w<4;w++){
+    var wv=0,ws=0;
+    for(var d=0;d<5;d++){
+      var si=w*5+d;
+      var sess=PROG[si];
+      if(!sess||!sess.blocks)continue;
+      sess.blocks.forEach(function(b,bi){
+        b.exs.forEach(function(e,ei){
+          if(e.cardio)return;
+          var lg=logs['s'+si+'b'+bi+'e'+ei];
+          if(lg&&lg.sets)lg.sets.forEach(function(st){
+            if(st.done){ws++;wv+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}
+          });
+        });
+      });
+    }
+    weekVols.push({w:w,vol:wv,ser:ws});
+    if(wv>maxVol)maxVol=wv;
+  }
+  weekVols.forEach(function(wk){
+    var pct2=maxVol>0?Math.round(wk.vol/maxVol*100):0;
+    html+='<div class="week-bar-wrap">'+
+      '<div class="week-bar-label"><span>Sem '+(wk.w+1)+(wk.w===3?' (deload)':'')+'</span>'+
+        '<span style="font-weight:700">'+Math.round(wk.vol).toLocaleString('es-ES')+' kg · '+wk.ser+' series</span></div>'+
+      '<div class="week-bar-track"><div class="week-bar-fill" style="width:'+pct2+'%;background:'+(wk.vol>0?'var(--pu)':'var(--border)')+'"></div></div>'+
+    '</div>';
+  });
+  html+='</div>';
+
+  // ── Records personales (top 8) ───────────────────────────────────────────
+  var prs=computePRs();
+  var prList=Object.entries(prs).filter(function(e){return e[1].maxKg>0;})
+    .sort(function(a,b){return b[1].maxKg-a[1].maxKg;}).slice(0,10);
+  if(prList.length){
+    html+='<div class="card" style="margin-bottom:10px"><div class="dash-section" style="margin-top:0">Records personales 🏆</div>';
+    prList.forEach(function(entry){
+      var n=entry[0],d=entry[1];
+      html+='<div class="pr-dash-row">'+
+        '<div class="pr-dash-name">'+n+'</div>'+
+        '<div style="text-align:right"><div class="pr-dash-val">'+d.maxKg+' kg × '+d.maxReps+'</div>'+
+          '<div class="pr-dash-date">'+d.bestDate+'</div></div>'+
+      '</div>';
+    });
+    html+='</div>';
+  }
+
+  // ── Pasos: últimos 7 días ────────────────────────────────────────────────
+  var stepDays=Object.keys(stepsData).sort().slice(-7);
+  if(stepDays.length){
+    html+='<div class="card" style="margin-bottom:10px"><div class="dash-section" style="margin-top:0">Pasos — últimos 7 días 👟</div>';
+    var maxSteps=Math.max.apply(null,stepDays.map(function(d){return stepsData[d]||0;}));
+    maxSteps=Math.max(maxSteps,10000);
+    var goal=10000;
+    var daysHit=stepDays.filter(function(d){return(stepsData[d]||0)>=goal;}).length;
+    var avgSteps=Math.round(stepDays.reduce(function(a,d){return a+(stepsData[d]||0);},0)/stepDays.length);
+    html+='<div class="kpi-grid" style="margin-bottom:10px">'+
+      '<div class="kpi '+(avgSteps>=goal?'green':'')+'"><div class="kpi-val">'+avgSteps.toLocaleString('es-ES')+'</div><div class="kpi-lbl">Media diaria</div></div>'+
+      '<div class="kpi '+(daysHit>=5?'green':daysHit>=3?'orange':'')+'"><div class="kpi-val">'+daysHit+'/'+stepDays.length+'</div><div class="kpi-lbl">Días con objetivo</div></div>'+
+    '</div>';
+    html+='<div class="steps-week-row">';
+    var WDAYS=['L','M','X','J','V','S','D'];
+    stepDays.forEach(function(d){
+      var v=stepsData[d]||0;
+      var barH=Math.round(v/maxSteps*46);
+      var isGoal=v>=goal;
+      var dt=new Date(d+'T12:00:00');
+      var lbl=WDAYS[dt.getDay()===0?6:dt.getDay()-1];
+      html+='<div class="steps-day">'+
+        '<div class="steps-day-bar-wrap">'+
+          '<div class="steps-day-bar" style="height:'+barH+'px;background:'+(isGoal?'#16a34a':'var(--pu)')+'"></div>'+
+        '</div>'+
+        '<div class="steps-day-lbl">'+lbl+'</div>'+
+        '<div class="steps-day-val">'+(v>=1000?Math.round(v/1000)+'k':v)+'</div>'+
+      '</div>';
+    });
+    html+='</div></div>';
+  }
+
+  // ── Bio: evolución de peso ────────────────────────────────────────────────
+  if(bioData&&bioData.length>=2){
+    var sorted=bioData.slice().sort(function(a,b){return a.date>b.date?1:-1;});
+    var first=sorted[0],last=sorted[sorted.length-1];
+    var delta=(parseFloat(last.peso)-parseFloat(first.peso)).toFixed(1);
+    var deltaNum=parseFloat(delta);
+    html+='<div class="card" style="margin-bottom:10px"><div class="dash-section" style="margin-top:0">Evolución de peso ⚖️</div>';
+    html+='<div class="kpi-grid" style="margin-bottom:10px">'+
+      '<div class="kpi"><div class="kpi-val">'+last.peso+'<span style="font-size:13px;color:var(--muted)"> kg</span></div><div class="kpi-lbl">Peso actual</div><div class="kpi-sub">'+last.date+'</div></div>'+
+      '<div class="kpi '+(deltaNum<0?'green':deltaNum>0?'orange':'')+'"><div class="kpi-val">'+(deltaNum>0?'+':'')+delta+'<span style="font-size:13px;color:var(--muted)"> kg</span></div><div class="kpi-lbl">Cambio total</div><div class="kpi-sub">desde '+first.date+'</div></div>'+
+    '</div>';
+    // Mini weight history
+    sorted.slice(-5).forEach(function(b){
+      html+='<div class="bio-trend"><span class="bio-trend-label">'+b.date.slice(5)+'</span>'+
+        '<span class="bio-trend-val">'+b.peso+' kg</span></div>';
+    });
+    html+='</div>';
+  }
+
+  // ── Abs completadas ────────────────────────────────────────────────────────
+  if(absCompleted&&absCompleted.length){
+    html+='<div class="card" style="margin-bottom:10px">'+
+      '<div class="dash-section" style="margin-top:0">Abs completados 💪</div>'+
+      '<div style="display:flex;align-items:center;gap:12px;padding:8px 0">'+
+        '<div style="font-size:32px;font-weight:800;color:var(--pu)">'+absCompleted.length+'</div>'+
+        '<div><div style="font-size:13px;font-weight:600">sesiones de abs</div>'+
+          '<div style="font-size:11px;color:var(--muted)">de 20 posibles</div></div>'+
+        '<div style="margin-left:auto">'+
+          '<div style="height:6px;width:100px;background:var(--border);border-radius:3px">'+
+            '<div style="height:100%;background:var(--pu);border-radius:3px;width:'+Math.min(100,Math.round(absCompleted.length/20*100))+'%"></div>'+
+          '</div></div>'+
+      '</div>'+
+    '</div>';
+  }
+
+  // ── Diario: días registrados ───────────────────────────────────────────────
+  var foodDays=Object.keys(foodData||{}).filter(function(d){
+    return Object.values(foodData[d]).some(function(v){return v&&v.trim();});
+  });
+  if(foodDays.length){
+    var recentFood=foodDays.sort().slice(-3);
+    html+='<div class="card" style="margin-bottom:10px">'+
+      '<div class="dash-section" style="margin-top:0">Diario de comidas 📔</div>'+
+      '<div style="font-size:13px;font-weight:700;color:var(--pu);margin-bottom:8px">'+foodDays.length+' días registrados</div>'+
+      recentFood.reverse().map(function(d){
+        var dd=foodData[d]||{};
+        var count=Object.values(dd).filter(function(v){return v&&v.trim();}).length;
+        return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px">'+
+          '<span>'+d+'</span><span style="color:var(--muted)">'+count+' franjas</span></div>';
+      }).join('')+
+    '</div>';
+  }
+
+  el.innerHTML=html;
 }
+
 function renderExChart(){
   const sel=document.getElementById('chart-ex-sel');const exName=sel.value;if(!exName)return;
   const pts=[];
-  for(let w=0;w<4;w++)Array.from({length:6},(_,d)=>PROG[w*6+d]||{blocks:[]}).forEach((day,d)=>day.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
+  for(let w=0;w<4;w++)Array.from({length:5},(_,d)=>(PROG[w*5+d]||{})||{blocks:[]}).forEach((day,d)=>day.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
     if(e.n!==exName)return;const lg=logs[exKey(w,d,bi,ei)];if(!lg||!lg.sets)return;
     const done=lg.sets.filter(s=>s.done&&s.kg&&s.reps);if(!done.length)return;
     const avg=done.reduce((a,s)=>a+(parseFloat(s.kg)||0),0)/done.length;
@@ -1386,6 +1583,21 @@ function renderExChart(){
 function changeWeek(d){curWeek2=Math.max(0,Math.min(3,curWeek2+d));renderWeekOv();}
 
 // ─── BIOMETRÍA ────────────────────────────────────────────────────────────────
+function findNextIncomplete(){
+  for(let i=0;i<20;i++){
+    const sess=PROG[i];if(!sess)continue;
+    let tot=0,dn=0;
+    sess.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
+      if(e.cardio)return;tot++;
+      const k=exKey(Math.floor(i/5),i%5,bi,ei);
+      const k2='s'+i+'b'+bi+'e'+ei;
+      const lg=logs[k]||logs[k2];
+      if(lg&&lg.sets&&lg.sets.some(function(st){return st.done;}))dn++;
+    }));
+    if(dn===0||dn<tot)return i;
+  }
+  return 0;
+}
 document.addEventListener('DOMContentLoaded',()=>{
   const di=document.getElementById('bio-date');
   if(di)di.value=new Date().toISOString().split('T')[0];
@@ -1463,16 +1675,41 @@ function generateExport(){
   lines.push('\nVOLUMEN POR SEMANA');
   for(let w=0;w<4;w++){
     let wV=0,wS=0;
-    for(let d=0;d<7;d++) PROG[w*6+d].blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
-      if(e.cardio)return;const lg=logs[exKey(w,d,bi,ei)];
-      if(lg&&lg.sets)lg.sets.forEach(st=>{if(st.done){wS++;wV+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}});
-    }));
-    lines.push(`Semana ${w+1}${PROG[w*6+0].isDeload?' (descarga)':''}: ${wS} series - ${Math.round(wV).toLocaleString('es-ES')} kg`);
+    const sessInWeek=PROG.filter((_,idx)=>Math.floor(idx/5)===w);
+    sessInWeek.forEach((sess,di)=>{
+      const si=w*5+di;
+      if(!sess||!sess.blocks)return;
+      sess.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
+        if(e.cardio)return;
+        const lg=logs['s'+si+'b'+bi+'e'+ei];
+        if(lg&&lg.sets)lg.sets.forEach(st=>{if(st.done){wS++;wV+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}});
+      }));
+    });
+    lines.push('Semana '+(w+1)+': '+wS+' series - '+Math.round(wV).toLocaleString('es-ES')+' kg');
   }
   lines.push('\nNOTAS DE SESION');
   const noteEntries=Object.entries(sessionNotes).filter(([,v])=>v.trim());
   if(noteEntries.length) noteEntries.forEach(([k,v])=>{const m=k.match(/w(\d)d(\d)/);if(m)lines.push(`Sem ${+m[1]+1} ${DAYS_F[+m[2]]}: ${v.trim()}`);});
   else lines.push('Sin notas.');
+  // Steps summary
+  lines.push('\nPASOS DIARIOS (ultimos 14 dias)');
+  const stepDays=Object.keys(stepsData).sort().slice(-14);
+  if(stepDays.length){
+    stepDays.forEach(d=>{const v=stepsData[d];lines.push(d+': '+v.toLocaleString('es-ES')+(v>=10000?' OK':' (no llegue)'));});
+    const avg=Math.round(stepDays.reduce((a,d)=>a+stepsData[d],0)/stepDays.length);
+    const goal=stepDays.filter(d=>stepsData[d]>=10000).length;
+    lines.push('Media: '+avg.toLocaleString('es-ES')+' pasos/dia | Dias objetivo: '+goal+'/'+stepDays.length);
+  } else lines.push('Sin datos de pasos.');
+  // Food diary
+  lines.push('\nDIARIO DE COMIDAS (ultimos 7 dias)');
+  const foodDays=Object.keys(foodData).sort().slice(-7);
+  if(foodDays.length){
+    foodDays.forEach(d=>{
+      const day=foodData[d];
+      lines.push('\n--- '+d+' ---');
+      FOOD_LABELS.forEach((lbl,i)=>{if(day[i]&&day[i].trim())lines.push(lbl+': '+day[i].trim());});
+    });
+  } else lines.push('Sin diario de comidas.');
   lines.push('\nINSTRUCCIONES PARA CLAUDE:');
   lines.push('Analiza estos datos y programa el siguiente ciclo de 4 semanas.');
   lines.push('Ten en cuenta: records personales, progresion de volumen, biometria y notas.');
@@ -1559,12 +1796,17 @@ function renderGuide(){
 function showScr(id,btn){
   document.querySelectorAll('.scr').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.bn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('scr-'+id).classList.add('active');
+  var el=document.getElementById('scr-'+id);
+  if(el)el.classList.add('active');
   if(btn)btn.classList.add('active');
+  if(id==='hoy'){renderDayScroll();renderSession();renderSessionBanner();renderStepsWidget();}
   if(id==='prog'){renderWeekOv();}
   if(id==='pr'){renderPR();}
   if(id==='nutri'){initNutri();}
-  if(id==='abs'){}
+  if(id==='abs'){absCurSession=curSession;renderAbsScreen();}
+  if(id==='food'){renderFoodDiary();}
+  if(id==='bio'){renderBioHistory();}
+  if(id==='suplem'){if(typeof renderSuplem==='function')renderSuplem();}
 }
 
 // ─── NUTRITION DATA ───────────────────────────────────────────────────────────
@@ -1844,7 +2086,7 @@ function loadWarmup(){ warmupDone=JSON.parse(localStorage.getItem('ft4_warmup')|
 loadWarmup();
 
 function renderWarmupBlock(w,d){
-  const s=PROG[w*6+d];
+  const s=(PROG[w*5+d]||{});
   const el=document.getElementById('warmup-block');
   if(!el) return;
   if(s.type==='rest'){el.innerHTML='';return;}
@@ -2882,104 +3124,20 @@ function updateBadge(){
 
 // ─── SESSION NAVIGATION ───────────────────────────────────────────────────────
 function prevSession(){
-  if(curSession>0){curSession--;curWeek=Math.floor(curSession/6);curDay=curSession%6;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
+  if(curSession>0){curSession--;curWeek=Math.floor(curSession/5);curDay=curSession%5;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
 }
 function nextSession(){
-  if(curSession<19){curSession++;curWeek=Math.floor(curSession/6);curDay=curSession%6;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
+  if(curSession<19){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
 }
 
 // ─── RUNNING PROGRAM ──────────────────────────────────────────────────────────
-let runCurWeek=parseInt(localStorage.getItem('ft_run_week')||'0');
-let runChecked=JSON.parse(localStorage.getItem('ft_run_checked')||'{}');
+
 function saveRun(){localStorage.setItem('ft_run_week',runCurWeek);localStorage.setItem('ft_run_checked',JSON.stringify(runChecked));}
 
-const RUN_PROGRAM=[
-  {week:1,title:'Semana 1 — Primeros pasos',subtitle:'El objetivo NO es ir rápido. Es acostumbrarte al impacto. Si puedes hablar con frases completas, vas bien.',sessions:[
-    {day:'Sesión 1',duration:'20 min',fc:'113-120 ppm',ritmo:'Sin ritmo — muy suave. GPS: 8:00-9:00 min/km',focus:'Sentir el impacto. No te preocupes por la velocidad.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE MUY SUAVE',dur:'1 min',note:'Casi como caminar rápido. Si no puedes hablar, VAS DEMASIADO RÁPIDO.'},{t:'walk',txt:'Caminar activo',dur:'2 min',note:'No pares. Recupera la respiración.'},{t:'rep',txt:'Repetir 5 ciclos',dur:'15 min',note:'5 veces: 1 min trotando + 2 min caminando.'},{t:'cool',txt:'Vuelta a la calma',dur:'5 min',note:'Reduce el paso. Estira gemelos 30s cada lado.'}],tips:['Si en algún momento no puedes hablar, camina. Es la semana 1.','Puede que notes los gemelos tensos al día siguiente. Es normal.']},
-    {day:'Sesión 2',duration:'20 min',fc:'113-120 ppm',ritmo:'Mismo que sesión 1. No subas el ritmo.',focus:'Repetir exactamente igual. La consistencia importa más que el progreso.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE MUY SUAVE',dur:'1 min',note:'Mismo ritmo que el martes.'},{t:'walk',txt:'Caminar activo',dur:'2 min',note:''},{t:'rep',txt:'Repetir 5 ciclos',dur:'15 min',note:''},{t:'cool',txt:'Caminar suave',dur:'5 min',note:'Estira gemelos y cuádriceps 30s.'}],tips:['Si la sesión 1 fue dura, esta será más fácil. El cuerpo aprende rápido.']},
-    {day:'Sesión 3',duration:'22 min',fc:'113-120 ppm',ritmo:'8:00-9:00 min/km. Sube ligeramente si te sientes bien.',focus:'Un ciclo más. Primera pequeña progresión.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SUAVE',dur:'1 min',note:''},{t:'walk',txt:'Caminar activo',dur:'2 min',note:''},{t:'rep',txt:'Repetir 6 ciclos',dur:'18 min',note:'Un ciclo más. Ya no es tan duro.'},{t:'cool',txt:'Caminar suave',dur:'4 min',note:'Estira bien. Semana 2: 90 segundos.'}],tips:['Has completado la semana 1. La semana que viene sube a 90 segundos corriendo.']},
-  ]},
-  {week:2,title:'Semana 2 — Igualando tiempos',subtitle:'Ya corremos tanto como caminamos. El ritmo sigue siendo MUY suave.',sessions:[
-    {day:'Sesión 4',duration:'24 min',fc:'115-125 ppm',ritmo:'7:30-8:30 min/km al trotar.',focus:'Mantener el ritmo constante en cada bloque. No empezar rápido y acabar lento.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SUAVE — 90 segundos',dur:'1:30 min',note:'30 segundos más que la semana pasada.'},{t:'walk',txt:'Caminar activo',dur:'90 seg',note:'Misma duración que el trote.'},{t:'rep',txt:'Repetir 6 ciclos',dur:'18 min',note:''},{t:'cool',txt:'Caminar suave',dur:'4 min',note:''}],tips:['El ritmo 1:1 (mismo tiempo corriendo que caminando) es un hito importante.']},
-    {day:'Sesión 5',duration:'24 min',fc:'115-125 ppm',ritmo:'7:30-8:30 min/km.',focus:'Técnica de brazos: codos a 90°, manos relajadas. Los brazos van hacia atrás, no cruzados.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SUAVE — 90 segundos',dur:'1:30 min',note:'Pon atención en los brazos esta sesión.'},{t:'walk',txt:'Caminar activo',dur:'90 seg',note:''},{t:'rep',txt:'Repetir 6 ciclos',dur:'18 min',note:''},{t:'cool',txt:'Caminar suave',dur:'4 min',note:''}],tips:[]},
-    {day:'Sesión 6',duration:'26 min',fc:'115-125 ppm',ritmo:'7:30-8:30 min/km.',focus:'Primera vez que llegas a 2 minutos seguidos. Puede costar — es normal.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SUAVE — 2 minutos',dur:'2 min',note:'Si no puedes mantenerlo, vuelve a 90s. No pasa nada.'},{t:'walk',txt:'Caminar activo',dur:'1 min',note:'Solo 1 min de recuperación.'},{t:'rep',txt:'Repetir 7 ciclos',dur:'21 min',note:''},{t:'cool',txt:'Caminar suave',dur:'4 min',note:'La semana 3 sube a 3 minutos.'}],tips:['La semana 3: bloques de 3 minutos. Ya estás preparado.']},
-  ]},
-  {week:3,title:'Semana 3 — Más correr que caminar',subtitle:'Bloques de 2-3 min. La base aeróbica empieza a construirse.',sessions:[
-    {day:'Sesión 7',duration:'26 min',fc:'118-128 ppm',ritmo:'7:00-8:00 min/km.',focus:'Encontrar el ritmo sostenible. Test: ¿puedes decir "estoy corriendo bien"? Si sí, vas bien.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SUAVE — 2 min',dur:'2 min',note:'Ya consolidado.'},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'rep',txt:'Repetir 7 ciclos',dur:'21 min',note:''},{t:'cool',txt:'Caminar suave',dur:'4 min',note:''}],tips:[]},
-    {day:'Sesión 8',duration:'26 min',fc:'118-128 ppm',ritmo:'7:00-8:00 min/km.',focus:'Postura: cuerpo ligeramente inclinado hacia adelante desde los tobillos, no encorvado.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SUAVE — 2 min',dur:'2 min',note:'Pon atención en la postura.'},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'rep',txt:'Repetir 7 ciclos',dur:'21 min',note:''},{t:'cool',txt:'Caminar suave',dur:'4 min',note:''}],tips:[]},
-    {day:'Sesión 9 — 3 minutos',duration:'28 min',fc:'118-128 ppm',ritmo:'7:00-8:00 min/km. Conservador en los primeros bloques.',focus:'3 minutos seguidos por primera vez. Estrategia: primer min suave, segundo igual, tercer "aguanta".',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:'Hoy es un día importante.'},{t:'run',txt:'TROTE SUAVE — 3 MINUTOS',dur:'3 min',note:'Empieza muy suave. Si en el min 2 no puedes más, vuelve a 2 min — también es un éxito.'},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'rep',txt:'Repetir 5 ciclos',dur:'20 min',note:'5 bloques de 3 min + 1 min caminando.'},{t:'cool',txt:'Caminar suave',dur:'4 min',note:''}],tips:['De 0 a 3 minutos seguidos en 3 semanas. La semana 4 consolida los 3 minutos.']},
-  ]},
-  {week:4,title:'Semana 4 — Consolidación y primer hito: 5 minutos',subtitle:'Los 3 minutos ya son sólidos. Al final de esta semana: 5 minutos seguidos.',sessions:[
-    {day:'Sesión 10',duration:'28 min',fc:'118-130 ppm',ritmo:'6:45-7:45 min/km.',focus:'Consolidar los 3 minutos. Que se sientan fáciles.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SOSTENIDO — 3 min',dur:'3 min',note:'Debería sentirse cómodo ya.'},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'rep',txt:'Repetir 5 ciclos',dur:'20 min',note:''},{t:'cool',txt:'Caminar suave',dur:'4 min',note:''}],tips:[]},
-    {day:'Sesión 11',duration:'28 min',fc:'118-130 ppm',ritmo:'6:45-7:45 min/km.',focus:'Respiración abdominal: al inhalar, el vientre sale (no el pecho).',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SOSTENIDO — 3 min',dur:'3 min',note:''},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'rep',txt:'Repetir 5 ciclos',dur:'20 min',note:''},{t:'cool',txt:'Caminar suave',dur:'4 min',note:''}],tips:[]},
-    {day:'Sesión 12 — HITO: 5 minutos',duration:'30 min',fc:'118-130 ppm',ritmo:'7:00-8:00 min/km. Conservador para aguantar los 5 min.',focus:'5 minutos seguidos. El primer hito psicológico real.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:'Hoy es el gran día de la semana 4.'},{t:'run',txt:'TROTE SOSTENIDO — 5 MINUTOS',dur:'5 min',note:'Divide: 2+2+1 min. Los últimos 60s: "ya casi". Si en el min 4 no puedes: 4 min también es un éxito.'},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'rep',txt:'Repetir 4 ciclos',dur:'24 min',note:'4 bloques de 5 min. Total: 20 min corriendo.'},{t:'cool',txt:'Caminar suave',dur:'3 min',note:''}],tips:['20 min corriendo en una sesión (en bloques). Hace 4 semanas no podías correr 1 minuto.']},
-  ]},
-  {week:5,title:'Semana 5 — Bloques de 8 minutos',subtitle:'El cardio base ya está construido. Esta semana marca la diferencia entre "empecé a correr" y "soy runner".',sessions:[
-    {day:'Sesión 13',duration:'30 min',fc:'120-130 ppm',ritmo:'6:30-7:30 min/km.',focus:'Pacing: mismo ritmo en el primer y último minuto de cada bloque.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SOSTENIDO — 5 min',dur:'5 min',note:'Ya consolidados. Se sienten más fáciles.'},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'rep',txt:'Repetir 4 ciclos',dur:'24 min',note:''},{t:'cool',txt:'Caminar suave',dur:'3 min',note:''}],tips:[]},
-    {day:'Sesión 14 — 6 minutos',duration:'30 min',fc:'120-130 ppm',ritmo:'6:30-7:30 min/km.',focus:'6 minutos. Ya no es tan diferente a 5. La adaptación es exponencial.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SOSTENIDO — 6 min',dur:'6 min',note:'Un minuto más.'},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'rep',txt:'Repetir 3 ciclos',dur:'21 min',note:'3 bloques de 6 min.'},{t:'cool',txt:'Caminar suave',dur:'4 min',note:''}],tips:[]},
-    {day:'Sesión 15 — 8 minutos',duration:'32 min',fc:'120-132 ppm',ritmo:'6:45-7:45 min/km. Ligeramente más conservador.',focus:'8 minutos. Divide: 3+3+2. Cuando llegues al min 6: "solo me quedan 2 minutos".',intervals:[{t:'warm',txt:'Caminar rápido con aceleraciones',dur:'5 min',note:'Últimos 60s más rápido.'},{t:'run',txt:'TROTE SOSTENIDO — 8 MINUTOS',dur:'8 min',note:'Empieza LENTO los primeros 2 min. Más lento de lo que crees. Luego mantén.'},{t:'walk',txt:'Caminar activo',dur:'2 min',note:'Más descanso por el esfuerzo.'},{t:'rep',txt:'Repetir 2 ciclos',dur:'20 min',note:'2 bloques de 8 min = 16 min corriendo.'},{t:'cool',txt:'Caminar suave',dur:'5 min',note:'Estira bien hoy.'}],tips:['16 min corriendo. Hace 5 semanas no podías correr 1 minuto. La semana 6: 10-12 min.']},
-  ]},
-  {week:6,title:'Semana 6 — Resistencia real: 10-12 minutos',subtitle:'Aquí empieza el running de verdad. Notarás que la respiración se regula sola sobre el min 8-10.',sessions:[
-    {day:'Sesión 16',duration:'32 min',fc:'120-132 ppm',ritmo:'6:30-7:30 min/km.',focus:'8 minutos consolidados. Ya no son un reto, son la base.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SOSTENIDO — 8 min',dur:'8 min',note:'Más manejable que la semana pasada.'},{t:'walk',txt:'Caminar activo',dur:'2 min',note:''},{t:'rep',txt:'2 ciclos + 1 bloque de 5 min',dur:'26 min',note:'2×8 min + 1×5 min = 21 min corriendo.'},{t:'cool',txt:'Caminar suave',dur:'4 min',note:''}],tips:[]},
-    {day:'Sesión 17 — 10 minutos',duration:'33 min',fc:'120-132 ppm',ritmo:'6:30-7:30 min/km.',focus:'10 minutos. El "segundo aliento": entre el min 5-8 la respiración se regula sola.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SOSTENIDO — 10 MINUTOS',dur:'10 min',note:'Primeros 3 min muy suaves. Del 4 al 7 mantén. Si notas que la respiración se regula sobre el min 6-8, es el segundo aliento.'},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'run',txt:'TROTE — 8 min',dur:'8 min',note:''},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'run',txt:'TROTE — 5 min',dur:'5 min',note:''},{t:'cool',txt:'Caminar suave',dur:'3 min',note:''}],tips:['23 min corriendo en la sesión. El objetivo son 30 — ya estás muy cerca.']},
-    {day:'Sesión 18 — 12 minutos',duration:'35 min',fc:'120-132 ppm',ritmo:'6:30-7:30 min/km.',focus:'12 minutos. Divide: 4+4+4. Desde aquí hasta 30 min es solo cuestión de tiempo.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'TROTE SOSTENIDO — 12 MINUTOS',dur:'12 min',note:'4+4+4. Tercer cuarto: "ya puedo".'},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'run',txt:'TROTE — 10 min',dur:'10 min',note:''},{t:'walk',txt:'Caminar activo',dur:'1 min',note:''},{t:'run',txt:'TROTE — 5 min',dur:'5 min',note:''},{t:'cool',txt:'Caminar suave',dur:'3 min',note:''}],tips:['27 min corriendo. El objetivo de 30 min está a 2 semanas.']},
-  ]},
-  {week:7,title:'Semana 7 — A las puertas: 20-25 minutos continuos',subtitle:'Quitamos los intervalos en las sesiones principales. Corres de forma continua.',sessions:[
-    {day:'Sesión 19 — 20 min continuos',duration:'32 min',fc:'120-132 ppm',ritmo:'7:00-8:00 min/km. Más lento que en bloques — es normal.',focus:'20 min SIN PARAR. El secreto: los primeros 5 min MUY lentos.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:'Hoy es la primera vez que corres 20 min sin parar.'},{t:'run',txt:'CORRER 20 MINUTOS CONTINUOS',dur:'20 min',note:'Primeros 5 min ridículamente lentos. Min 5-15 tu ritmo. Min 15-20 "ya casi". Si en el min 12 no puedes: camina 1 min y sigue.'},{t:'cool',txt:'Caminar vuelta a la calma',dur:'7 min',note:'Nunca pares en seco después de 20 min.'}],tips:['Lo conseguiste. 20 minutos seguidos.']},
-    {day:'Sesión 20 — 22 min continuos',duration:'34 min',fc:'120-132 ppm',ritmo:'7:00-8:00 min/km.',focus:'22 minutos. Solo 2 más. Ya sabes que puedes.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'CORRER 22 MINUTOS CONTINUOS',dur:'22 min',note:'Misma estrategia: empieza muy suave.'},{t:'cool',txt:'Caminar suave',dur:'7 min',note:''}],tips:[]},
-    {day:'Sesión 21 — 25 min continuos',duration:'37 min',fc:'120-132 ppm',ritmo:'7:00-8:00 min/km.',focus:'25 minutos. El objetivo final de 30 está a 5 minutos.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'CORRER 25 MINUTOS CONTINUOS',dur:'25 min',note:'A 7:30 min/km son unos 3.3km. Hace 7 semanas no podías correr 1 minuto.'},{t:'cool',txt:'Caminar suave',dur:'7 min',note:'La semana 8 es el gran día.'}],tips:['La semana 8: 30 minutos continuos.']},
-  ]},
-  {week:8,title:'Semana 8 — 30 minutos: el objetivo',subtitle:'8 semanas de trabajo. Hoy culminan. De 0 a 30 minutos en 8 semanas.',sessions:[
-    {day:'Sesión 22 — 25 min',duration:'37 min',fc:'120-132 ppm',ritmo:'7:00-7:45 min/km.',focus:'Preparación mental para el gran día.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'CORRER 25 MINUTOS',dur:'25 min',note:'Sesión de preparación. Guarda energía para el gran día.'},{t:'cool',txt:'Caminar suave',dur:'7 min',note:''}],tips:[]},
-    {day:'Sesión 23 — 28 min',duration:'40 min',fc:'120-132 ppm',ritmo:'7:00-7:45 min/km.',focus:'28 minutos. A 2 del objetivo.',intervals:[{t:'warm',txt:'Caminar rápido',dur:'5 min',note:''},{t:'run',txt:'CORRER 28 MINUTOS',dur:'28 min',note:'Casi. Corre a ritmo que te permita llegar bien al final.'},{t:'cool',txt:'Caminar suave',dur:'7 min',note:'Mañana descansas. Pasado mañana es el gran día.'}],tips:['Descansa bien la noche antes. Come normal. Hidrátate.']},
-    {day:'Sesión 24 — EL GRAN DÍA: 30 MINUTOS',duration:'42 min',fc:'120-132 ppm',ritmo:'7:15-8:00 min/km. Conservador — el objetivo es llegar, no ir rápido.',focus:'30 minutos corriendo sin parar. De 0 a 30 minutos en 8 semanas.',intervals:[{t:'warm',txt:'Calentamiento especial — 7 min',dur:'7 min',note:'Más largo hoy. Últimos 60s: zancadas largas para activar.'},{t:'run',txt:'CORRER 30 MINUTOS SEGUIDOS',dur:'30 min',note:'Primeros 7 min TAN LENTO que parece ridículo. Min 8-20 tu ritmo natural. Min 20-27 mantén. Min 27-30 "ya casi". Cuando llegues al min 30: LO HAS CONSEGUIDO.'},{t:'cool',txt:'Caminar consciente — disfruta',dur:'5 min',note:'Camina estos 5 min sabiendo lo que acabas de conseguir.'}],tips:['30 minutos corriendo. De 0 a 30 en 8 semanas.','Lo que sigue: 5km en menos de 35 min es el siguiente objetivo natural.']},
-  ]},
-];
 
-function renderRunWeek(){
-  const w=RUN_PROGRAM[runCurWeek];
-  if(!w) return;
-  document.getElementById('run-week-label').textContent='Semana '+(runCurWeek+1)+'/8';
-  const typeColors={warm:'#fef9c3',run:'#dcfce7',walk:'#f1f5f9',cool:'#ede9fe',rep:'#fff7ed'};
-  const typeIcons={warm:'🔥',run:'🏃',walk:'🚶',cool:'🧘',rep:'🔁'};
-  let html='<div class="card" style="margin-bottom:10px;background:#f0fdf4;border-color:#10b981"><div style="font-size:13px;font-weight:700;color:#065f46;margin-bottom:4px">'+w.title+'</div><div style="font-size:12px;color:#047857">'+w.subtitle+'</div></div>';
-  w.sessions.forEach((sess,si)=>{
-    const key='run_w'+runCurWeek+'_s'+si;
-    const done=!!runChecked[key];
-    html+=`<div class="card" style="${done?'border-color:#16a34a;background:#f0fdf4':''}">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px">
-        <div style="flex:1">
-          <div style="font-size:13px;font-weight:700">${sess.day} ${done?'✓':''}</div>
-          <div style="font-size:11px;color:var(--muted)">${sess.duration} · FC: ${sess.fc}</div>
-          <div style="font-size:11px;color:#c2410c;font-weight:600;margin-top:2px">🏃 ${sess.ritmo}</div>
-        </div>
-        <button onclick="toggleRunSession('${key}')" style="padding:7px 12px;border-radius:20px;border:none;background:${done?'#16a34a':'#c2410c'};color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;flex-shrink:0">${done?'Hecho ✓':'Marcar'}</button>
-      </div>
-      ${sess.focus?`<div style="background:#fff7ed;border-radius:var(--rs);padding:8px;margin-bottom:8px;font-size:12px;color:#92400e"><b>🎯 Objetivo:</b> ${sess.focus}</div>`:''}
-      <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:${sess.tips&&sess.tips.length?'8px':'0'}">
-        ${sess.intervals.map(iv=>`<div style="display:flex;gap:8px;align-items:flex-start;padding:7px;background:${typeColors[iv.t]||'#f8fafc'};border-radius:var(--rs)">
-          <span style="font-size:14px;flex-shrink:0">${typeIcons[iv.t]||'▶'}</span>
-          <div style="flex:1"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font-size:12px;font-weight:700;color:${iv.t==='run'?'#166534':'#1e293b'}">${iv.txt}</span><span style="font-size:12px;font-weight:800;color:${iv.t==='run'?'#16a34a':'#475569'};flex-shrink:0">${iv.dur}</span></div>${iv.note?`<div style="font-size:11px;color:#64748b;margin-top:2px;line-height:1.4">${iv.note}</div>`:''}</div></div>`).join('')}
-      </div>
-      ${sess.tips&&sess.tips.length?`<div style="background:#f0fdf4;border-radius:var(--rs);padding:8px">${sess.tips.map(t=>`<div style="font-size:11px;color:#166534;line-height:1.5;padding:2px 0">💡 ${t}</div>`).join('')}</div>`:''}
-    </div>`;
-  });
-  // Progress bar
-  const total=RUN_PROGRAM.reduce((a,w)=>a+w.sessions.length,0);
-  const done=Object.values(runChecked).filter(Boolean).length;
-  const pct=Math.round(done/total*100);
-  html+=`<div class="card"><div style="font-size:12px;font-weight:600;margin-bottom:6px">Progreso total: ${done}/${total} sesiones (${pct}%)</div><div style="height:8px;background:var(--border);border-radius:4px;overflow:hidden"><div style="height:100%;background:#c2410c;border-radius:4px;width:${pct}%;transition:width .3s"></div></div></div>`;
-  document.getElementById('run-week-content').innerHTML=html;
-}
-function changeRunWeek(d){
-  runCurWeek=Math.max(0,Math.min(7,runCurWeek+d));
-  saveRun();renderRunWeek();
-}
-function toggleRunSession(key){
-  runChecked[key]=!runChecked[key];
-  saveRun();renderRunWeek();
-}
-function initRunning(){renderRunWeek();}
+
+
+
 
 function toggleCardio(key){
   if(!logs[key])logs[key]={done:false};
@@ -2991,7 +3149,335 @@ function toggleCalm(key){
   logs[key].done=!logs[key].done;
   saveL();renderSession();
 }
+
+function confirmSessionDone(){markSessionDone(curSession);if(curSession<19){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;localStorage.setItem('ft_sess',curSession);}renderDayScroll();renderSession();renderSessionBanner();showToast('Sesion completada. Siguiente: '+PROG[Math.min(curSession,19)].label);}
+let absCompleted=JSON.parse(localStorage.getItem('ft_abs_done')||'[]');
+function saveAbsCompleted(){localStorage.setItem('ft_abs_done',JSON.stringify(absCompleted));}
+function isAbsDone(i){return absCompleted.includes(i);}
+function toggleAbsDone(i){if(isAbsDone(i))absCompleted=absCompleted.filter(function(x){return x!==i;});else absCompleted.push(i);saveAbsCompleted();renderAbsScreen();showToast(isAbsDone(i)?'Abs completado ✓':'Abs desmarcado');}
+let absCurSession=0;
+const ABS_ROUTINES={"Push A": {"focus": "Recto abdominal + Oblicuos", "why": "Push A no fatiga el core. Puedes trabajarlo con intensidad total.", "exercises": [["Crunch en Fitball", "3×15-20", "Fitball", "Tumbado sobre la fitball con la parte baja de la espalda apoyada. Baja hasta hiperextension — el recto trabaja desde su maxima longitud. Sube apretando el abdomen."], ["Rollout en Fitball", "3×10-12", "Fitball", "Rodillas en el suelo, manos sobre la pelota. Rueda hacia adelante manteniendo el core activado. Anti-extension pura."], ["Oblicuos laterales en Fitball", "3×12 c/lado", "Fitball + Sofa", "Cadera apoyada en la pelota, pies contra el sofa o pared. Baja el tronco lateralmente y sube contrayendo el oblicuo."], ["Plancha con pies en Fitball", "3×30s", "Fitball + Suelo", "Antebrazos en el suelo, pies sobre la fitball. El core estabiliza constantemente. Mas dificil que plancha normal."]]}, "Pull A": {"focus": "Core profundo + Lumbar", "why": "Pull activa los erectores. Complementas con transverso y estabilizacion profunda.", "exercises": [["Dead bug", "3×8 c/lado", "Suelo", "Tumbado boca arriba, brazos al techo, rodillas a 90 grados. Extiende brazo derecho y pierna izquierda. La lumbar NO se despega del suelo."], ["Bird dog", "3×10 c/lado", "Suelo", "A cuatro patas. Extiende brazo y pierna contrarios. Aguanta 2s. Activa multifidos y erector de forma unilateral."], ["TRX Fallout", "3×8-10", "TRX", "Agarra el TRX con brazos extendidos al frente. Cae hacia adelante dejando los brazos subir. El core resiste toda la caida. El ejercicio mas exigente para el core profundo."], ["Hollow hold", "3×20-30s", "Suelo", "Tumbado boca arriba, brazos sobre la cabeza, piernas a 45 grados, lumbar pegada al suelo. Isometrico total del core."]]}, "Legs": {"focus": "Movilidad lumbar + Core suave", "why": "Legs ya carga mucho la lumbar. Solo movilidad y core muy ligero hoy.", "exercises": [["Cat-cow lento", "2×10 muy lentos", "Suelo", "A cuatro patas. Inhala arqueando (vaca), exhala redondeando (gato). Muy lento. Moviliza la lumbar despues de la prensa e hip thrust."], ["Dead bug suave", "2×6 c/lado", "Suelo", "Igual que en Pull A pero solo 6 reps, muy lento. No es el momento de exigir al core."], ["Plancha lateral", "2×20s c/lado", "Suelo", "Codo en el suelo, cuerpo recto. Cuadrado lumbar y oblicuo sin carga axial."], ["Estiramiento de psoas", "60s c/lado", "Suelo", "Rodilla en el suelo, pie delantero adelantado. Empuja la cadera hacia adelante. El psoas se tensa mucho en prensa y hip thrust — esto lo libera."]]}, "Push B": {"focus": "Oblicuos + Core lateral y rotacional", "why": "Push B complementa con trabajo lateral y rotacional. El core en distintos planos.", "exercises": [["Russian twist en Fitball", "3×15 c/lado", "Fitball", "Sentado sobre la fitball, reclinado 45 grados. Gira el tronco de lado a lado con los brazos extendidos. La pelota fuerza al core a estabilizar mientras rotas."], ["Pike en Fitball", "3×10", "Fitball", "Posicion de plancha con los pies sobre la pelota. Lleva las caderas hacia arriba formando una V invertida. Serrato anterior y core total. Empieza por plancha con pies en fitball si es muy dificil."], ["TRX Mountain climbers", "3×20", "TRX", "Pies en los anillos del TRX, posicion de plancha. Lleva las rodillas al pecho alternadamente. La inestabilidad multiplica el trabajo del core."], ["Crunch inverso", "3×15", "Suelo + Silla", "Tumbado, manos agarradas a la silla detras de la cabeza. Lleva las rodillas al pecho y eleva la cadera. Trabaja el recto inferior."]]}, "Pull B": {"focus": "Core isometrico + TRX como protagonista", "why": "Pull B usa el TRX al maximo. Core en suspension, el estimulo mas exigente.", "exercises": [["TRX Plank", "3×30-40s", "TRX", "Pies en los anillos del TRX, antebrazos en el suelo. La inestabilidad de los pies fuerza al core a trabajar sin parar. Mucho mas dificil que plancha normal."], ["TRX Fallout", "3×8-10", "TRX", "Brazos extendidos al frente agarrando el TRX. Cae hacia adelante resistiendo con el core. Vuelve. El mas exigente para el core profundo."], ["Bird dog con Fitball", "3×8 c/lado", "Fitball + Suelo", "A cuatro patas con una mano sobre la fitball. Extiende brazo y pierna contrarios. La inestabilidad de la pelota amplia la dificultad."], ["Plancha lateral TRX", "3×20s c/lado", "TRX", "Un pie en el TRX, cuerpo lateral, codo en el suelo. El pie suspendido crea inestabilidad. Oblicuo y cuadrado lumbar al maximo."]]}};
+
+// ── STEPS ─────────────────────────────────────────────────────────────────────
+let stepsData=JSON.parse(localStorage.getItem('ft_steps')||'{}');
+function todayKey(){return new Date().toISOString().split('T')[0];}
+function saveSteps(val){
+  const v=Math.max(0,parseInt(val)||0);
+  stepsData[todayKey()]=v;
+  localStorage.setItem('ft_steps',JSON.stringify(stepsData));
+  renderStepsWidget();
+}
+function renderStepsWidget(){
+  const val=stepsData[todayKey()]||0;
+  const goal=10000;
+  const pct=Math.min(100,Math.round(val/goal*100));
+  const d=document.getElementById('steps-display');
+  const g=document.getElementById('steps-goal-txt');
+  const f=document.getElementById('steps-fill');
+  const inp=document.getElementById('steps-input');
+  if(d)d.textContent=val.toLocaleString('es-ES');
+  if(g)g.textContent=val.toLocaleString('es-ES')+' / '+goal.toLocaleString('es-ES')+' pasos ('+(val>=goal?'✓ Objetivo!':pct+'%')+')';
+  if(f)f.style.width=pct+'%';
+  if(inp&&inp!==document.activeElement)inp.value=val||'';
+}
+
+// ── FOOD DIARY ─────────────────────────────────────────────────────────────────
+let foodData=JSON.parse(localStorage.getItem('ft_food')||'{}');
+let foodCurDay=new Date().toISOString().split('T')[0];
+const FOOD_LABELS=['Desayuno','Almuerzo','Comida','Merienda','Cena'];
+const FOOD_ICONS=['☀️','🍎','🍽️','🍵','🌙'];
+function foodDateStr(d){
+  const dt=new Date(d+'T12:00:00');
+  return dt.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'});
+}
+function foodPrevDay(){
+  const d=new Date(foodCurDay+'T12:00:00');
+  d.setDate(d.getDate()-1);
+  foodCurDay=d.toISOString().split('T')[0];
+  renderFoodDiary();
+}
+function foodNextDay(){
+  const d=new Date(foodCurDay+'T12:00:00');
+  d.setDate(d.getDate()+1);
+  foodCurDay=d.toISOString().split('T')[0];
+  renderFoodDiary();
+}
+function saveFood(){
+  if(!foodData[foodCurDay])foodData[foodCurDay]={};
+  for(let i=0;i<5;i++){
+    const el=document.getElementById('food-'+i);
+    if(el)foodData[foodCurDay][i]=el.value;
+  }
+  localStorage.setItem('ft_food',JSON.stringify(foodData));
+}
+function renderFoodDiary(){
+  const lbl=document.getElementById('food-day-label');
+  if(lbl)lbl.textContent=foodDateStr(foodCurDay);
+  const dayData=foodData[foodCurDay]||{};
+  for(let i=0;i<5;i++){
+    const el=document.getElementById('food-'+i);
+    if(el)el.value=dayData[i]||'';
+  }
+  if(typeof renderFoodLog==='function')renderFoodLog();
+}
+
+// ── ABS RENDER ────────────────────────────────────────────────────────────────
+function renderAbsScreen(){
+  const el=document.getElementById('abs-content');
+  if(!el)return;
+  var absIdx=typeof absCurSession!=='undefined'?absCurSession:curSession;
+  const sess=PROG[absIdx];
+  const label=sess?sess.label:'';
+  const routine=ABS_ROUTINES[label];
+  let html='';
+  if(routine){
+    var absLabels=PROG.map(function(p){return p.label;});
+    var absNavHtml='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'+
+      '<button onclick="absNav(-1)" style="background:none;border:1.5px solid var(--border);border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;color:var(--pu);line-height:1">&#8249;</button>'+
+      '<div style="text-align:center"><div style="font-size:14px;font-weight:800;color:var(--pu)">'+label+'</div>'+
+      '<div style="font-size:10px;color:var(--muted)">'+(absIdx===curSession?'Sesion de hoy':'S'+(absIdx+1)+'/20')+'</div></div>'+
+      '<button onclick="absNav(1)" style="background:none;border:1.5px solid var(--border);border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;color:var(--pu);line-height:1">&#8250;</button>'+
+    '</div>';
+    html+=absNavHtml;
+    html+=`<div class="abs-session-tag">Rutina: ${label}</div>`;
+    html+=`<div class="abs-why"><strong>${routine.focus}</strong><br>${routine.why}</div>`;
+    html+='<div class="card">';
+    routine.exercises.forEach((ex,i)=>{
+      html+=`<div class="abs-ex">
+        <div class="abs-ex-name">${i+1}. ${ex[0]}</div>
+        <div class="abs-ex-sets">${ex[1]}</div>
+        <div class="abs-ex-equip">🏋️ ${ex[2]}</div>
+        <div class="abs-ex-how">${ex[3]}</div>
+      </div>`;
+    });
+    html+='</div>';
+  } else {
+    // Rest day or unknown
+    html='<div class="card" style="text-align:center;padding:30px"><div style="font-size:40px;margin-bottom:12px">😴</div><div style="font-size:15px;font-weight:700;margin-bottom:8px">Dia de descanso</div><div style="font-size:13px;color:var(--muted)">No hay rutina de abs asignada para hoy.</div></div>';
+  }
+  // Always show all routines below
+  html+='<div class="section-label" style="margin-top:16px">Todas las rutinas</div>';
+  Object.entries(ABS_ROUTINES).forEach(([sessLabel,r])=>{
+    const isToday=sessLabel===label;
+    html+=`<div class="card" style="${isToday?'border-color:var(--pu);':''}margin-bottom:8px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <div style="font-size:13px;font-weight:800">${sessLabel}</div>
+        <div style="font-size:11px;color:var(--pu);font-weight:600">${r.focus}</div>
+      </div>
+      ${r.exercises.map(ex=>`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--muted);min-width:80px">${ex[1]}</span><span style="font-weight:600">${ex[0]}</span></div>`).join('')}
+    </div>`;
+  });
+  // Per-exercise done checkboxes
+  var absKey='abs-'+absCurSession;
+  var exDone=JSON.parse(localStorage.getItem(absKey)||'[]');
+  // Add exercise checkboxes to the routine card
+  if(routine){
+    // Replace exercise list with checkable version
+    var exHtml='';
+    routine.exercises.forEach(function(ex,ei){
+      var done=exDone.includes(ei);
+      exHtml+='<div class="abs-ex" style="'+(done?'opacity:.6':'')+'">'+
+        '<div style="display:flex;align-items:flex-start;gap:10px">'+
+          '<button onclick="toggleAbsEx('+ei+')" style="margin-top:2px;width:22px;height:22px;border-radius:50%;border:2px solid '+(done?'#16a34a':'var(--border)')+';background:'+(done?'#16a34a':'#fff')+';flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px">'+(done?'&#10003;':'')+'</button>'+
+          '<div style="flex:1">'+
+            '<div class="abs-ex-name" style="'+(done?'text-decoration:line-through':'')+'">'+ex[0]+'</div>'+
+            '<div class="abs-ex-sets">'+ex[1]+'</div>'+
+            '<div class="abs-ex-equip">'+ex[2]+'</div>'+
+            '<div class="abs-ex-how">'+ex[3]+'</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    });
+    // Replace the exercise list in html
+    var cardStart=html.lastIndexOf('<div class="card">');
+    if(cardStart>-1){
+      html=html.substring(0,cardStart)+'<div class="card">'+exHtml+'</div>';
+    }
+  }
+  // Completion buttons
+  var allExDone=routine?exDone.length>=routine.exercises.length:false;
+  var absDone=isAbsDone(absCurSession);
+  html+='<div style="display:flex;flex-direction:column;gap:8px;padding:16px 0 4px">'+
+    (routine?'<button onclick="markAllAbsEx()" style="width:100%;padding:11px;border-radius:var(--r);border:1.5px solid '+(allExDone?'#16a34a':'var(--pu)')+';background:'+(allExDone?'#f0fdf4':'#fff')+';color:'+(allExDone?'#16a34a':'var(--pu)')+';font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">'+(allExDone?'&#10003; Todos los ejercicios marcados':'Marcar todos los ejercicios')+'</button>':'')+
+    '<button onclick="toggleAbsDone('+absCurSession+')" style="width:100%;padding:13px;border-radius:var(--r);border:none;background:'+(absDone?'#16a34a':'var(--pu)')+';color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">'+
+      (absDone?'&#10003; Abs completado':'&#127937; Abs completado &mdash; marcar')+'</button>'+
+  '</div>';
+  el.innerHTML=html;
+}
+
+function showMuscleModal(exName){
+  const key=getMuscleKey(exName);
+  if(!key||!COACHING_TIPS[key]) return;
+  const d=COACHING_TIPS[key];
+  document.getElementById('mus-title').textContent=exName;
+  document.getElementById('mus-sub').textContent=d.muscles;
+  document.getElementById('mus-diagrams').innerHTML='';
+  document.getElementById('mus-tags').innerHTML='';
+  const tips=d.tips.map((t,i)=>`<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">
+    <div style="width:22px;height:22px;border-radius:50%;background:var(--pul);color:var(--pud);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">${i+1}</div>
+    <div style="font-size:13px;color:var(--text);line-height:1.6">${t}</div>
+  </div>`).join('');
+  const extra=`<div style="background:var(--grl);border-radius:var(--rs);padding:10px 12px;margin-top:10px">
+    <div style="font-size:10px;font-weight:700;color:var(--te);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Musculo principal</div>
+    <div style="font-size:12px;color:var(--te)">${d.muscles}</div>
+  </div>
+  <div style="background:var(--bll);border-radius:var(--rs);padding:10px 12px;margin-top:8px">
+    <div style="font-size:10px;font-weight:700;color:var(--bl);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Descanso recomendado</div>
+    <div style="font-size:12px;color:var(--bl)">${d.rest}</div>
+  </div>
+  <div style="background:var(--aml);border-radius:var(--rs);padding:10px 12px;margin-top:8px">
+    <div style="font-size:10px;font-weight:700;color:var(--am);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Progresion de peso</div>
+    <div style="font-size:12px;color:var(--am)">${d.weight_tip}</div>
+  </div>`;
+  document.getElementById('mus-tips').innerHTML=tips+extra;
+  document.getElementById('muscle-modal').classList.add('open');
+}
+
+
+function updateBadge(){
+  const b=document.getElementById('tb-badge');
+  if(b) b.textContent='S'+(curSession+1)+'/20';
+  const sub=document.getElementById('tb-sub');
+  if(sub&&PROG[curSession]) sub.textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
+}
+
+// ─── SESSION NAVIGATION ───────────────────────────────────────────────────────
+function prevSession(){
+  if(curSession>0){curSession--;curWeek=Math.floor(curSession/5);curDay=curSession%5;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
+}
+function nextSession(){
+  if(curSession<19){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
+}
+
+// ─── RUNNING PROGRAM ──────────────────────────────────────────────────────────
+
+function saveRun(){localStorage.setItem('ft_run_week',runCurWeek);localStorage.setItem('ft_run_checked',JSON.stringify(runChecked));}
+
+
+
+
+
+
+function toggleCardio(key){
+  if(!logs[key])logs[key]={done:false};
+  logs[key].done=!logs[key].done;
+  saveL();renderSession();renderSessionBanner();updateStats();
+}
+function toggleCalm(key){
+  if(!logs[key])logs[key]={done:false};
+  logs[key].done=!logs[key].done;
+  saveL();renderSession();
+}
+
+function confirmSessionDone(){markSessionDone(curSession);if(curSession<19){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;localStorage.setItem('ft_sess',curSession);}renderDayScroll();renderSession();renderSessionBanner();showToast('Sesion completada. Siguiente: '+PROG[Math.min(curSession,19)].label);}
+
+function renderBioHistory(){
+  if(typeof showBioTab==='function')showBioTab('registro',document.querySelector('#scr-bio .tab-btn'));
+}
+
+function absNav(dir){
+  absCurSession=Math.max(0,Math.min(19,absCurSession+dir));
+  renderAbsScreen();
+}
+
+function renderFoodLog(){
+  var el=document.getElementById('food-log');
+  if(!el)return;
+  var days=Object.keys(foodData).sort().reverse().slice(0,7);
+  if(!days.length){el.innerHTML='<div style="color:var(--muted);font-size:13px;padding:10px 0">Sin registros aun.</div>';return;}
+  var NAMES=['Desayuno','Almuerzo','Comida','Merienda','Cena'];
+  var today=new Date().toISOString().split('T')[0];
+  var out='';
+  days.forEach(function(d){
+    var dd=foodData[d]||{};
+    var filled=Object.values(dd).filter(function(v){return v&&v.trim();}).length;
+    if(!filled)return;
+    var isToday=d===today;
+    var rows=[0,1,2,3,4].filter(function(i){return dd[i]&&dd[i].trim();}).map(function(i){
+      return '<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:8px">'+
+        '<span style="min-width:70px;color:var(--muted)">'+NAMES[i]+'</span>'+
+        '<span>'+dd[i]+'</span></div>';
+    }).join('');
+    out+='<div class="card" style="margin-bottom:8px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
+        '<div style="font-size:13px;font-weight:700;color:'+(isToday?'var(--pu)':'var(--text)')+'">'+
+          (isToday?'Hoy':foodDateStr(d))+'</div>'+
+        '<div style="display:flex;gap:6px">'+
+          '<button onclick="foodEditDay(\'' +d+ '\')" style="padding:4px 10px;border-radius:20px;border:1.5px solid var(--pu);background:none;color:var(--pu);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">Editar</button>'+
+          '<button onclick="foodDeleteDay(\'' +d+ '\')" style="padding:4px 10px;border-radius:20px;border:1.5px solid #ef4444;background:none;color:#ef4444;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">Borrar</button>'+
+        '</div></div>'+rows+'</div>';
+  });
+  el.innerHTML=out||'<div style="color:var(--muted);font-size:13px">Sin registros.</div>';
+}
+
+function foodEditDay(d){
+  foodCurDay=d;
+  renderFoodDiary();
+  var sc=document.getElementById('scr-food');
+  if(sc)sc.scrollTop=0;
+}
+
+function foodDeleteDay(d){
+  if(!confirm('Borrar registro de '+foodDateStr(d)+'?'))return;
+  delete foodData[d];
+  localStorage.setItem('ft_food',JSON.stringify(foodData));
+  renderFoodDiary();
+  showToast('Registro borrado');
+}
+
+function toggleAbsEx(ei){
+  var absKey='abs-'+absCurSession;
+  var exDone=JSON.parse(localStorage.getItem(absKey)||'[]');
+  if(exDone.includes(ei))exDone=exDone.filter(function(x){return x!==ei;});
+  else exDone.push(ei);
+  localStorage.setItem(absKey,JSON.stringify(exDone));
+  renderAbsScreen();
+}
+function markAllAbsEx(){
+  var absKey='abs-'+absCurSession;
+  var sess=PROG[absCurSession];
+  var routine=sess?ABS_ROUTINES[sess.label]:null;
+  if(!routine)return;
+  var all=[0,1,2,3].slice(0,routine.exercises.length);
+  localStorage.setItem(absKey,JSON.stringify(all));
+  renderAbsScreen();
+  showToast('Todos los ejercicios marcados ✓');
+}
+function foodEditDay(d){
+  foodCurDay=d;
+  renderFoodDiary();
+  var sc=document.getElementById('scr-food');
+  if(sc)sc.scrollTop=0;
+}
+
+function foodDeleteDay(d){
+  if(!confirm('Borrar registro de '+foodDateStr(d)+'?'))return;
+  delete foodData[d];
+  localStorage.setItem('ft_food',JSON.stringify(foodData));
+  renderFoodDiary();
+  showToast('Registro borrado');
+}
+
+function toggleAbsEx(ei){
+  var absKey='abs-'+absCurSession;
+  var exDone=JSON.parse(localStorage.getItem(absKey)||'[]');
+  if(exDone.includes(ei))exDone=exDone.filter(function(x){return x!==ei;});
+  else exDone.push(ei);
+  localStorage.setItem(absKey,JSON.stringify(exDone));
+  renderAbsScreen();
+}
+function markAllAbsEx(){
+  var absKey='abs-'+absCurSession;
+  var sess=PROG[absCurSession];
+  var routine=sess?ABS_ROUTINES[sess.label]:null;
+  if(!routine)return;
+  var all=[0,1,2,3].slice(0,routine.exercises.length);
+  localStorage.setItem(absKey,JSON.stringify(all));
+  renderAbsScreen();
+  showToast('Todos los ejercicios marcados ✓');
+}
 </script>
+
 
 <div class="sum-ov" id="sum-ov">
   <div class="sum-panel">
@@ -3027,225 +3513,5 @@ function toggleCalm(key){
   </div>
 </div>
 
-<div id="scr-running" class="scr">
-  <div class="section-label">Running — Programa 8 semanas (0 a 30 min)</div>
-  <div style="display:flex;gap:6px;margin-bottom:12px">
-    <button id="rbtn-prev" onclick="changeRunWeek(-1)" style="flex:1;padding:9px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--card);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">‹ Anterior</button>
-    <div style="flex:2;padding:9px;border-radius:var(--rs);border:1.5px solid var(--pu);background:var(--card);text-align:center;font-size:12px;font-weight:700;color:var(--pu)" id="run-week-label">Semana 1</div>
-    <button id="rbtn-next" onclick="changeRunWeek(1)" style="flex:1;padding:9px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--card);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Siguiente ›</button>
-  </div>
-  <div id="run-week-content"></div>
-</div>
 
-<div id="scr-suplem" class="scr">
-  <div class="section-label">Tu protocolo diario — Rybelsus 7mg</div>
-  <div class="card" style="border-left:3px solid #ef4444">
-    <div style="display:flex;gap:10px;margin-bottom:10px"><span style="font-size:24px">💊</span><div><div style="font-weight:700">Rybelsus 7mg (semaglutida oral)</div><div style="font-size:12px;color:var(--muted)">Tomar en ayunas, esperar 30 min antes de comer o beber nada</div></div></div>
-    <div style="display:flex;flex-direction:column;gap:5px">
-      <div style="padding:8px;background:#fef2f2;border-radius:var(--rs);font-size:12px"><strong>07:00h</strong> — Rybelsus con agua (120ml mínimo). En ayunas total.</div>
-      <div style="padding:8px;background:#f8fafc;border-radius:var(--rs);font-size:12px"><strong>07:30h</strong> — Desayuno (mínimo 30 min después)</div>
-      <div style="padding:8px;background:#f0fdf4;border-radius:var(--rs);font-size:12px"><strong>Post-gym</strong> — Batido Bulk Whey + Creatina Foodelis (mínimo 2h después del Rybelsus)</div>
-    </div>
-    <div style="background:#fff7ed;border-radius:var(--rs);padding:10px;margin-top:10px;font-size:12px;color:#92400e">
-      <strong>Por qué esta vez será diferente:</strong> Con Rybelsus perdiste 20kg pero sin fuerza perdiste músculo. Ahora: Rybelsus + fuerza + proteína alta = recomposición real. El músculo preserva el metabolismo.
-    </div>
-  </div>
-
-  <div class="section-label">Whey — Bulk Pure Whey</div>
-  <div class="card">
-    <div style="display:flex;gap:10px;margin-bottom:10px"><span style="font-size:24px">🥤</span><div><div style="font-weight:700">Bulk Pure Whey</div><div style="font-size:12px;color:var(--muted)">bulk.com/es · ~25€/kg · 22-23g proteína/toma · +20 sabores</div></div></div>
-    <div class="section-label" style="font-size:10px;margin-top:0;margin-bottom:6px">Cómo preparar el shaker — paso a paso</div>
-    <div style="display:flex;flex-direction:column;gap:5px;font-size:12px">
-      <div style="padding:7px 10px;background:#fff7ed;border-radius:var(--rs)"><strong>1.</strong> Añade primero 200-300ml de leche o agua fría</div>
-      <div style="padding:7px 10px;background:#fff7ed;border-radius:var(--rs)"><strong>2.</strong> Añade 1 cazo raso de proteína (30g) + 5g creatina</div>
-      <div style="padding:7px 10px;background:#fff7ed;border-radius:var(--rs)"><strong>3.</strong> Cierra bien la tapa — comprueba antes de agitar</div>
-      <div style="padding:7px 10px;background:#fff7ed;border-radius:var(--rs)"><strong>4.</strong> Agita 10-15 segundos con energía</div>
-      <div style="padding:7px 10px;background:#f0fdf4;border-radius:var(--rs)"><strong>5.</strong> Beber en los primeros 30 min tras prepararlo</div>
-    </div>
-    <div style="font-size:12px;color:var(--muted);margin-top:8px">💡 <strong>Opción recomendada:</strong> lleva el polvo seco en el shaker al gym, llena con agua del vestuario al terminar. Batido perfectamente fresco.</div>
-    <div style="background:#fef2f2;border-radius:var(--rs);padding:8px;margin-top:8px;font-size:12px;color:#7f1d1d">⚠️ Batido siempre <strong>mínimo 2h después</strong> del Rybelsus</div>
-  </div>
-
-  <div class="section-label">Creatina — Foodelis Monohidrato</div>
-  <div class="card">
-    <div style="display:flex;gap:10px;margin-bottom:10px"><span style="font-size:24px">⚡</span><div><div style="font-weight:700">Creatina GEN Monohidrato Micronizada</div><div style="font-size:12px;color:var(--muted)">Amazon · 500g · Sin aditivos · Testada en lab independiente · Fabricada en UE</div></div></div>
-    <div style="font-size:12px;color:var(--text);line-height:1.7">
-      <strong>Dosis:</strong> 5g/día directamente en el batido post-gym. Sin fase de carga.<br>
-      <strong>Dosificador:</strong> el que incluye mide 6g — usa una cucharita de café rasa.<br>
-      <strong>Mito desmontado:</strong> La "fase de carga" (20g/día) es un protocolo antiguo. 5g/día constantes llegan al mismo nivel en 3-4 semanas sin molestias digestivas.
-    </div>
-  </div>
-
-  <div class="section-label">Resto del protocolo</div>
-  <div class="card">
-    <div style="font-size:12px;line-height:1.9">
-      🌞 <strong>Vitamina D3+K2:</strong> 2.000 UI D3 + 200mcg MK7 (365 comp.) — la tienes. Con comida. Mayo-sept en Murcia puedes pausarla.<br>
-      🌙 <strong>Bisglicinato Magnesio PharmaZen:</strong> 1500mg sal = ~300mg magnesio elemental. 1 cápsula por la noche. Reduce calambres al empezar. Ya lo tienes — llega el viernes.<br>
-      💰 <strong>Coste total:</strong> ~24€/mes (creatina + whey + vitaminas). Sin suscripciones ni complicaciones.
-    </div>
-  </div>
-</div>
-
-<div id="scr-abs" class="scr">
-  <div class="section-label">Programa Abs — Bosu + Fitball en casa</div>
-  <div class="card" style="background:#fef3c7;border-color:#f59e0b;margin-bottom:12px">
-    <div style="font-size:13px;font-weight:700;color:#92400e;margin-bottom:6px">💡 Cómo usar este programa</div>
-    <div style="font-size:12px;color:#78350f;line-height:1.7">
-      Haz esta rutina <strong>3 días a la semana en casa</strong> — los días que no vas al gym. 15-20 minutos son suficientes.<br>
-      El Bosu y la Fitball <strong>activan el core profundo</strong> (transverso abdominal) mucho más que los abdominales en suelo porque el cuerpo tiene que estabilizarse constantemente.<br>
-      <strong>Progresión:</strong> Semana 1-2 empiezas con los ejercicios base. Semana 3-4 añades las variantes avanzadas.
-    </div>
-  </div>
-
-  <div class="section-label">Rutina A — Core profundo + Estabilización (Bosu)</div>
-  <div class="card">
-    <div style="display:flex;flex-direction:column;gap:12px">
-      <div style="border-bottom:1px solid var(--border);padding-bottom:12px">
-        <div style="font-size:14px;font-weight:700">1. Plancha sobre Bosu <span style="font-size:11px;background:#dcfce7;color:#166534;border-radius:8px;padding:2px 8px;font-weight:700">Base</span></div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 30-40 segundos · Descanso 45s</div>
-        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Bosu con la parte plana hacia abajo (la curva hacia arriba). Apoya los antebrazos en la curva. Mantén el cuerpo recto como una tabla.</div>
-        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: el Bosu inestable activa el transverso abdominal 40% más que la plancha en el suelo. Es el músculo que "aprieta" la cintura.</div>
-      </div>
-      <div style="border-bottom:1px solid var(--border);padding-bottom:12px">
-        <div style="font-size:14px;font-weight:700">2. Dead bug sobre Fitball</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 8 cada lado · Descanso 45s</div>
-        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Tumbado boca arriba con los pies apoyados en la Fitball. Extiende el brazo derecho y la pierna izquierda simultáneamente. Mantén la espalda baja pegada al suelo.</div>
-        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: el punto de apoyo inestable (la Fitball) obliga al core a trabajar para no rodar. Activa multífidos y erector espinal.</div>
-      </div>
-      <div style="border-bottom:1px solid var(--border);padding-bottom:12px">
-        <div style="font-size:14px;font-weight:700">3. Crunch sobre Fitball <span style="font-size:11px;background:#dcfce7;color:#166534;border-radius:8px;padding:2px 8px;font-weight:700">Base</span></div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 15-20 reps · Descanso 45s</div>
-        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Siéntate sobre la Fitball y deslízate hasta que la parte baja de la espalda quede apoyada. Cruza los brazos en el pecho o lleva las manos a las orejas. Sube contrayendo el abdomen.</div>
-        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: la Fitball permite un rango de movimiento mayor que el suelo. El abdomen trabaja en toda su longitud, no solo en el rango final.</div>
-      </div>
-      <div>
-        <div style="font-size:14px;font-weight:700">4. Palancas sobre Bosu <span style="font-size:11px;background:#fef3c7;color:#92400e;border-radius:8px;padding:2px 8px;font-weight:700">Sem 3-4</span></div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 10 cada lado · Descanso 60s</div>
-        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Bosu con curva hacia arriba. Siéntate encima en equilibrio. Lleva las rodillas al pecho y luego extiende las piernas. Agarra los bordes del Bosu para estabilizarte.</div>
-        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: combina flexión de cadera, recto abdominal y estabilización de core simultáneamente. Más completo que cualquier crunch tradicional.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label">Rutina B — Oblicuos + Rotación (Semana 3-4)</div>
-  <div class="card">
-    <div style="display:flex;flex-direction:column;gap:12px">
-      <div style="border-bottom:1px solid var(--border);padding-bottom:12px">
-        <div style="font-size:14px;font-weight:700">1. Plancha lateral sobre Bosu</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 20-30s cada lado · Descanso 45s</div>
-        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Bosu curva hacia arriba. Apoya el antebrazo lateral en la curva. Cuerpo en línea recta. El oblicuo y cuadrado lumbar trabajan para no colapsar.</div>
-        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: los oblicuos dan la forma de cintura y estabilizan la columna en el plano frontal. Directamente relacionado con la reducción de la cintura visible.</div>
-      </div>
-      <div style="border-bottom:1px solid var(--border);padding-bottom:12px">
-        <div style="font-size:14px;font-weight:700">2. Russian twist sobre Fitball</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 12 cada lado · Descanso 45s</div>
-        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Espalda baja apoyada en la Fitball, caderas levantadas. Gira el tronco de lado a lado. Puedes añadir un peso ligero (2-4kg) cuando el movimiento sea fluido.</div>
-        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: la rotación sobre superficie inestable activa los oblicuos internos y externos en todo el rango de rotación. Mucho más efectivo que el crunch lateral.</div>
-      </div>
-      <div>
-        <div style="font-size:14px;font-weight:700">3. Pike sobre Fitball</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">3 × 10 reps · Descanso 60s</div>
-        <div style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6">Posición de plancha con los pies encima de la Fitball. Lleva las caderas hacia arriba formando una V invertida. Vuelve a la posición de plancha controlado.</div>
-        <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">💡 Por qué: uno de los ejercicios de core más completos que existen. Activa todo el abdomen más el serrato anterior. Requiere fuerza de hombros también.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label">Progresión recomendada</div>
-  <div class="card" style="font-size:12px;line-height:1.9">
-    <strong>Semana 1-2 (adaptación):</strong> Rutina A completa × 3 días<br>
-    <strong>Semana 3-4 (volumen):</strong> Rutina A + Rutina B alternadas × 3 días<br>
-    <strong>A partir del Ciclo 2:</strong> Añadir peso en Russian twist, aumentar tiempo en planchas<br>
-    <br>
-    <strong>Cuándo hacerlos:</strong> Días sin gym — lunes, miércoles o viernes. 15-20 minutos son suficientes. No hace falta más.
-  </div>
-</div>
-
-<div id="scr-abs" class="scr">
-  <div class="section-label">Programa Abs — Bosu + Fitball en casa</div>
-  <div class="card" style="background:#eff6ff;border-color:#bfdbfe;margin-bottom:12px">
-    <div style="font-size:13px;font-weight:700;color:#1e40af;margin-bottom:6px">Por que entrenamos abs por separado</div>
-    <div style="font-size:12px;color:#1e3a5f;line-height:1.7">El core no es solo estetico. Es el sistema de estabilizacion de toda la columna. Un core fuerte protege la lumbar en la prensa, estabiliza el peso en el press, y es el eslabón entre la fuerza del tren superior e inferior.<br><br>
-    El <strong>Bosu</strong> e introduce inestabilidad que activa el core profundo (transverso abdominal) — el musculo que crea presion intraabdominal y protege los discos.<br>
-    La <strong>Fitball</strong> permite trabajar el recto abdominal en un rango de movimiento mayor que el crunch en el suelo.</div>
-  </div>
-
-  <div class="section-label">Rutina A — Core profundo (15 min)</div>
-  <div class="card">
-    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Hacer 2-3 dias a la semana. Sin equipamiento o con Bosu.</div>
-    <div class="exrow">
-      <div style="font-weight:700;font-size:13px">1. Plancha en Bosu <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 30-45s</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">Antebrazos sobre el Bosu (lado plano abajo). El Bosu obliga al core a estabilizarse constantemente.</div>
-      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">Progresion: sem 1-2 sin Bosu → sem 3 con Bosu → sem 4 plancha lateral en Bosu</div>
-    </div>
-    <div class="exrow">
-      <div style="font-weight:700;font-size:13px">2. Dead bug <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 8 cada lado</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">Tumbado boca arriba. Extiende brazo derecho y pierna izquierda simultaneamente manteniendo la lumbar pegada al suelo. La lumbar NUNCA debe despegarse.</div>
-      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">Es el ejercicio mas eficiente para el transverso abdominal segun la evidencia.</div>
-    </div>
-    <div class="exrow">
-      <div style="font-weight:700;font-size:13px">3. Bird dog <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 10 cada lado</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">A cuatro patas. Extiende brazo y pierna contrarios. Aguanta 2 segundos. Espalda plana.</div>
-      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">Progresion: sem 3 hazlo sobre el Bosu (lado plano abajo). Nivel muy superior.</div>
-    </div>
-    <div class="exrow" style="border-bottom:none">
-      <div style="font-weight:700;font-size:13px">4. Hollow hold <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 20-30s</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">Tumbado boca arriba. Brazos sobre la cabeza, piernas juntas a 45°, espalda baja pegada al suelo. Aguanta la posicion.</div>
-      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">El core isometrico es mas funcional que el crunch clasico.</div>
-    </div>
-  </div>
-
-  <div class="section-label">Rutina B — Fitball (15 min)</div>
-  <div class="card">
-    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">2 dias a la semana. Requiere Fitball.</div>
-    <div class="exrow">
-      <div style="font-weight:700;font-size:13px">1. Crunch en Fitball <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 15-20</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">La espalda baja sobre la pelota. Baja hasta hiperextension — aqui el recto abdominal trabaja desde su maxima longitud. Sube contrayendo el abdomen.</div>
-      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">El crunch en fitball activa el recto abdominal un 40% mas que el crunch en el suelo por el mayor rango de movimiento.</div>
-    </div>
-    <div class="exrow">
-      <div style="font-weight:700;font-size:13px">2. Pike en Fitball <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 10-12</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">Posicion de plancha con los pies sobre la pelota. Lleva las caderas hacia arriba formando una V invertida. Core y serrato anterior.</div>
-      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">Ejercicio avanzado — empieza por plancha con pies en fitball antes de hacer el pike.</div>
-    </div>
-    <div class="exrow">
-      <div style="font-weight:700;font-size:13px">3. Rollout con Fitball <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 8-10</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">Rodillas en el suelo, manos sobre la pelota. Rueda hacia adelante extendiendo los brazos mientras mantienes el core activado. Vuelve.</div>
-      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">El rollout activa el core en un patron de anti-extension — mas funcional que el crunch.</div>
-    </div>
-    <div class="exrow" style="border-bottom:none">
-      <div style="font-weight:700;font-size:13px">4. Oblicuos en Fitball <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 12 cada lado</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">Lado sobre la pelota, caderas apoyadas. Baja el tronco hacia el lado y sube contrayendo el oblicuo.</div>
-      <div style="font-size:11px;color:#1e40af;background:#eff6ff;border-radius:6px;padding:5px 8px;margin-top:6px">Los oblicuos estabilizan la columna en rotacion — fundamentales para proteger la lumbar.</div>
-    </div>
-  </div>
-
-  <div class="section-label">Rutina C — Bosu avanzado (sem 3-4)</div>
-  <div class="card">
-    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Solo cuando domines A y B. 1-2 dias a la semana.</div>
-    <div class="exrow">
-      <div style="font-weight:700;font-size:13px">1. Sentadilla en Bosu <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 15</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">De pie sobre el lado curvo del Bosu. Sentadilla con peso corporal. Core activado en todo momento para mantener el equilibrio.</div>
-    </div>
-    <div class="exrow">
-      <div style="font-weight:700;font-size:13px">2. Plancha lateral en Bosu <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 20-30s cada lado</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">Antebrazo sobre el Bosu. Cuerpo recto lateral. El oblicuo y cuadrado lumbar trabajan maximos.</div>
-    </div>
-    <div class="exrow" style="border-bottom:none">
-      <div style="font-weight:700;font-size:13px">3. Mountain climbers en Bosu <span style="font-size:11px;color:var(--pu);font-weight:400">3 x 20</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">Manos sobre el Bosu (lado plano arriba), posicion de plancha. Lleva las rodillas alternadamente hacia el pecho rapido.</div>
-    </div>
-  </div>
-
-  <div class="section-label">Cuando y como integrar</div>
-  <div class="card">
-    <div style="font-size:13px;line-height:1.9">
-      📅 <strong>Dias recomendados:</strong> cualquier dia en casa, preferiblemente mañana o tarde — nunca justo antes del gym porque fatigan el core que necesitas para los compuestos.<br>
-      ⏱ <strong>Duracion:</strong> 15 minutos es suficiente. La calidad importa mas que la cantidad.<br>
-      📈 <strong>Progresion:</strong> Sem 1-2 → Rutina A sin Bosu. Sem 3 → Rutina A con Bosu + empezar Rutina B. Sem 4+ → las 3 rutinas rotando.<br>
-      🎯 <strong>Objetivo real:</strong> el sixpack se ve cuando el porcentaje de grasa baja. El entrenamiento de abs no quema la grasa del abdomen — eso es un mito. Lo que hace es fortalecer y definir el musculo que se vera cuando el Rybelsus + deficit calorico hagan su trabajo.
-    </div>
-  </div>
-</div>
-</body>
-</html>
+>
