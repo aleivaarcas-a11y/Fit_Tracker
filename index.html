@@ -711,15 +711,15 @@ function buildProg(){
   week0.push({type:'gym',label:'Push A',icon:'💪',color:'gym',calmType:'push',isDeload:false,
     duration:'Gym ~65 min + Cardio 30 min',desc:'Pecho palancas · Hombros · Laterales+Pec deck · Cruce+Overhead',
     blocks:[
-      {label:'Pecho — compuesto',exs:[ex('Press pecho máquina palancas','2x8-12',10,'amrap',null,'pecho',180)]},
-      {label:'Hombros — press',exs:[ex('Press hombros máquina','2x10-12',10,'prog',null,'hombro',120)]},
+      {label:'Pecho — compuesto',exs:[ex('Press pecho máquina palancas','2x8-12',10,'amrap','https://youtube.com/shorts/taI4XduLpTk','pecho',180)]},
+      {label:'Hombros — press',exs:[ex('Press hombros máquina','2x10-12',10,'prog','https://youtube.com/shorts/g0VD63YKh6Q','hombro',120)]},
       {label:'Superserie — Laterales + Apertura',exs:[
-        ...ss(ex('Elevaciones laterales mancuernas','2x15-20',15,null,null,'lateral'),
-          ex('Pec Deck máquina (DX)','2x12-15',12,null,null,'pecho'),90)]},
+        ...ss(ex('Elevaciones laterales mancuernas','2x15-20',15,null,'https://youtube.com/shorts/VmB1G1K7v94','lateral'),
+          ex('Pec Deck máquina (DX)','2x12-15',12,null,'https://youtube.com/shorts/qEwKCR5JCog','pecho'),90)]},
       {label:'Superserie — Cruce + Overhead',exs:[
-        ...ss(ex('Cruce polea alto','2x12-15',12,null,null,'pecho'),
+        ...ss(ex('Cruce polea alto','2x12-15',12,null,'https://youtube.com/shorts/qEwKCR5JCog','pecho'),
           ex('Extensión overhead polea cuerda','2x12-15',12,null,'https://youtube.com/shorts/Z57CtFmRMxA','triceps'),90)]},
-      {label:'Salud articular',exs:[ex('Face pulls polea','2x15-20',15,null,null,'face_pull',60)]},
+      {label:'Salud articular',exs:[ex('Face pulls polea','2x15-20',15,null,'https://youtube.com/shorts/6Z15_WdXmVw','face_pull',60)]},
       {label:'Cardio',exs:[cardio('Bici estática Zona 2','30 min — 130-145 ppm')]},
     ]
   });
@@ -728,12 +728,12 @@ function buildProg(){
   week0.push({type:'gym',label:'Pull A',icon:'🏋️',color:'gym',calmType:'pull',isDeload:false,
     duration:'Gym ~55 min + Cardio 25 min',desc:'Jalón ancho · Remo Hammer · Face pulls · Predicador+Martillo',
     blocks:[
-      {label:'Espalda — tirón vertical',exs:[ex('Jalón polea agarre ancho','2x8-12',8,'amrap',null,'espalda_v',180)]},
-      {label:'Espalda — remo horizontal',exs:[ex('Remo máquina Hammer','2x10-12',10,'prog',null,'espalda_h',120)]},
-      {label:'Deltoides posterior',exs:[ex('Face pulls polea','2x15-20',15,null,null,'face_pull',60)]},
+      {label:'Espalda — tirón vertical',exs:[ex('Jalón polea agarre ancho','2x8-12',8,'amrap','https://youtube.com/shorts/xUm0BiZCWlQ','espalda_v',180)]},
+      {label:'Espalda — remo horizontal',exs:[ex('Remo máquina Hammer','2x10-12',10,'prog','https://youtube.com/shorts/3RTpS2GHo_c','espalda_h',120)]},
+      {label:'Deltoides posterior',exs:[ex('Face pulls polea','2x15-20',15,null,'https://youtube.com/shorts/6Z15_WdXmVw','face_pull',60)]},
       {label:'Superserie — Bíceps',exs:[
-        ...ss(ex('Curl predicador mancuerna','2x10-12',10,null,null,'biceps'),
-          ex('Curl martillo mancuernas','2x12-15',12,null,null,'biceps'),90)]},
+        ...ss(ex('Curl predicador mancuerna','2x10-12',10,null,'https://youtube.com/shorts/VmB1G1K7v94','biceps'),
+          ex('Curl martillo mancuernas','2x12-15',12,null,'https://youtube.com/shorts/VmB1G1K7v94','biceps'),90)]},
       {label:'Cardio',exs:[cardio('Bici estática Zona 2','25 min — 130-145 ppm')]},
     ]
   });
@@ -742,13 +742,13 @@ function buildProg(){
   week0.push({type:'gym',label:'Legs',icon:'🦵',color:'gym',calmType:'legs',isDeload:false,
     duration:'Gym ~70 min',desc:'Prensa · Extensión · Curl femoral · Hip thrust · Abducción · Gemelo',
     blocks:[
-      {label:'Cuádriceps — compuesto',exs:[ex('Prensa de piernas','2x10-12',10,'amrap',null,'cuad',180)]},
-      {label:'Cuádriceps — aislamiento',exs:[ex('Extensión cuádriceps máquina','2x12-15',12,'prog',null,'cuad',90)]},
-      {label:'Isquiotibiales',exs:[ex('Curl femoral tumbado máquina','2x10-12',10,null,null,'posterior',120)]},
-      {label:'Glúteo',exs:[ex('Hip thrust máquina','2x12-15',12,null,null,'posterior',120)]},
+      {label:'Cuádriceps — compuesto',exs:[ex('Prensa de piernas','2x10-12',10,'amrap','https://youtube.com/shorts/DbFgADa2PL8','cuad',180)]},
+      {label:'Cuádriceps — aislamiento',exs:[ex('Extensión cuádriceps máquina','2x12-15',12,'prog','https://youtube.com/shorts/Z57CtFmRMxA','cuad',90)]},
+      {label:'Isquiotibiales',exs:[ex('Curl femoral tumbado máquina','2x10-12',10,null,'https://youtube.com/shorts/DbFgADa2PL8','posterior',120)]},
+      {label:'Glúteo',exs:[ex('Hip thrust máquina','2x12-15',12,null,'https://youtube.com/shorts/qEwKCR5JCog','posterior',120)]},
       {label:'Cadera y gemelo',exs:[
-        ex('Abducción cadera máquina','2x15-20',15,null,null,'abduccion',60),
-        ex('Gemelo prensa de piernas','2x15-20',15,null,null,'gemelo',60),
+        ex('Abducción cadera máquina','2x15-20',15,null,'https://youtube.com/shorts/Z57CtFmRMxA','abduccion',60),
+        ex('Gemelo prensa de piernas','2x15-20',15,null,'https://youtube.com/shorts/6Z15_WdXmVw','gemelo',60),
       ]},
     ]
   });
@@ -757,12 +757,12 @@ function buildProg(){
   week0.push({type:'gym',label:'Push B',icon:'💪',color:'gym',calmType:'push',isDeload:false,
     duration:'Gym ~60 min + Cardio 20 min',desc:'Press Arnold · Laterales+Press inclinado · Pec deck+Pushdown',
     blocks:[
-      {label:'Hombros — compuesto',exs:[ex('Press Arnold mancuernas','2x8-12',8,'amrap',null,'hombro',180)]},
+      {label:'Hombros — compuesto',exs:[ex('Press Arnold mancuernas','2x8-12',8,'amrap','https://youtube.com/shorts/eozdVDA78K0','hombro',180)]},
       {label:'Superserie — Laterales + Press pecho',exs:[
-        ...ss(ex('Elevaciones laterales mancuernas','3x15-20',15,null,null,'lateral'),
-          ex('Press inclinado mancuernas','2x10-12',10,null,null,'pecho'),90)]},
+        ...ss(ex('Elevaciones laterales mancuernas','3x15-20',15,null,'https://youtube.com/shorts/VmB1G1K7v94','lateral'),
+          ex('Press inclinado mancuernas','2x10-12',10,null,'https://youtube.com/shorts/a64mtMHyPfY','pecho'),90)]},
       {label:'Superserie — Pecho + Tríceps',exs:[
-        ...ss(ex('Pec Deck máquina (DX)','2x12-15',12,null,null,'pecho'),
+        ...ss(ex('Pec Deck máquina (DX)','2x12-15',12,null,'https://youtube.com/shorts/qEwKCR5JCog','pecho'),
           ex('Pushdown polea cuerda','2x12-15',12,null,'https://youtube.com/shorts/DbFgADa2PL8','triceps'),90)]},
       {label:'Cardio',exs:[cardio('Bici estática Zona 2','20 min — 130-145 ppm')]},
     ]
@@ -772,11 +772,11 @@ function buildProg(){
   week0.push({type:'gym',label:'Pull B',icon:'🏋️',color:'gym',calmType:'pull',isDeload:false,
     duration:'Gym ~60 min + Cardio 20 min',desc:'Remo neutro · Jalón supino · Pájaro+Curl alterno · Curl concentrado',
     blocks:[
-      {label:'Espalda — remo horizontal',exs:[ex('Remo polea agarre neutro','2x8-12',8,'amrap',null,'espalda_h',180)]},
-      {label:'Espalda — tirón vertical',exs:[ex('Jalón polea agarre supino','2x10-12',10,'prog',null,'espalda_v',120)]},
+      {label:'Espalda — remo horizontal',exs:[ex('Remo polea agarre neutro','2x8-12',8,'amrap','https://youtube.com/shorts/3RTpS2GHo_c','espalda_h',180)]},
+      {label:'Espalda — tirón vertical',exs:[ex('Jalón polea agarre supino','2x10-12',10,'prog','https://youtube.com/shorts/xUm0BiZCWlQ','espalda_v',120)]},
       {label:'Superserie — Deltoides post + Bíceps',exs:[
-        ...ss(ex('Pájaro mancuernas (rear delt)','2x15-20',15,null,null,'face_pull'),
-          ex('Curl alterno mancuernas supinando','2x10-12',10,null,null,'biceps'),90)]},
+        ...ss(ex('Pájaro mancuernas (rear delt)','2x15-20',15,null,'https://youtube.com/shorts/6Z15_WdXmVw','face_pull'),
+          ex('Curl alterno mancuernas supinando','2x10-12',10,null,'https://youtube.com/shorts/VmB1G1K7v94','biceps'),90)]},
       {label:'Bíceps — finisher',exs:[ex('Curl concentrado mancuerna','2x12-15',12,null,'https://youtube.com/shorts/VmB1G1K7v94','biceps',90)]},
       {label:'Cardio',exs:[cardio('Bici estática + Elíptica','20 min: 10 bici Z2 + 10 elíptica Z2-3')]},
     ]
@@ -795,15 +795,15 @@ function buildProg(){
   week1.push({type:'gym',label:'Push A',icon:'💪',color:'gym',calmType:'push',isDeload:false,
     duration:'Gym ~65 min + Cardio 30 min',desc:'Press inclinado · Arnold · Laterales+Pec deck · Cruce bajo+Overhead',
     blocks:[
-      {label:'Pecho — compuesto',exs:[ex('Press inclinado máquina','2x8-12',10,'amrap',null,'pecho',180)]},
-      {label:'Hombros — press',exs:[ex('Press Arnold mancuernas','2x10-12',10,'prog',null,'hombro',120)]},
+      {label:'Pecho — compuesto',exs:[ex('Press inclinado máquina','2x8-12',10,'amrap','https://youtube.com/shorts/a64mtMHyPfY','pecho',180)]},
+      {label:'Hombros — press',exs:[ex('Press Arnold mancuernas','2x10-12',10,'prog','https://youtube.com/shorts/eozdVDA78K0','hombro',120)]},
       {label:'Superserie — Laterales + Apertura',exs:[
-        ...ss(ex('Elevaciones laterales mancuernas','2x15-20',15,null,null,'lateral'),
-          ex('Pec Deck máquina (DX)','2x12-15',12,null,null,'pecho'),90)]},
+        ...ss(ex('Elevaciones laterales mancuernas','2x15-20',15,null,'https://youtube.com/shorts/VmB1G1K7v94','lateral'),
+          ex('Pec Deck máquina (DX)','2x12-15',12,null,'https://youtube.com/shorts/qEwKCR5JCog','pecho'),90)]},
       {label:'Superserie — Cruce + Overhead',exs:[
-        ...ss(ex('Cruce polea bajo','2x12-15',12,null,null,'pecho'),
+        ...ss(ex('Cruce polea bajo','2x12-15',12,null,'https://youtube.com/shorts/qEwKCR5JCog','pecho'),
           ex('Extensión overhead polea cuerda','2x12-15',12,null,'https://youtube.com/shorts/Z57CtFmRMxA','triceps'),90)]},
-      {label:'Salud articular',exs:[ex('Face pulls polea','2x15-20',15,null,null,'face_pull',60)]},
+      {label:'Salud articular',exs:[ex('Face pulls polea','2x15-20',15,null,'https://youtube.com/shorts/6Z15_WdXmVw','face_pull',60)]},
       {label:'Cardio',exs:[cardio('Bici estática Zona 2','30 min — 130-145 ppm')]},
     ]
   });
@@ -812,12 +812,12 @@ function buildProg(){
   week1.push({type:'gym',label:'Pull A',icon:'🏋️',color:'gym',calmType:'pull',isDeload:false,
     duration:'Gym ~55 min + Cardio 25 min',desc:'Jalón supino · Remo neutro · Face pulls · Araña+Alterno',
     blocks:[
-      {label:'Espalda — tirón vertical',exs:[ex('Jalón polea agarre supino','2x8-12',8,'amrap',null,'espalda_v',180)]},
-      {label:'Espalda — remo horizontal',exs:[ex('Remo polea agarre neutro','2x10-12',10,'prog',null,'espalda_h',120)]},
-      {label:'Deltoides posterior',exs:[ex('Face pulls polea','2x15-20',15,null,null,'face_pull',60)]},
+      {label:'Espalda — tirón vertical',exs:[ex('Jalón polea agarre supino','2x8-12',8,'amrap','https://youtube.com/shorts/xUm0BiZCWlQ','espalda_v',180)]},
+      {label:'Espalda — remo horizontal',exs:[ex('Remo polea agarre neutro','2x10-12',10,'prog','https://youtube.com/shorts/3RTpS2GHo_c','espalda_h',120)]},
+      {label:'Deltoides posterior',exs:[ex('Face pulls polea','2x15-20',15,null,'https://youtube.com/shorts/6Z15_WdXmVw','face_pull',60)]},
       {label:'Superserie — Bíceps',exs:[
-        ...ss(ex('Spider curl (curl araña)','2x10-12',10,null,null,'biceps'),
-          ex('Curl alterno supinando','2x12-15',12,null,null,'biceps'),90)]},
+        ...ss(ex('Spider curl (curl araña)','2x10-12',10,null,'https://youtube.com/shorts/VmB1G1K7v94','biceps'),
+          ex('Curl alterno supinando','2x12-15',12,null,'https://youtube.com/shorts/VmB1G1K7v94','biceps'),90)]},
       {label:'Cardio',exs:[cardio('Bici estática Zona 2','25 min — 130-145 ppm')]},
     ]
   });
@@ -826,13 +826,13 @@ function buildProg(){
   week1.push({type:'gym',label:'Legs',icon:'🦵',color:'gym',calmType:'legs',isDeload:false,
     duration:'Gym ~70 min',desc:'Hack squat · Extensión · Curl sentado · Hip thrust barra · Abducción · Gemelo',
     blocks:[
-      {label:'Cuádriceps — compuesto',exs:[ex('Hack squat máquina','2x10-12',10,'amrap',null,'cuad',180)]},
-      {label:'Cuádriceps — aislamiento',exs:[ex('Extensión cuádriceps máquina','2x12-15',12,'prog',null,'cuad',90)]},
-      {label:'Isquiotibiales',exs:[ex('Curl femoral sentado máquina','2x10-12',10,null,null,'posterior',120)]},
-      {label:'Glúteo',exs:[ex('Hip thrust barra en banco','2x12-15',12,null,null,'posterior',120)]},
+      {label:'Cuádriceps — compuesto',exs:[ex('Hack squat máquina','2x10-12',10,'amrap','https://youtube.com/shorts/I6dbd_SSIvc','cuad',180)]},
+      {label:'Cuádriceps — aislamiento',exs:[ex('Extensión cuádriceps máquina','2x12-15',12,'prog','https://youtube.com/shorts/Z57CtFmRMxA','cuad',90)]},
+      {label:'Isquiotibiales',exs:[ex('Curl femoral sentado máquina','2x10-12',10,null,'https://youtube.com/shorts/DbFgADa2PL8','posterior',120)]},
+      {label:'Glúteo',exs:[ex('Hip thrust barra en banco','2x12-15',12,null,'https://youtube.com/shorts/qEwKCR5JCog','posterior',120)]},
       {label:'Cadera y gemelo',exs:[
-        ex('Abducción cadera máquina','2x15-20',15,null,null,'abduccion',60),
-        ex('Gemelo máquina de pie','2x15-20',15,null,null,'gemelo',60),
+        ex('Abducción cadera máquina','2x15-20',15,null,'https://youtube.com/shorts/Z57CtFmRMxA','abduccion',60),
+        ex('Gemelo máquina de pie','2x15-20',15,null,'https://youtube.com/shorts/6Z15_WdXmVw','gemelo',60),
       ]},
     ]
   });
@@ -844,15 +844,15 @@ function buildProg(){
     blocks:[
       {label:'Pecho — compuesto principal',exs:[ex('Press banca mancuernas','3x8-12',10,'amrap','https://www.youtube.com/watch?v=e8knTkOp8AM','pecho',180)]},
       {label:'Hombros — press',exs:[ex('Press hombros mancuernas sentado','3x10-12',10,'prog','https://www.youtube.com/shorts/qcJLCzLybrU','hombro',120)]},
-      {label:'Hombros — laterales',exs:[ex('Elevaciones laterales mancuernas','3x15-20',15,null,null,'lateral',90)]},
-      {label:'Pecho — Pec Deck',exs:[ex('Pec Deck máquina (DX)','3x12-15',12,null,null,'pecho',90)]},
+      {label:'Hombros — laterales',exs:[ex('Elevaciones laterales mancuernas','3x15-20',15,null,'https://youtube.com/shorts/VmB1G1K7v94','lateral',90)]},
+      {label:'Pecho — Pec Deck',exs:[ex('Pec Deck máquina (DX)','3x12-15',12,null,'https://youtube.com/shorts/qEwKCR5JCog','pecho',90)]},
       {label:'Pecho — cruce polea neutro',exs:[ex('Cruce polea neutro','3x12-15',12,null,'https://youtube.com/shorts/qEwKCR5JCog','pecho',90)]},
       {label:'Tríceps — overhead',exs:[ex('Extensión overhead polea cuerda','3x12-15',12,null,'https://youtube.com/shorts/Z57CtFmRMxA','triceps',120)]},
       {label:'Tríceps — pushdown',exs:[ex('Pushdown polea cuerda','3x12-15',12,null,'https://youtube.com/shorts/DbFgADa2PL8','triceps',90)]},
-      {label:'Salud articular',exs:[ex('Face pulls polea','3x15-20',15,null,null,'face_pull',60)]},
-      {label:'Core — recto abdominal',exs:[ex('Crunch máquina abdominal','3x12-15',12,null,null,null,60)]},
-      {label:'Core — oblicuos',exs:[ex('Rotación de torso máquina','3x12-15',12,null,null,null,60)]},
-      {label:'Core — lumbar',exs:[ex('Back extension máquina','3x12-15',12,null,null,null,60)]},
+      {label:'Salud articular',exs:[ex('Face pulls polea','3x15-20',15,null,'https://youtube.com/shorts/6Z15_WdXmVw','face_pull',60)]},
+      {label:'Core — recto abdominal',exs:[ex('Crunch máquina abdominal','3x12-15',12,null,'https://youtube.com/shorts/taI4XduLpTk',null,60)]},
+      {label:'Core — oblicuos',exs:[ex('Rotación de torso máquina','3x12-15',12,null,'https://youtube.com/shorts/Z57CtFmRMxA',null,60)]},
+      {label:'Core — lumbar',exs:[ex('Back extension máquina','3x12-15',12,null,'https://youtube.com/shorts/6Z15_WdXmVw',null,60)]},
       {label:'Cardio',exs:[cardio('Bici estática Zona 2','20 min — 130-145 ppm')]},
     ]
   });
@@ -862,15 +862,15 @@ function buildProg(){
     duration:'Gym ~90 min + Cardio 20 min',
     desc:'Jalón neutro · Pullover DX · Remo unilateral · Face pulls · Curl concentrado · Curl martillo · Core',
     blocks:[
-      {label:'Espalda — tirón vertical',exs:[ex('Jalón polea agarre neutro','4x8-12',8,'amrap',null,'espalda_v',180)]},
+      {label:'Espalda — tirón vertical',exs:[ex('Jalón polea agarre neutro','4x8-12',8,'amrap','https://youtube.com/shorts/xUm0BiZCWlQ','espalda_v',180)]},
       {label:'Espalda — pullover máquina',exs:[ex('Pullover máquina (DX)','3x12-15',12,'prog','https://www.youtube.com/watch?v=1TzycULDGik','espalda_v',120)]},
       {label:'Espalda — remo horizontal',exs:[ex('Remo mancuerna unilateral','3x10-12',10,'prog','https://www.youtube.com/shorts/3RTpS2GHo_c','espalda_h',120)]},
-      {label:'Deltoides posterior',exs:[ex('Face pulls polea','3x15-20',15,null,null,'face_pull',60)]},
+      {label:'Deltoides posterior',exs:[ex('Face pulls polea','3x15-20',15,null,'https://youtube.com/shorts/6Z15_WdXmVw','face_pull',60)]},
       {label:'Bíceps — curl concentrado',exs:[ex('Curl concentrado mancuerna','3x10-12',10,null,'https://youtube.com/shorts/VmB1G1K7v94','biceps',120)]},
-      {label:'Bíceps — curl martillo',exs:[ex('Curl martillo mancuernas','3x12-15',12,null,null,'biceps',90)]},
-      {label:'Core — recto abdominal',exs:[ex('Crunch banco declinado','3x12-15',12,null,null,null,60)]},
-      {label:'Core — oblicuos lateral',exs:[ex('Oblicuos lateral máquina','3x12-15',12,null,null,null,60)]},
-      {label:'Core — lumbar',exs:[ex('Hiperextensión lumbar máquina','3x12-15',12,null,null,null,60)]},
+      {label:'Bíceps — curl martillo',exs:[ex('Curl martillo mancuernas','3x12-15',12,null,'https://youtube.com/shorts/VmB1G1K7v94','biceps',90)]},
+      {label:'Core — recto abdominal',exs:[ex('Crunch banco declinado','3x12-15',12,null,'https://youtube.com/shorts/taI4XduLpTk',null,60)]},
+      {label:'Core — oblicuos lateral',exs:[ex('Oblicuos lateral máquina','3x12-15',12,null,'https://youtube.com/shorts/Z57CtFmRMxA',null,60)]},
+      {label:'Core — lumbar',exs:[ex('Hiperextensión lumbar máquina','3x12-15',12,null,'https://youtube.com/shorts/6Z15_WdXmVw',null,60)]},
       {label:'Cardio',exs:[cardio('Bici estática Zona 2','20 min — 130-145 ppm')]},
     ]
   });
@@ -897,15 +897,15 @@ function buildProg(){
       blocks:[
         {label:'Cuádriceps — compuesto',exs:[ex(dl?'Prensa de piernas':'Sentadilla en Smith',dl?'3x10-12':sets(4,'8-12'),10,'amrap',null,'cuad',180)]},
         {label:'Cuádriceps — extensión',exs:[ex('Extensión cuádriceps máquina (DX)',dl?'2x12-15':sets(3,'12-15'),12,'prog',null,'cuad',90)]},
-        {label:'Isquiotibiales — curl',exs:[ex('Curl femoral tumbado máquina',dl?'2x10-12':sets(3,'10-12'),10,null,null,'posterior',120)]},
+        {label:'Isquiotibiales — curl',exs:[ex('Curl femoral tumbado máquina',dl?'2x10-12':sets(3,'10-12'),10,null,'https://youtube.com/shorts/DbFgADa2PL8','posterior',120)]},
         ...(dl?[]:[{label:'Isquiotibiales — RDL',exs:[ex('RDL máquina palancas (DX)',sets(3,'10-12'),10,null,'https://youtube.com/shorts/DbFgADa2PL8','posterior',120)]}]),
         {label:'Glúteo — hip thrust',exs:[ex('Hip thrust máquina (DX)',dl?'2x12-15':sets(3,'12-15'),12,null,'https://youtube.com/shorts/qEwKCR5JCog','posterior',120)]},
-        {label:'Cadera — abducción',exs:[ex('Abducción cadera máquina',dl?'2x15-20':sets(3,'15-20'),15,null,null,'abduccion',60)]},
+        {label:'Cadera — abducción',exs:[ex('Abducción cadera máquina',dl?'2x15-20':sets(3,'15-20'),15,null,'https://youtube.com/shorts/Z57CtFmRMxA','abduccion',60)]},
         ...(dl?[]:[{label:'Cadera — aducción',exs:[ex('Aducción cadera máquina',sets(3,'15-20'),15,null,'https://youtube.com/shorts/Z57CtFmRMxA','abduccion',60)]}]),
         {label:'Gemelo — sóleo',exs:[ex(dl?'Gemelo prensa de piernas':'Gemelo máquina sentado — sóleo (DX)',dl?'2x15-20':sets(3,'15-20'),15,null,null,'gemelo',60)]},
         ...(dl?[]:[
-          {label:'Core — recto inferior',exs:[ex('Crunch inverso — elevación piernas máquina',sets(3,'12-15'),12,null,null,null,60)]},
-          {label:'Core — core completo',exs:[ex('Ab coaster — rodillas al pecho',sets(3,'10-12'),12,null,null,null,60)]},
+          {label:'Core — recto inferior',exs:[ex('Crunch inverso — elevación piernas máquina',sets(3,'12-15'),12,null,'https://youtube.com/shorts/eozdVDA78K0',null,60)]},
+          {label:'Core — core completo',exs:[ex('Ab coaster — rodillas al pecho',sets(3,'10-12'),12,null,'https://youtube.com/shorts/eozdVDA78K0',null,60)]},
         ]),
       ]
     });
@@ -917,16 +917,16 @@ function buildProg(){
           :'Press hombros palancas DX · Laterales · Press inclinado DX · Pec Deck · Pushdown · Elevación frontal · Face pulls · Core',
       blocks:[
         {label:'Hombros — compuesto',exs:[ex(dl?'Press Arnold mancuernas':'Press hombros máquina palancas (DX)',dl?'3x8-10':sets(4,'8-12'),8,'amrap',null,'hombro',180)]},
-        {label:'Hombros — laterales',exs:[ex('Elevaciones laterales mancuernas',dl?'2x15':sets(3,'15-20'),15,null,null,'lateral',90)]},
+        {label:'Hombros — laterales',exs:[ex('Elevaciones laterales mancuernas',dl?'2x15':sets(3,'15-20'),15,null,'https://youtube.com/shorts/VmB1G1K7v94','lateral',90)]},
         {label:'Pecho — press inclinado',exs:[ex(dl?'Press inclinado mancuernas':'Press inclinado máquina (DX)',dl?'2x10-12':sets(3,'10-12'),10,null,null,'pecho',120)]},
-        {label:'Pecho — Pec Deck',exs:[ex('Pec Deck máquina (DX)',dl?'2x12':sets(3,'12-15'),12,null,null,'pecho',90)]},
+        {label:'Pecho — Pec Deck',exs:[ex('Pec Deck máquina (DX)',dl?'2x12':sets(3,'12-15'),12,null,'https://youtube.com/shorts/qEwKCR5JCog','pecho',90)]},
         ...(dl?[]:[
           {label:'Tríceps — pushdown',exs:[ex('Pushdown polea cuerda',sets(3,'12-15'),12,null,'https://youtube.com/shorts/DbFgADa2PL8','triceps',90)]},
           {label:'Hombros — deltoides anterior',exs:[ex('Elevación frontal mancuernas',sets(3,'12-15'),12,null,'https://youtube.com/shorts/VmB1G1K7v94','hombro',90)]},
-          {label:'Salud articular',exs:[ex('Face pulls polea',sets(2,'15-20'),15,null,null,'face_pull',60)]},
-          {label:'Core — recto abdominal',exs:[ex('Crunch máquina abdominal — agarre alto',sets(3,'12-15'),12,null,null,null,60)]},
-          {label:'Core — oblicuos',exs:[ex('Rotación de torso máquina',sets(3,'12-15'),12,null,null,null,60)]},
-          {label:'Core — lumbar',exs:[ex('Back extension máquina',sets(3,'12-15'),12,null,null,null,60)]},
+          {label:'Salud articular',exs:[ex('Face pulls polea',sets(2,'15-20'),15,null,'https://youtube.com/shorts/6Z15_WdXmVw','face_pull',60)]},
+          {label:'Core — recto abdominal',exs:[ex('Crunch máquina abdominal — agarre alto',sets(3,'12-15'),12,null,'https://youtube.com/shorts/taI4XduLpTk',null,60)]},
+          {label:'Core — oblicuos',exs:[ex('Rotación de torso máquina',sets(3,'12-15'),12,null,'https://youtube.com/shorts/Z57CtFmRMxA',null,60)]},
+          {label:'Core — lumbar',exs:[ex('Back extension máquina',sets(3,'12-15'),12,null,'https://youtube.com/shorts/6Z15_WdXmVw',null,60)]},
         ]),
         {label:'Cardio',exs:[cardio('Bici estática Zona 2',dl?'15 min — 130-145 ppm':'20 min — 130-145 ppm')]},
       ]
@@ -943,11 +943,11 @@ function buildProg(){
         ...(dl?[]:[{label:'Espalda — remo unilateral',exs:[ex('Remo polea unilateral (DX)',sets(3,'10-12'),10,null,'https://www.youtube.com/shorts/3RTpS2GHo_c','espalda_h',120)]}]),
         {label:'Deltoides posterior',exs:[ex(dl?'Pájaro mancuernas (rear delt)':'Pájaro en polea baja',dl?'2x15':sets(3,'15-20'),15,null,null,'face_pull',90)]},
         {label:'Bíceps — curl predicador',exs:[ex(dl?'Curl predicador mancuerna':'Curl predicador máquina (DX)',dl?'2x10-12':sets(3,'10-12'),10,null,null,'biceps',120)]},
-        {label:'Bíceps — curl alterno',exs:[ex('Curl alterno mancuernas supinando',dl?'2x12':sets(3,'12-15'),12,null,null,'biceps',90)]},
+        {label:'Bíceps — curl alterno',exs:[ex('Curl alterno mancuernas supinando',dl?'2x12':sets(3,'12-15'),12,null,'https://youtube.com/shorts/VmB1G1K7v94','biceps',90)]},
         ...(dl?[]:[
-          {label:'Core — recto abdominal',exs:[ex('Crunch banco declinado — con lastre',sets(3,'12-15'),12,null,null,null,60)]},
-          {label:'Core — oblicuos lateral',exs:[ex('Oblicuos lateral máquina',sets(3,'12-15'),12,null,null,null,60)]},
-          {label:'Core — lumbar',exs:[ex('Hiperextensión lumbar máquina',sets(3,'12-15'),12,null,null,null,60)]},
+          {label:'Core — recto abdominal',exs:[ex('Crunch banco declinado — con lastre',sets(3,'12-15'),12,null,'https://youtube.com/shorts/taI4XduLpTk',null,60)]},
+          {label:'Core — oblicuos lateral',exs:[ex('Oblicuos lateral máquina',sets(3,'12-15'),12,null,'https://youtube.com/shorts/Z57CtFmRMxA',null,60)]},
+          {label:'Core — lumbar',exs:[ex('Hiperextensión lumbar máquina',sets(3,'12-15'),12,null,'https://youtube.com/shorts/6Z15_WdXmVw',null,60)]},
         ]),
         {label:'Cardio',exs:[cardio('Bici estática Zona 2',dl?'15 min — 130-145 ppm':'20 min — 130-145 ppm')]},
       ]
@@ -961,16 +961,16 @@ function buildProg(){
       blocks:[
         {label:'Pecho — compuesto principal',exs:[ex(dl?'Press pecho máquina palancas':'Press banca mancuernas',dl?'3x8-10':sets(4,'8-12'),10,'amrap',null,'pecho',180)]},
         {label:'Hombros — press',exs:[ex(dl?'Press hombros máquina':'Press hombros mancuernas sentado',dl?'2x10-12':sets(3,'10-12'),10,'prog',null,'hombro',120)]},
-        {label:'Hombros — laterales',exs:[ex('Elevaciones laterales mancuernas',dl?'2x15':sets(3,'15-20'),15,null,null,'lateral',90)]},
-        {label:'Pecho — Pec Deck',exs:[ex('Pec Deck máquina (DX)',dl?'2x12':sets(3,'12-15'),12,null,null,'pecho',90)]},
+        {label:'Hombros — laterales',exs:[ex('Elevaciones laterales mancuernas',dl?'2x15':sets(3,'15-20'),15,null,'https://youtube.com/shorts/VmB1G1K7v94','lateral',90)]},
+        {label:'Pecho — Pec Deck',exs:[ex('Pec Deck máquina (DX)',dl?'2x12':sets(3,'12-15'),12,null,'https://youtube.com/shorts/qEwKCR5JCog','pecho',90)]},
         ...(dl?[]:[
           {label:'Pecho — cruce polea neutro',exs:[ex('Cruce polea neutro',sets(3,'12-15'),12,null,'https://youtube.com/shorts/qEwKCR5JCog','pecho',90)]},
           {label:'Tríceps — overhead',exs:[ex('Extensión overhead polea cuerda',sets(3,'12-15'),12,null,'https://youtube.com/shorts/Z57CtFmRMxA','triceps',120)]},
           {label:'Tríceps — pushdown',exs:[ex('Pushdown polea cuerda',sets(3,'12-15'),12,null,'https://youtube.com/shorts/DbFgADa2PL8','triceps',90)]},
-          {label:'Salud articular',exs:[ex('Face pulls polea',sets(3,'15-20'),15,null,null,'face_pull',60)]},
-          {label:'Core — recto abdominal',exs:[ex('Crunch máquina abdominal',sets(3,'12-15'),12,null,null,null,60)]},
-          {label:'Core — oblicuos',exs:[ex('Rotación de torso máquina',sets(3,'12-15'),12,null,null,null,60)]},
-          {label:'Core — lumbar',exs:[ex('Back extension máquina',sets(3,'12-15'),12,null,null,null,60)]},
+          {label:'Salud articular',exs:[ex('Face pulls polea',sets(3,'15-20'),15,null,'https://youtube.com/shorts/6Z15_WdXmVw','face_pull',60)]},
+          {label:'Core — recto abdominal',exs:[ex('Crunch máquina abdominal',sets(3,'12-15'),12,null,'https://youtube.com/shorts/taI4XduLpTk',null,60)]},
+          {label:'Core — oblicuos',exs:[ex('Rotación de torso máquina',sets(3,'12-15'),12,null,'https://youtube.com/shorts/Z57CtFmRMxA',null,60)]},
+          {label:'Core — lumbar',exs:[ex('Back extension máquina',sets(3,'12-15'),12,null,'https://youtube.com/shorts/6Z15_WdXmVw',null,60)]},
         ]),
         {label:'Cardio',exs:[cardio('Bici estática Zona 2',dl?'15 min — 130-145 ppm':'20 min — 130-145 ppm')]},
       ]
@@ -985,13 +985,13 @@ function buildProg(){
         {label:'Espalda — tirón vertical',exs:[ex(dl?'Jalón polea agarre ancho':'Jalón polea agarre neutro',dl?'3x8-10':sets(4,'8-12'),8,'amrap',null,'espalda_v',180)]},
         ...(dl?[]:[{label:'Espalda — pullover máquina',exs:[ex('Pullover máquina (DX)',sets(3,'12-15'),12,'prog','https://www.youtube.com/watch?v=1TzycULDGik','espalda_v',120)]}]),
         {label:'Espalda — remo horizontal',exs:[ex(dl?'Remo máquina Hammer':'Remo mancuerna unilateral',dl?'2x10-12':sets(3,'10-12'),10,'prog',null,'espalda_h',120)]},
-        {label:'Deltoides posterior',exs:[ex('Face pulls polea',dl?'2x15':sets(3,'15-20'),15,null,null,'face_pull',60)]},
+        {label:'Deltoides posterior',exs:[ex('Face pulls polea',dl?'2x15':sets(3,'15-20'),15,null,'https://youtube.com/shorts/6Z15_WdXmVw','face_pull',60)]},
         {label:'Bíceps — curl concentrado',exs:[ex(dl?'Curl predicador mancuerna':'Curl concentrado mancuerna',dl?'2x10-12':sets(3,'10-12'),10,null,null,'biceps',120)]},
-        {label:'Bíceps — curl martillo',exs:[ex('Curl martillo mancuernas',dl?'2x12':sets(3,'12-15'),12,null,null,'biceps',90)]},
+        {label:'Bíceps — curl martillo',exs:[ex('Curl martillo mancuernas',dl?'2x12':sets(3,'12-15'),12,null,'https://youtube.com/shorts/VmB1G1K7v94','biceps',90)]},
         ...(dl?[]:[
-          {label:'Core — recto abdominal',exs:[ex('Crunch banco declinado',sets(3,'12-15'),12,null,null,null,60)]},
-          {label:'Core — oblicuos lateral',exs:[ex('Oblicuos lateral máquina',sets(3,'12-15'),12,null,null,null,60)]},
-          {label:'Core — lumbar',exs:[ex('Hiperextensión lumbar máquina',sets(3,'12-15'),12,null,null,null,60)]},
+          {label:'Core — recto abdominal',exs:[ex('Crunch banco declinado',sets(3,'12-15'),12,null,'https://youtube.com/shorts/taI4XduLpTk',null,60)]},
+          {label:'Core — oblicuos lateral',exs:[ex('Oblicuos lateral máquina',sets(3,'12-15'),12,null,'https://youtube.com/shorts/Z57CtFmRMxA',null,60)]},
+          {label:'Core — lumbar',exs:[ex('Hiperextensión lumbar máquina',sets(3,'12-15'),12,null,'https://youtube.com/shorts/6Z15_WdXmVw',null,60)]},
         ]),
         {label:'Cardio',exs:[cardio('Bici estática Zona 2',dl?'15 min — 130-145 ppm':'20 min — 130-145 ppm')]},
       ]
@@ -3642,6 +3642,8 @@ function markAllAbsEx(){
 }
 
 
+
+function renderSuplem(){}
 </script>
 
 
@@ -3691,6 +3693,191 @@ function markAllAbsEx(){
     <div id="diag-svg"></div>
     <div id="diag-steps"></div>
   </div>
+</div>
+<div id="scr-suplem" class="scr">
+
+  <!-- SUPLEMENTOS ACTUALES -->
+  <div class="dash-section">Suplementación actual</div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">🥛</div>
+      <div>
+        <div style="font-size:14px;font-weight:800">Whey Proteína — Bulk Pure Whey Banana</div>
+        <div style="font-size:11px;color:var(--muted)">Post-entreno · 25-30g proteína por dosis</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
+      <strong>Cuándo:</strong> Dentro de los 30 min post-entreno, con agua o leche.<br>
+      <strong>Por qué:</strong> La proteína de suero es la de absorción más rápida. En la ventana post-entreno el músculo está más receptivo a los aminoácidos.<br>
+      <strong>Dosis:</strong> 1 cacito (25-30g). No necesitas más — el músculo no puede usar más de ~40g de golpe.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">⚡</div>
+      <div>
+        <div style="font-size:14px;font-weight:800">Creatina — GEN Monohidrato Micronizada</div>
+        <div style="font-size:11px;color:var(--muted)">Con el batido post-entreno · 5g/día</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
+      <strong>Cuándo:</strong> Con el batido post-entreno. En días de descanso, con cualquier comida.<br>
+      <strong>Por qué:</strong> El suplemento más estudiado y eficaz que existe. Aumenta la fuerza en un 5-15%, permite más reps con el mismo peso, acelera la recuperación.<br>
+      <strong>Retención de agua:</strong> Los primeros 2-3kg de peso ganado son agua intramuscular — normal y beneficioso.<br>
+      <strong>Dosis:</strong> 5g/día. No hay beneficio en más cantidad.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">☀️</div>
+      <div>
+        <div style="font-size:14px;font-weight:800">Vitamina D3+K2 MK7</div>
+        <div style="font-size:11px;color:var(--muted)">Con desayuno · 2.000 UI/día</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
+      <strong>Cuándo:</strong> Con el desayuno (es liposoluble — se absorbe mejor con grasa).<br>
+      <strong>Por qué:</strong> El 80% de la población española tiene déficit. La D3 regula testosterona, función inmune y absorción de calcio. La K2 dirige el calcio al hueso, no a las arterias.<br>
+      <strong>Dosis:</strong> 2.000 UI de D3 + K2 MK7 incluida. No separes los dos.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">🌙</div>
+      <div>
+        <div style="font-size:14px;font-weight:800">Magnesio — Bisglicinato PharmaZen</div>
+        <div style="font-size:11px;color:var(--muted)">Con la cena · 300-400mg</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
+      <strong>Cuándo:</strong> Con la cena. El magnesio por la noche mejora la calidad del sueño — y el sueño es donde el músculo crece.<br>
+      <strong>Por qué:</strong> El 70% de la población tiene déficit. Interviene en más de 300 reacciones enzimáticas, incluyendo síntesis de proteínas y función muscular.<br>
+      <strong>Forma bisglicinato:</strong> La más absorbible. Evita el óxido de magnesio (barato pero poco absorbible).
+    </div>
+  </div>
+
+  <!-- BARRAS DE PROTEÍNA -->
+  <div class="dash-section" style="margin-top:16px">Barritas proteína — recomendadas</div>
+  <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Para el almuerzo: añaden ~20g proteína y tapan el déficit diario fácilmente.</div>
+
+  <div class="card" style="margin-bottom:8px;border-color:#f59e0b">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">🏆</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">Barebells Protein Bar</div>
+          <div style="font-size:11px;color:var(--muted)">20g proteína · &lt;2g azúcar · 55g · Sin aceite de palma</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:#d97706">~2.02€</div>
+        <div style="font-size:10px;color:var(--muted)">pack 12 Amazon</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;background:#fffbeb;border-radius:6px;padding:8px">
+      La mejor opción. Textura tipo chocolate real, sin el sabor artificial de otras. <strong>Sabores recomendados:</strong> Salty Peanut, Cookies &amp; Cream, White Chocolate Almond.<br>
+      <strong>Contiene maltitol</strong> — si notas malestar digestivo cambia a Quest.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">🥈</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">Quest Bar</div>
+          <div style="font-size:11px;color:var(--muted)">21g proteína · fibra alta · sin maltitol</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:var(--pu)">~2.50€</div>
+        <div style="font-size:10px;color:var(--muted)">Amazon / MASmusculo</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;background:#f8fafc;border-radius:6px;padding:8px">
+      Sin maltitol — mejor tolerada digestivamente. Proteína de aislado de suero puro. Más dura de textura que Barebells. <strong>Sabor recomendado:</strong> Chocolate Chip Cookie Dough.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">⭐</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">Premier Protein High Protein Bar</div>
+          <div style="font-size:11px;color:var(--muted)">20g proteína · &lt;1g azúcar · 40g · 50% proteína · Sin aceite de palma</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:#16a34a">~1.50€</div>
+        <div style="font-size:10px;color:var(--muted)">pack 16 Amazon ES</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;background:#f0fdf4;border-radius:6px;padding:8px">
+      Excelente relación calidad-precio. Pack de 16 unidades, más económica por proteína que Barebells. 50% de proteína — de las más altas del mercado. Barrita más pequeña (40g vs 55g) pero mismo contenido proteico.<br>
+      <strong>Sabores:</strong> Chocolate Caramel y Double Chocolate Cookie.<br>
+      <strong>Contiene maltitol</strong> — igual tolerancia que Barebells. Textura más crujiente y ligera.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">💰</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">Max Protein Real Protein Bar</div>
+          <div style="font-size:11px;color:var(--muted)">20g proteína · marca española</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:#16a34a">~1.80€</div>
+        <div style="font-size:10px;color:var(--muted)">Amazon España</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;background:#f0fdf4;border-radius:6px;padding:8px">
+      La más barata con buen perfil. Marca española, fácil de encontrar. Sabor más convencional que Barebells pero cumple perfectamente su función.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px;border-color:#7c3aed">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">💣</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">Grenade Carb Killa</div>
+          <div style="font-size:11px;color:var(--muted)">23g proteína · 1g azúcar · 60g · Triple capa</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:#7c3aed">~2.20€</div>
+        <div style="font-size:10px;color:var(--muted)">pack 12 Amazon ES</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;background:#faf5ff;border-radius:6px;padding:8px">
+      La <strong>más proteína por barrita</strong> de todas (23g). Triple capa con chocolate europeo — textura y sabor excepcionales, las más valoradas en reseñas.<br>
+      <strong>Sabores recomendados:</strong> Caramel Chaos, White Chocolate Salted Peanut, Fudge Brownie.<br>
+      <strong>Contiene aceite de palma</strong> — única de la lista. Y maltitol como las demás.<br>
+      <strong>Contiene maltitol</strong> — misma tolerancia que Barebells y Premier Protein.
+    </div>
+  </div>
+
+  <!-- PROTOCOLO RYBELSUS -->
+  <div class="dash-section">Protocolo Rybelsus 7mg</div>
+  <div class="card" style="margin-bottom:20px">
+    <div style="font-size:12px;line-height:1.8;color:var(--text)">
+      <div style="margin-bottom:6px">⏰ <strong>Despertar</strong> → Rybelsus en ayunas</div>
+      <div style="margin-bottom:6px">⏱️ <strong>30 minutos después</strong> → Desayuno</div>
+      <div style="margin-bottom:6px">⏱️ <strong>Mínimo 2h después del desayuno</strong> → Batido proteína + creatina</div>
+      <div style="margin-top:10px;padding:8px;background:#fff7ed;border-radius:6px;font-size:11px;color:#92400e">
+        ⚠️ El Rybelsus debe tomarse con el estómago vacío y solo con un sorbo de agua (máx. 120ml). Cualquier alimento o bebida antes de los 30 min reduce su absorción hasta un 50%.
+      </div>
+    </div>
+  </div>
+
 </div>
 </body>
 </html>
