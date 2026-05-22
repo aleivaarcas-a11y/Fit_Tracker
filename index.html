@@ -696,8 +696,6 @@ function mkEx(arr,w,off,sets,reps,badge,isSuper,rest){
 
 function buildProg(){
   const prog=[];
-
-  // Helper: superset pair (2 exercises, 0 rest between, rest after pair)
   function ss(a,b,rest){return[Object.assign({},a,{super:true,rest:0}),Object.assign({},b,{super:true,rest:rest||90})];}
   function ex(n,s,r,badge,yt,g,rest){return{n,s,r,badge:badge||null,yt:yt||null,g:g||null,super:false,cardio:false,rest:rest||90};}
   function cardio(name,dur){return{n:name,s:dur,r:null,badge:'cardio',yt:null,g:null,super:false,cardio:true,rest:0};}
@@ -705,165 +703,291 @@ function buildProg(){
   for(let w=0;w<4;w++){
     const dl=w===3;
     const week=[];
-    // Sets string helper
-    // Weeks 1-2: n-1 sets (learning, lower volume)
-    // Week 3: n sets (peak volume)
-    // Week 4: deload, n-2 sets
     function sets(n,r){
       if(dl) return `${Math.max(2,n-1)}x${r}`;
       if(w<2) return `${Math.max(2,n-1)}x${r}`;
       return `${n}x${r}`;
     }
 
-    // ── DAY 1: PUSH A — Pecho prioritario ─────────────────────────────────
-    week.push({type:'gym',label:'Push A',icon:'💪',color:'gym',calmType:'push',isDeload:dl,
-      duration:'Gym ~55 min + Cardio 30 min',
-      desc:(w===0?'Pecho máquina · Hombros · Laterales+Aperturas · Cruce+Overhead':
-            w===1?'Press inclinado · Press Arnold · Laterales+Apertura · Cruce+Francés':
-            w===2?'Press banca mancuernas · Press mancuernas · Laterales+Pec deck · Polea+Overhead':
-                  'DESCARGA · Pecho · Hombros · Accesorios reducidos'),
-      blocks:[
-        {label:'Pecho — compuesto principal',exs:[
-          ex(w===0?'Press pecho máquina palancas':w===1?'Press inclinado máquina':w===2?'Press banca mancuernas':'Press pecho máquina palancas',
-            sets(3,'8-12'),10,'amrap',null,'pecho',180)
-        ]},
-        {label:'Hombros — press',exs:[
-          ex(w===0?'Press hombros máquina':w===1?'Press Arnold mancuernas':w===2?'Press hombros mancuernas sentado':'Press hombros máquina',
-            sets(3,'10-12'),10,'prog',null,'hombro',120)
-        ]},
-        {label:'Superserie — Laterales + Apertura mancuernas',exs:[
-          ...ss(
-            ex('Elevaciones laterales mancuernas',sets(3,'15-20'),15,null,null,'lateral'),
-            ex(w===0?'Pec Deck — aperturas máquina (DX)':w===1?'Pec Deck — aperturas máquina (DX)':w===2?'Apertura mancuernas inclinado':'Pec Deck — aperturas máquina (DX)',sets(3,'12-15'),12,null,null,'pecho'),
-            90)
-        ]},
-        {label:'Superserie polea — Cruce + Tríceps overhead',exs:[
-          ...ss(
-            ex(w===0?'Cruce polea alto (cable crossover)':w===1?'Cruce polea bajo':w===2?'Cruce polea neutro':'Cruce polea alto',sets(3,'12-15'),12,null,null,'pecho'),
-            ex('Extensión overhead cuerda (cabeza larga)',sets(3,'12-15'),12,null,null,'triceps'),
-            90)
-        ]},
-        {label:'Salud articular — face pulls',exs:[{n:'Face pulls polea',s:sets(3,'15-20'),r:'15',badge:null,yt:null,g:'face_pull',super:false,cardio:false,rest:60}]},
-        {label:'Cardio',exs:[cardio('Bici estática Zona 2','30 min — 130-145 ppm')]},
-      ]
-    });
+    if(w<2){
+      // ── SEMANAS 0-1: estructura original preservada (S1-S10) ──────────
 
-    // ── DAY 2: PULL A — Espalda vertical prioritaria ───────────────────────
-    week.push({type:'gym',label:'Pull A',icon:'🏋️',color:'gym',calmType:'pull',isDeload:dl,
-      duration:'Gym ~55 min + Cardio 30 min',
-      desc:(w===0?'Jalón ancho · Remo Hammer · Face pulls · Predicador+Martillo':
-            w===1?'Jalón supino · Remo polea neutro · Face pulls · Araña+Alterno':
-            w===2?'Jalón neutro · Remo mancuerna · Face pulls · Concentrado+Martillo':'DESCARGA · Jalón · Remo · Bíceps'),
-      blocks:[
-        {label:'Espalda — tirón vertical',exs:[
-          ex(w===0?'Jalón polea agarre ancho':w===1?'Jalón polea agarre supino':w===2?'Jalón polea agarre neutro':'Jalón polea agarre ancho',
-            sets(3,'8-12'),8,'amrap',null,'espalda_v',180)
-        ]},
-        {label:'Espalda — remo horizontal',exs:[
-          ex(w===0?'Remo máquina Hammer':w===1?'Remo polea agarre neutro':w===2?'Remo mancuerna unilateral':'Remo máquina Hammer',
-            sets(3,'10-12'),10,'prog',null,'espalda_h',120)
-        ]},
-        {label:'Deltoides posterior — face pulls',exs:[
-          ex('Face pulls polea',sets(3,'15-20'),15,null,null,'face_pull',60)
-        ]},
-        {label:'Superserie mancuernas — Bíceps',exs:[
-          ...ss(
-            ex(w===0?'Curl predicador mancuerna':w===1?'Spider curl (curl araña)':w===2?'Curl concentrado mancuerna':'Curl predicador mancuerna',sets(3,'10-12'),10,null,null,'biceps'),
-            ex(w===0?'Curl martillo mancuernas':w===1?'Curl alterno supinando':w===2?'Curl martillo mancuernas':'Curl martillo mancuernas',sets(3,'12-15'),12,null,null,'biceps'),
-            90)
-        ]},
-        {label:'Cardio',exs:[cardio('Bici estática Zona 2','25 min — 130-145 ppm')]},
-      ]
-    });
+      // PUSH A
+      week.push({type:'gym',label:'Push A',icon:'💪',color:'gym',calmType:'push',isDeload:false,
+        duration:'Gym ~65 min + Cardio 30 min',
+        desc:w===0?'Pecho máquina · Hombros · Laterales+Pec deck · Cruce+Overhead':'Press inclinado · Arnold · Laterales+Pec deck · Cruce bajo+Overhead',
+        blocks:[
+          {label:'Pecho — compuesto',exs:[ex(w===0?'Press pecho máquina palancas':'Press inclinado máquina',sets(3,'8-12'),10,'amrap',null,'pecho',180)]},
+          {label:'Hombros — press',exs:[ex(w===0?'Press hombros máquina':'Press Arnold mancuernas',sets(3,'10-12'),10,'prog',null,'hombro',120)]},
+          {label:'Superserie — Laterales + Apertura',exs:[
+            ...ss(ex('Elevaciones laterales mancuernas',sets(3,'15-20'),15,null,null,'lateral'),
+              ex('Pec Deck — aperturas máquina (DX)',sets(3,'12-15'),12,null,null,'pecho'),90)]},
+          {label:'Superserie — Cruce + Overhead tríceps',exs:[
+            ...ss(ex(w===0?'Cruce polea alto (cable crossover)':'Cruce polea bajo',sets(3,'12-15'),12,null,null,'pecho'),
+              ex('Extensión overhead cuerda (cabeza larga)',sets(3,'12-15'),12,null,null,'triceps'),90)]},
+          {label:'Salud articular',exs:[ex('Face pulls polea',sets(3,'15-20'),15,null,null,'face_pull',60)]},
+          {label:'Cardio',exs:[cardio('Bici estática Zona 2','30 min — 130-145 ppm')]},
+        ]
+      });
 
-    // ── DAY 3: LEGS ────────────────────────────────────────────────────────
-    week.push({type:'gym',label:'Legs',icon:'🦵',color:'gym',calmType:'legs',isDeload:dl,
-      duration:'Gym ~60 min',
-      desc:(w===0?'Prensa · Extensión · Curl · Hip thrust · Abducción · Gemelo':
-            w===1?'Hack squat · Extensión · Curl sentado · Hip thrust barra · Abducción · Gemelo':
-            w===2?'Sentadilla Smith · Extensión · Curl tumbado · Hip thrust máq · Abducción · Gemelo':'DESCARGA · Pierna completa reducida'),
-      blocks:[
-        {label:'Cuádriceps — compuesto',exs:[
-          ex(w===0?'Prensa de piernas':w===1?'Hack squat máquina':w===2?'Sentadilla en Smith':'Prensa de piernas',
-            sets(3,'10-12'),10,'amrap',null,'cuad',180)
-        ]},
-        {label:'Cuádriceps — accesorio',exs:[
-          ex('Extensión cuádriceps máquina',sets(3,'12-15'),12,'prog',null,'cuad',120)
-        ]},
-        {label:'Cuádriceps — accesorio',exs:[ex('Extensión cuádriceps máquina',sets(3,'12-15'),12,'prog',null,'cuad',90)]},
-        {label:'Isquios',exs:[
-          ex(w===0?'Curl femoral tumbado máquina':w===1?'Curl femoral sentado máquina':w===2?'Curl femoral tumbado máquina':'Curl femoral tumbado máquina',
-            sets(3,'10-12'),10,null,null,'posterior',120)
-        ]},
-        {label:'Glúteo',exs:[
-          ex(w===0?'Hip thrust máquina':w===1?'Hip thrust barra en banco':w===2?'Hip thrust máquina':'Hip thrust máquina',
-            sets(3,'12-15'),12,null,null,'posterior',120)
-        ]},
-        {label:'Cadera y gemelo',exs:[
-          ex('Abducción cadera máquina',sets(3,'15-20'),15,null,null,'abduccion',60),
-          ex(w===0?'Gemelo prensa de piernas':w===1?'Gemelo máquina de pie':w===2?'Gemelo máquina sentado (sóleo)':'Gemelo prensa de piernas',
-            sets(3,'15-20'),15,null,null,'gemelo',60),
-        ]},
-      ]
-    });
+      // PULL A
+      week.push({type:'gym',label:'Pull A',icon:'🏋️',color:'gym',calmType:'pull',isDeload:false,
+        duration:'Gym ~55 min + Cardio 25 min',
+        desc:w===0?'Jalón ancho · Remo Hammer · Face pulls · Predicador+Martillo':'Jalón supino · Remo neutro · Face pulls · Araña+Alterno',
+        blocks:[
+          {label:'Espalda — tirón vertical',exs:[ex(w===0?'Jalón polea agarre ancho':'Jalón polea agarre supino',sets(3,'8-12'),8,'amrap',null,'espalda_v',180)]},
+          {label:'Espalda — remo horizontal',exs:[ex(w===0?'Remo máquina Hammer':'Remo polea agarre neutro',sets(3,'10-12'),10,'prog',null,'espalda_h',120)]},
+          {label:'Deltoides posterior',exs:[ex('Face pulls polea',sets(3,'15-20'),15,null,null,'face_pull',60)]},
+          {label:'Superserie — Bíceps',exs:[
+            ...ss(ex(w===0?'Curl predicador mancuerna':'Spider curl (curl araña)',sets(3,'10-12'),10,null,null,'biceps'),
+              ex(w===0?'Curl martillo mancuernas':'Curl alterno supinando',sets(3,'12-15'),12,null,null,'biceps'),90)]},
+          {label:'Cardio',exs:[cardio('Bici estática Zona 2','25 min — 130-145 ppm')]},
+        ]
+      });
 
-    // ── DAY 4: PUSH B — Hombros prioritarios ──────────────────────────────
-    week.push({type:'gym',label:'Push B',icon:'💪',color:'gym',calmType:'push',isDeload:dl,
-      duration:'Gym ~55 min + Cardio 20 min',
-      desc:(w===0?'Press Arnold · Laterales+Press inclinado · Pec deck+Pushdown':
-            w===1?'Press militar Smith · Laterales+Press mancuernas · Cruce+Francés':
-            w===2?'Press hombros máq heavy · Laterales+Aperturas · Polea+Overhead':'DESCARGA · Hombros · Pecho · Tríceps reducidos'),
-      blocks:[
-        {label:'Hombros — compuesto principal',exs:[
-          ex(w===0?'Press Arnold mancuernas':w===1?'Press militar en Smith':w===2?'Press hombros máquina (carga alta)':'Press Arnold mancuernas',
-            sets(3,'8-12'),8,'amrap',null,'hombro',180)
-        ]},
-        {label:'Superserie mancuernas — Laterales + Press pecho',exs:[
-          ...ss(
-            ex('Elevaciones laterales mancuernas',sets(4,'15-20'),15,null,null,'lateral'),
-            ex(w===0?'Press inclinado mancuernas':w===1?'Press banca mancuernas':w===2?'Press inclinado máquina':'Press inclinado mancuernas',sets(3,'10-12'),10,null,null,'pecho'),
-            90)
-        ]},
-        {label:'Superserie polea — Pecho + Tríceps',exs:[
-          ...ss(
-            ex(w===0?'Pec Deck — aperturas máquina':w===1?'Cruce polea bajo':w===2?'Cruce polea alto':'Pec Deck — aperturas máquina',sets(3,'12-15'),12,null,null,'pecho'),
-            ex(w===0?'Pushdown polea cuerda':w===1?'Press francés barra EZ (skullcrusher)':w===2?'Extensión overhead cuerda':'Pushdown polea cuerda',sets(3,'12-15'),12,null,null,'triceps'),
-            90)
-        ]},
-        {label:'Cardio',exs:[cardio('Bici estática Zona 2','20 min — 130-145 ppm')]},
-      ]
-    });
+      // LEGS
+      week.push({type:'gym',label:'Legs',icon:'🦵',color:'gym',calmType:'legs',isDeload:false,
+        duration:'Gym ~70 min',
+        desc:w===0?'Prensa · Extensión · Curl femoral · Hip thrust · Abducción · Gemelo':'Hack squat · Extensión · Curl sentado · Hip thrust barra · Abducción · Gemelo',
+        blocks:[
+          {label:'Cuádriceps — compuesto',exs:[ex(w===0?'Prensa de piernas':'Hack squat máquina',sets(3,'10-12'),10,'amrap',null,'cuad',180)]},
+          {label:'Cuádriceps — aislamiento',exs:[ex('Extensión cuádriceps máquina',sets(3,'12-15'),12,'prog',null,'cuad',90)]},
+          {label:'Isquiotibiales',exs:[ex(w===0?'Curl femoral tumbado máquina':'Curl femoral sentado máquina',sets(3,'10-12'),10,null,null,'posterior',120)]},
+          {label:'Glúteo',exs:[ex(w===0?'Hip thrust máquina':'Hip thrust barra en banco',sets(3,'12-15'),12,null,null,'posterior',120)]},
+          {label:'Cadera y gemelo',exs:[
+            ex('Abducción cadera máquina',sets(3,'15-20'),15,null,null,'abduccion',60),
+            ex(w===0?'Gemelo prensa de piernas':'Gemelo máquina de pie',sets(3,'15-20'),15,null,null,'gemelo',60),
+          ]},
+        ]
+      });
 
-    // ── DAY 5: PULL B — Espalda horizontal prioritaria ────────────────────
-    week.push({type:'gym',label:'Pull B',icon:'🏋️',color:'gym',calmType:'pull',isDeload:dl,
-      duration:'Gym ~55 min + Cardio 20 min',
-      desc:(w===0?'Remo polea neutro · Jalón supino · Pájaro+Curl alterno':
-            w===1?'Remo barra T · Jalón ancho · Rear delt+Curl predicador':
-            w===2?'Remo máquina Hammer · Jalón neutro · Pájaro+Concentrado':'DESCARGA · Remo · Jalón · Deltoides post · Bíceps'),
-      blocks:[
-        {label:'Espalda — remo horizontal (compuesto)',exs:[
-          ex(w===0?'Remo polea agarre neutro':w===1?'Remo barra T':w===2?'Remo máquina Hammer':'Remo polea agarre neutro',
-            sets(3,'8-12'),8,'amrap',null,'espalda_h',180)
-        ]},
-        {label:'Espalda — tirón vertical',exs:[
-          ex(w===0?'Jalón polea agarre supino':w===1?'Jalón polea agarre ancho':w===2?'Jalón polea agarre neutro':'Jalón polea agarre supino',
-            sets(3,'10-12'),10,'prog',null,'espalda_v',120)
-        ]},
-        {label:'Superserie mancuernas — Deltoides post + Bíceps',exs:[
-          ...ss(
-            ex(w===0?'Pájaro mancuernas (rear delt)':w===1?'Rear delt máquina':w===2?'Pájaro mancuernas (rear delt)':'Pájaro mancuernas (rear delt)',sets(3,'15-20'),15,null,null,'face_pull'),
-            ex(w===0?'Curl alterno mancuernas supinando':w===1?'Curl predicador barra EZ (agarre W)':w===2?'Curl concentrado mancuerna':'Curl alterno mancuernas supinando',sets(3,'10-12'),10,null,null,'biceps'),
-            90)
-        ]},
-        {label:'Bíceps — finisher',exs:[
-          ex(w===0?'Curl concentrado mancuerna':w===1?'Curl martillo mancuernas':w===2?'Curl predicador mancuerna':'Curl concentrado mancuerna',
-            sets(3,'12-15'),12,null,null,'biceps',90)
-        ]},
-        {label:'Cardio',exs:[cardio('Bici estática + Elíptica','20 min: 10 min bici Z2 + 10 min elíptica Z2-3')]},
-      ]
-    });
+      // PUSH B
+      week.push({type:'gym',label:'Push B',icon:'💪',color:'gym',calmType:'push',isDeload:false,
+        duration:'Gym ~60 min + Cardio 20 min',
+        desc:w===0?'Press Arnold · Laterales+Press inclinado · Pec deck+Pushdown':'Press militar Smith · Laterales+Press plano · Cruce+Francés',
+        blocks:[
+          {label:'Hombros — compuesto',exs:[ex(w===0?'Press Arnold mancuernas':'Press militar en Smith',sets(3,'8-12'),8,'amrap',null,'hombro',180)]},
+          {label:'Superserie — Laterales + Press pecho',exs:[
+            ...ss(ex('Elevaciones laterales mancuernas',sets(4,'15-20'),15,null,null,'lateral'),
+              ex(w===0?'Press inclinado mancuernas':'Press banca mancuernas',sets(3,'10-12'),10,null,null,'pecho'),90)]},
+          {label:'Superserie — Pecho + Tríceps',exs:[
+            ...ss(ex(w===0?'Pec Deck — aperturas máquina':'Cruce polea bajo',sets(3,'12-15'),12,null,null,'pecho'),
+              ex(w===0?'Pushdown polea cuerda':'Press francés barra EZ',sets(3,'12-15'),12,null,null,'triceps'),90)]},
+          {label:'Cardio',exs:[cardio('Bici estática Zona 2','20 min — 130-145 ppm')]},
+        ]
+      });
 
-    // ── REST DAY ───────────────────────────────────────────────────────────
+      // PULL B
+      week.push({type:'gym',label:'Pull B',icon:'🏋️',color:'gym',calmType:'pull',isDeload:false,
+        duration:'Gym ~60 min + Cardio 20 min',
+        desc:w===0?'Remo neutro · Jalón supino · Pájaro+Curl alterno · Curl concentrado':'Remo barra T · Jalón ancho · Rear delt+Predicador · Curl martillo',
+        blocks:[
+          {label:'Espalda — remo horizontal',exs:[ex(w===0?'Remo polea agarre neutro':'Remo barra T',sets(3,'8-12'),8,'amrap',null,'espalda_h',180)]},
+          {label:'Espalda — tirón vertical',exs:[ex(w===0?'Jalón polea agarre supino':'Jalón polea agarre ancho',sets(3,'10-12'),10,'prog',null,'espalda_v',120)]},
+          {label:'Superserie — Deltoides post + Bíceps',exs:[
+            ...ss(ex(w===0?'Pájaro mancuernas (rear delt)':'Rear delt máquina',sets(3,'15-20'),15,null,null,'face_pull'),
+              ex(w===0?'Curl alterno mancuernas supinando':'Curl predicador barra EZ',sets(3,'10-12'),10,null,null,'biceps'),90)]},
+          {label:'Bíceps — finisher',exs:[ex(w===0?'Curl concentrado mancuerna':'Curl martillo mancuernas',sets(3,'12-15'),12,null,null,'biceps',90)]},
+          {label:'Cardio',exs:[cardio('Bici estática + Elíptica','20 min: 10 bici Z2 + 10 elíptica Z2-3')]},
+        ]
+      });
+
+    } else {
+      // ── SEMANAS 2-3: programa nuevo sin superseries, volumen real ─────
+      // 4 series compuestos, 3 series accesorios
+      // Descansos: 180s compuestos, 120s accesorios, 90s aislamiento
+      // Sin superseries excepto bíceps al final de Pull
+
+      // PUSH A — Pecho prioritario + Hombros + Tríceps
+      week.push({type:'gym',label:'Push A',icon:'💪',color:'gym',calmType:'push',isDeload:dl,
+        duration:dl?'Gym ~55 min + Cardio 15 min':'Gym ~80 min + Cardio 20 min',
+        desc:dl?'DESCARGA · Pecho · Hombros · Tríceps reducidos'
+            :'Press banca mancuernas · Press hombros · Laterales · Pec Deck · Cruce neutro · Overhead · Pushdown · Face pulls',
+        blocks:[
+          {label:'Pecho — compuesto principal',exs:[
+            ex(dl?'Press pecho máquina palancas (DX)':'Press banca mancuernas',
+              dl?'3x8-10':sets(4,'8-12'),10,'amrap',null,'pecho',180)
+          ]},
+          {label:'Hombros — press',exs:[
+            ex(dl?'Press hombros máquina (DX)':'Press hombros mancuernas sentado',
+              dl?'2x10-12':sets(3,'10-12'),10,'prog',null,'hombro',120)
+          ]},
+          {label:'Hombros — laterales',exs:[
+            ex('Elevaciones laterales mancuernas',
+              dl?'2x15':sets(3,'15-20'),15,null,null,'lateral',90)
+          ]},
+          {label:'Pecho — aislamiento Pec Deck',exs:[
+            ex('Pec Deck máquina (DX)',
+              dl?'2x12':sets(3,'12-15'),12,null,null,'pecho',90)
+          ]},
+          ...(dl?[]:[
+            {label:'Pecho — cruce polea',exs:[
+              ex('Cruce polea neutro',sets(3,'12-15'),12,null,null,'pecho',90)
+            ]},
+            {label:'Tríceps — overhead cabeza larga',exs:[
+              ex('Extensión overhead polea cuerda',sets(3,'12-15'),12,null,null,'triceps',120)
+            ]},
+            {label:'Tríceps — pushdown',exs:[
+              ex('Pushdown polea cuerda',sets(3,'12-15'),12,null,null,'triceps',90)
+            ]},
+            {label:'Salud articular — rotadores',exs:[
+              ex('Face pulls polea',sets(3,'15-20'),15,null,null,'face_pull',60)
+            ]},
+          ]),
+          {label:'Cardio',exs:[cardio('Bici estática Zona 2',dl?'15 min — 130-145 ppm':'20 min — 130-145 ppm')]},
+        ]
+      });
+
+      // PULL A — Espalda vertical + Pullover + Remo + Face pulls + Bíceps
+      week.push({type:'gym',label:'Pull A',icon:'🏋️',color:'gym',calmType:'pull',isDeload:dl,
+        duration:dl?'Gym ~55 min + Cardio 15 min':'Gym ~80 min + Cardio 20 min',
+        desc:dl?'DESCARGA · Jalón · Remo · Bíceps reducidos'
+            :'Jalón neutro · Pullover máq · Remo mancuerna · Face pulls · Curl concentrado · Curl martillo',
+        blocks:[
+          {label:'Espalda — tirón vertical',exs:[
+            ex(dl?'Jalón polea agarre ancho':'Jalón polea agarre neutro',
+              dl?'3x8-10':sets(4,'8-12'),8,'amrap',null,'espalda_v',180)
+          ]},
+          ...(dl?[]:[
+            {label:'Espalda — pullover máquina',exs:[
+              ex('Pullover máquina (DX)',sets(3,'12-15'),12,'prog',null,'espalda_v',120)
+            ]},
+          ]),
+          {label:'Espalda — remo horizontal',exs:[
+            ex(dl?'Remo máquina Hammer':'Remo mancuerna unilateral',
+              dl?'2x10-12':sets(3,'10-12'),10,'prog',null,'espalda_h',120)
+          ]},
+          {label:'Deltoides posterior — face pulls',exs:[
+            ex('Face pulls polea',dl?'2x15':sets(3,'15-20'),15,null,null,'face_pull',60)
+          ]},
+          {label:'Bíceps — curl concentrado',exs:[
+            ex(dl?'Curl predicador mancuerna':'Curl concentrado mancuerna',
+              dl?'2x10-12':sets(3,'10-12'),10,null,null,'biceps',120)
+          ]},
+          {label:'Bíceps — curl martillo',exs:[
+            ex('Curl martillo mancuernas',dl?'2x12':sets(3,'12-15'),12,null,null,'biceps',90)
+          ]},
+          {label:'Cardio',exs:[cardio('Bici estática Zona 2',dl?'15 min — 130-145 ppm':'20 min — 130-145 ppm')]},
+        ]
+      });
+
+      // LEGS — Pierna completa sin duplicados
+      week.push({type:'gym',label:'Legs',icon:'🦵',color:'gym',calmType:'legs',isDeload:dl,
+        duration:dl?'Gym ~60 min':'Gym ~90 min',
+        desc:dl?'DESCARGA · Prensa · Extensión · Curl · Hip thrust · Abducción · Gemelo'
+            :'Sentadilla Smith · Extensión · Curl tumbado · RDL palancas · Hip thrust · Abducción · Aducción · Gemelo sóleo',
+        blocks:[
+          {label:'Cuádriceps — compuesto',exs:[
+            ex(dl?'Prensa de piernas':'Sentadilla en Smith',
+              dl?'3x10-12':sets(4,'8-12'),10,'amrap',null,'cuad',180)
+          ]},
+          {label:'Cuádriceps — extensión máquina',exs:[
+            ex('Extensión cuádriceps máquina (DX)',
+              dl?'2x12-15':sets(3,'12-15'),12,'prog',null,'cuad',90)
+          ]},
+          {label:'Isquiotibiales — curl femoral',exs:[
+            ex('Curl femoral tumbado máquina',
+              dl?'2x10-12':sets(3,'10-12'),10,null,null,'posterior',120)
+          ]},
+          ...(dl?[]:[
+            {label:'Isquiotibiales — RDL máquina',exs:[
+              ex('RDL máquina palancas (DX)',sets(3,'10-12'),10,null,null,'posterior',120)
+            ]},
+          ]),
+          {label:'Glúteo — hip thrust',exs:[
+            ex('Hip thrust máquina (DX)',
+              dl?'2x12-15':sets(3,'12-15'),12,null,null,'posterior',120)
+          ]},
+          {label:'Cadera — abducción',exs:[
+            ex('Abducción cadera máquina',
+              dl?'2x15-20':sets(3,'15-20'),15,null,null,'abduccion',60)
+          ]},
+          ...(dl?[]:[
+            {label:'Cadera — aducción',exs:[
+              ex('Aducción cadera máquina',sets(3,'15-20'),15,null,null,'abduccion',60)
+            ]},
+          ]),
+          {label:'Gemelo — sóleo',exs:[
+            ex(dl?'Gemelo prensa de piernas':'Gemelo máquina sentado — sóleo (DX)',
+              dl?'2x15-20':sets(3,'15-20'),15,null,null,'gemelo',60)
+          ]},
+        ]
+      });
+
+      // PUSH B — Hombros prioritarios + Pecho + Tríceps + Deltoides anterior
+      week.push({type:'gym',label:'Push B',icon:'💪',color:'gym',calmType:'push',isDeload:dl,
+        duration:dl?'Gym ~50 min + Cardio 15 min':'Gym ~80 min + Cardio 20 min',
+        desc:dl?'DESCARGA · Hombros · Pecho · Tríceps reducidos'
+            :'Press hombros palancas · Laterales · Press inclinado máq · Pec Deck · Pushdown · Elevación frontal · Face pulls',
+        blocks:[
+          {label:'Hombros — compuesto principal',exs:[
+            ex(dl?'Press Arnold mancuernas':'Press hombros máquina palancas (DX)',
+              dl?'3x8-10':sets(4,'8-12'),8,'amrap',null,'hombro',180)
+          ]},
+          {label:'Hombros — laterales',exs:[
+            ex('Elevaciones laterales mancuernas',
+              dl?'2x15':sets(3,'15-20'),15,null,null,'lateral',90)
+          ]},
+          {label:'Pecho — press inclinado',exs:[
+            ex(dl?'Press inclinado mancuernas':'Press inclinado máquina (DX)',
+              dl?'2x10-12':sets(3,'10-12'),10,null,null,'pecho',120)
+          ]},
+          {label:'Pecho — Pec Deck',exs:[
+            ex('Pec Deck máquina (DX)',
+              dl?'2x12':sets(3,'12-15'),12,null,null,'pecho',90)
+          ]},
+          ...(dl?[]:[
+            {label:'Tríceps — pushdown',exs:[
+              ex('Pushdown polea cuerda',sets(3,'12-15'),12,null,null,'triceps',90)
+            ]},
+            {label:'Hombros — deltoides anterior',exs:[
+              ex('Elevación frontal mancuernas',sets(3,'12-15'),12,null,null,'hombro',90)
+            ]},
+            {label:'Salud articular — face pulls',exs:[
+              ex('Face pulls polea',sets(2,'15-20'),15,null,null,'face_pull',60)
+            ]},
+          ]),
+          {label:'Cardio',exs:[cardio('Bici estática Zona 2',dl?'15 min — 130-145 ppm':'20 min — 130-145 ppm')]},
+        ]
+      });
+
+      // PULL B — Espalda horizontal prioritaria + Remo unilateral + Deltoides post + Bíceps
+      week.push({type:'gym',label:'Pull B',icon:'🏋️',color:'gym',calmType:'pull',isDeload:dl,
+        duration:dl?'Gym ~55 min + Cardio 15 min':'Gym ~80 min + Cardio 20 min',
+        desc:dl?'DESCARGA · Remo · Jalón · Deltoides post · Bíceps reducidos'
+            :'Remo máq palancas · Jalón neutro · Remo unilateral · Pájaro polea · Curl predicador máq · Curl alterno',
+        blocks:[
+          {label:'Espalda — remo horizontal compuesto',exs:[
+            ex(dl?'Remo polea agarre neutro':'Remo máquina palancas (DX)',
+              dl?'3x8-10':sets(4,'8-12'),8,'amrap',null,'espalda_h',180)
+          ]},
+          {label:'Espalda — tirón vertical',exs:[
+            ex(dl?'Jalón polea agarre supino':'Jalón polea agarre neutro',
+              dl?'2x10-12':sets(3,'10-12'),10,'prog',null,'espalda_v',120)
+          ]},
+          ...(dl?[]:[
+            {label:'Espalda — remo unilateral',exs:[
+              ex('Remo polea unilateral (DX)',sets(3,'10-12'),10,null,null,'espalda_h',120)
+            ]},
+          ]),
+          {label:'Deltoides posterior — pájaro',exs:[
+            ex(dl?'Pájaro mancuernas (rear delt)':'Pájaro en polea baja',
+              dl?'2x15':sets(3,'15-20'),15,null,null,'face_pull',90)
+          ]},
+          {label:'Bíceps — curl predicador',exs:[
+            ex(dl?'Curl predicador mancuerna':'Curl predicador máquina (DX)',
+              dl?'2x10-12':sets(3,'10-12'),10,null,null,'biceps',120)
+          ]},
+          {label:'Bíceps — curl alterno',exs:[
+            ex('Curl alterno mancuernas supinando',
+              dl?'2x12':sets(3,'12-15'),12,null,null,'biceps',90)
+          ]},
+          {label:'Cardio',exs:[cardio('Bici estática Zona 2',dl?'15 min — 130-145 ppm':'20 min — 130-145 ppm')]},
+        ]
+      });
+    }
+
+    // REST DAYS
     week.push({type:'rest',label:'Descanso',icon:'😴',color:'rest',calmType:null,isDeload:false,
       duration:'Recuperación activa',desc:'Senderismo · Patinaje · Movilidad',
       blocks:[{label:'Actividad libre',exs:[
@@ -871,7 +995,6 @@ function buildProg(){
         {n:'Estiramientos generales',s:'15-20 min',r:null,badge:null,yt:null,g:null,super:false,cardio:false,rest:0},
       ]}]
     });
-
     week.push({type:'rest',label:'Descanso',icon:'😴',color:'rest',calmType:null,isDeload:false,
       duration:'Recuperación activa',desc:'Descanso libre',
       blocks:[{label:'Actividad libre',exs:[
