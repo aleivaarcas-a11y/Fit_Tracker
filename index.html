@@ -471,6 +471,7 @@ canvas{display:block;width:100%!important;height:100%!important}
     <button class="n-nav-btn" onclick="showNutriTab('micro',this)">Micronutrientes</button>
     <button class="n-nav-btn" onclick="showNutriTab('estrategia',this)">Estrategia</button>
     <button class="n-nav-btn" onclick="showNutriTab('compra',this)">Lista compra</button>
+    <button class="n-nav-btn" onclick="showNutriTab('proteina',this)">Proteína</button>
   </div>
 
   <div id="n-plan" class="n-scr active">
@@ -551,6 +552,88 @@ canvas{display:block;width:100%!important;height:100%!important}
       <div class="strat-row"><div class="strat-ico">🫒</div><div class="strat-tx"><strong>Aceite de oliva virgen extra:</strong> Oleocantal antiinflamatorio, vitamina E. Base de todas las cocciones.</div></div>
       <div class="strat-row"><div class="strat-ico">🍠</div><div class="strat-tx"><strong>Boniato:</strong> Betacaroteno, potasio, fibra. El mejor carbo post-gym.</div></div>
       <div class="strat-row"><div class="strat-ico">🫐</div><div class="strat-tx"><strong>Frutos rojos:</strong> Antocianinas antiinflamatorias, vitamina C, bajo indice glucemico.</div></div>
+    </div>
+  </div>
+
+  <div id="n-proteina" class="n-scr">
+    <div class="card" style="margin-bottom:10px">
+      <div class="card-title">Fuentes de proteína natural — sin batidos</div>
+      <div class="card-sub">Objetivo: 120-130g/día ajustando lo que ya comes</div>
+    </div>
+
+    <div class="card" style="margin-bottom:8px">
+      <div style="font-size:13px;font-weight:800;margin-bottom:6px">🥚 Ajustes en tu dieta actual</div>
+      <div style="font-size:12px;line-height:1.8;color:var(--text)">
+        <div>• <strong>Desayuno:</strong> añade 2 lonchas más de pavo → +6g</div>
+        <div>• <strong>Almuerzo:</strong> cambia yogur griego por skyr Arla → +5g</div>
+        <div>• <strong>Cena:</strong> sube de 2 a 4 huevos → +12g</div>
+        <div style="margin-top:8px;padding:8px;background:#f0fdf4;border-radius:6px;font-size:11px;color:#166534">
+          Con estos 3 cambios: <strong>~120g proteína/día</strong> sin nada artificial
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:8px">
+      <div style="font-size:13px;font-weight:800;margin-bottom:8px">🌱 Proteína vegetal — mejores opciones</div>
+
+      <div style="border-bottom:1px solid var(--brd);padding-bottom:10px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:12px;font-weight:700">Edamame congelado</div>
+          <div style="font-size:12px;font-weight:800;color:#16a34a">11g/100g</div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px">Proteína completa — todos los aminoácidos esenciales. Hervir 5 min con sal. Mercadona ~2€/400g.</div>
+        <div style="font-size:11px;color:var(--text);margin-top:4px">💡 Añádelo a la comida junto al arroz y el pescado — 150g = 16g proteína extra</div>
+      </div>
+
+      <div style="border-bottom:1px solid var(--brd);padding-bottom:10px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:12px;font-weight:700">Skyr Arla (Mercadona)</div>
+          <div style="font-size:12px;font-weight:800;color:#16a34a">11g/100g</div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px">El doble de proteína que el yogur griego normal. Textura más densa, sabor suave.</div>
+        <div style="font-size:11px;color:var(--text);margin-top:4px">💡 Sustituye el yogur griego del almuerzo directamente</div>
+      </div>
+
+      <div style="border-bottom:1px solid var(--brd);padding-bottom:10px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:12px;font-weight:700">Lentejas o garbanzos</div>
+          <div style="font-size:12px;font-weight:800;color:#16a34a">9g/100g cocido</div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px">2 veces por semana en lugar del arroz. Mucha fibra, hierro y saciedad prolongada — ideal con el Rybelsus.</div>
+      </div>
+
+      <div style="border-bottom:1px solid var(--brd);padding-bottom:10px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:12px;font-weight:700">Atún en lata al natural</div>
+          <div style="font-size:12px;font-weight:800;color:#16a34a">25g/lata</div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px">Cero preparación. Sustituye o complementa el pescado en la comida. ~0.80€/lata.</div>
+      </div>
+
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:12px;font-weight:700">Queso cottage / queso fresco batido 0%</div>
+          <div style="font-size:12px;font-weight:800;color:#16a34a">9g/100g</div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px">Versátil, va bien con fruta en el almuerzo. Más proteína que el philadelphia light.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:13px;font-weight:800;margin-bottom:8px">📊 Resumen — sin cambiar tu estilo de comer</div>
+      <div style="font-size:12px;line-height:1.9;color:var(--text)">
+        <div style="display:flex;justify-content:space-between"><span>Desayuno actual</span><span style="color:var(--muted)">~6g</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Desayuno ajustado (+pavo)</span><span style="color:#16a34a;font-weight:700">~14g</span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px"><span>Almuerzo actual (yogur)</span><span style="color:var(--muted)">~10g</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Almuerzo ajustado (skyr + edamame)</span><span style="color:#16a34a;font-weight:700">~27g</span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px"><span>Comida (igual)</span><span style="color:var(--text)">~30g</span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px"><span>Merienda batido (igual)</span><span style="color:var(--text)">~26g</span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px"><span>Cena actual (2 huevos)</span><span style="color:var(--muted)">~15g</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Cena ajustada (4 huevos)</span><span style="color:#16a34a;font-weight:700">~22g</span></div>
+        <div style="margin-top:10px;padding:8px;background:#f0fdf4;border-radius:6px;text-align:center;font-weight:800;color:#166534">
+          TOTAL AJUSTADO: ~119g proteína/día ✓
+        </div>
+      </div>
     </div>
   </div>
 
@@ -3862,6 +3945,33 @@ function renderSuplem(){}
       <strong>Sabores recomendados:</strong> Caramel Chaos, White Chocolate Salted Peanut, Fudge Brownie.<br>
       <strong>Contiene aceite de palma</strong> — única de la lista. Y maltitol como las demás.<br>
       <strong>Contiene maltitol</strong> — misma tolerancia que Barebells y Premier Protein.
+    </div>
+  </div>
+
+  <!-- PRE-ENTRENO — OPCIONAL (a partir de semana 3) -->
+  <div class="dash-section" style="margin-top:16px">Pre-entreno — opcional 🚀</div>
+  <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Recomendado a partir de S14 (semana 3), cuando el programa esté rodado. No antes.</div>
+
+  <div class="card" style="margin-bottom:8px;border-color:#7c3aed">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">🏅</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">HSN Evopump en Polvo</div>
+          <div style="font-size:11px;color:var(--muted)">600mg nitratos · Citrulina + Arginina · Sin cafeína · Fabricado en España</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:#7c3aed">~0.80€</div>
+        <div style="font-size:10px;color:var(--muted)">por toma · 500g/25 tomas</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.6;background:#faf5ff;border-radius:6px;padding:8px">
+      La mejor opción calidad-precio. 600mg de nitratos garantizados — más que el Beet It Sport. Añade citrulina y arginina que potencian el efecto vasodilatador.<br>
+      <strong>Cómo tomarlo:</strong> 20g en 300ml agua, 90 min antes del entreno. Necesitas cuchara medidora de 20g.<br>
+      <strong>Sabores:</strong> Ponche de Frutas o Grosella Negra.<br>
+      <strong>Sin cafeína</strong> — no interfiere con el sueño aunque entrenes tarde.<br>
+      <strong>Dónde:</strong> hsnstore.com o Amazon España.
     </div>
   </div>
 
