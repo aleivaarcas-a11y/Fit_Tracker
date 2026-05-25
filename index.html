@@ -3238,6 +3238,16 @@ function toggleCalm(key){
 <div id="scr-diario" class="scr">
   <div class="section-label">Diario de Comidas</div>
 
+  <!-- NAVEGADOR FECHAS -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;background:var(--card);border-radius:var(--r);padding:10px 14px;border:1px solid var(--border)">
+    <button onclick="dcNavDay(-1)" style="width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--bg);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;color:var(--text)">‹</button>
+    <div style="text-align:center">
+      <div style="font-size:15px;font-weight:700;color:var(--text)" id="dc-fecha-label">Hoy</div>
+      <div style="font-size:11px;color:var(--muted)" id="dc-fecha-sub">—</div>
+    </div>
+    <button onclick="dcNavDay(1)" id="dc-nav-next" style="width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--bg);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;color:var(--text)">›</button>
+  </div>
+
   <!-- RESUMEN CALORÍAS -->
   <div class="card" style="margin-bottom:10px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
@@ -3273,6 +3283,7 @@ function toggleCalm(key){
   </div>
 
   <!-- AÑADIR EJERCICIO -->
+  <div id="dc-add-zone">
   <div class="card" style="margin-bottom:10px">
     <div class="card-title">➕ Registrar ejercicio</div>
     <div style="display:flex;gap:8px;align-items:center">
@@ -3320,12 +3331,13 @@ function toggleCalm(key){
       <button onclick="confirmAddFood()" style="width:100%;padding:9px;border-radius:8px;border:none;background:var(--gr);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Añadir a comidas</button>
     </div>
   </div>
+  </div><!-- /dc-add-zone -->
 
   <!-- LOG DEL DÍA -->
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
       <div class="card-title" style="margin:0">📋 Registro de hoy</div>
-      <button onclick="clearDiario()" style="font-size:11px;color:var(--re);background:none;border:none;cursor:pointer;font-family:inherit">Borrar todo</button>
+      <button id="dc-clear-btn" onclick="clearDiario()" style="font-size:11px;color:var(--re);background:none;border:none;cursor:pointer;font-family:inherit">Borrar todo</button>
     </div>
     <!-- Por comidas -->
     <div id="dc-log-desayuno" class="dc-meal-group"></div>
@@ -3436,38 +3448,82 @@ const FOODS_DB = [
 let dcState = {
   comidas:[],
   ejercicios:[],
-  selectedFood:null
+  selectedFood:null,
+  currentDate: new Date().toISOString().split('T')[0]
 };
 const DC_KEY = 'ft_diario_v1';
 
+function dcDateKey(){ return dcState.currentDate; }
+
 function saveDC(){
-  const today = new Date().toISOString().split('T')[0];
   const stored = JSON.parse(localStorage.getItem(DC_KEY)||'{}');
-  stored[today] = {comidas:dcState.comidas, ejercicios:dcState.ejercicios};
-  // Guarda solo ultimos 30 dias
-  const keys = Object.keys(stored).sort().reverse().slice(0,30);
+  stored[dcDateKey()] = {comidas:dcState.comidas, ejercicios:dcState.ejercicios};
+  const keys = Object.keys(stored).sort().reverse().slice(0,90);
   const clean = {};
   keys.forEach(k=>clean[k]=stored[k]);
   localStorage.setItem(DC_KEY, JSON.stringify(clean));
 }
 
 function loadDC(){
-  const today = new Date().toISOString().split('T')[0];
   const stored = JSON.parse(localStorage.getItem(DC_KEY)||'{}');
-  if(stored[today]){
-    dcState.comidas = stored[today].comidas||[];
-    dcState.ejercicios = stored[today].ejercicios||[];
+  const day = stored[dcDateKey()];
+  if(day){
+    dcState.comidas = day.comidas||[];
+    dcState.ejercicios = day.ejercicios||[];
   } else {
     dcState.comidas = [];
     dcState.ejercicios = [];
   }
 }
 
+function dcNavDay(dir){
+  const d = new Date(dcState.currentDate);
+  d.setDate(d.getDate() + dir);
+  const today = new Date().toISOString().split('T')[0];
+  // No navegar al futuro
+  if(d.toISOString().split('T')[0] > today) return;
+  dcState.currentDate = d.toISOString().split('T')[0];
+  loadDC();
+  updateDcDateLabel();
+  renderDiario();
+  // Ocultar añadir si navegamos a otro dia
+  document.getElementById('dc-add-form').style.display='none';
+  document.getElementById('dc-food-results').innerHTML='';
+}
+
+function updateDcDateLabel(){
+  const today = new Date().toISOString().split('T')[0];
+  const d = new Date(dcState.currentDate + 'T12:00:00');
+  const isToday = dcState.currentDate === today;
+  const isYesterday = (() => {
+    const y = new Date(); y.setDate(y.getDate()-1);
+    return dcState.currentDate === y.toISOString().split('T')[0];
+  })();
+  const dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  let label = isToday ? 'Hoy' : isYesterday ? 'Ayer' : dias[d.getDay()]+' '+d.getDate()+' '+meses[d.getMonth()];
+  let sub = d.getDate()+' de '+['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][d.getMonth()]+' '+d.getFullYear();
+  document.getElementById('dc-fecha-label').textContent = label;
+  document.getElementById('dc-fecha-sub').textContent = sub;
+  // Deshabilitar flecha siguiente si es hoy
+  const nextBtn = document.getElementById('dc-nav-next');
+  nextBtn.style.opacity = isToday ? '0.3' : '1';
+  nextBtn.style.pointerEvents = isToday ? 'none' : 'auto';
+  // Mostrar/ocultar zona de añadir (solo hoy)
+  const addZone = document.getElementById('dc-add-zone');
+  if(addZone) addZone.style.display = isToday ? 'block' : 'none';
+  // Ocultar borrar todo si no es hoy
+  const clearBtn = document.getElementById('dc-clear-btn');
+  if(clearBtn) clearBtn.style.display = isToday ? 'inline' : 'none';
+}
+
 function initDiario(){
+  dcState.currentDate = new Date().toISOString().split('T')[0];
   loadDC();
   const {tdee, objetivo, bmr} = calcTDEE();
   document.getElementById('dc-objetivo').textContent = objetivo+' kcal';
   document.getElementById('dc-objetivo-sub').textContent = `TDEE ${tdee} kcal · déficit 20% · BMR ${bmr}`;
+  updateDcDateLabel();
   renderDiario();
 }
 
@@ -3676,7 +3732,8 @@ function delEjercicio(i){
 }
 
 function clearDiario(){
-  if(!confirm('¿Borrar todos los registros de hoy?'))return;
+  const dLabel = dcState.currentDate===new Date().toISOString().split('T')[0]?'hoy':document.getElementById('dc-fecha-label').textContent;
+  if(!confirm('¿Borrar todos los registros de '+dLabel+'?'))return;
   dcState.comidas=[];
   dcState.ejercicios=[];
   saveDC();
