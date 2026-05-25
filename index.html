@@ -3293,9 +3293,12 @@ function toggleCalm(key){
     <!-- Mini form añadir -->
     <div id="dc-add-form" style="display:none;margin-top:8px;background:var(--bg);border-radius:8px;padding:10px">
       <div style="font-size:13px;font-weight:700;margin-bottom:8px" id="dc-add-food-name">—</div>
+      <!-- Raciones rápidas -->
+      <div id="dc-raciones" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px"></div>
+      <!-- Gramos manual -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px">
         <div>
-          <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Cantidad (g)</div>
+          <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Gramos</div>
           <input id="dc-cantidad" type="number" value="100" min="1" max="2000" style="width:100%;padding:7px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:inherit;background:var(--card);color:var(--text);text-align:center" oninput="updateAddPreview()">
         </div>
         <div>
@@ -3367,53 +3370,67 @@ function calcTDEE(){
 
 // Base de datos de alimentos (kcal por 100g)
 const FOODS_DB = [
-  {n:'Pechuga de pollo',k:165,p:31,c:0,g:3.6},
-  {n:'Pechuga de pavo',k:135,p:29,c:0,g:1.7},
-  {n:'Huevo entero',k:155,p:13,c:1.1,g:11},
-  {n:'Clara de huevo',k:52,p:11,c:0.7,g:0.2},
-  {n:'Salmon',k:208,p:20,c:0,g:13},
-  {n:'Atun en lata (al natural)',k:116,p:26,c:0,g:1},
-  {n:'Sardinas en lata',k:208,p:24,c:0,g:12},
-  {n:'Merluza',k:79,p:17,c:0,g:0.9},
-  {n:'Gambas',k:85,p:18,c:0.9,g:0.5},
-  {n:'Ternera (magra)',k:158,p:26,c:0,g:5.4},
-  {n:'Lomo de cerdo',k:143,p:22,c:0,g:5.8},
-  {n:'Yogur griego 0%',k:59,p:10,c:3.6,g:0.4},
-  {n:'Skyr Arla',k:63,p:11,c:4,g:0.2},
-  {n:'Queso cottage 0%',k:72,p:12,c:3.4,g:0.5},
-  {n:'Leche desnatada',k:34,p:3.4,c:4.8,g:0.1},
-  {n:'Whey proteina (polvo)',k:380,p:80,c:6,g:3},
-  {n:'Arroz (cocido)',k:130,p:2.7,c:28,g:0.3},
-  {n:'Pasta (cocida)',k:158,p:5.8,c:31,g:0.9},
-  {n:'Avena',k:389,p:17,c:66,g:7},
-  {n:'Boniato (cocido)',k:86,p:1.6,c:20,g:0.1},
-  {n:'Patata (cocida)',k:87,p:1.9,c:20,g:0.1},
-  {n:'Pan integral',k:247,p:9,c:41,g:3.4},
-  {n:'Lentejas (cocidas)',k:116,p:9,c:20,g:0.4},
-  {n:'Garbanzos (cocidos)',k:164,p:8.9,c:27,g:2.6},
-  {n:'Brocoli',k:34,p:2.8,c:6.6,g:0.4},
-  {n:'Espinacas',k:23,p:2.9,c:3.6,g:0.4},
-  {n:'Zanahoria',k:41,p:0.9,c:9.6,g:0.2},
-  {n:'Pimiento rojo',k:31,p:1,c:6,g:0.3},
-  {n:'Tomate',k:18,p:0.9,c:3.9,g:0.2},
-  {n:'Lechuga/Rucula',k:17,p:1.3,c:2.9,g:0.2},
-  {n:'Aguacate',k:160,p:2,c:9,g:15},
-  {n:'Platano',k:89,p:1.1,c:23,g:0.3},
-  {n:'Naranja',k:47,p:0.9,c:12,g:0.1},
-  {n:'Manzana',k:52,p:0.3,c:14,g:0.2},
-  {n:'Frutos rojos (mix)',k:57,p:0.7,c:14,g:0.3},
-  {n:'Almendras',k:579,p:21,c:22,g:50},
-  {n:'Nueces',k:654,p:15,c:14,g:65},
-  {n:'Aceite de oliva',k:884,p:0,c:0,g:100},
-  {n:'Barrita Barebells',k:215,p:20,c:20,g:7},
-  {n:'Barrita Quest',k:200,p:21,c:21,g:8},
-  {n:'Cafe solo',k:2,p:0.3,c:0,g:0},
-  {n:'Tortilla de trigo (wrap)',k:306,p:8,c:55,g:7},
-  {n:'Queso mozzarella light',k:149,p:22,c:2.7,g:5.8},
-  {n:'Salmon ahumado',k:117,p:18,c:0,g:4.3},
-  {n:'Edamame',k:122,p:11,c:10,g:5},
-  {n:'Crema de cacahuete',k:598,p:25,c:20,g:51},
-  {n:'Miel',k:304,p:0.3,c:82,g:0}
+  {n:'Pechuga de pollo',k:165,p:31,c:0,g:3.6,r:[{l:'1 pechuga pequeña',g:120},{l:'1 pechuga grande',g:180},{l:'100g',g:100}]},
+  {n:'Pechuga de pavo',k:135,p:29,c:0,g:1.7,r:[{l:'1 filete',g:100},{l:'2 filetes',g:200},{l:'100g',g:100}]},
+  {n:'Huevo entero',k:155,p:13,c:1.1,g:11,r:[{l:'1 huevo M',g:55},{l:'1 huevo L',g:65},{l:'2 huevos M',g:110},{l:'3 huevos M',g:165}]},
+  {n:'Clara de huevo',k:52,p:11,c:0.7,g:0.2,r:[{l:'1 clara',g:35},{l:'2 claras',g:70},{l:'3 claras',g:105}]},
+  {n:'Salmon',k:208,p:20,c:0,g:13,r:[{l:'1 filete pequeño',g:120},{l:'1 filete grande',g:180},{l:'100g',g:100}]},
+  {n:'Lubina',k:82,p:18,c:0,g:1.2,r:[{l:'1 lubina entera',g:300},{l:'1/2 lubina',g:150},{l:'1 filete',g:120},{l:'100g',g:100}]},
+  {n:'Dorada',k:96,p:20,c:0,g:2.1,r:[{l:'1 dorada entera',g:300},{l:'1/2 dorada',g:150},{l:'1 filete',g:120},{l:'100g',g:100}]},
+  {n:'Merluza',k:79,p:17,c:0,g:0.9,r:[{l:'1 filete',g:130},{l:'1/2 cola',g:200},{l:'100g',g:100}]},
+  {n:'Atun en lata (al natural)',k:116,p:26,c:0,g:1,r:[{l:'1 lata pequeña (80g)',g:80},{l:'1 lata grande (160g)',g:160}]},
+  {n:'Sardinas en lata',k:208,p:24,c:0,g:12,r:[{l:'1 lata',g:90},{l:'100g',g:100}]},
+  {n:'Gambas',k:85,p:18,c:0.9,g:0.5,r:[{l:'Ración (150g)',g:150},{l:'100g',g:100}]},
+  {n:'Ternera (magra)',k:158,p:26,c:0,g:5.4,r:[{l:'1 filete mediano',g:150},{l:'1 filete grande',g:200},{l:'100g',g:100}]},
+  {n:'Lomo de cerdo',k:143,p:22,c:0,g:5.8,r:[{l:'1 lomo',g:130},{l:'2 lomos',g:260},{l:'100g',g:100}]},
+  {n:'Yogur griego 0%',k:59,p:10,c:3.6,g:0.4,r:[{l:'1 tarrina (125g)',g:125},{l:'1 tarrina grande (200g)',g:200}]},
+  {n:'Skyr Arla',k:63,p:11,c:4,g:0.2,r:[{l:'1 tarrina (170g)',g:170},{l:'100g',g:100}]},
+  {n:'Queso cottage 0%',k:72,p:12,c:3.4,g:0.5,r:[{l:'1/2 tarrina (125g)',g:125},{l:'1 tarrina (250g)',g:250}]},
+  {n:'Leche desnatada',k:34,p:3.4,c:4.8,g:0.1,r:[{l:'1 vaso (200ml)',g:200},{l:'1/2 vaso (100ml)',g:100}]},
+  {n:'Whey proteina (polvo)',k:380,p:80,c:6,g:3,r:[{l:'1 cacito (30g)',g:30},{l:'1.5 cacitos (45g)',g:45}]},
+  {n:'Arroz (cocido)',k:130,p:2.7,c:28,g:0.3,r:[{l:'Ración pequeña (60g)',g:60},{l:'Ración media (100g)',g:100},{l:'Ración grande (150g)',g:150}]},
+  {n:'Pasta (cocida)',k:158,p:5.8,c:31,g:0.9,r:[{l:'60g cocida',g:60},{l:'100g cocida',g:100},{l:'150g cocida',g:150},{l:'200g cocida',g:200}]},
+  {n:'Avena',k:389,p:17,c:66,g:7,r:[{l:'40g (1 bol)',g:40},{l:'60g',g:60},{l:'80g',g:80}]},
+  {n:'Boniato (cocido)',k:86,p:1.6,c:20,g:0.1,r:[{l:'1 boniato pequeño (150g)',g:150},{l:'1 boniato grande (250g)',g:250},{l:'100g',g:100}]},
+  {n:'Patata (cocida)',k:87,p:1.9,c:20,g:0.1,r:[{l:'1 patata mediana (150g)',g:150},{l:'2 patatas (300g)',g:300},{l:'100g',g:100}]},
+  {n:'Pan integral',k:247,p:9,c:41,g:3.4,r:[{l:'1 rebanada (30g)',g:30},{l:'2 rebanadas (60g)',g:60}]},
+  {n:'Pan Bimbo (molde)',k:233,p:7,c:43,g:3.5,r:[{l:'1 rebanada (25g)',g:25},{l:'2 rebanadas (50g)',g:50},{l:'3 rebanadas (75g)',g:75}]},
+  {n:'Tostada bimbo',k:380,p:11,c:72,g:5,r:[{l:'1 tostada (25g)',g:25},{l:'2 tostadas (50g)',g:50}]},
+  {n:'Lentejas (cocidas)',k:116,p:9,c:20,g:0.4,r:[{l:'Ración (200g)',g:200},{l:'Ración grande (300g)',g:300},{l:'100g',g:100}]},
+  {n:'Garbanzos (cocidos)',k:164,p:8.9,c:27,g:2.6,r:[{l:'Ración (200g)',g:200},{l:'100g',g:100}]},
+  {n:'Brocoli',k:34,p:2.8,c:6.6,g:0.4,r:[{l:'1/2 brócoli (200g)',g:200},{l:'1 brócoli entero (400g)',g:400},{l:'100g',g:100}]},
+  {n:'Espinacas',k:23,p:2.9,c:3.6,g:0.4,r:[{l:'Ración (80g)',g:80},{l:'Bolsa (200g)',g:200}]},
+  {n:'Zanahoria',k:41,p:0.9,c:9.6,g:0.2,r:[{l:'1 zanahoria (80g)',g:80},{l:'2 zanahorias (160g)',g:160}]},
+  {n:'Pimiento rojo',k:31,p:1,c:6,g:0.3,r:[{l:'1 pimiento (150g)',g:150},{l:'1/2 pimiento (75g)',g:75}]},
+  {n:'Tomate',k:18,p:0.9,c:3.9,g:0.2,r:[{l:'1 tomate mediano (120g)',g:120},{l:'2 tomates (240g)',g:240}]},
+  {n:'Lechuga/Rucula',k:17,p:1.3,c:2.9,g:0.2,r:[{l:'Bol ensalada (60g)',g:60},{l:'100g',g:100}]},
+  {n:'Aguacate',k:160,p:2,c:9,g:15,r:[{l:'1/2 aguacate (70g)',g:70},{l:'1 aguacate (140g)',g:140}]},
+  {n:'Platano',k:89,p:1.1,c:23,g:0.3,r:[{l:'1 plátano pequeño (100g)',g:100},{l:'1 plátano grande (140g)',g:140}]},
+  {n:'Naranja',k:47,p:0.9,c:12,g:0.1,r:[{l:'1 naranja (180g)',g:180},{l:'1 naranja grande (250g)',g:250}]},
+  {n:'Manzana',k:52,p:0.3,c:14,g:0.2,r:[{l:'1 manzana pequeña (130g)',g:130},{l:'1 manzana grande (200g)',g:200}]},
+  {n:'Pera',k:57,p:0.4,c:15,g:0.1,r:[{l:'1 pera (150g)',g:150},{l:'1 pera grande (200g)',g:200}]},
+  {n:'Kiwi',k:61,p:1.1,c:15,g:0.5,r:[{l:'1 kiwi (75g)',g:75},{l:'2 kiwis (150g)',g:150}]},
+  {n:'Melocoton',k:39,p:0.9,c:10,g:0.3,r:[{l:'1 melocotón (150g)',g:150},{l:'2 melocotones (300g)',g:300}]},
+  {n:'Cerezas',k:63,p:1.1,c:16,g:0.2,r:[{l:'10 cerezas (60g)',g:60},{l:'20 cerezas (120g)',g:120},{l:'30 cerezas (180g)',g:180}]},
+  {n:'Fresas',k:32,p:0.7,c:7.7,g:0.3,r:[{l:'1 puñado (100g)',g:100},{l:'200g',g:200}]},
+  {n:'Frutos rojos (mix)',k:57,p:0.7,c:14,g:0.3,r:[{l:'1 puñado (80g)',g:80},{l:'150g',g:150}]},
+  {n:'Almendras',k:579,p:21,c:22,g:50,r:[{l:'10 almendras (12g)',g:12},{l:'20 almendras (24g)',g:24},{l:'30g',g:30}]},
+  {n:'Nueces',k:654,p:15,c:14,g:65,r:[{l:'3 nueces (15g)',g:15},{l:'5 nueces (25g)',g:25},{l:'30g',g:30}]},
+  {n:'Aceite de oliva',k:884,p:0,c:0,g:100,r:[{l:'1 cucharada (10g)',g:10},{l:'2 cucharadas (20g)',g:20}]},
+  {n:'Barrita Barebells',k:215,p:20,c:20,g:7,r:[{l:'1 barrita (55g)',g:55}]},
+  {n:'Barrita Quest',k:200,p:21,c:21,g:8,r:[{l:'1 barrita (60g)',g:60}]},
+  {n:'Barrita Grenade Killa',k:218,p:23,c:17,g:6,r:[{l:'1 barrita (60g)',g:60}]},
+  {n:'Cafe solo',k:2,p:0.3,c:0,g:0,r:[{l:'1 cafe (200ml)',g:200}]},
+  {n:'Tortilla de trigo (wrap)',k:306,p:8,c:55,g:7,r:[{l:'1 wrap (60g)',g:60}]},
+  {n:'Queso mozzarella light',k:149,p:22,c:2.7,g:5.8,r:[{l:'1/4 bola (60g)',g:60},{l:'1/2 bola (120g)',g:120}]},
+  {n:'Salmon ahumado',k:117,p:18,c:0,g:4.3,r:[{l:'2 lonchas (50g)',g:50},{l:'4 lonchas (100g)',g:100}]},
+  {n:'Edamame',k:122,p:11,c:10,g:5,r:[{l:'Ración (150g)',g:150},{l:'100g',g:100}]},
+  {n:'Crema de cacahuete',k:598,p:25,c:20,g:51,r:[{l:'1 cucharada (15g)',g:15},{l:'2 cucharadas (30g)',g:30}]},
+  {n:'Miel',k:304,p:0.3,c:82,g:0,r:[{l:'1 cucharadita (7g)',g:7},{l:'1 cucharada (15g)',g:15}]},
+  {n:'Jamon york / pavo fiambre',k:107,p:18,c:1.5,g:3,r:[{l:'2 lonchas (40g)',g:40},{l:'4 lonchas (80g)',g:80}]},
+  {n:'Jamon serrano',k:241,p:28,c:0,g:14,r:[{l:'2 lonchas (30g)',g:30},{l:'4 lonchas (60g)',g:60}]},
+  {n:'Queso light en lonchas',k:180,p:20,c:2,g:10,r:[{l:'1 loncha (17g)',g:17},{l:'2 lonchas (34g)',g:34}]},
+  {n:'Mantequilla',k:717,p:0.9,c:0.6,g:81,r:[{l:'1 cucharadita (5g)',g:5},{l:'1 cucharada (10g)',g:10}]}
 ];
 
 let dcState = {
@@ -3502,7 +3519,7 @@ function renderDiario(){
       <div class="dc-meal-header">${emojis[g]} ${nombres[g]} · ${Math.round(subtotal)} kcal</div>
       ${items.map((c,i)=>`
         <div class="dc-item">
-          <span class="dc-item-name">${c.nombre}${c.gramos?' ('+c.gramos+'g)':''}</span>
+          <span class="dc-item-name">${c.nombre} <span style='color:var(--muted);font-size:11px'>(${c.label||c.gramos+'g'})</span></span>
           <span class="dc-item-kcal">${Math.round(c.kcal)}</span>
           <button class="dc-del" onclick="delComida(${dcState.comidas.indexOf(c)})">×</button>
         </div>`).join('')}`;
@@ -3575,6 +3592,26 @@ function selectFoodObj(obj){
   document.getElementById('dc-add-form').style.display='block';
   document.getElementById('dc-food-results').innerHTML='';
   document.getElementById('dc-food-search').value='';
+  // Mostrar raciones si las tiene
+  const racEl = document.getElementById('dc-raciones');
+  if(f.r && f.r.length>0){
+    racEl.style.display='flex';
+    racEl.innerHTML = f.r.map(r=>`<button onclick="setRacion(${r.g})" style="font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;font-family:inherit;white-space:nowrap">${r.l}</button>`).join('');
+  } else {
+    racEl.style.display='none';
+    racEl.innerHTML='';
+  }
+  updateAddPreview();
+}
+
+function setRacion(g){
+  document.getElementById('dc-cantidad').value = g;
+  // Highlight active ración
+  document.querySelectorAll('#dc-raciones button').forEach(b=>{
+    b.style.background = b.textContent.includes(g+'g') || b.getAttribute('onclick').includes('('+g+')') ? 'var(--pul)' : 'var(--card)';
+    b.style.color = b.getAttribute('onclick').includes('('+g+')') ? 'var(--pud)' : 'var(--text)';
+    b.style.borderColor = b.getAttribute('onclick').includes('('+g+')') ? 'var(--pu)' : 'var(--border)';
+  });
   updateAddPreview();
 }
 
@@ -3599,10 +3636,18 @@ function confirmAddFood(){
   const g = parseFloat(document.getElementById('dc-cantidad').value)||100;
   const comida = document.getElementById('dc-comida-sel').value;
   const kcal = Math.round((dcState.selectedFood.k/100)*g);
-  dcState.comidas.push({nombre:dcState.selectedFood.n, gramos:g, kcal, comida});
+  // Busca si hay una ración que coincida con los gramos para mostrarla
+  const f = dcState.selectedFood;
+  let label = g+'g';
+  if(f.r){
+    const match = f.r.find(r=>r.g===g);
+    if(match) label = match.l;
+  }
+  dcState.comidas.push({nombre:dcState.selectedFood.n, gramos:g, label, kcal, comida});
   dcState.selectedFood=null;
   document.getElementById('dc-add-form').style.display='none';
   document.getElementById('dc-cantidad').value=100;
+  document.getElementById('dc-raciones').innerHTML='';
   saveDC();
   renderDiario();
 }
