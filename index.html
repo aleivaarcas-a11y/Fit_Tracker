@@ -866,6 +866,23 @@ canvas{display:block;width:100%!important;height:100%!important}
 
   <div class="card" style="margin-bottom:10px">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">🐟</div>
+      <div>
+        <div style="font-size:14px;font-weight:800">Omega-3 — 2g EPA+DHA/día</div>
+        <div style="font-size:11px;color:var(--muted)">Con la comida principal · Opcional si comes pescado azul 3-4x/semana</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f0f9ff;border-radius:8px;padding:10px">
+      <strong>Por qué:</strong> El suplemento con mejor evidencia después de la creatina. Reduce triglicéridos, mejora recuperación muscular entre sesiones y tiene efecto antiinflamatorio — importante con 5 días de entreno.<br><br>
+      <strong>Dosis:</strong> 2g de EPA+DHA al día. Fíjate en el EPA+DHA del etiquetado, no en el total de aceite de pescado.<br><br>
+      <strong>Cuándo:</strong> Con la comida más grasa del día. Siempre con comida para mejorar absorción y evitar el retrogusto.<br><br>
+      <strong>Marcas fiables:</strong> Solgar, Myprotein Omega-3, o Hacendado Omega-3 Mercadona (económico).<br><br>
+      <strong>Alternativa sin suplemento:</strong> Sardinas, caballa o salmón 3-4 veces por semana te dan dosis equivalentes. Si ya los comes, el suplemento aporta menos.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
       <div style="font-size:28px">🌙</div>
       <div>
         <div style="font-size:14px;font-weight:800">Magnesio — Bisglicinato PharmaZen</div>
@@ -1394,11 +1411,12 @@ function buildProg(){
     const rdl=sw===2?'RDL máquina palancas (DX)':'RDL mancuernas';
     const curl=sw===2?'Curl femoral sentado máquina':'Curl femoral tumbado máquina';
     const hip=sw===2?'Hip thrust barra en banco':'Hip thrust máquina (DX)';
-    const gem=sw===2?'Gemelo máquina de pie':sw===3?'Gemelo prensa de piernas':'Gemelo máquina sentado — sóleo (DX)';
+    // Gemelo alterna: sem1+sem3 sóleo DX, sem2+sem4 máquina de pie
+    const gem=sw===2||sw===4?'Gemelo máquina de pie':'Gemelo máquina sentado — sóleo (DX)';
     return{type:'gym',label:'Legs',icon:'🦵',color:'gym',calmType:'legs',isDeload:dl,
-      duration:dl?'Gym ~55 min':'Gym ~75 min',
+      duration:dl?'Gym ~50 min':'Gym ~65 min + Cardio 20 min',
       desc:dl?'DESCARGA — Pierna completa'
-          :comp+' · Extensión · '+curl+' · RDL · Hip thrust · Cadera · Gemelo · Core',
+          :comp+' · Extensión · '+curl+' · RDL · Hip thrust · Abducción · Core',
       blocks:[
         {label:'Cuádriceps — compuesto',exs:[ex(dl?'Prensa de piernas':comp,sets(4,'10-12',dl),10,'amrap',null,'cuad',120)]},
         {label:'Cuádriceps — extensión',exs:[ex('Extensión cuádriceps máquina (DX)',sets(3,'12-15',dl),12,'prog',null,'cuad',60)]},
@@ -1406,7 +1424,6 @@ function buildProg(){
         ...(dl?[]:[{label:'Isquiotibiales — RDL',exs:[ex(rdl,'3x10-12',10,null,null,'posterior',90)]}]),
         {label:'Glúteo — hip thrust',exs:[ex(dl?'Hip thrust máquina (DX)':hip,sets(3,'12-15',dl),12,null,null,'posterior',90)]},
         {label:'Cadera — abducción',exs:[ex('Abducción cadera máquina',sets(3,'15-20',dl),15,null,null,'abduccion',60)]},
-        ...(dl?[]:[{label:'Cadera — aducción',exs:[ex('Aducción cadera máquina','3x15-20',15,null,null,'abduccion',60)]}]),
         {label:'Gemelo',exs:[ex(dl?'Gemelo prensa de piernas':gem,sets(3,'15-20',dl),15,null,null,'gemelo',60)]},
         ...core_legs(dl),
       ]
