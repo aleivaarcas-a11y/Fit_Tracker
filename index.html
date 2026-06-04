@@ -1198,7 +1198,7 @@ function buildProg(){
   function ex(n,s,r,badge,yt,g,rest){return{n,s,r,badge:badge||null,yt:yt||null,g:g||null,super:false,cardio:false,rest:rest||90};}
   function cardio(name,dur){return{n:name,s:dur,r:null,badge:'cardio',yt:null,g:null,super:false,cardio:true,rest:0};}
 
-  // ── S1-S5 sem0: estructura original preservada ────────────────────────────
+  // ── S1-S8 históricos preservados ──────────────────────────────────────────
   const week0=[];
   week0.push({type:'gym',label:'Push A',icon:'💪',color:'gym',calmType:'push',isDeload:false,duration:'Gym ~65 min',desc:'Pecho palancas · Hombros · Laterales+Pec deck · Cruce+Overhead',blocks:[
     {label:'Pecho — compuesto',exs:[ex('Press pecho máquina palancas','2x8-12',10,'amrap',null,'pecho',180)]},
@@ -1239,7 +1239,7 @@ function buildProg(){
   week0.push({type:'rest',label:'Descanso',icon:'😴',color:'rest',calmType:null,isDeload:false,duration:'Recuperación',desc:'Descanso libre',blocks:[{label:'Actividad libre',exs:[{n:'Descanso completo',s:'Lo que el cuerpo pida',r:null,badge:null,yt:null,g:null,super:false,cardio:false,rest:0}]}]});
   prog.push(week0);
 
-  // ── S6-S10 sem1: S6-S8 originales + S9-S10 nuevos ────────────────────────
+  // ── S6-S10 sem1 ───────────────────────────────────────────────────────────
   const week1=[];
   week1.push({type:'gym',label:'Push A',icon:'💪',color:'gym',calmType:'push',isDeload:false,duration:'Gym ~65 min',desc:'Press inclinado · Arnold · Laterales+Pec deck · Cruce bajo+Overhead',blocks:[
     {label:'Pecho — compuesto',exs:[ex('Press inclinado máquina','2x8-12',10,'amrap',null,'pecho',180)]},
@@ -1263,123 +1263,99 @@ function buildProg(){
     {label:'Glúteo',exs:[ex('Hip thrust barra en banco','2x12-15',12,null,null,'posterior',120)]},
     {label:'Cadera y gemelo',exs:[ex('Abducción cadera máquina','2x15-20',15,null,null,'abduccion',60),ex('Gemelo máquina de pie','2x15-20',15,null,null,'gemelo',60)]},
   ]});
-  // S9 Push A nuevo MC1, S10 Pull A nuevo MC1
   week1.push(buildPushA(1,false));
   week1.push(buildPullA(1,false));
   week1.push({type:'rest',label:'Descanso',icon:'😴',color:'rest',calmType:null,isDeload:false,duration:'Recuperación',desc:'Descanso activo',blocks:[{label:'Actividad libre',exs:[{n:'Senderismo o actividad ligera',s:'Lo que el cuerpo pida',r:null,badge:null,yt:null,g:null,super:false,cardio:false,rest:0}]}]});
   week1.push({type:'rest',label:'Descanso',icon:'😴',color:'rest',calmType:null,isDeload:false,duration:'Recuperación',desc:'Descanso libre',blocks:[{label:'Actividad libre',exs:[{n:'Descanso completo',s:'Lo que el cuerpo pida',r:null,badge:null,yt:null,g:null,super:false,cardio:false,rest:0}]}]});
   prog.push(week1);
 
-  // ── MC1 semanas 2-5 (S11-S30) ─────────────────────────────────────────────
-  // Orden: Legs, PushA, PullA, PushB, PullB (5 sesiones + 2 descanso = 7)
-  // Deload en semana 5 (w=5)
-
-  // BUILDERS — definidos antes del for loop
+  // ── BUILDERS ─────────────────────────────────────────────────────────────
   function sets(n,r,dl){return dl?`${Math.max(2,n-1)}x${r}`:`${n}x${r}`;}
 
-  // CORE: 2 ejercicios por sesión, 3 series cada uno
-  function core_push(dl){
-    if(dl)return[];
-    return[
-      {label:'Core — recto abdominal',exs:[ex('Crunch máquina abdominal','3x12-15',12,null,null,null,60)]},
-      {label:'Core — lumbar',exs:[ex('Back extension máquina','3x12-15',12,null,null,null,60)]},
-    ];
+  function core_push(sw){
+    const exs=sw===2?'Back extension máquina':'Crunch máquina abdominal';
+    return[{label:'Core',exs:[ex(exs,'3x12-15',12,null,null,null,60)]}];
   }
-  function core_pull(dl){
-    if(dl)return[];
-    return[
-      {label:'Core — recto abdominal',exs:[ex('Crunch banco declinado','3x12-15',12,null,null,null,60)]},
-      {label:'Core — oblicuos',exs:[ex('Oblicuos lateral máquina','3x12-15',12,null,null,null,60)]},
-    ];
+  function core_pull(sw){
+    const exs=sw===2?'Oblicuos lateral máquina':'Crunch banco declinado';
+    return[{label:'Core',exs:[ex(exs,'3x12-15',12,null,null,null,60)]}];
   }
-  function core_legs(dl){
-    if(dl)return[];
-    return[
-      {label:'Core — recto inferior',exs:[ex('Crunch inverso — elevación piernas máquina','3x12-15',12,null,null,null,60)]},
-      {label:'Core — core completo',exs:[ex('Ab coaster — rodillas al pecho','3x10-12',12,null,null,null,60)]},
-    ];
+  function core_legs(sw){
+    const exs=sw===2?'Ab coaster — rodillas al pecho':'Crunch inverso — elevación piernas';
+    return[{label:'Core',exs:[ex(exs,'3x12-15',12,null,null,null,60)]}];
   }
 
-  // PUSH A — Pecho prioritario (~18-20 series)
-  // Sem1: Press inclinado mancuernas, Pec Deck DX, Press hombros mancuernas, Laterales, Pushdown
-  // Sem2: Press banca mancuernas, Cruce polea neutro, Press hombros palancas DX, Lat polea, Overhead
-  // Sem3: Press inclinado máquina DX, Pec Deck DX, Press hombros mancuernas, Laterales, Pushdown
-  // Sem4 deload
+  // PUSH A — Pecho prioritario (~18 series)
+  // 4 + 3 + 3 + 3 + 2 + 3 core = 18
   function buildPushA(sw,dl){
     const ex2=sw===2?'Press banca mancuernas':sw===3?'Press inclinado máquina (DX)':'Press inclinado mancuernas';
     const ex3=sw===2?'Cruce polea neutro':'Pec Deck máquina (DX)';
     const ex4=sw===2?'Press hombros máquina palancas (DX)':'Press hombros mancuernas sentado';
     const ex5=sw===2?'Elevaciones laterales polea baja':'Elevaciones laterales mancuernas';
-    const ex6=sw===2?'Extensión overhead polea cuerda':'Pushdown polea cuerda';
     return{type:'gym',label:'Push A',icon:'💪',color:'gym',calmType:'push',isDeload:dl,
-      duration:dl?'Gym ~50 min + Cardio 20 min':'Gym ~65 min + Cardio 20 min',
-      desc:dl?'DESCARGA — Pecho · Hombros · Tríceps'
-          :'Press pecho DX · '+ex2+' · '+ex3+' · '+ex4+' · Laterales · Tríceps · Core',
+      duration:dl?'Gym ~45 min + Cardio 20 min':'Gym ~40 min + Cardio 20 min',
+      desc:dl?'DESCARGA — Pecho · Hombros':'Press pecho DX · '+ex2+' · '+ex3+' · '+ex4+' · Core',
       blocks:[
-        {label:'Pecho — compuesto principal',exs:[ex('Press pecho máquina palancas (DX)',sets(4,'10-12',dl),10,'amrap',null,'pecho',120)]},
+        {label:'Pecho — compuesto',exs:[ex('Press pecho máquina palancas (DX)',sets(4,'10-12',dl),10,'amrap',null,'pecho',120)]},
         ...(dl?[]:[
           {label:'Pecho — segundo compuesto',exs:[ex(ex2,'3x10-12',10,null,null,'pecho',90)]},
           {label:'Pecho — aislamiento',exs:[ex(ex3,'3x12-15',12,null,null,'pecho',90)]},
           {label:'Hombros — press',exs:[ex(ex4,'3x10-12',10,'prog',null,'hombro',90)]},
-          {label:'Hombros — laterales',exs:[ex(ex5,'3x15-20',15,null,null,'lateral',60)]},
-          {label:'Tríceps',exs:[ex(ex6,'3x12-15',12,null,null,'triceps',60)]},
-          ...core_push(false),
+          {label:'Hombros — laterales',exs:[ex(ex5,'2x15-20',15,null,null,'lateral',60)]},
+          ...core_push(sw),
         ]),
         {label:'Cardio',exs:[cardio('Bici estática Zona 2','20 min — 130-145 ppm')]},
       ]
     };
   }
 
-  // PUSH B — Hombros prioritario (~18-20 series)
+  // PUSH B — Hombros prioritario (~18 series)
   function buildPushB(sw,dl){
     const ex2=sw===2?'Press inclinado mancuernas':'Press banca mancuernas';
     const ex3=sw===2?'Pec Deck máquina (DX)':sw===3?'Cruce polea bajo':'Cruce polea alto';
     const ex4=sw===2?'Elevaciones laterales mancuernas':'Elevaciones laterales polea baja';
     const ex5=sw===2?'Pushdown polea cuerda':'Extensión overhead polea cuerda';
     return{type:'gym',label:'Push B',icon:'💪',color:'gym',calmType:'push',isDeload:dl,
-      duration:dl?'Gym ~50 min + Cardio 20 min':'Gym ~65 min + Cardio 20 min',
-      desc:dl?'DESCARGA — Hombros · Pecho · Tríceps'
-          :'Press hombros DX · '+ex2+' · '+ex3+' · Laterales · Tríceps · Core',
+      duration:dl?'Gym ~45 min + Cardio 20 min':'Gym ~40 min + Cardio 20 min',
+      desc:dl?'DESCARGA — Hombros · Pecho':'Press hombros DX · '+ex2+' · '+ex3+' · Laterales · Core',
       blocks:[
-        {label:'Hombros — compuesto principal',exs:[ex('Press hombros máquina palancas (DX)',sets(4,'10-12',dl),8,'amrap',null,'hombro',120)]},
+        {label:'Hombros — compuesto',exs:[ex('Press hombros máquina palancas (DX)',sets(4,'10-12',dl),8,'amrap',null,'hombro',120)]},
         ...(dl?[]:[
           {label:'Pecho — press',exs:[ex(ex2,'3x10-12',10,null,null,'pecho',90)]},
           {label:'Pecho — aislamiento',exs:[ex(ex3,'3x12-15',12,null,null,'pecho',90)]},
           {label:'Hombros — laterales',exs:[ex(ex4,'3x15-20',15,null,null,'lateral',60)]},
-          {label:'Tríceps',exs:[ex(ex5,'3x12-15',12,null,null,'triceps',60)]},
-          {label:'Salud articular',exs:[ex('Face pulls polea','2x15-20',15,null,null,'face_pull',60)]},
-          ...core_push(false),
+          {label:'Tríceps',exs:[ex(ex5,'2x12-15',12,null,null,'triceps',60)]},
+          ...core_push(sw===2?1:2),
         ]),
         {label:'Cardio',exs:[cardio('Bici estática Zona 2','20 min — 130-145 ppm')]},
       ]
     };
   }
 
-  // PULL A — Tirón vertical prioritario (~18-20 series)
+  // PULL A — Tirón vertical (~18 series)
   function buildPullA(sw,dl){
     const ex2=sw===2?'Pullover polea alta':'Pullover máquina (DX)';
     const ex3=sw===2?'Remo polea unilateral (DX)':'Remo mancuerna unilateral';
     const ex4=sw===2?'Curl concentrado mancuerna':'Curl predicador máquina (DX)';
     const ex5=sw===2?'Curl alterno mancuernas supinando':'Curl martillo mancuernas';
     return{type:'gym',label:'Pull A',icon:'🏋️',color:'gym',calmType:'pull',isDeload:dl,
-      duration:dl?'Gym ~50 min + Cardio 20 min':'Gym ~65 min + Cardio 20 min',
-      desc:dl?'DESCARGA — Jalón · Remo · Bíceps'
-          :'Jalón neutro · '+ex2+' · '+ex3+' · Bíceps · Core',
+      duration:dl?'Gym ~45 min + Cardio 20 min':'Gym ~40 min + Cardio 20 min',
+      desc:dl?'DESCARGA — Jalón · Remo · Bíceps':'Jalón neutro · '+ex2+' · '+ex3+' · Bíceps · Core',
       blocks:[
         {label:'Espalda — tirón vertical',exs:[ex('Jalón polea agarre neutro',sets(4,'10-12',dl),8,'amrap',null,'espalda_v',120)]},
         ...(dl?[]:[
           {label:'Espalda — pullover',exs:[ex(ex2,'3x12-15',12,'prog',null,'espalda_v',90)]},
           {label:'Espalda — remo',exs:[ex(ex3,'3x10-12',10,null,null,'espalda_h',90)]},
           {label:'Bíceps — curl 1',exs:[ex(ex4,'3x10-12',10,null,null,'biceps',90)]},
-          {label:'Bíceps — curl 2',exs:[ex(ex5,'3x12-15',12,null,null,'biceps',60)]},
-          ...core_pull(false),
+          {label:'Bíceps — curl 2',exs:[ex(ex5,'2x12-15',12,null,null,'biceps',60)]},
+          ...core_pull(sw),
         ]),
         {label:'Cardio',exs:[cardio('Bici estática Zona 2','20 min — 130-145 ppm')]},
       ]
     };
   }
 
-  // PULL B — Remo prioritario (~18-20 series)
+  // PULL B — Remo prioritario (~18 series)
   function buildPullB(sw,dl){
     const ex2=sw===2?'Jalón polea agarre ancho':'Jalón polea agarre supino';
     const ex3=sw===2?'Remo mancuerna unilateral':'Remo polea agarre neutro';
@@ -1387,49 +1363,43 @@ function buildProg(){
     const ex5=sw===2?'Curl predicador máquina (DX)':'Curl concentrado mancuerna';
     const ex6=sw===2?'Curl martillo mancuernas':'Curl alterno mancuernas supinando';
     return{type:'gym',label:'Pull B',icon:'🏋️',color:'gym',calmType:'pull',isDeload:dl,
-      duration:dl?'Gym ~50 min + Cardio 20 min':'Gym ~65 min + Cardio 20 min',
-      desc:dl?'DESCARGA — Remo · Jalón · Bíceps'
-          :'Remo DX · '+ex2+' · '+ex3+' · Deltoides post · Bíceps · Core',
+      duration:dl?'Gym ~45 min + Cardio 20 min':'Gym ~40 min + Cardio 20 min',
+      desc:dl?'DESCARGA — Remo · Jalón · Bíceps':'Remo DX · '+ex2+' · '+ex3+' · Deltoides post · Bíceps · Core',
       blocks:[
-        {label:'Espalda — remo horizontal',exs:[ex('Remo máquina palancas (DX)',sets(4,'10-12',dl),8,'amrap',null,'espalda_h',120)]},
+        {label:'Espalda — remo',exs:[ex('Remo máquina palancas (DX)',sets(4,'10-12',dl),8,'amrap',null,'espalda_h',120)]},
         ...(dl?[]:[
-          {label:'Espalda — tirón vertical',exs:[ex(ex2,'3x10-12',10,'prog',null,'espalda_v',90)]},
+          {label:'Espalda — tirón',exs:[ex(ex2,'3x10-12',10,'prog',null,'espalda_v',90)]},
           {label:'Espalda — remo unilateral',exs:[ex(ex3,'3x10-12',10,null,null,'espalda_h',90)]},
           {label:'Deltoides posterior',exs:[ex(ex4,'3x12-15',12,null,null,'face_pull',60)]},
           {label:'Bíceps — curl 1',exs:[ex(ex5,'3x10-12',10,null,null,'biceps',90)]},
-          {label:'Bíceps — curl 2',exs:[ex(ex6,'3x12-15',12,null,null,'biceps',60)]},
-          ...core_pull(false),
+          {label:'Bíceps — curl 2',exs:[ex(ex6,'2x12-15',12,null,null,'biceps',60)]},
+          ...core_pull(sw===2?1:2),
         ]),
         {label:'Cardio',exs:[cardio('Bici estática Zona 2','20 min — 130-145 ppm')]},
       ]
     };
   }
 
-  // LEGS — (~18-20 series)
+  // LEGS (~19 series)
   function buildLegs(sw,dl){
     const comp=sw===1?'Sentadilla en Smith':sw===2?'Prensa de piernas':sw===3?'Hack squat máquina':'Sentadilla en Smith';
-    const rdl=sw===2?'RDL máquina palancas (DX)':'RDL mancuernas';
     const curl=sw===2?'Curl femoral sentado máquina':'Curl femoral tumbado máquina';
     const hip=sw===2?'Hip thrust barra en banco':'Hip thrust máquina (DX)';
-    // Gemelo alterna: sem1+sem3 sóleo DX, sem2+sem4 máquina de pie
-    const gem=sw===2||sw===4?'Gemelo máquina de pie':'Gemelo máquina sentado — sóleo (DX)';
     return{type:'gym',label:'Legs',icon:'🦵',color:'gym',calmType:'legs',isDeload:dl,
-      duration:dl?'Gym ~50 min':'Gym ~65 min + Cardio 20 min',
-      desc:dl?'DESCARGA — Pierna completa'
-          :comp+' · Extensión · '+curl+' · RDL · Hip thrust · Abducción · Core',
+      duration:dl?'Gym ~45 min + Cardio 20 min':'Gym ~40 min + Cardio 20 min',
+      desc:dl?'DESCARGA — Pierna completa':comp+' · Extensión · '+curl+' · Hip thrust · Abducción · Core',
       blocks:[
         {label:'Cuádriceps — compuesto',exs:[ex(dl?'Prensa de piernas':comp,sets(4,'10-12',dl),10,'amrap',null,'cuad',120)]},
         {label:'Cuádriceps — extensión',exs:[ex('Extensión cuádriceps máquina (DX)',sets(3,'12-15',dl),12,'prog',null,'cuad',60)]},
-        {label:'Isquiotibiales — curl',exs:[ex(dl?'Curl femoral tumbado máquina':curl,sets(3,'10-12',dl),10,null,null,'posterior',90)]},
-        ...(dl?[]:[{label:'Isquiotibiales — RDL',exs:[ex(rdl,'3x10-12',10,null,null,'posterior',90)]}]),
+        {label:'Isquiotibiales',exs:[ex(dl?'Curl femoral tumbado máquina':curl,sets(3,'10-12',dl),10,null,null,'posterior',90)]},
         {label:'Glúteo — hip thrust',exs:[ex(dl?'Hip thrust máquina (DX)':hip,sets(3,'12-15',dl),12,null,null,'posterior',90)]},
         {label:'Cadera — abducción',exs:[ex('Abducción cadera máquina',sets(3,'15-20',dl),15,null,null,'abduccion',60)]},
-        {label:'Gemelo',exs:[ex(dl?'Gemelo prensa de piernas':gem,sets(3,'15-20',dl),15,null,null,'gemelo',60)]},
-        ...core_legs(dl),
+        ...core_legs(sw),
       ]
     };
   }
 
+  // ── MC1 semanas 2-5 ───────────────────────────────────────────────────────
   for(let w=2;w<=5;w++){
     const dl=w===5;
     const sw=w-1;
