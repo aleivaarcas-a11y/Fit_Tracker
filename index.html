@@ -1404,9 +1404,9 @@ function buildProg(){
     const dl=w===5;
     const sw=w-1;
     const week=[];
-    week.push(buildLegs(sw,dl));
     week.push(buildPushA(sw,dl));
     week.push(buildPullA(sw,dl));
+    week.push(buildLegs(sw,dl));
     week.push(buildPushB(sw,dl));
     week.push(buildPullB(sw,dl));
     week.push({type:'rest',label:'Descanso',icon:'😴',color:'rest',calmType:null,isDeload:false,duration:'Recuperación',desc:'Descanso activo',blocks:[{label:'Actividad libre',exs:[{n:'Senderismo o actividad ligera',s:'Lo que el cuerpo pida',r:null,badge:null,yt:null,g:null,super:false,cardio:false,rest:0}]}]});
