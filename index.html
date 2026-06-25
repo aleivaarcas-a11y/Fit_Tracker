@@ -1446,6 +1446,15 @@ let prFilter='all';
 function saveL(){localStorage.setItem('ft4_logs',JSON.stringify(logs));}
 function saveBioD(){localStorage.setItem('ft4_bio',JSON.stringify(bioData));}
 function saveNotes(){localStorage.setItem('ft4_notes',JSON.stringify(sessionNotes));}
+// Detecta ejercicios de mancuerna para multiplicar volumen x2
+function isMancuerna(name){
+  if(!name)return false;
+  var n=name.toLowerCase();
+  return n.includes('mancuerna')||n.includes('arnold')||n.includes('martillo')||
+         n.includes('concentrado')||n.includes('alterno')||n.includes('spider')||
+         n.includes('araña')||n.includes('pajaro')||n.includes('pájaro');
+}
+
 function exKey(w,d,bi,ei){return`s${w*5+d}b${bi}e${ei}`;}
 function noteKey(w,d){return`w${w}d${d}`;}
 
@@ -1540,15 +1549,27 @@ function showDiagram(exName, group){
 function closeDiag(){var m=document.getElementById('diag-modal');if(m)m.style.display='none';}
 
 // ─── TIMER ────────────────────────────────────────────────────────────────────
+let timerEndTime=0;
 function startTimer(sec){
-  timerSec=sec;timerOn=true;clearInterval(timerInt);renderTimerArea();
+  timerSec=sec;timerOn=true;timerEndTime=Date.now()+sec*1000;clearInterval(timerInt);renderTimerArea();
   timerInt=setInterval(()=>{
-    if(!timerOn)return; timerSec--;
+    if(!timerOn)return;
+    // Calcula tiempo restante por diferencia real de timestamps (sobrevive a cierre de app)
+    timerSec=Math.max(0,Math.round((timerEndTime-Date.now())/1000));
     if(timerSec<=0){timerSec=0;timerOn=false;clearInterval(timerInt);if(navigator.vibrate)navigator.vibrate([200,100,200]);}
     const el=document.getElementById('timer-num');
     if(el){const m=Math.floor(timerSec/60),s=timerSec%60;el.textContent=`${m}:${s.toString().padStart(2,'0')}`;el.className='timer-num '+(timerSec<=10?'urgent':'ok');}
   },1000);
 }
+// Al volver a la app (visibilitychange), recalcula el timer
+document.addEventListener('visibilitychange',function(){
+  if(!document.hidden&&timerOn&&timerEndTime>0){
+    timerSec=Math.max(0,Math.round((timerEndTime-Date.now())/1000));
+    if(timerSec<=0){timerSec=0;timerOn=false;clearInterval(timerInt);}
+    const el=document.getElementById('timer-num');
+    if(el){const m=Math.floor(timerSec/60),s=timerSec%60;el.textContent=`${m}:${s.toString().padStart(2,'0')}`;el.className='timer-num '+(timerSec<=10?'urgent':'ok');}
+  }
+});
 function pauseTimer(){timerOn=!timerOn;}
 function resetTimer(){timerOn=false;clearInterval(timerInt);timerSec=0;renderTimerArea();}
 function renderTimerArea(){
@@ -1942,12 +1963,22 @@ function renderDashboard(){
   // ── KPI ROW 1: sesiones y volumen total ──────────────────────────────────
   var totalSess=completedSessions.length;
   var totalVol=0,totalSer=0;
-  Object.keys(logs).forEach(function(k){
-    var lg=logs[k];
-    if(lg&&lg.sets)lg.sets.forEach(function(st){
-      if(st.done){totalSer++;totalVol+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}
+  for(var pi=0;pi<PROG.length;pi++){
+    var sess=PROG[pi];
+    if(!sess||!sess.blocks)continue;
+    var w=Math.floor(pi/5),d=pi%5;
+    sess.blocks.forEach(function(b,bi){
+      b.exs.forEach(function(ex,ei){
+        if(ex.cardio||!ex.n)return;
+        var lg=logs[exKey(w,d,bi,ei)];
+        if(!lg||!lg.sets)return;
+        var mult=isMancuerna(ex.n)?2:1;
+        lg.sets.forEach(function(st){
+          if(st.done){totalSer++;totalVol+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0)*mult;}
+        });
+      });
     });
-  });
+  }
   var pct=Math.round(totalSess/20*100);
   html+='<div class="dash-section">Resumen general</div>';
   html+='<div class="kpi-grid">';
