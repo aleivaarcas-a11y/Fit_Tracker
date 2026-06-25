@@ -1483,12 +1483,102 @@ function computePRs(){
   return prs;
 }
 
+
+// ─── EDICIÓN Y LIMPIEZA DE PRs ────────────────────────────────────────────────
+function findLogKeyForExercise(exName){
+  // Busca la clave de log más reciente para un ejercicio dado
+  var foundKey=null,foundSi=null;
+  for(var pi=0;pi<PROG.length;pi++){
+    var sess=PROG[pi];
+    if(!sess||!sess.blocks)continue;
+    var w=Math.floor(pi/5),d=pi%5;
+    sess.blocks.forEach(function(b,bi){
+      b.exs.forEach(function(ex,ei){
+        if(ex.n===exName){
+          var k=exKey(w,d,bi,ei);
+          if(logs[k]&&logs[k].sets){foundKey=k;}
+        }
+      });
+    });
+  }
+  return foundKey;
+}
+
+function editPR(exName){
+  // Encuentra todas las series registradas de este ejercicio y permite editarlas
+  var allEntries=[];
+  for(var pi=0;pi<PROG.length;pi++){
+    var sess=PROG[pi];
+    if(!sess||!sess.blocks)continue;
+    var w=Math.floor(pi/5),d=pi%5;
+    sess.blocks.forEach(function(b,bi){
+      b.exs.forEach(function(ex,ei){
+        if(ex.n===exName){
+          var k=exKey(w,d,bi,ei);
+          if(logs[k]&&logs[k].sets){
+            logs[k].sets.forEach(function(st,si){
+              if(st.done&&st.kg)allEntries.push({key:k,si:si,kg:st.kg,reps:st.reps});
+            });
+          }
+        }
+      });
+    });
+  }
+  if(!allEntries.length){alert('No hay series registradas de '+exName);return;}
+  // Encuentra el valor máximo (el PR)
+  var maxEntry=allEntries.reduce(function(a,b){return parseFloat(b.kg)>parseFloat(a.kg)?b:a;});
+  var nuevo=prompt('Editar récord de '+exName+'\n\nPeso actual del récord: '+maxEntry.kg+'kg x'+maxEntry.reps+' reps\n\nIntroduce el peso correcto (kg):',maxEntry.kg);
+  if(nuevo===null)return;
+  var nuevoKg=parseFloat(nuevo.replace(',','.'));
+  if(isNaN(nuevoKg)||nuevoKg<0){alert('Valor no válido');return;}
+  logs[maxEntry.key].sets[maxEntry.si].kg=String(nuevoKg);
+  saveL();
+  renderPR();
+  alert('Récord actualizado a '+nuevoKg+'kg');
+}
+
+function cleanAnomalousPRs(){
+  // Detecta valores >3x la mediana del ejercicio y los marca para revisión
+  var prs=computePRs();
+  var anomalias=[];
+  Object.keys(prs).forEach(function(name){
+    var hist=prs[name].history;
+    if(hist.length<2)return;
+    var kgs=hist.map(function(h){return parseFloat(h.kg);}).filter(function(x){return x>0;}).sort(function(a,b){return a-b;});
+    if(kgs.length<2)return;
+    var mediana=kgs[Math.floor(kgs.length/2)];
+    var max=Math.max.apply(null,kgs);
+    // Anómalo si el máximo es >3x la mediana
+    if(max>mediana*3&&mediana>0){
+      anomalias.push({name:name,max:max,mediana:mediana});
+    }
+  });
+  if(!anomalias.length){alert('✓ No se han detectado récords anómalos.');return;}
+  var msg='Se han detectado '+anomalias.length+' posibles récords erróneos:\n\n';
+  anomalias.forEach(function(a){
+    msg+='• '+a.name+': '+a.max+'kg (tu media es '+a.mediana+'kg)\n';
+  });
+  msg+='\nPulsa cada récord con ✏️ para corregirlo manualmente.';
+  alert(msg);
+}
+
 function renderPR(){
   const prs=computePRs();
   const search=(document.getElementById('pr-search').value||'').toLowerCase();
   const groups=['all','pecho','hombro','biceps','triceps','espalda_v','espalda_h','cuad','posterior','gemelo','abduccion'];
   const groupLabels={all:'Todos',pecho:'Pecho',hombro:'Hombros',biceps:'Biceps',triceps:'Triceps',espalda_v:'Espalda',espalda_h:'Espalda H',cuad:'Cuadriceps',posterior:'Isquios',gemelo:'Gemelos',abduccion:'Gluteo med.'};
   document.getElementById('pr-filters').innerHTML=groups.map(g=>`<button class="pr-filter ${prFilter===g?'active':''}" onclick="prFilter='${g}';renderPR()">${groupLabels[g]}</button>`).join('');
+  // Botón limpiar anómalos
+  var cleanBtn=document.getElementById('pr-clean-btn');
+  if(!cleanBtn){
+    var filtersEl=document.getElementById('pr-filters');
+    var btn=document.createElement('button');
+    btn.id='pr-clean-btn';
+    btn.textContent='🧹 Limpiar récords anómalos';
+    btn.style.cssText='width:100%;margin:8px 0;padding:8px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:12px;font-weight:700;cursor:pointer';
+    btn.onclick=cleanAnomalousPRs;
+    filtersEl.parentNode.insertBefore(btn,filtersEl.nextSibling);
+  }
 
   const entries=Object.entries(prs).filter(([name,data])=>{
     if(search&&!name.toLowerCase().includes(search)) return false;
@@ -1513,7 +1603,10 @@ function renderPR(){
     return`<div class="pr-card">
       <div class="pr-card-top">
         <div class="pr-ex-name">${name}</div>
-        <div class="pr-muscle-tag">${muscleLabel}</div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <div class="pr-muscle-tag">${muscleLabel}</div>
+          <button onclick="editPR('${name.replace(/'/g,"\\'")}')" style="background:none;border:1px solid var(--brd);border-radius:6px;padding:2px 8px;font-size:11px;cursor:pointer;color:var(--muted)">✏️</button>
+        </div>
       </div>
       <div class="pr-record">
         <div class="pr-record-icon">🏆</div>
