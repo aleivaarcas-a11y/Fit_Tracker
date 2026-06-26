@@ -1265,8 +1265,8 @@ function buildProg(){
     {label:'Cadera y gemelo',exs:[ex('Abducción cadera máquina','2x15-20',15,null,null,'abduccion',60),ex('Gemelo máquina de pie','2x15-20',15,null,null,'gemelo',60)]},
   ]});
   // S9 Push PPHL, S10 Pull PPHL
-  week1.push(buildPush(1,false));
-  week1.push(buildPull(1,false));
+  week1.push(rest());
+  week1.push(rest());
   week1.push(rest());
   week1.push(rest());
   prog.push(week1);
@@ -1392,7 +1392,7 @@ const DAYS=['Lun','Mar','Mie','Jue','Vie','Sab','Dom'];
 const DAYS_F=['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
-let curSession=(function(){var saved=Math.max(10,parseInt(localStorage.getItem('ft_sess')||'10'));var total=PROG.length;var allLogs=JSON.parse(localStorage.getItem('ft4_logs')||'{}');for(var i=saved;i<total;i++){var s=PROG[i];if(!s)break;var done=true;s.blocks.forEach(function(b,bi){b.exs.forEach(function(e,ei){if(e.cardio)return;var lg=allLogs['s'+i+'b'+bi+'e'+ei];if(!lg||!lg.sets||!lg.sets.some(function(st){return st.done;}))done=false;});});if(!done)return Math.min(total-1,Math.max(0,i));}return Math.min(total-1,Math.max(0,saved));})();
+let curSession=(function(){var saved=Math.max(8,parseInt(localStorage.getItem('ft_sess')||'10'));var total=PROG.length;var allLogs=JSON.parse(localStorage.getItem('ft4_logs')||'{}');for(var i=saved;i<total;i++){var s=PROG[i];if(!s)break;var done=true;s.blocks.forEach(function(b,bi){b.exs.forEach(function(e,ei){if(e.cardio)return;var lg=allLogs['s'+i+'b'+bi+'e'+ei];if(!lg||!lg.sets||!lg.sets.some(function(st){return st.done;}))done=false;});});if(!done)return Math.min(total-1,Math.max(0,i));}return Math.min(total-1,Math.max(0,saved));})();
 let curWeek=Math.floor(curSession/5);
 let curDay=curSession%5;
 function saveSess(){localStorage.setItem('ft_sess',curSession);}
