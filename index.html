@@ -1381,6 +1381,10 @@ function buildProg(){
   return prog;
 }
 
+let absCompleted=JSON.parse(localStorage.getItem('ft_abs_done')||'[]');
+let absCurSession=0;
+let stepsData=JSON.parse(localStorage.getItem('ft_steps')||'{}');
+let foodData=JSON.parse(localStorage.getItem('ft_food')||'{}');
 const PROG_NESTED=buildProg();
 const PROG=(()=>{const f=[];PROG_NESTED.forEach(w=>w.forEach(d=>{if(d.type!=="rest")f.push(d);}));return f;})();
 // PROG = 20 gym sessions (4 weeks x 5 days, no rest days)
