@@ -1392,7 +1392,7 @@ const DAYS=['Lun','Mar','Mie','Jue','Vie','Sab','Dom'];
 const DAYS_F=['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
-let curSession=(function(){var saved=parseInt(localStorage.getItem('ft_sess')||'0');var allLogs=JSON.parse(localStorage.getItem('ft4_logs')||'{}');for(var i=saved;i<20;i++){var s=PROG[i];if(!s)break;var done=true;s.blocks.forEach(function(b,bi){b.exs.forEach(function(e,ei){if(e.cardio)return;var lg=allLogs['s'+i+'b'+bi+'e'+ei];if(!lg||!lg.sets||!lg.sets.some(function(st){return st.done;}))done=false;});});if(!done)return Math.min(19,Math.max(0,i));}return Math.min(19,Math.max(0,saved));})();
+let curSession=(function(){var saved=Math.max(10,parseInt(localStorage.getItem('ft_sess')||'10'));var total=PROG.length;var allLogs=JSON.parse(localStorage.getItem('ft4_logs')||'{}');for(var i=saved;i<total;i++){var s=PROG[i];if(!s)break;var done=true;s.blocks.forEach(function(b,bi){b.exs.forEach(function(e,ei){if(e.cardio)return;var lg=allLogs['s'+i+'b'+bi+'e'+ei];if(!lg||!lg.sets||!lg.sets.some(function(st){return st.done;}))done=false;});});if(!done)return Math.min(total-1,Math.max(0,i));}return Math.min(total-1,Math.max(0,saved));})();
 let curWeek=Math.floor(curSession/5);
 let curDay=curSession%5;
 function saveSess(){localStorage.setItem('ft_sess',curSession);}
@@ -2036,10 +2036,10 @@ function renderDashboard(){
       });
     });
   }
-  var pct=Math.round(totalSess/20*100);
+  var pct=Math.round(totalSess/PROG.length*100);
   html+='<div class="dash-section">Resumen general</div>';
   html+='<div class="kpi-grid">';
-  html+='<div class="kpi"><div class="kpi-val">'+totalSess+'<span style="font-size:14px;color:var(--muted)">/20</span></div><div class="kpi-lbl">Sesiones completadas</div><div class="kpi-sub">'+pct+'% del programa</div></div>';
+  html+='<div class="kpi"><div class="kpi-val">'+totalSess+'<span style="font-size:14px;color:var(--muted)">/'+PROG.length+'</span></div><div class="kpi-lbl">Sesiones completadas</div><div class="kpi-sub">'+pct+'% del programa</div></div>';
   html+='<div class="kpi"><div class="kpi-val">'+Math.round(totalVol/1000)+'<span style="font-size:14px;color:var(--muted)">t</span></div><div class="kpi-lbl">Volumen total</div><div class="kpi-sub">'+totalSer+' series hechas</div></div>';
   html+='</div>';
 
@@ -2171,7 +2171,7 @@ function renderDashboard(){
           '<div style="font-size:11px;color:var(--muted)">de 20 posibles</div></div>'+
         '<div style="margin-left:auto">'+
           '<div style="height:6px;width:100px;background:var(--border);border-radius:3px">'+
-            '<div style="height:100%;background:var(--pu);border-radius:3px;width:'+Math.min(100,Math.round(absCompleted.length/20*100))+'%"></div>'+
+            '<div style="height:100%;background:var(--pu);border-radius:3px;width:'+Math.min(100,Math.round(absCompleted.length/PROG.length*100))+'%"></div>'+
           '</div></div>'+
       '</div>'+
     '</div>';
@@ -3808,7 +3808,7 @@ function showMuscleModal(exName){
 
 function updateBadge(){
   const b=document.getElementById('tb-badge');
-  if(b) b.textContent='S'+(curSession+1)+'/20';
+  if(b) b.textContent='S'+(curSession+1)+'/'+PROG.length;
   const sub=document.getElementById('tb-sub');
   if(sub&&PROG[curSession]) sub.textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
 }
@@ -3922,7 +3922,7 @@ function renderAbsScreen(){
     var absNavHtml='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'+
       '<button onclick="absNav(-1)" style="background:none;border:1.5px solid var(--border);border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;color:var(--pu);line-height:1">&#8249;</button>'+
       '<div style="text-align:center"><div style="font-size:14px;font-weight:800;color:var(--pu)">'+label+'</div>'+
-      '<div style="font-size:10px;color:var(--muted)">'+(absIdx===curSession?'Sesion de hoy':'S'+(absIdx+1)+'/20')+'</div></div>'+
+      '<div style="font-size:10px;color:var(--muted)">'+(absIdx===curSession?'Sesion de hoy':'S'+(absIdx+1)+'/'+PROG.length)+'</div></div>'+
       '<button onclick="absNav(1)" style="background:none;border:1.5px solid var(--border);border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;color:var(--pu);line-height:1">&#8250;</button>'+
     '</div>';
     html+=absNavHtml;
@@ -4023,7 +4023,7 @@ function showMuscleModal(exName){
 
 function updateBadge(){
   const b=document.getElementById('tb-badge');
-  if(b) b.textContent='S'+(curSession+1)+'/20';
+  if(b) b.textContent='S'+(curSession+1)+'/'+PROG.length;
   const sub=document.getElementById('tb-sub');
   if(sub&&PROG[curSession]) sub.textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
 }
