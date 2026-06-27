@@ -453,104 +453,245 @@ canvas{display:block;width:100%!important;height:100%!important}
       <div id="copy-confirm" style="text-align:center;font-size:13px;color:var(--gr);margin-top:8px;display:none">Copiado. Pega esto en Claude.</div>
     </div>
   </div>
-</div>
-
-
-<div id="scr-nutri" class="scr">
+</di<div id="scr-nutri" class="scr">
   <div class="hero">
-    <div class="hero-label">Plan nutricional personalizado</div>
+    <div class="hero-label">Plan nutricional · 1.900 kcal · 130g proteína</div>
     <div class="hero-title">Recomposición<br><em>corporal</em></div>
-    <div class="hero-sub">94kg · Rybelsus 7mg · Déficit moderado · Deshinchar</div>
+    <div class="hero-sub">94kg · Rybelsus 7mg · Déficit ~500-800 kcal · Deshinchar</div>
   </div>
 
   <div class="card" style="margin-bottom:10px;border-left:3px solid #dc2626">
-    <div style="font-size:13px;font-weight:800;margin-bottom:8px">⚠️ Prioridad: reducir retención de líquidos</div>
-    <div style="font-size:12px;line-height:1.7;color:var(--text)">
-      La hinchazón viene de 3 sitios: <strong>exceso de sodio</strong> (aceitunas, picatostes, atún en aceite, queso feta), <strong>digestión lenta por Rybelsus</strong> (enlentece el vaciado gástrico) y <strong>carbohidratos refinados</strong>. No es grasa — es agua e inflamación digestiva.<br><br>
-      <strong>Solución:</strong> reducir sal, aumentar potasio (plátano, aguacate, espinacas), beber 2-2.5L agua/día, y priorizar carbohidratos complejos sobre refinados.
+    <div style="font-size:13px;font-weight:800;margin-bottom:6px">⚠️ Para deshinchar — reducir sodio, aumentar potasio</div>
+    <div style="font-size:12px;line-height:1.6">
+      Evitar L-V: picatostes, aceitunas, queso feta, philadelphia, atún en aceite, Bimbo, embutidos procesados.<br>
+      Priorizar: plátano, aguacate, espinacas, pepino, agua con limón, edamame. Beber 2-2.5L agua/día.
     </div>
   </div>
 
-  <div class="dash-section">Plan Lunes a Viernes</div>
-  <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Fines de semana libres por compromisos sociales</div>
+  <!-- TABS -->
+  <div style="display:flex;gap:6px;margin-bottom:12px;overflow-x:auto" id="nutri-tabs">
+    <button class="btn-sm active" onclick="showNutriWeek('a',this)" style="padding:6px 12px;border-radius:8px;border:1px solid var(--brd);background:var(--pu);color:#fff;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Semana A</button>
+    <button class="btn-sm" onclick="showNutriWeek('b',this)" style="padding:6px 12px;border-radius:8px;border:1px solid var(--brd);background:var(--card);color:var(--text);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Semana B</button>
+    <button class="btn-sm" onclick="showNutriWeek('compra',this)" style="padding:6px 12px;border-radius:8px;border:1px solid var(--brd);background:var(--card);color:var(--text);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Lista compra</button>
+    <button class="btn-sm" onclick="showNutriWeek('tips',this)" style="padding:6px 12px;border-radius:8px;border:1px solid var(--brd);background:var(--card);color:var(--text);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Consejos</button>
+  </div>
 
-  <div class="card" style="margin-bottom:8px">
-    <div style="font-size:13px;font-weight:800;margin-bottom:8px">☀️ Desayuno (~300 kcal · P:20g)</div>
-    <div style="font-size:12px;line-height:1.8">
-      • Tostada integral (no Bimbo) con aguacate + pavo (4 lonchas)<br>
-      • Café cortado con leche semidesnatada<br>
-      <span style="color:var(--muted);font-size:11px">Rybelsus 30 min antes. Sin philadelphia — alto en sodio y grasa.</span>
+  <!-- SEMANA A -->
+  <div id="nutri-a">
+    <div class="dash-section">Semana A — Pollo · Salmón · Atún · Merluza · Sardinas</div>
+
+    <div class="card" style="margin-bottom:6px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">LUNES</div>
+      <div style="font-size:11px;line-height:1.7">
+        ☀️ Tostada integral + aguacate ½ + pavo 4 lonchas + café cortado<br>
+        🍎 Skyr Arla 150g + nueces 15g + manzana<br>
+        🍽️ Arroz integral 60g + pollo plancha 150g + brócoli + AOVE 1 cuch<br>
+        🍵 Batido whey 30g + plátano + creatina 5g<br>
+        🌙 Revuelto 3 huevos + espinacas + champiñones
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:6px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">MARTES</div>
+      <div style="font-size:11px;line-height:1.7">
+        ☀️ Avena 40g + leche semi + plátano + canela<br>
+        🍎 Plátano + almendras 20g<br>
+        🍽️ Quinoa 60g + salmón 150g + espinacas + limón<br>
+        🍵 Batido whey 30g + fresas + creatina 5g<br>
+        🌙 Merluza al horno 150g + verdura al vapor (judías + zanahoria)
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:6px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">MIÉRCOLES</div>
+      <div style="font-size:11px;line-height:1.7">
+        ☀️ Tostada integral + huevo revuelto + tomate rodajas<br>
+        🍎 Skyr Arla 150g + fresas<br>
+        🍽️ Pasta integral 60g + atún al natural 2 latas + tomate + pepino + AOVE<br>
+        🍵 2 huevos duros + manzana<br>
+        🌙 Tortilla francesa 3 huevos + ensalada variada
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:6px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">JUEVES</div>
+      <div style="font-size:11px;line-height:1.7">
+        ☀️ Avena 40g + frutos rojos + nueces 15g<br>
+        🍎 Manzana + nueces 15g<br>
+        🍽️ Arroz integral 60g + pechuga pavo 150g + judías verdes + AOVE<br>
+        🍵 Batido whey 30g + plátano + creatina 5g<br>
+        🌙 Sardinas al natural + ensalada (tomate + pepino + cebolla)
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:6px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">VIERNES</div>
+      <div style="font-size:11px;line-height:1.7">
+        ☀️ Tostada integral + aguacate ½ + pavo 4 lonchas + café cortado<br>
+        🍎 Skyr Arla 150g + plátano<br>
+        🍽️ Lentejas 80g + verduras (pimiento + zanahoria + tomate) + huevo duro<br>
+        🍵 Batido whey 30g + manzana + creatina 5g<br>
+        🌙 Pollo plancha 150g + calabacín + pimiento a la plancha
+      </div>
     </div>
   </div>
 
-  <div class="card" style="margin-bottom:8px">
-    <div style="font-size:13px;font-weight:800;margin-bottom:8px">🍎 Media mañana (~200 kcal · P:15g)</div>
-    <div style="font-size:12px;line-height:1.8">
-      • Skyr Arla natural (150g) + puñado nueces (15g) + fruta de temporada<br>
-      <span style="color:var(--muted);font-size:11px">El skyr tiene el doble de proteína que el yogur griego.</span>
+  <!-- SEMANA B -->
+  <div id="nutri-b" style="display:none">
+    <div class="dash-section">Semana B — Ternera · Lubina · Caballa · Gambas · Edamame</div>
+
+    <div class="card" style="margin-bottom:6px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">LUNES</div>
+      <div style="font-size:11px;line-height:1.7">
+        ☀️ Avena 40g + leche semi + frutos rojos + canela<br>
+        🍎 Plátano + almendras 20g<br>
+        🍽️ Arroz integral 60g + ternera plancha 150g + espinacas + AOVE<br>
+        🍵 Batido whey 30g + plátano + creatina 5g<br>
+        🌙 Tortilla 3 huevos con calabacín + ensalada
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:6px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">MARTES</div>
+      <div style="font-size:11px;line-height:1.7">
+        ☀️ Tostada integral + aguacate ½ + huevo poché<br>
+        🍎 Skyr Arla 150g + nueces 15g + manzana<br>
+        🍽️ Quinoa 60g + lubina al horno 150g + brócoli + limón<br>
+        🍵 Batido whey 30g + fresas + creatina 5g<br>
+        🌙 Edamame 200g + salmón ahumado 80g
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:6px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">MIÉRCOLES</div>
+      <div style="font-size:11px;line-height:1.7">
+        ☀️ Tostada integral + pavo 4 lonchas + tomate + AOVE<br>
+        🍎 Skyr Arla 150g + fresas<br>
+        🍽️ Pasta integral 60g + gambas 150g + ajo + espinacas + AOVE<br>
+        🍵 2 huevos duros + plátano<br>
+        🌙 Caballa en conserva natural + ensalada variada
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:6px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">JUEVES</div>
+      <div style="font-size:11px;line-height:1.7">
+        ☀️ Avena 40g + plátano + nueces 15g + canela<br>
+        🍎 Manzana + almendras 20g<br>
+        🍽️ Arroz integral 60g + pollo al curry ligero 150g + verdura al wok<br>
+        🍵 Batido whey 30g + manzana + creatina 5g<br>
+        🌙 Revuelto 3 huevos + champiñones + espárragos
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:6px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">VIERNES</div>
+      <div style="font-size:11px;line-height:1.7">
+        ☀️ Tostada integral + aguacate ½ + pavo 4 lonchas + café<br>
+        🍎 Skyr Arla 150g + plátano<br>
+        🍽️ Garbanzos 80g + verduras asadas (pimiento + berenjena + cebolla) + huevo duro<br>
+        🍵 Batido whey 30g + fresas + creatina 5g<br>
+        🌙 Ternera plancha 150g + ensalada (pepino + tomate + aguacate)
+      </div>
     </div>
   </div>
 
-  <div class="card" style="margin-bottom:8px">
-    <div style="font-size:13px;font-weight:800;margin-bottom:8px">🍽️ Comida (~450 kcal · P:35g)</div>
-    <div style="font-size:12px;line-height:1.8">
-      • Arroz integral o quinoa (60g en seco) + pechuga de pollo/pavo/pescado blanco (150g) + verdura (ensalada, judías, brócoli)<br>
-      • Aliño: aceite de oliva (1 cucharada) + limón<br>
-      <span style="color:var(--muted);font-size:11px">Sin picatostes, sin aceitunas, sin queso feta — todo alto en sodio. Añade edamame (100g) para +11g proteína.</span>
+  <!-- LISTA COMPRA -->
+  <div id="nutri-compra" style="display:none">
+    <div class="dash-section">Lista de la compra Mercadona · ~50€</div>
+
+    <div class="card" style="margin-bottom:8px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">🥩 Proteína (~22€)</div>
+      <div style="font-size:11px;line-height:1.8">
+        • Pechuga pollo 2 bandejas — ~8€<br>
+        • Pechuga pavo lonchas — ~3€<br>
+        • Huevos docena — ~2.50€<br>
+        • Atún al natural 4 latas — ~4€<br>
+        • Sem A: Salmón congelado ~5€ + Merluza congelada ~4€ + Sardinas natural 2 latas ~2€<br>
+        • Sem B: Ternera ~6€ + Lubina/gambas congeladas ~5€ + Caballa natural 2 latas ~2€
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:8px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">🥛 Lácteos y cereales (~10€)</div>
+      <div style="font-size:11px;line-height:1.8">
+        • Skyr Arla natural 3 uds — ~3€<br>
+        • Leche semidesnatada — ~1€<br>
+        • Arroz integral — ~1.50€<br>
+        • Pasta integral — ~1€<br>
+        • Quinoa — ~2€<br>
+        • Avena — ~1€<br>
+        • Pan integral panadería — ~2€<br>
+        • Lentejas/garbanzos — ~1€
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:8px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">🥦 Fruta y verdura (~12€)</div>
+      <div style="font-size:11px;line-height:1.8">
+        • Plátanos — ~1€ · Manzanas — ~1.50€ · Fresas — ~2€<br>
+        • Espinacas — ~1.50€ · Brócoli — ~1.50€<br>
+        • Tomates — ~1€ · Champiñones — ~1€ · Pepino — ~0.50€<br>
+        • Judías verdes congel. — ~1€ · Calabacín — ~0.80€ · Pimientos — ~1€<br>
+        • Aguacates 2 — ~2€ · Limón — ~0.50€<br>
+        • Sem B: Edamame congelado — ~2€
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:8px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">🥜 Otros (~6€)</div>
+      <div style="font-size:11px;line-height:1.8">
+        • Nueces/almendras bolsa — ~2.50€<br>
+        • Frutos rojos congelados — ~2€<br>
+        • Canela molida — ~1€ (dura meses)<br>
+        • AOVE ya lo tienes · Whey ya lo tienes
+      </div>
+    </div>
+
+    <div class="card" style="background:#f0fdf4">
+      <div style="font-size:12px;font-weight:700;text-align:center">Total estimado: ~48-52€/semana</div>
     </div>
   </div>
 
-  <div class="card" style="margin-bottom:8px">
-    <div style="font-size:13px;font-weight:800;margin-bottom:8px">🍵 Merienda post-entreno (~250 kcal · P:30g)</div>
-    <div style="font-size:12px;line-height:1.8">
-      • Batido whey (30g) + plátano + creatina 5g<br>
-      • Si no entrenas: 2 huevos duros + fruta<br>
-      <span style="color:var(--muted);font-size:11px">El plátano aporta potasio que contrarresta el sodio y ayuda a deshinchar.</span>
-    </div>
-  </div>
+  <!-- CONSEJOS -->
+  <div id="nutri-tips" style="display:none">
+    <div class="dash-section">Consejos para deshinchar</div>
 
-  <div class="card" style="margin-bottom:8px">
-    <div style="font-size:13px;font-weight:800;margin-bottom:8px">🌙 Cena (~350 kcal · P:30g)</div>
-    <div style="font-size:12px;line-height:1.8">
-      • Revuelto de 3-4 huevos con espinacas y champiñones<br>
-      • O: pescado azul (salmón/sardinas) con verdura al vapor<br>
-      <span style="color:var(--muted);font-size:11px">Sin carbohidratos refinados en la cena. Las espinacas aportan potasio y magnesio.</span>
+    <div class="card" style="margin-bottom:8px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">🚫 Evitar L-V</div>
+      <div style="font-size:11px;line-height:1.8">
+        • Picatostes fritos — sodio + grasa trans<br>
+        • Aceitunas rellenas — altísimas en sodio<br>
+        • Queso feta / philadelphia — sodio + grasa saturada<br>
+        • Atún en aceite — cambiar por atún al natural<br>
+        • Tostadas Bimbo — ultraprocesado, pan integral de panadería<br>
+        • Embutidos procesados — sodio y nitritos
+      </div>
     </div>
-  </div>
 
-  <div class="card" style="margin-bottom:10px;background:#f0fdf4">
-    <div style="font-size:13px;font-weight:800;margin-bottom:8px">📊 Totales diarios estimados</div>
-    <div style="font-size:12px;line-height:1.8">
-      • Calorías: ~1.550 kcal (déficit moderado con Rybelsus)<br>
-      • Proteína: ~130g ✓<br>
-      • Carbohidratos: ~140g (complejos, no refinados)<br>
-      • Grasas: ~55g (aceite oliva, nueces, huevo, pescado azul)<br>
-      • Agua: 2-2.5L mínimo
+    <div class="card" style="margin-bottom:8px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">✅ Alimentos que deshinchar</div>
+      <div style="font-size:11px;line-height:1.8">
+        • Plátano — potasio (contrarresta el sodio)<br>
+        • Aguacate — potasio + grasas saludables<br>
+        • Espinacas — potasio + magnesio + hierro<br>
+        • Pepino — diurético natural<br>
+        • Jengibre — antiinflamatorio digestivo<br>
+        • Agua con limón — hidratación + digestión<br>
+        • Edamame — proteína vegetal + potasio
+      </div>
     </div>
-  </div>
 
-  <div class="card" style="margin-bottom:10px">
-    <div style="font-size:13px;font-weight:800;margin-bottom:8px">🚫 Alimentos a evitar (L-V) para deshinchar</div>
-    <div style="font-size:12px;line-height:1.8">
-      • <strong>Picatostes fritos</strong> — sodio + grasa trans<br>
-      • <strong>Aceitunas rellenas</strong> — altísimas en sodio<br>
-      • <strong>Queso feta / philadelphia</strong> — sodio + grasa saturada<br>
-      • <strong>Atún en aceite</strong> — cambiar por atún al natural<br>
-      • <strong>Tostadas Bimbo</strong> — pan ultraprocesado, cambiar por integral de panadería<br>
-      • <strong>Embutidos procesados</strong> — sodio y nitritos
-    </div>
-  </div>
-
-  <div class="card">
-    <div style="font-size:13px;font-weight:800;margin-bottom:8px">✅ Alimentos que ayudan a deshinchar</div>
-    <div style="font-size:12px;line-height:1.8">
-      • <strong>Plátano</strong> — potasio (contrarresta el sodio)<br>
-      • <strong>Aguacate</strong> — potasio + grasas saludables<br>
-      • <strong>Espinacas</strong> — potasio + magnesio + hierro<br>
-      • <strong>Pepino</strong> — diurético natural<br>
-      • <strong>Jengibre</strong> — antiinflamatorio digestivo<br>
-      • <strong>Agua con limón</strong> — hidratación + digestión<br>
-      • <strong>Edamame</strong> — proteína vegetal + potasio
+    <div class="card">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">📊 Objetivos diarios</div>
+      <div style="font-size:11px;line-height:1.8">
+        • Calorías: 1.900 kcal (déficit ~500-800 kcal)<br>
+        • Proteína: 130g mínimo<br>
+        • Agua: 2-2.5L<br>
+        • Pérdida esperada: 0.5-0.8 kg/semana<br>
+        • En 6 meses: 12-20 kg de grasa<br>
+        • Fines de semana: libres por compromisos
+      </div>
     </div>
   </div>
 </div>
@@ -1969,6 +2110,18 @@ function renderGuide(){
 }
 
 // ─── NAV ──────────────────────────────────────────────────────────────────────
+
+function showNutriWeek(id,btn){
+  ['a','b','compra','tips'].forEach(function(t){
+    var el=document.getElementById('nutri-'+t);
+    if(el)el.style.display=t===id?'block':'none';
+  });
+  var tabs=document.getElementById('nutri-tabs');
+  if(tabs){tabs.querySelectorAll('button').forEach(function(b){
+    b.style.background=b===btn?'var(--pu)':'var(--card)';
+    b.style.color=b===btn?'#fff':'var(--text)';
+  });}
+}
 function showScr(id,btn){
   document.querySelectorAll('.scr').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.bn').forEach(b=>b.classList.remove('active'));
