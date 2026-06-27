@@ -365,30 +365,10 @@ canvas{display:block;width:100%!important;height:100%!important}
 .sess-done{background:#dcfce7;color:#16a34a}
 .sess-today{background:var(--pul);color:var(--pu)}
 .sess-future{background:var(--bg);color:var(--muted);border:1px solid var(--border)}
-
-.dc-meal-header{font-size:12px;font-weight:700;color:var(--text);padding:6px 0 4px;border-bottom:1px solid var(--brd);margin-bottom:4px}
-.dc-item{display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--brd)}
-.dc-item-name{flex:1;font-size:12px;color:var(--text)}
-.dc-item-kcal{font-size:12px;font-weight:700;color:var(--text);white-space:nowrap}
-.dc-del{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:0 2px;line-height:1}
-.dc-food-result{padding:8px 10px;border-bottom:1px solid var(--brd);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-.dc-food-result:hover{background:var(--bg)}
-.dc-fr-name{font-size:12px;color:var(--text);flex:1}
-.dc-fr-kcal{font-size:11px;color:var(--muted);white-space:nowrap;margin-left:8px}
-.dc-meal-group{margin-bottom:8px}
+.dc-meal-header{font-size:12px;font-weight:700}.dc-item{display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--brd)}.dc-item-name{flex:1;font-size:12px}.dc-item-kcal{font-size:12px;font-weight:700;white-space:nowrap}.dc-del{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:0 2px}.dc-food-result{padding:8px 10px;border-bottom:1px solid var(--brd);cursor:pointer;display:flex;justify-content:space-between}.dc-fr-name{font-size:12px;flex:1}.dc-fr-kcal{font-size:11px;color:var(--muted);margin-left:8px}.dc-meal-group{margin-bottom:8px}
 </style>
+</head>
 <body>
-<nav class="bnav">
-  <button class="bn active" onclick="showScr('hoy',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Hoy</button>
-  <button class="bn" onclick="showScr('pr',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Records</button>
-  <button class="bn" onclick="showScr('prog',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Progreso</button>
-  <button class="bn" onclick="showScr('bio',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Bio</button>
-  <button class="bn" onclick="showScr('nutri',this)"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Nutricion</button>
-  <button class="bn" onclick="showScr('abs',this)"><svg viewBox="0 0 24 24"><path d="M6 4h12v4H6zM6 12h12v4H6zM6 20h12"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Abs</button>
-  <button class="bn" onclick="showScr('diario',this)"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Comidas</button>
-  <button class="bn" onclick="showScr('suplem',this)"><svg viewBox="0 0 24 24"><path d="M8 3h8l1 7H7zm1 7v11m6-11v11M3 10h18"/></svg>Suplem.</button>
-</nav>
-
 <div class="topbar">
   <div class="topbar-row">
     <div><h1>FitTracker Pro</h1><div class="topbar-sub" id="tb-sub">—</div></div>
@@ -673,6 +653,45 @@ canvas{display:block;width:100%!important;height:100%!important}
 <div id="scr-abs" class="scr">
   <div id="abs-content"></div>
 </div>
+<div id="scr-food" class="scr">
+  <div class="food-day-nav">
+    <button onclick="foodPrevDay()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--pu)">‹</button>
+    <div class="food-day-label" id="food-day-label">Hoy</div>
+    <button onclick="foodNextDay()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--pu)">›</button>
+  </div>
+  <div class="card" id="food-diary-card">
+    <div class="food-franja">
+      <div class="food-franja-label">☀️ Desayuno</div>
+      <textarea class="food-textarea" id="food-0" placeholder="¿Qué has desayunado?" oninput="saveFood()" rows="2"></textarea>
+    </div>
+    <div class="food-franja">
+      <div class="food-franja-label">🍎 Almuerzo</div>
+      <textarea class="food-textarea" id="food-1" placeholder="Media mañana..." oninput="saveFood()" rows="2"></textarea>
+    </div>
+    <div class="food-franja">
+      <div class="food-franja-label">🍽️ Comida</div>
+      <textarea class="food-textarea" id="food-2" placeholder="Comida principal..." oninput="saveFood()" rows="3"></textarea>
+    </div>
+    <div class="food-franja">
+      <div class="food-franja-label">🍵 Merienda</div>
+      <textarea class="food-textarea" id="food-3" placeholder="Merienda..." oninput="saveFood()" rows="2"></textarea>
+    </div>
+    <div class="food-franja">
+      <div class="food-franja-label">🌙 Cena</div>
+      <textarea class="food-textarea" id="food-4" placeholder="Cena..." oninput="saveFood()" rows="3"></textarea>
+    </div>
+  </div>
+</div>
+<nav class="bnav">
+  <button class="bn active" onclick="showScr('hoy',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Hoy</button>
+  <button class="bn" onclick="showScr('pr',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Records</button>
+  <button class="bn" onclick="showScr('prog',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Progreso</button>
+  <button class="bn" onclick="showScr('bio',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Bio</button>
+  <button class="bn" onclick="showScr('nutri',this)"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Nutricion</button>
+  <button class="bn" onclick="showScr('abs',this)"><svg viewBox="0 0 24 24"><path d="M6 4h12v4H6zM6 12h12v4H6zM6 20h12"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Abs</button>
+  <button class="bn" onclick="showScr('diario',this)"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Comidas</button>
+    <button class="bn" onclick="showScr('suplem',this)"><svg viewBox="0 0 24 24"><path d="M8 3h8l1 7H7zm1 7v11m6-11v11M3 10h18"/></svg>Suplem.</button>
+</nav>
 
 <div id="scr-diario" class="scr">
   <div class="section-label">Diario de Comidas</div>
@@ -721,12 +740,7 @@ canvas{display:block;width:100%!important;height:100%!important}
     </div>
   </div>
 
-  <!-- PANEL MACROS -->
-  <div class="card" id="dc-macros" style="margin-bottom:10px">
-    <div style="font-size:11px;color:var(--muted)">Cargando macros...</div>
-  </div>
-
-  <!-- MACROS PANEL -->
+  <!-- MACROS -->
   <div class="card" id="dc-macros" style="margin-bottom:10px"><div style="font-size:11px;color:var(--muted)">Cargando macros...</div></div>
 
   <!-- AÑADIR EJERCICIO -->
@@ -813,318 +827,41 @@ canvas{display:block;width:100%!important;height:100%!important}
 </style>
 
 
-<div id="scr-suplem" class="scr">
-
-  <!-- SUPLEMENTOS ACTUALES -->
-  <div class="dash-section">Suplementación actual</div>
-
-  <div class="card" style="margin-bottom:10px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-      <div style="font-size:28px">🥛</div>
-      <div>
-        <div style="font-size:14px;font-weight:800">Whey Proteína — Bulk Pure Whey Banana</div>
-        <div style="font-size:11px;color:var(--muted)">Post-entreno · 25-30g proteína por dosis</div>
-      </div>
-    </div>
-    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
-      <strong>Cuándo:</strong> Dentro de los 30 min post-entreno, con agua o leche.<br>
-      <strong>Por qué:</strong> La proteína de suero es la de absorción más rápida. En la ventana post-entreno el músculo está más receptivo a los aminoácidos.<br>
-      <strong>Dosis:</strong> 1 cacito (25-30g). No necesitas más — el músculo no puede usar más de ~40g de golpe.
-    </div>
-  </div>
-
-  <div class="card" style="margin-bottom:10px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-      <div style="font-size:28px">⚡</div>
-      <div>
-        <div style="font-size:14px;font-weight:800">Creatina — GEN Monohidrato Micronizada</div>
-        <div style="font-size:11px;color:var(--muted)">Con el batido post-entreno · 5g/día</div>
-      </div>
-    </div>
-    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
-      <strong>Cuándo:</strong> Con el batido post-entreno. En días de descanso, con cualquier comida.<br>
-      <strong>Por qué:</strong> El suplemento más estudiado y eficaz que existe. Aumenta la fuerza en un 5-15%, permite más reps con el mismo peso, acelera la recuperación.<br>
-      <strong>Retención de agua:</strong> Los primeros 2-3kg de peso ganado son agua intramuscular — normal y beneficioso.<br>
-      <strong>Dosis:</strong> 5g/día. No hay beneficio en más cantidad.
-    </div>
-  </div>
-
-  <div class="card" style="margin-bottom:10px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-      <div style="font-size:28px">☀️</div>
-      <div>
-        <div style="font-size:14px;font-weight:800">Vitamina D3+K2 MK7</div>
-        <div style="font-size:11px;color:var(--muted)">Con desayuno · 2.000 UI/día</div>
-      </div>
-    </div>
-    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
-      <strong>Cuándo:</strong> Con el desayuno (es liposoluble — se absorbe mejor con grasa).<br>
-      <strong>Por qué:</strong> El 80% de la población española tiene déficit. La D3 regula testosterona, función inmune y absorción de calcio. La K2 dirige el calcio al hueso, no a las arterias.<br>
-      <strong>Dosis:</strong> 2.000 UI de D3 + K2 MK7 incluida. No separes los dos.
-    </div>
-  </div>
-
-  <div class="card" style="margin-bottom:10px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-      <div style="font-size:28px">🐟</div>
-      <div>
-        <div style="font-size:14px;font-weight:800">Omega-3 — 2g EPA+DHA/día</div>
-        <div style="font-size:11px;color:var(--muted)">Con la comida principal · Opcional si comes pescado azul 3-4x/semana</div>
-      </div>
-    </div>
-    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f0f9ff;border-radius:8px;padding:10px">
-      <strong>Por qué:</strong> El suplemento con mejor evidencia después de la creatina. Reduce triglicéridos, mejora recuperación muscular entre sesiones y tiene efecto antiinflamatorio — importante con 5 días de entreno.<br><br>
-      <strong>Dosis:</strong> 2g de EPA+DHA al día. Fíjate en el EPA+DHA del etiquetado, no en el total de aceite de pescado.<br><br>
-      <strong>Cuándo:</strong> Con la comida más grasa del día. Siempre con comida para mejorar absorción y evitar el retrogusto.<br><br>
-      <strong>Marcas fiables:</strong> Solgar, Myprotein Omega-3, o Hacendado Omega-3 Mercadona (económico).<br><br>
-      <strong>Alternativa sin suplemento:</strong> Sardinas, caballa o salmón 3-4 veces por semana te dan dosis equivalentes. Si ya los comes, el suplemento aporta menos.
-    </div>
-  </div>
-
-  <div class="card" style="margin-bottom:10px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-      <div style="font-size:28px">🌙</div>
-      <div>
-        <div style="font-size:14px;font-weight:800">Magnesio — Bisglicinato PharmaZen</div>
-        <div style="font-size:11px;color:var(--muted)">Con la cena · 300-400mg</div>
-      </div>
-    </div>
-    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
-      <strong>Cuándo:</strong> Con la cena. El magnesio por la noche mejora la calidad del sueño — y el sueño es donde el músculo crece.<br>
-      <strong>Por qué:</strong> El 70% de la población tiene déficit. Interviene en más de 300 reacciones enzimáticas, incluyendo síntesis de proteínas y función muscular.<br>
-      <strong>Forma bisglicinato:</strong> La más absorbible. Evita el óxido de magnesio (barato pero poco absorbible).
-    </div>
-  </div>
-
-  <!-- BARRAS DE PROTEÍNA -->
-  <div class="dash-section" style="margin-top:16px">Barritas proteína — recomendadas</div>
-  <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Para el almuerzo: añaden ~20g proteína y tapan el déficit diario fácilmente.</div>
-
-  <div class="card" style="margin-bottom:10px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-      <div style="font-size:28px">🌙</div>
-      <div>
-        <div style="font-size:14px;font-weight:800">Melatonina — 0.5mg</div>
-        <div style="font-size:11px;color:var(--muted)">30 min antes de dormir · Dosis baja fisiológica</div>
-      </div>
-    </div>
-    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
-      <strong>Cuándo:</strong> 30 minutos antes de la hora que quieres dormirte.<br>
-      <strong>Por qué 0.5mg y no más:</strong> La dosis fisiológica es 0.1-0.5mg. Dosis más altas (1-5mg típicas en muchos suplementos) saturan los receptores y pueden empeorar el sueño a largo plazo. 0.5mg es lo que recomienda la evidencia actual.<br>
-      <strong>Especialmente útil:</strong> Cuando entrenas tarde y el cortisol pospone el sueño, o cuando el horario es irregular como en tu caso.<br>
-      <strong>No genera dependencia</strong> a dosis bajas. Puede tomarse solo cuando lo necesites.
-    </div>
-  </div>
-
-
-  <div class="card" style="margin-bottom:8px;border-color:#f59e0b">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="font-size:24px">🏆</div>
-        <div>
-          <div style="font-size:13px;font-weight:800">Barebells Protein Bar</div>
-          <div style="font-size:11px;color:var(--muted)">20g proteína · &lt;2g azúcar · 55g · Sin aceite de palma</div>
-        </div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:14px;font-weight:800;color:#d97706">~2.02€</div>
-        <div style="font-size:10px;color:var(--muted)">pack 12 Amazon</div>
-      </div>
-    </div>
-    <div style="font-size:12px;line-height:1.5;background:#fffbeb;border-radius:6px;padding:8px">
-      La mejor opción. Textura tipo chocolate real, sin el sabor artificial de otras. <strong>Sabores recomendados:</strong> Salty Peanut, Cookies &amp; Cream, White Chocolate Almond.<br>
-      <strong>Contiene maltitol</strong> — si notas malestar digestivo cambia a Quest.
-    </div>
-  </div>
-
-  <div class="card" style="margin-bottom:8px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="font-size:24px">🥈</div>
-        <div>
-          <div style="font-size:13px;font-weight:800">Quest Bar</div>
-          <div style="font-size:11px;color:var(--muted)">21g proteína · fibra alta · sin maltitol</div>
-        </div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:14px;font-weight:800;color:var(--pu)">~2.50€</div>
-        <div style="font-size:10px;color:var(--muted)">Amazon / MASmusculo</div>
-      </div>
-    </div>
-    <div style="font-size:12px;line-height:1.5;background:#f8fafc;border-radius:6px;padding:8px">
-      Sin maltitol — mejor tolerada digestivamente. Proteína de aislado de suero puro. Más dura de textura que Barebells. <strong>Sabor recomendado:</strong> Chocolate Chip Cookie Dough.
-    </div>
-  </div>
-
-  <div class="card" style="margin-bottom:8px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="font-size:24px">⭐</div>
-        <div>
-          <div style="font-size:13px;font-weight:800">Premier Protein High Protein Bar</div>
-          <div style="font-size:11px;color:var(--muted)">20g proteína · &lt;1g azúcar · 40g · 50% proteína · Sin aceite de palma</div>
-        </div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:14px;font-weight:800;color:#16a34a">~1.50€</div>
-        <div style="font-size:10px;color:var(--muted)">pack 16 Amazon ES</div>
-      </div>
-    </div>
-    <div style="font-size:12px;line-height:1.5;background:#f0fdf4;border-radius:6px;padding:8px">
-      Excelente relación calidad-precio. Pack de 16 unidades, más económica por proteína que Barebells. 50% de proteína — de las más altas del mercado. Barrita más pequeña (40g vs 55g) pero mismo contenido proteico.<br>
-      <strong>Sabores:</strong> Chocolate Caramel y Double Chocolate Cookie.<br>
-      <strong>Contiene maltitol</strong> — igual tolerancia que Barebells. Textura más crujiente y ligera.
-    </div>
-  </div>
-
-  <div class="card" style="margin-bottom:20px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="font-size:24px">💰</div>
-        <div>
-          <div style="font-size:13px;font-weight:800">Max Protein Real Protein Bar</div>
-          <div style="font-size:11px;color:var(--muted)">20g proteína · marca española</div>
-        </div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:14px;font-weight:800;color:#16a34a">~1.80€</div>
-        <div style="font-size:10px;color:var(--muted)">Amazon España</div>
-      </div>
-    </div>
-    <div style="font-size:12px;line-height:1.5;background:#f0fdf4;border-radius:6px;padding:8px">
-      La más barata con buen perfil. Marca española, fácil de encontrar. Sabor más convencional que Barebells pero cumple perfectamente su función.
-    </div>
-  </div>
-
-  <div class="card" style="margin-bottom:8px;border-color:#7c3aed">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="font-size:24px">💣</div>
-        <div>
-          <div style="font-size:13px;font-weight:800">Grenade Carb Killa</div>
-          <div style="font-size:11px;color:var(--muted)">23g proteína · 1g azúcar · 60g · Triple capa</div>
-        </div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:14px;font-weight:800;color:#7c3aed">~2.20€</div>
-        <div style="font-size:10px;color:var(--muted)">pack 12 Amazon ES</div>
-      </div>
-    </div>
-    <div style="font-size:12px;line-height:1.5;background:#faf5ff;border-radius:6px;padding:8px">
-      La <strong>más proteína por barrita</strong> de todas (23g). Triple capa con chocolate europeo — textura y sabor excepcionales, las más valoradas en reseñas.<br>
-      <strong>Sabores recomendados:</strong> Caramel Chaos, White Chocolate Salted Peanut, Fudge Brownie.<br>
-      <strong>Contiene aceite de palma</strong> — única de la lista. Y maltitol como las demás.<br>
-      <strong>Contiene maltitol</strong> — misma tolerancia que Barebells y Premier Protein.
-    </div>
-  </div>
-
-  <!-- PRE-ENTRENO — OPCIONAL (a partir de semana 3) -->
-  <div class="dash-section" style="margin-top:16px">Pre-entreno — opcional 🚀</div>
-  <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Recomendado a partir de S14 (semana 3), cuando el programa esté rodado. No antes.</div>
-
-  <div class="card" style="margin-bottom:8px;border-color:#7c3aed">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="font-size:24px">🏅</div>
-        <div>
-          <div style="font-size:13px;font-weight:800">HSN Evopump en Polvo</div>
-          <div style="font-size:11px;color:var(--muted)">600mg nitratos · Citrulina + Arginina · Sin cafeína · Fabricado en España</div>
-        </div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:14px;font-weight:800;color:#7c3aed">~0.80€</div>
-        <div style="font-size:10px;color:var(--muted)">por toma · 500g/25 tomas</div>
-      </div>
-    </div>
-    <div style="font-size:12px;line-height:1.6;background:#faf5ff;border-radius:6px;padding:8px">
-      La mejor opción calidad-precio. 600mg de nitratos garantizados — más que el Beet It Sport. Añade citrulina y arginina que potencian el efecto vasodilatador.<br>
-      <strong>Cuándo tomarlo:</strong> <strong>2-3 horas antes del entreno</strong> — es el tiempo necesario para que el nitrato se convierta en óxido nítrico y alcance el pico en sangre. Si entrenas a las 16:00h, tómalo con la comida a las 13:00-14:00h. Si entrenas a mediodía, con el desayuno.<br>
-      <strong>Cómo:</strong> 20g en 300ml agua. Necesitas cuchara medidora de 20g.<br>
-      <strong>Sabores:</strong> Ponche de Frutas o Grosella Negra.<br>
-      <strong>Sin cafeína</strong> — no interfiere con el sueño aunque entrenes tarde.<br>
-      <strong>Dónde:</strong> hsnstore.com o Amazon España.
-    </div>
-  </div>
-
-  <!-- PRE-ENTRENO — OPCIONAL -->
-  <div class="dash-section" style="margin-top:16px">Pre-entreno — opcional 🚀</div>
-  <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Recomendado a partir de S14. No antes — deja que el programa se asiente primero.</div>
-    <!-- PROTOCOLO RYBELSUS -->
-  <div class="dash-section">Protocolo Rybelsus 7mg</div>
-  <div class="card" style="margin-bottom:20px">
-    <div style="font-size:12px;line-height:1.8;color:var(--text)">
-      <div style="margin-bottom:6px">⏰ <strong>Despertar</strong> → Rybelsus en ayunas</div>
-      <div style="margin-bottom:6px">⏱️ <strong>30 minutos después</strong> → Desayuno</div>
-      <div style="margin-bottom:6px">⏱️ <strong>Mínimo 2h después del desayuno</strong> → Batido proteína + creatina</div>
-      <div style="margin-top:10px;padding:8px;background:#fff7ed;border-radius:6px;font-size:11px;color:#92400e">
-        ⚠️ El Rybelsus debe tomarse con el estómago vacío y solo con un sorbo de agua (máx. 120ml). Cualquier alimento o bebida antes de los 30 min reduce su absorción hasta un 50%.
-      </div>
-    </div>
-  </div>
-
-</div>
-
-</body>
-</html
-</body>
-</html
-</body>
-</html>
-
-<div id="diag-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-end;justify-content:center;padding:20px" onclick="if(event.target===this)closeDiag();">
-  <div class="diag-box" style="background:var(--card);border-radius:16px 16px 16px 16px;width:100%;max-width:480px;max-height:80vh;overflow-y:auto;padding:20px;position:relative">
-    <button class="diag-close" onclick="event.stopPropagation();closeDiag();" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);line-height:1">✕</button>
-    <div style="font-size:16px;font-weight:800;margin-bottom:4px;padding-right:30px" id="diag-title"></div>
-    <div style="font-size:12px;color:var(--muted);margin-bottom:14px" id="diag-muscle"></div>
-    <div id="diag-svg"></div>
-    <div id="diag-steps"></div>
-  </div>
-</div>
-<div id="diag-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-end;justify-content:center;padding:20px" onclick="if(event.target===this)closeDiag();">
-  <div class="diag-box" style="background:var(--card);border-radius:16px 16px 16px 16px;width:100%;max-width:480px;max-height:80vh;overflow-y:auto;padding:20px;position:relative">
-    <button class="diag-close" onclick="event.stopPropagation();closeDiag();" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);line-height:1">✕</button>
-    <div style="font-size:16px;font-weight:800;margin-bottom:4px;padding-right:30px" id="diag-title"></div>
-    <div style="font-size:12px;color:var(--muted);margin-bottom:14px" id="diag-muscle"></div>
-<script>(function(){try{var e=JSON.parse(localStorage.getItem("ft4_logs")||"{}");var d={"s0b0e0": {"name": "Press pecho maquina palancas", "sets": [{"kg": "40", "reps": "8", "done": true}, {"kg": "40", "reps": "7", "done": true}]}, "s0b1e0": {"name": "Press hombros maquina", "sets": [{"kg": "20", "reps": "10", "done": true}, {"kg": "20", "reps": "10", "done": true}]}, "s0b2e0": {"name": "Elevaciones laterales mancuernas", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "13", "done": true}]}, "s0b2e1": {"name": "Pec Deck aperturas maquina", "sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s0b3e0": {"name": "Cruce polea alto", "sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s0b3e1": {"name": "Extension overhead cuerda", "sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s1b0e0": {"name": "Jalon polea agarre ancho", "sets": [{"kg": "45", "reps": "10", "done": true}, {"kg": "45", "reps": "10", "done": true}, {"kg": "50", "reps": "13", "done": true}]}, "s1b1e0": {"name": "Remo maquina Hammer", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "10", "done": true}]}, "s1b2e0": {"name": "Face pulls polea", "sets": [{"kg": "35", "reps": "15", "done": true}, {"kg": "35", "reps": "15", "done": true}]}, "s1b3e0": {"name": "Curl predicador mancuerna", "sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s1b3e1": {"name": "Curl martillo mancuernas", "sets": [{"kg": "7.5", "reps": "8", "done": true}, {"kg": "5", "reps": "6", "done": true}]}, "s2b0e0": {"name": "Prensa de piernas", "sets": [{"kg": "96", "reps": "12", "done": true}, {"kg": "102", "reps": "12", "done": true}, {"kg": "102", "reps": "21", "done": true}]}, "s2b1e0": {"name": "Extension cuadriceps maquina", "sets": [{"kg": "45", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b2e0": {"name": "Curl femoral tumbado maquina", "sets": [{"kg": "50", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b3e0": {"name": "Hip thrust maquina", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "35", "reps": "12", "done": true}]}, "s2b4e0": {"name": "Abduccion cadera maquina", "sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "45", "reps": "15", "done": true}]}, "s2b4e1": {"name": "Gemelo prensa de piernas", "sets": [{"kg": "40", "reps": "15", "done": true}, {"kg": "40", "reps": "15", "done": true}]}, "s3b0e0": {"name": "Press Arnold mancuernas", "sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "11", "done": true}]}, "s3b1e0": {"name": "Elevaciones laterales mancuernas", "sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s3b1e1": {"name": "Press inclinado mancuernas", "sets": [{"kg": "10", "reps": "10", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s3b2e0": {"name": "Pec Deck aperturas maquina", "sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "55", "reps": "15", "done": true}, {"kg": "55", "reps": "12", "done": true}]}, "s3b2e1": {"name": "Pushdown polea cuerda", "sets": [{"kg": "15", "reps": "15", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s4b0e0": {"name": "Remo polea agarre neutro", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "12", "done": true}, {"kg": "45", "reps": "12", "done": true}]}, "s4b1e0": {"name": "Jalon polea agarre supino", "sets": [{"kg": "50", "reps": "10", "done": true}, {"kg": "50", "reps": "10", "done": true}]}, "s4b2e0": {"name": "Pajaro mancuernas", "sets": [{"kg": "5", "reps": "15", "done": true}, {"kg": "5", "reps": "15", "done": true}]}, "s4b2e1": {"name": "Curl alterno mancuernas", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s4b3e0": {"name": "Curl concentrado mancuerna", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s5b0e0": {"name": "Press inclinado maquina", "sets": [{"kg": "30", "reps": "10", "done": true}, {"kg": "30", "reps": "10", "done": true}]}, "s5b1e0": {"name": "Press Arnold mancuernas", "sets": [{"kg": "10", "reps": "10", "done": true}, {"kg": "10", "reps": "10", "done": true}]}, "s5b2e0": {"name": "Elevaciones laterales mancuernas", "sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "15", "done": true}]}, "s5b2e1": {"name": "Pec Deck aperturas maquina", "sets": [{"kg": "60", "reps": "12", "done": true}, {"kg": "60", "reps": "10", "done": true}]}, "s5b3e0": {"name": "Cruce polea bajo", "sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s5b3e1": {"name": "Extension overhead cuerda", "sets": [{"kg": "15", "reps": "15", "done": true}, {"kg": "15", "reps": "15", "done": true}]}, "s5b4e0": {"name": "Face pulls polea", "sets": [{"kg": "30", "reps": "15", "done": true}, {"kg": "30", "reps": "15", "done": true}]}, "s6b0e0": {"name": "Jalon polea agarre supino", "sets": [{"kg": "50", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s6b1e0": {"name": "Remo polea agarre neutro", "sets": [{"kg": "40", "reps": "12", "done": true}, {"kg": "45", "reps": "15", "done": true}]}, "s6b2e0": {"name": "Face pulls polea", "sets": [{"kg": "30", "reps": "15", "done": true}, {"kg": "30", "reps": "15", "done": true}]}, "s6b3e0": {"name": "Spider curl", "sets": [{"kg": "10", "reps": "10", "done": true}, {"kg": "7.5", "reps": "10", "done": true}]}, "s6b3e1": {"name": "Curl alterno supinando", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s7b0e0": {"name": "Hack squat maquina", "sets": [{"kg": "80", "reps": "10", "done": true}, {"kg": "100", "reps": "12", "done": true}]}, "s7b1e0": {"name": "Extension cuadriceps maquina", "sets": [{"kg": "50", "reps": "12", "done": true}, {"kg": "55", "reps": "12", "done": true}]}, "s7b2e0": {"name": "Curl femoral sentado maquina", "sets": [{"kg": "55", "reps": "12", "done": true}, {"kg": "55", "reps": "12", "done": true}]}, "s7b3e0": {"name": "Hip thrust barra en banco", "sets": [{"kg": "40", "reps": "12", "done": true}, {"kg": "40", "reps": "12", "done": true}]}, "s7b4e0": {"name": "Abduccion cadera maquina", "sets": [{"kg": "50", "reps": "15", "done": true}, {"kg": "50", "reps": "15", "done": true}]}, "s7b4e1": {"name": "Gemelo maquina de pie", "sets": [{"kg": "50", "reps": "15", "done": true}, {"kg": "50", "reps": "15", "done": true}]}};Object.keys(d).forEach(function(k){if(!e[k]||!e[k].sets||!e[k].sets.some(function(x){return x.done;}))e[k]=d[k];});localStorage.setItem("ft4_logs",JSON.stringify(e));}catch(err){}})();
-(function(){
-  try{
-    var DC_KEY='ft_diario_v1';
-    var stored=JSON.parse(localStorage.getItem(DC_KEY)||'{}');
-    if(!stored['2026-05-25']||!stored['2026-05-25'].comidas||stored['2026-05-25'].comidas.length===0){
-      stored['2026-05-25']={"comidas": [{"nombre": "Queso cremoso · Philadelphia", "gramos": 25, "label": "25g", "kcal": 62, "comida": "desayuno", "p": 1.6, "c": 1.0, "g": 8.2}, {"nombre": "Tostada bimbo", "gramos": 25, "label": "1 tostada (25g)", "kcal": 95, "comida": "desayuno", "p": 2.8, "c": 18.0, "g": 1.3}, {"nombre": "Pechuga de pavo · EL POZO", "gramos": 25, "label": "25g", "kcal": 20, "comida": "desayuno", "p": 7.3, "c": 0, "g": 0.4}, {"nombre": "Café cortado", "gramos": 200, "label": "200g", "kcal": 54, "comida": "desayuno", "p": 3.4, "c": 5.0, "g": 3.0}, {"nombre": "Cogollos de lechuga · Dulze", "gramos": 100, "label": "100g", "kcal": 15, "comida": "comida", "p": 1.3, "c": 2.9, "g": 0.2}, {"nombre": "Tomate", "gramos": 120, "label": "1 tomate mediano (120g)", "kcal": 22, "comida": "comida", "p": 1.1, "c": 4.7, "g": 0.2}, {"nombre": "Pasta (cocida)", "gramos": 60, "label": "60g cocida", "kcal": 95, "comida": "comida", "p": 3.5, "c": 18.6, "g": 0.5}, {"nombre": "Cebollas moradas · Aldi", "gramos": 40, "label": "40g", "kcal": 15, "comida": "comida", "p": 0.4, "c": 3.0, "g": 0.0}, {"nombre": "Atún claro en aceite · MERCADONA", "gramos": 52, "label": "52g", "kcal": 127, "comida": "comida", "p": 13.5, "c": 0, "g": 6.2}, {"nombre": "Aceitunas manzanilla rellenas · Hacendado", "gramos": 50, "label": "50g", "kcal": 75, "comida": "comida", "p": 0.4, "c": 0.5, "g": 8.0}, {"nombre": "Picatostes fritos sabor ajo · Hacendado", "gramos": 30, "label": "30g", "kcal": 148, "comida": "comida", "p": 3.0, "c": 16.5, "g": 6.0}, {"nombre": "Aceite de oliva", "gramos": 20, "label": "2 cucharadas (20g)", "kcal": 177, "comida": "comida", "p": 0.0, "c": 0.0, "g": 20.0}, {"nombre": "Queso feta · HACENDADO", "gramos": 50, "label": "50g", "kcal": 139, "comida": "comida", "p": 7.0, "c": 2.0, "g": 11.0}], "ejercicios": []};
-      localStorage.setItem(DC_KEY,JSON.stringify(stored));
-    }
-  }catch(e){}
-})();</script>
+<script>(function(){try{var e=JSON.parse(localStorage.getItem("ft4_logs")||"{}");var d={"s0b0e0": {"name": "Press pecho maquina palancas", "sets": [{"kg": "40", "reps": "8", "done": true}, {"kg": "40", "reps": "7", "done": true}]}, "s0b1e0": {"name": "Press hombros maquina", "sets": [{"kg": "20", "reps": "10", "done": true}, {"kg": "20", "reps": "10", "done": true}]}, "s0b2e0": {"name": "Elevaciones laterales mancuernas", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "13", "done": true}]}, "s0b2e1": {"name": "Pec Deck aperturas maquina", "sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s0b3e0": {"name": "Cruce polea alto", "sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s0b3e1": {"name": "Extension overhead cuerda", "sets": [{"kg": "15", "reps": "12", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s1b0e0": {"name": "Jalon polea agarre ancho", "sets": [{"kg": "45", "reps": "10", "done": true}, {"kg": "45", "reps": "10", "done": true}, {"kg": "50", "reps": "13", "done": true}]}, "s1b1e0": {"name": "Remo maquina Hammer", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "10", "done": true}]}, "s1b2e0": {"name": "Face pulls polea", "sets": [{"kg": "35", "reps": "15", "done": true}, {"kg": "35", "reps": "15", "done": true}]}, "s1b3e0": {"name": "Curl predicador mancuerna", "sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s1b3e1": {"name": "Curl martillo mancuernas", "sets": [{"kg": "7.5", "reps": "8", "done": true}, {"kg": "5", "reps": "6", "done": true}]}, "s2b0e0": {"name": "Prensa de piernas", "sets": [{"kg": "96", "reps": "12", "done": true}, {"kg": "102", "reps": "12", "done": true}, {"kg": "102", "reps": "21", "done": true}]}, "s2b1e0": {"name": "Extension cuadriceps maquina", "sets": [{"kg": "45", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b2e0": {"name": "Curl femoral tumbado maquina", "sets": [{"kg": "50", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s2b3e0": {"name": "Hip thrust maquina", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "35", "reps": "12", "done": true}]}, "s2b4e0": {"name": "Abduccion cadera maquina", "sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "45", "reps": "15", "done": true}]}, "s2b4e1": {"name": "Gemelo prensa de piernas", "sets": [{"kg": "40", "reps": "15", "done": true}, {"kg": "40", "reps": "15", "done": true}]}, "s3b0e0": {"name": "Press Arnold mancuernas", "sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "11", "done": true}]}, "s3b1e0": {"name": "Elevaciones laterales mancuernas", "sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s3b1e1": {"name": "Press inclinado mancuernas", "sets": [{"kg": "10", "reps": "10", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s3b2e0": {"name": "Pec Deck aperturas maquina", "sets": [{"kg": "45", "reps": "15", "done": true}, {"kg": "55", "reps": "15", "done": true}, {"kg": "55", "reps": "12", "done": true}]}, "s3b2e1": {"name": "Pushdown polea cuerda", "sets": [{"kg": "15", "reps": "15", "done": true}, {"kg": "15", "reps": "12", "done": true}]}, "s4b0e0": {"name": "Remo polea agarre neutro", "sets": [{"kg": "35", "reps": "12", "done": true}, {"kg": "40", "reps": "12", "done": true}, {"kg": "45", "reps": "12", "done": true}]}, "s4b1e0": {"name": "Jalon polea agarre supino", "sets": [{"kg": "50", "reps": "10", "done": true}, {"kg": "50", "reps": "10", "done": true}]}, "s4b2e0": {"name": "Pajaro mancuernas", "sets": [{"kg": "5", "reps": "15", "done": true}, {"kg": "5", "reps": "15", "done": true}]}, "s4b2e1": {"name": "Curl alterno mancuernas", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s4b3e0": {"name": "Curl concentrado mancuerna", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s5b0e0": {"name": "Press inclinado maquina", "sets": [{"kg": "30", "reps": "10", "done": true}, {"kg": "30", "reps": "10", "done": true}]}, "s5b1e0": {"name": "Press Arnold mancuernas", "sets": [{"kg": "10", "reps": "10", "done": true}, {"kg": "10", "reps": "10", "done": true}]}, "s5b2e0": {"name": "Elevaciones laterales mancuernas", "sets": [{"kg": "7.5", "reps": "15", "done": true}, {"kg": "7.5", "reps": "15", "done": true}]}, "s5b2e1": {"name": "Pec Deck aperturas maquina", "sets": [{"kg": "60", "reps": "12", "done": true}, {"kg": "60", "reps": "10", "done": true}]}, "s5b3e0": {"name": "Cruce polea bajo", "sets": [{"kg": "10", "reps": "12", "done": true}, {"kg": "10", "reps": "12", "done": true}]}, "s5b3e1": {"name": "Extension overhead cuerda", "sets": [{"kg": "15", "reps": "15", "done": true}, {"kg": "15", "reps": "15", "done": true}]}, "s5b4e0": {"name": "Face pulls polea", "sets": [{"kg": "30", "reps": "15", "done": true}, {"kg": "30", "reps": "15", "done": true}]}, "s6b0e0": {"name": "Jalon polea agarre supino", "sets": [{"kg": "50", "reps": "12", "done": true}, {"kg": "50", "reps": "12", "done": true}]}, "s6b1e0": {"name": "Remo polea agarre neutro", "sets": [{"kg": "40", "reps": "12", "done": true}, {"kg": "45", "reps": "15", "done": true}]}, "s6b2e0": {"name": "Face pulls polea", "sets": [{"kg": "30", "reps": "15", "done": true}, {"kg": "30", "reps": "15", "done": true}]}, "s6b3e0": {"name": "Spider curl", "sets": [{"kg": "10", "reps": "10", "done": true}, {"kg": "7.5", "reps": "10", "done": true}]}, "s6b3e1": {"name": "Curl alterno supinando", "sets": [{"kg": "7.5", "reps": "12", "done": true}, {"kg": "7.5", "reps": "12", "done": true}]}, "s7b0e0": {"name": "Hack squat maquina", "sets": [{"kg": "80", "reps": "10", "done": true}, {"kg": "100", "reps": "12", "done": true}]}, "s7b1e0": {"name": "Extension cuadriceps maquina", "sets": [{"kg": "50", "reps": "12", "done": true}, {"kg": "55", "reps": "12", "done": true}]}, "s7b2e0": {"name": "Curl femoral sentado maquina", "sets": [{"kg": "55", "reps": "12", "done": true}, {"kg": "55", "reps": "12", "done": true}]}, "s7b3e0": {"name": "Hip thrust barra en banco", "sets": [{"kg": "40", "reps": "12", "done": true}, {"kg": "40", "reps": "12", "done": true}]}, "s7b4e0": {"name": "Abduccion cadera maquina", "sets": [{"kg": "50", "reps": "15", "done": true}, {"kg": "50", "reps": "15", "done": true}]}, "s7b4e1": {"name": "Gemelo maquina de pie", "sets": [{"kg": "50", "reps": "15", "done": true}, {"kg": "50", "reps": "15", "done": true}]}};Object.keys(d).forEach(function(k){if(!e[k]||!e[k].sets||!e[k].sets.some(function(x){return x.done;}))e[k]=d[k];});localStorage.setItem("ft4_logs",JSON.stringify(e));}catch(err){}})();</script>
 <script>
 
-
-
-
-
-
-
-
-
 const DIAGRAMS={
-  pecho:['✅ CÓMO HACERLO BIEN\n• Retrae escápulas: junta omóplatos ANTES de bajar y no los sueltes\n• Pies firmes en el suelo — base estable = más fuerza\n• Baja controlado 2-3s hasta sentir estiramiento, sube explosivo\n• Arco lumbar natural, no exagerado\n• Pec Deck DX: codos a 90°, mueve desde el codo no desde la muñeca\n\n❌ ERRORES MÁS COMUNES\n• Rebotar el peso (rompe tensión muscular, riesgo de lesión)\n• Despegar escápulas de la banca al subir\n• Bloquear codos completamente arriba\n• Bajar demasiado con mancuernas: riesgo de hombro\n\n💡 DIFERENCIAS ENTRE SEMANAS\n• Sem 1 — Máquina palancas DX: movimiento guiado, aprende el patrón sin compensaciones\n• Sem 2 — Press inclinado máquina: énfasis porción clavicular (más visible con camiseta)\n• Sem 3 — Banca mancuernas: mayor rango, más estabilización escapular\n• Pec Deck siempre mejor que aperturas mancuernas: sin asimetría, sin temblor\n\n🔬 POR QUÉ FUNCIONA\nEl pectoral tiene dos porciones: esternocosal (inferior/media, la más grande) y clavicular (superior). El press plano trabaja ambas. El inclinado enfatiza la superior. El cruce de polea y Pec Deck añaden tensión en máxima contracción — zona que el press no alcanza bien.'],
-  hombro:['✅ CÓMO HACERLO BIEN\n• Núcleo activado: no arquees la lumbar al subir — señal de peso excesivo\n• Codos ligeramente adelantados del plano del cuerpo\n• Baja hasta altura de orejas, no más abajo (riesgo manguito rotador)\n• Press Arnold: rota muñecas lentamente durante el movimiento\n• Agarre neutro (palmas enfrentadas): menos estrés en el manguito rotador\n\n❌ ERRORES\n• Arquear lumbar: el core debe estar activado todo el tiempo\n• Encogerse de hombros al subir: el trapecio roba el trabajo\n• Subir con inercia o balancear el cuerpo\n• Bajar en exceso: riesgo de impingement\n\n💡 DIFERENCIAS ENTRE SEMANAS\n• Sem 1 — Press hombros máquina: movimiento guiado, aprende la trayectoria\n• Sem 2 — Press Arnold: rotación que activa las 3 cabezas del deltoides\n• Sem 3 — Press militar mancuernas: máxima activación y estabilización\n• Sem 4 — Deload: menos peso, misma técnica\n\n🔬 POR QUÉ FUNCIONA\nEl deltoides tiene 3 cabezas: anterior (frente), medial (lado — da anchura) y posterior (detrás — postura). El press trabaja principalmente anterior y medial. Las elevaciones laterales aíslan la medial. El Face pull trabaja la posterior.'],
-  lateral:['✅ CÓMO HACERLO BIEN\n• Ligera inclinación del tronco hacia adelante (10-15°): más deltoides medial, menos trapecio\n• Codos ligeramente doblados y FIJOS durante todo el movimiento\n• Sube hasta altura del hombro — ni más ni menos\n• Meñique ligeramente más alto que el pulgar (como si vaciaras un vaso)\n• Baja en 2-3 segundos: el excéntrico construye más músculo\n• Peso correcto: si llegas a 15 reps cómodo, sube 1-2kg\n\n❌ ERRORES\n• Subir por encima del hombro: el trapecio roba el trabajo\n• Usar inercia o balancear el tronco\n• Codo completamente recto: riesgo en el manguito rotador\n• Bajar demasiado rápido: pierdes el trabajo excéntrico\n\n💡 TU CASO\nEn semana 1 con 7.5kg llegaste a 12-13 reps (objetivo 15). Es normal para el primer entreno. No bajes el peso — sigue con 7.5kg hasta llegar a 15 reps limpias en 2 series. Luego sube a 9kg.'],
-  triceps:['✅ CÓMO HACERLO BIEN — EXTENSIÓN OVERHEAD CUERDA\n• Brazos por encima de la cabeza: estira la cabeza LARGA (la más grande, da volumen al brazo)\n• Codos fijos junto a las orejas — solo se mueve el antebrazo\n• Baja hasta sentir el estiramiento completo del tríceps\n• Extiende completamente arriba apretando el tríceps\n\n✅ CÓMO HACERLO BIEN — PUSHDOWN CUERDA\n• Codos pegados al cuerpo durante todo el movimiento\n• Extiende completamente abajo — no te quedes a medias\n• Tronco ligeramente inclinado hacia adelante\n• La cuerda se separa al bajar: activa las dos cabezas por separado\n\n❌ ERRORES\n• Mover los codos (overhead): el codo es el eje, solo el antebrazo trabaja\n• No extender completamente: pierdes la contracción máxima\n• Usar inercia o balancear el cuerpo\n• Peso excesivo: mejor rango completo con menos peso\n\n🔬 POR QUÉ EL OVERHEAD ES MEJOR\nEl tríceps tiene 3 cabezas. La cabeza larga (la más grande, da el volumen del brazo) solo se estira completamente con el brazo por encima de la cabeza. El pushdown no la estira. Por eso el overhead overhead debe ser el ejercicio prioritario.'],
-  espalda_v:['✅ CÓMO HACERLO BIEN — JALÓN POLEA\n• Agarre algo más ancho que los hombros\n• Inclínate ligeramente hacia atrás (10-15°) antes de tirar\n• Tira hacia el pecho, no hacia la barbilla\n• INICIA el movimiento con los codos, no con los bíceps\n• Aprieta los codos hacia abajo y hacia atrás al final del recorrido\n• Aguanta 1 segundo abajo con los omóplatos juntos\n\n❌ ERRORES\n• Tirar con los brazos en lugar de con la espalda\n• Inclinar demasiado el tronco (se convierte en remo)\n• No llevar el movimiento hasta el pecho (rango incompleto)\n• Dejar subir el peso sin control (excéntrico desperdiciado)\n\n💡 DIFERENCIAS ENTRE AGARRES\n• Agarre ancho (Sem 1): más activación del dorsal superior, da anchura\n• Agarre supino/bíceps (Sem 2): más bíceps y dorsal inferior, más recorrido\n• Agarre neutro (Sem 3): posición más natural, menos estrés en la muñeca\n\n🔬 POR QUÉ FUNCIONA\nEl jalón trabaja el dorsal ancho — el músculo que da la forma de "V" a la espalda. También activa el redondo mayor y bíceps. La clave es iniciar con los codos, no con las manos: así el dorsal trabaja primero y el bíceps como asistente.'],
-  espalda_h:['✅ CÓMO HACERLO BIEN — REMO\n• Espalda recta y ligeramente inclinada — NO redondees la lumbar\n• Retrae las escápulas ANTES de empezar a tirar\n• Tira hacia el ombligo/cintura baja, no hacia el pecho\n• Codos cerca del cuerpo, no en ángulo de 90°\n• Aguanta 1 segundo en la posición final con escápulas juntas\n• Baja controlado en 2-3 segundos\n\n❌ ERRORES\n• Redondear la espalda: riesgo de lesión lumbar, especialmente con cargas altas\n• Tirar con los brazos en lugar de con la espalda\n• Balancear el tronco hacia atrás para usar inercia\n• No completar el recorrido por exceso de peso\n\n💡 DIFERENCIAS ENTRE VARIANTES\n• Remo Hammer (Sem 1): movimiento guiado, peso más alto posible\n• Remo polea neutro (Sem 2): rango más completo, agarre cómodo\n• Remo mancuerna unilateral (Sem 3): corrige desequilibrios izquierda/derecha\n\n🔬 POR QUÉ FUNCIONA\nEl remo trabaja el dorsal ancho, romboides, trapecio medio e infraespinoso. Los romboides son los que "cierran" las escápulas — su fortaleza es fundamental para la postura y para proteger el hombro.'],
-  face_pull:['✅ CÓMO HACERLO BIEN\n• Polea a la altura de los ojos o ligeramente por encima\n• Agarra las cuerdas con los pulgares hacia arriba\n• Tira hacia la cara separando las manos (como si hicieras doble bíceps)\n• Codos arriba y atrás — los codos deben quedar por encima de las muñecas\n• Aguanta 1-2 segundos en la posición final\n• Peso LIGERO: este ejercicio es de control, no de fuerza\n\n❌ ERRORES\n• Bajar los codos al tirar (se convierte en remo)\n• Peso excesivo: pierde toda su efectividad\n• No abrir completamente las manos al final\n• Inclinar el cuerpo hacia atrás para tirar\n\n🔬 POR QUÉ ES OBLIGATORIO\nEl face pull trabaja el deltoides posterior y el manguito rotador externo. Son los músculos más olvidados del gym y los más importantes para la salud del hombro. Sin ellos, el desequilibrio anterior/posterior causa lesiones de manguito. Es el ejercicio de "seguro de vida" del hombro.'],
-  biceps:['✅ CÓMO HACERLO BIEN\n• Codos FIJOS al costado durante todo el movimiento\n• Supina la muñeca (gira la palma hacia arriba) al subir\n• Baja completamente hasta extensión total\n• Excéntrico lento: 2-3 segundos bajando\n\n🕷️ SPIDER CURL (Curl araña):\n• Banco inclinado a 45°, pecho apoyado, brazos colgando\n• El húmero queda perpendicular al suelo — aísla el bíceps\n• Sube controlado, baja MÁS despacio (3 segundos)\n• Si balanceas el cuerpo, el peso es excesivo'],
-  cuad:['✅ CÓMO HACERLO BIEN — PRENSA DE PIERNAS\n• Pies a la anchura de caderas, ligeramente abiertos (10-15° hacia fuera)\n• Baja hasta 90° de rodilla — el cuádriceps debe estar paralelo a la plataforma\n• Rodillas SIEMPRE alineadas con los pies: ni hacia dentro ni hacia fuera\n• Empuja con toda la planta del pie, no solo con los dedos\n• NO bloquees las rodillas arriba del todo: mantén tensión muscular\n• Espalda y glúteos pegados al asiento en todo momento\n\n❌ ERRORES CRÍTICOS\n• Bajar demasiado: la pelvis se despega del asiento (señal de que bajas demasiado) → riesgo lumbar\n• Rodillas hacia dentro (valgo): el error más peligroso en prensa\n• Pies demasiado abajo en la plataforma: más cuádriceps pero más estrés en rodilla\n• Pies altos en la plataforma: más glúteo e isquio, menos cuádriceps\n\n💡 TU CASO\nEn semana 1 llegaste a 102kg×21 reps. Es un número excelente. El dolor de espalda que notaste probablemente fue por bajar demasiado — la pelvis se despegó del asiento. Solución: ajusta el tope de recorrido y asegúrate de que la espalda baja NUNCA se separa del asiento.\n\n💡 DIFERENCIAS ENTRE SEMANAS\n• Sem 1 — Prensa posición neutral: aprende el patrón\n• Sem 2 — Pies altos: más énfasis en glúteo e isquio (más transferencia al hip thrust)\n• Sem 3 — Prensa unilateral: corrige desequilibrios izquierda/derecha\n\n🔬 POR QUÉ LA PRENSA ES MEJOR QUE LA SENTADILLA PARA EMPEZAR\nLa prensa elimina la carga axial sobre la columna. Puedes trabajar con mucha más carga y enfocarte en el movimiento sin preocuparte por la estabilización del tronco. Para alguien volviendo al gym, es la opción más segura y efectiva.'],
-  posterior:['✅ CÓMO HACERLO BIEN — HIP THRUST MÁQUINA\n• La barra/almohada apoya en las caderas, NO en el abdomen ni en las costillas\n• Espalda apoyada en el banco a la altura de los OMÓPLATOS (no del cuello ni de la cintura)\n• Pies planos a la anchura de caderas — talones bajo las rodillas o ligeramente más lejos\n• Empuja con los TALONES hacia el suelo\n• Sube hasta que cuerpo forme una línea recta de hombros a rodillas\n• APRIETA el glúteo fuerte en la parte alta y aguanta 1-2 segundos\n• Chin to chest: mantén la barbilla hacia el pecho durante todo el movimiento\n\n❌ ERRORES CRÍTICOS\n• Hiperextender la lumbar arriba: la pelvis se inclina hacia adelante y la lumbar trabaja en lugar del glúteo\n• Banco demasiado bajo o demasiado alto: cambia el ángulo de activación del glúteo\n• Empujar con los dedos del pie en lugar de los talones\n• No apretar el glúteo arriba: pierdes el 40% del trabajo\n• Dejar caer el peso sin control (excéntrico es importante)\n\n✅ CÓMO HACERLO BIEN — CURL FEMORAL TUMBADO\n• Tumbado boca abajo, caderas pegadas al banco en todo momento\n• Curva los pies hacia el glúteo de forma controlada\n• Aguanta 1 segundo arriba con los isquios contraídos\n• Baja lentamente (2-3s): el excéntrico del isquio es donde más crece\n• Si la cadera se despega al subir: el peso es excesivo\n\n❌ ERRORES CURL FEMORAL\n• Despegar la cadera del banco al subir (el cuádriceps compensa)\n• Bajar demasiado rápido (pierdes el excéntrico)\n• Rango parcial — baja hasta extensión completa\n\n🔬 POR QUÉ EL HIP THRUST ES EL REY DEL GLÚTEO\nEl hip thrust activa el glúteo mayor al 200% más que la sentadilla estándar (Contreras, 2015). La diferencia clave: en la extensión completa de cadera con la pelvis en posición neutra, el glúteo es el único motor. La sentadilla comparte el trabajo con el cuádriceps.'],
-  abduccion:['✅ CÓMO HACERLO BIEN\n• Espalda recta pegada al respaldo en todo momento\n• Siéntate en el borde delantero del asiento para mayor activación del glúteo medio\n• Abre hasta el punto de tensión máxima con control total\n• Aguanta 1 segundo en la apertura máxima\n• Cierra CONTROLADO — no dejes caer el peso: el excéntrico es igual de importante\n• Inclinación ligera del tronco hacia adelante (unos 20°): activa más el glúteo medio\n\n❌ ERRORES\n• Inclinar el tronco hacia atrás: trabaja más el piriforme que el glúteo medio\n• Dejar caer el peso al cerrar (excéntrico desperdiciado)\n• Rango parcial: solo en apertura completa se activa el glúteo medio al máximo\n• Peso excesivo que impide el rango completo\n\n🔬 POR QUÉ EL GLÚTEO MEDIO IMPORTA\nEl glúteo medio es el estabilizador lateral de la cadera. Su debilidad causa: rodillas que se van hacia dentro en sentadilla, asimetría en el glúteo, y lesiones de rodilla a largo plazo. También es el responsable de la redondez lateral del glúteo — el que da forma al "lado" del trasero visto de frente.'],
-  gemelo:['✅ CÓMO HACERLO BIEN\n• Rango COMPLETO obligatorio: baja hasta sentir estiramiento máximo en el tendón de Aquiles\n• Sube de puntillas hasta la máxima contracción — aprieta el gemelo arriba\n• Subida explosiva, bajada lenta (3-4 segundos)\n• Mantén 1 segundo arriba en contracción máxima\n• Pie neutro: gemelo general. Punta hacia fuera: gemelo interno. Punta hacia dentro: externo\n\n❌ ERRORES\n• Rango parcial: el gemelo es un músculo muy resistente que SOLO responde a rango completo\n• Bajar demasiado rápido: el rebote en el tendón de Aquiles puede causar lesión\n• Peso excesivo que impide el rango completo\n• No llegar a la máxima punta de pie: la contracción queda incompleta\n\n🔬 POR QUÉ EL GEMELO NECESITA RANGO COMPLETO\nEl gemelo (gastrocnemio) es un músculo de fibras mixtas pero con alta proporción de fibras lentas. Responde mejor a altas repeticiones Y rango completo. A diferencia del cuádriceps, el gemelo no responde bien a cargas altas con rango parcial. Mejor 20 reps con rango completo que 10 reps con rango parcial.'],
-  core_flexion:['✅ CÓMO HACERLO\n• Columna neutra al empezar — no arquees la lumbar\n• Contrae el abdomen ANTES de empezar el movimiento\n• El movimiento es pequeño: solo flexión de columna, no balanceo de cadera\n• Aguanta 1-2 segundos en máxima contracción apretando fuerte\n• Baja en 2-3 segundos — el excéntrico es donde crece el músculo\n• Respira: exhala al subir, inhala al bajar\n\n❌ ERRORES MÁS COMUNES\n• Tirar con el cuello o los hombros\n• Hacer el movimiento demasiado rápido — el recto no nota tensión\n• No llegar a la extensión completa en la bajada\n• Usar demasiado peso y perder el control del movimiento\n\n💡 EN MÁQUINA DE CRUNCH\n• Ajusta el asiento para que el eje de rotación esté a la altura de tu ombligo\n• Agarra los apoyos con suavidad — el trabajo lo hace el abdomen, no los brazos\n• Empieza con poco peso: el recto se fatiga rápido con técnica correcta\n\n🔬 POR QUÉ FUNCIONA\nEl recto abdominal flexiona la columna lumbar. Para hipertrofia necesita resistencia progresiva como cualquier músculo — las máquinas de crunch permiten añadir carga de forma controlada. 3×12-15 con carga es superior a 100 abdominales sin resistencia.'],
-  core_rotacion:['✅ CÓMO HACERLO\n• Mantén las caderas completamente quietas — el movimiento es solo del tronco\n• Gira desde el abdomen, no desde los hombros\n• Llega al rango completo: el oblicuo necesita recorrido para activarse\n• Pausa 1 segundo en el punto de máxima rotación\n• Vuelve de forma controlada — 2-3 segundos\n• Completa todas las reps de un lado antes de cambiar\n\n❌ ERRORES MÁS COMUNES\n• Mover las caderas — invalida el ejercicio completamente\n• Usar inercia y girar rápido\n• Rango de movimiento corto por exceso de peso\n• Aguantar la respiración\n\n💡 EN MÁQUINA DE ROTACIÓN\n• Ajusta el asiento para que estés cómodo con la espalda apoyada\n• El eje de rotación debe coincidir con tu columna\n• El pie opuesto presiona el suelo para estabilizar la cadera\n\n🔬 POR QUÉ FUNCIONA\nLos oblicuos son los músculos que definen la "cintura" masculina. Su función principal es la rotación y flexión lateral del tronco. Son los más importantes para el aspecto visual del core una vez que baja la grasa abdominal.'],
-  core_lumbar:['✅ CÓMO HACERLO\n• Movimiento controlado: NO hagas hiperextensión forzada arriba\n• La posición superior es columna neutra — espalda recta, no arqueada\n• Baja hasta que sientas estiramiento en los isquiotibiales\n• Sube contrayendo los glúteos y los erectores simultáneamente\n• Tempo: 2 segundos bajando, 1 segundo arriba, 2 bajando\n• Sin carga extra hasta dominar la técnica\n\n❌ ERRORES MÁS COMUNES\n• Hiperextensión lumbar arriba: riesgo de lesión de disco\n• Bajar demasiado rápido con inercia\n• Redondear la espalda en la parte baja\n• Añadir carga antes de tener técnica sólida\n\n💡 EN MÁQUINA DE BACK EXTENSION\n• El pivote debe estar a la altura de las caderas, no de la cintura\n• Los pies bien apoyados y los muslos sobre el soporte\n• Brazos cruzados en el pecho (más fácil) o en la nuca (más difícil)\n\n⚠️ IMPORTANTE\nEste ejercicio es de calidad, no de cantidad. El erector espinal trabaja mucho en sentadilla, prensa y RDL — la back extension lo complementa. Nunca lo hagas con fatiga acumulada excesiva.\n\n🔬 POR QUÉ FUNCIONA\nEl erector espinal mantiene la columna erguida bajo carga. Su fortaleza determina cuánto puedes levantar en todos los compuestos. Un core lumbar débil es el techo de todos los demás ejercicios.'],
-  core_inferior:['✅ CÓMO HACERLO — CRUNCH INVERSO\n• Tumbado boca arriba, manos agarra el soporte detrás de la cabeza\n• Lleva las rodillas al pecho CURVANDO la pelvis hacia arriba\n• El movimiento es una retroversión pélvica — la cadera sube, no solo las piernas\n• Baja lentamente hasta casi tocar el suelo — sin soltar completamente la tensión\n• Exhala al subir, inhala al bajar\n\n❌ ERRORES MÁS COMUNES\n• Balancear las piernas con inercia — el abdomen no trabaja\n• No completar la retroversión pélvica — el recto inferior no se activa\n• Bajar demasiado rápido\n\n💡 EN MÁQUINA\n• Si hay máquina de elevación de piernas, ajusta los apoyos para que los codos queden cómodos\n• Empieza sin lastre hasta tener la coordinación del movimiento pélvico\n\n🔬 POR QUÉ FUNCIONA\nLa porción inferior del recto abdominal se activa preferentemente cuando el movimiento parte de la pelvis hacia el tronco (en lugar del tronco hacia la pelvis como en el crunch). Esto no significa que sean músculos separados — es el mismo recto — pero el estímulo es diferente y complementario.'],
-  core_completo:['✅ CÓMO HACERLO — AB COASTER\n• Arrodíllado en el soporte, agarra las asas\n• Lleva las rodillas hacia el pecho CURVANDO la columna — no solo flexionando cadera\n• El movimiento debe sentirse en el abdomen, no en los flexores de cadera\n• Vuelve lentamente resistiendo con el core\n• Controla cada repetición — es un ejercicio técnico\n\n❌ ERRORES MÁS COMUNES\n• Usar los brazos para tirar — el core no trabaja\n• Hacer el movimiento con inercia y velocidad\n• No curvar la columna — convierte el ejercicio en flexión de cadera pura\n\n💡 PRIMERAS SESIONES\n• Empieza sin resistencia extra hasta coordinar el movimiento\n• Si sientes más los flexores de cadera que el abdomen, reduce el rango\n• Es normal que cueste las primeras veces — es un patrón motor nuevo\n\n🔬 POR QUÉ FUNCIONA\nEl Ab coaster combina flexión de columna con flexión de cadera, activando el recto abdominal completo y los oblicuos simultáneamente. Es uno de los pocos ejercicios que trabaja el core en toda su longitud funcional.'],
+  pecho:['📌 PECHO — Guía por ejercicio\n\n🔸 PRESS PECHO MÁQUINA PALANCAS (DX)\n✅ 3 Reglas de Oro:\n1. Retrae escápulas ANTES de empujar — junta omóplatos contra el respaldo\n2. Codos a 45° del torso — ni pegados ni abiertos a 90°\n3. Empuja hasta extensión completa sin bloquear codos\n🧬 Ciencia: La máquina de palancas mantiene tensión constante en todo el rango. Al ser DX (brazos independientes) activas estabilizadores como en peso libre pero con seguridad de máquina.\n❌ Error común: Separar la espalda del respaldo al empujar — pierdes la retracción escapular y el hombro absorbe la carga.\n\n🔸 PRESS INCLINADO MANCUERNAS\n✅ 3 Reglas de Oro:\n1. Banco a 30-35° — más inclinación = más hombro, menos pecho\n2. Baja hasta que los codos queden a la altura del pecho, no más\n3. Arriba junta ligeramente las mancuernas sin chocarlas\n🧬 Ciencia: El inclinado activa la porción clavicular del pectoral (pecho superior). Con mancuernas el rango es mayor que con barra — más estiramiento en la fase excéntrica = más estímulo.\n❌ Error común: Subir el banco a 45° o más — conviertes el ejercicio en press de hombros.\n\n🔸 PRESS BANCA MANCUERNAS\n✅ 3 Reglas de Oro:\n1. Planta los pies firmes en el suelo — generan estabilidad\n2. Arco natural en la espalda baja — NO forzado, solo mantén la curvatura\n3. Baja controlado 2-3 segundos, sube explosivo 1 segundo\n🧬 Ciencia: Las mancuernas permiten mayor rango de movimiento que la barra y cada brazo trabaja independientemente, corrigiendo asimetrías de fuerza.\n❌ Error común: Rebotar las mancuernas abajo para tomar impulso.\n\n🔸 PEC DECK MÁQUINA (DX)\n✅ 3 Reglas de Oro:\n1. Codos ligeramente flexionados — NO brazos rectos\n2. Aprieta 1 segundo en el centro (contracción máxima)\n3. Abre controlado sin que los codos pasen detrás de los hombros\n🧬 Ciencia: Aislamiento puro del pectoral. La curva de resistencia de la máquina da máxima tensión justo donde el músculo está más contraído (fase final).\n❌ Error común: Usar impulso del torso inclinándote hacia delante.\n\n🔸 CRUCE DE POLEAS (alto/bajo/neutro)\n✅ 3 Reglas de Oro:\n1. Da un paso adelante para estirar el pecho en la posición inicial\n2. Cruza ligeramente las manos en la contracción — el cruce es el nombre\n3. Mantén los codos a la misma altura durante todo el movimiento\n🧬 Ciencia: Polea alta = pecho inferior. Polea baja = pecho superior. Neutro = pecho medio. La polea da tensión constante que las mancuernas no pueden dar en la fase final.\n❌ Error común: Cambiar el ángulo de los codos durante el movimiento.'],
+
+  hombro:['📌 HOMBROS — Guía por ejercicio\n\n🔸 PRESS HOMBROS MÁQUINA PALANCAS (DX)\n✅ 3 Reglas de Oro:\n1. NO bloquees los codos arriba — para justo antes de extensión completa\n2. Baja hasta que los codos queden a 90° — no más\n3. Espalda pegada al respaldo, core apretado\n🧬 Ciencia: El deltoides anterior es el motor principal. La máquina DX corrige asimetrías. No bloquear arriba mantiene tensión continua en el deltoides.\n❌ Error común: Arquear la espalda para meter más peso — la lumbar absorbe la carga.\n\n🔸 PRESS ARNOLD MANCUERNAS\n✅ 3 Reglas de Oro:\n1. Empieza con las palmas mirándote (posición de curl) — gira mientras subes\n2. La rotación debe ser gradual — no gires todo al principio\n3. Arriba las palmas miran al frente, abajo te miran a ti\n🧬 Ciencia: El giro activa las tres cabezas del deltoides en un solo movimiento. El deltoides lateral y posterior reciben más trabajo que en un press convencional gracias a la rotación.\n❌ Error común: Hacer la rotación demasiado rápido — pierde el estímulo del deltoides lateral.\n\n🔸 PRESS HOMBROS MANCUERNAS SENTADO\n✅ 3 Reglas de Oro:\n1. Banco a 85-90° — vertical o casi vertical\n2. Las mancuernas suben en línea recta, no en arco\n3. Baja hasta que los codos queden ligeramente por debajo del hombro\n🧬 Ciencia: Mayor activación del deltoides medio que el press militar con barra. Cada brazo trabaja independientemente.\n❌ Error común: Inclinar el banco demasiado — se convierte en press inclinado de pecho.'],
+
+  lateral:['📌 LATERALES — Guía por ejercicio\n\n🔸 ELEVACIONES LATERALES MANCUERNAS\n✅ 3 Reglas de Oro:\n1. Codos ligeramente flexionados y FIJOS — no los estires ni dobles más durante el movimiento\n2. Sube hasta la altura de los hombros, NO más alto\n3. Inclina ligeramente las muñecas como si vertieras agua de una jarra\n🧬 Ciencia: El deltoides medio tiene su máxima activación entre 70-120° de abducción. Por encima de 120° el trapecio toma el control. La inclinación de muñeca mantiene el deltoides medio como motor principal.\n❌ Error común: Subir demasiado alto y encoger los hombros — eso es trapecio, no deltoides.\n\n🔸 ELEVACIONES LATERALES POLEA BAJA\n✅ 3 Reglas de Oro:\n1. Polea a la altura de la cadera o ligeramente más baja\n2. Cruza el cable por delante del cuerpo para mayor rango\n3. Controla la bajada — la polea tira de vuelta, resiste\n🧬 Ciencia: La polea mantiene tensión constante durante todo el recorrido, incluyendo la fase baja donde las mancuernas no generan tensión (gravedad vertical). Estímulo más completo.\n❌ Error común: Usar demasiado peso y balancear el cuerpo.\n\n🔸 ELEVACIÓN FRONTAL\n✅ 3 Reglas de Oro:\n1. Sube hasta la altura de los ojos, no más\n2. Palmas mirando al suelo o enfrentadas — ambos agarre funcionan\n3. Alterna brazo a brazo si te cuesta mantener la técnica\n🧬 Ciencia: Activa el deltoides anterior. Complementa el trabajo lateral para un hombro completo.\n❌ Error común: Balancear la espalda para impulsar el peso.'],
+
+  triceps:['📌 TRÍCEPS — Guía por ejercicio\n\n🔸 PUSHDOWN POLEA CUERDA\n✅ 3 Reglas de Oro:\n1. Codos pegados al torso y FIJOS — solo se mueve el antebrazo\n2. Abajo separa las cuerdas hacia los lados (rompe la cuerda)\n3. Sube controlado hasta 90° de flexión — no más arriba\n🧬 Ciencia: El pushdown trabaja la cabeza lateral y medial del tríceps. Separar las cuerdas al final activa la cabeza lateral más que cualquier otro ejercicio de tríceps.\n❌ Error común: Mover los codos hacia delante — convierte el ejercicio en un press con los hombros.\n\n🔸 EXTENSIÓN OVERHEAD POLEA CUERDA\n✅ 3 Reglas de Oro:\n1. De espaldas a la polea, un paso adelante, inclinado ligeramente\n2. Codos junto a las orejas — FIJOS, solo mueves los antebrazos\n3. Extiende completamente arriba y aprieta 1 segundo\n🧬 Ciencia: Es el ÚNICO ejercicio que estira completamente la cabeza larga del tríceps (la más grande, da volumen al brazo). La cabeza larga cruza el hombro y solo se estira con los brazos por encima de la cabeza.\n❌ Error común: Abrir los codos hacia los lados — pierdes el estiramiento de la cabeza larga.'],
+
+  espalda_v:['📌 ESPALDA VERTICAL — Guía por ejercicio\n\n🔸 JALÓN POLEA AGARRE NEUTRO\n✅ 3 Reglas de Oro:\n1. Inclínate 15-20° hacia atrás — no recto vertical\n2. Tira con los codos hacia las caderas, no con las manos\n3. Aprieta las escápulas abajo 1 segundo antes de soltar\n🧬 Ciencia: El agarre neutro (palmas enfrentadas) es el más natural para la articulación del hombro. Activa el dorsal ancho con mínimo estrés articular. La inclinación permite un rango completo.\n❌ Error común: Tirar con los bíceps en lugar de iniciar el movimiento con las escápulas.\n\n🔸 JALÓN POLEA AGARRE ANCHO\n✅ 3 Reglas de Oro:\n1. Agarre 1.5 veces el ancho de hombros — más ancho no es mejor\n2. Baja la barra hasta la clavícula, no detrás de la nuca (lesión)\n3. Piensa en meter los codos dentro de los bolsillos traseros\n🧬 Ciencia: El agarre ancho enfatiza la porción externa del dorsal, creando la apariencia de espalda ancha en V.\n❌ Error común: Tirar detrás de la nuca — daña el manguito rotador.\n\n🔸 JALÓN POLEA AGARRE SUPINO\n✅ 3 Reglas de Oro:\n1. Agarre a la anchura de hombros, palmas hacia ti\n2. Inclínate ligeramente y tira hacia el esternón\n3. Contrae bíceps Y dorsal simultáneamente\n🧬 Ciencia: El agarre supino permite mayor rango de movimiento y mayor activación del dorsal inferior. También recluta más bíceps — funciona como ejercicio compuesto.\n❌ Error común: Inclinarse demasiado hacia atrás convirtiendo el jalón en remo.'],
+
+  espalda_h:['📌 ESPALDA HORIZONTAL (REMO) — Guía por ejercicio\n\n🔸 REMO MÁQUINA PALANCAS (DX)\n✅ 3 Reglas de Oro:\n1. Pecho contra el apoyo — mantén contacto durante TODO el movimiento\n2. Tira con los codos, no con las manos\n3. Aprieta las escápulas juntas 1 segundo arriba\n🧬 Ciencia: La máquina DX elimina el componente de estabilización lumbar, permitiéndote concentrarte 100% en el dorsal. Al ser independiente por brazo, corrige asimetrías.\n❌ Error común: Separar el pecho del apoyo para meter más peso — activa la lumbar en lugar del dorsal.\n\n🔸 REMO POLEA AGARRE NEUTRO\n✅ 3 Reglas de Oro:\n1. Espalda recta, ligera inclinación hacia delante al estirar\n2. Tira hacia el ombligo, no hacia el pecho\n3. No balancees el torso — el movimiento es de brazos y escápulas\n🧬 Ciencia: Dirección de tirón horizontal = romboides y trapecio medio. El agarre neutro reduce estrés en muñecas.\n❌ Error común: Usar el impulso del torso balanceándose adelante y atrás.\n\n🔸 REMO MANCUERNA UNILATERAL\n✅ 3 Reglas de Oro:\n1. Rodilla y mano del mismo lado en el banco — espalda paralela al suelo\n2. Tira la mancuerna hacia la cadera, no hacia el hombro\n3. Gira ligeramente el torso al tirar — es natural y activa más fibras\n🧬 Ciencia: El trabajo unilateral corrige desequilibrios entre lados. La rotación controlada del torso activa el dorsal ancho en todo su rango de acortamiento.\n❌ Error común: Tirar la mancuerna recto hacia arriba en lugar de hacia la cadera.'],
+
+  face_pull:['📌 DELTOIDES POSTERIOR + FACE PULLS — Guía por ejercicio\n\n🔸 FACE PULLS POLEA\n✅ 3 Reglas de Oro:\n1. Polea a la altura de la cara o ligeramente por encima\n2. Tira hacia las orejas separando las manos — termina con las manos a los lados de la cabeza\n3. Rota externamente al final — pulgares apuntando hacia atrás\n🧬 Ciencia: Es el mejor ejercicio para salud del hombro. Trabaja rotación externa + deltoides posterior + trapecio medio. Previene lesiones de manguito rotador causadas por exceso de press.\n❌ Error común: Tirar hacia el pecho como un remo — pierde toda la rotación externa.\n\n🔸 REAR DELT MÁQUINA (DX)\n✅ 3 Reglas de Oro:\n1. Ajusta los brazos a la altura de los hombros\n2. Abre los brazos con codos ligeramente flexionados\n3. Aprieta las escápulas juntas 1 segundo en la posición abierta\n🧬 Ciencia: Aislamiento puro del deltoides posterior. La máquina DX mantiene tensión constante y permite concentrarte en la contracción sin preocuparte por estabilización.\n❌ Error común: Usar demasiado peso y compensar con el trapecio.\n\n🔸 PÁJARO MANCUERNAS\n✅ 3 Reglas de Oro:\n1. Inclinado a 45° o más, pecho casi paralelo al suelo\n2. Levanta hacia los lados con codos ligeramente flexionados\n3. Usa peso MUY ligero — el deltoides posterior es un músculo pequeño\n🧬 Ciencia: El peso libre permite un rango de movimiento más natural que la máquina. Pero la curva de resistencia es menos favorable — máxima dificultad arriba donde el músculo está más débil.\n❌ Error común: Levantar demasiado peso y convertirlo en un movimiento de trapecio.'],
+
+  biceps:['📌 BÍCEPS — Guía por ejercicio\n\n🔸 CURL PREDICADOR MÁQUINA (DX)\n✅ 3 Reglas de Oro:\n1. Axila pegada al borde del apoyo — no dejes hueco\n2. Baja COMPLETAMENTE hasta extensión total — aquí está el estiramiento\n3. Sube hasta 3/4 del recorrido — no llegues a vertical (pierde tensión)\n🧬 Ciencia: El apoyo elimina el balanceo y aísla el bíceps. La posición con el brazo delante del cuerpo enfatiza la cabeza corta del bíceps. La extensión completa es donde más fibras se reclutan.\n❌ Error común: No bajar del todo por miedo — pierdes el 50% del ejercicio.\n\n🔸 CURL MARTILLO MANCUERNAS\n✅ 3 Reglas de Oro:\n1. Palmas enfrentadas SIEMPRE — no gires las muñecas\n2. Codos pegados al torso — si se despegan, pesa demasiado\n3. Alterna brazo a brazo para mantener técnica limpia\n🧬 Ciencia: El agarre neutro trabaja el braquial (debajo del bíceps) y el braquiorradial (antebrazo). El braquial al crecer empuja al bíceps hacia fuera — da volumen real al brazo.\n❌ Error común: Balancear el cuerpo para subir el peso.\n\n🔸 CURL CONCENTRADO MANCUERNA\n✅ 3 Reglas de Oro:\n1. Codo contra la cara interna del muslo — FIJO ahí\n2. Sube girando la muñeca hacia fuera (supinación) al final\n3. Baja lento — 3 segundos mínimo en la bajada\n🧬 Ciencia: Estudios de Boeckh-Behrens muestran que es el ejercicio con MAYOR activación del bíceps de todos. El apoyo del codo elimina todo balanceo.\n❌ Error común: Despegar el codo del muslo para hacer trampa.\n\n🔸 CURL ALTERNO SUPINANDO\n✅ 3 Reglas de Oro:\n1. Empieza con agarre neutro (martillo) abajo\n2. Gira la muñeca hacia fuera mientras subes — supina gradualmente\n3. Arriba la palma mira al techo — aprieta 1 segundo\n🧬 Ciencia: La supinación activa la cabeza corta del bíceps más que un curl normal. Al empezar neutro y terminar supinado recorres todo el rango funcional del bíceps.\n❌ Error común: Girar la muñeca desde el principio — pierdes la activación progresiva.\n\n🔸 SPIDER CURL (CURL ARAÑA)\n✅ 3 Reglas de Oro:\n1. Pecho contra el banco inclinado, brazos colgando rectos\n2. Solo se mueve el antebrazo — el brazo superior queda vertical\n3. Aprieta arriba 2 segundos — es donde más tensión hay\n🧬 Ciencia: Con los brazos delante del cuerpo, el bíceps está preestirado. La gravedad genera máxima tensión en la contracción (arriba) — complementa al predicador que tiene máxima tensión en el estiramiento (abajo).\n❌ Error común: Mover los codos hacia adelante al subir.'],
+
+  cuad:['📌 CUÁDRICEPS — Guía por ejercicio\n\n🔸 PRENSA DE PIERNAS\n✅ 3 Reglas de Oro:\n1. Pies a la anchura de hombros, en la mitad de la plataforma\n2. Baja hasta que las rodillas formen 90° — NO más profundo\n3. Lumbar SIEMPRE pegada al respaldo — si se despega, has bajado demasiado\n🧬 Ciencia: La prensa permite mover grandes cargas con mínimo riesgo lumbar. Pies altos = más glúteo/isquio. Pies bajos = más cuádriceps. Posición media = equilibrio.\n❌ Error común: Bajar demasiado y que la lumbar se despegue del asiento — riesgo de hernia discal.\n\n🔸 HACK SQUAT MÁQUINA\n✅ 3 Reglas de Oro:\n1. Hombros bien encajados en los soportes\n2. Pies juntos y ligeramente adelantados\n3. Baja hasta paralelo — muslo horizontal\n🧬 Ciencia: La inclinación de la máquina reduce la carga lumbar respecto a la sentadilla libre. Pies adelantados aumentan el recorrido del cuádriceps.\n❌ Error común: Pies demasiado atrás y rodillas pasando excesivamente de las puntas de los pies.\n\n🔸 SENTADILLA EN SMITH\n✅ 3 Reglas de Oro:\n1. Pies ligeramente adelantados respecto a la barra\n2. Baja hasta que los muslos estén paralelos al suelo\n3. Empuja con los talones, no con las puntas\n🧬 Ciencia: El Smith guía el movimiento pero permite cargar más que en sentadilla libre con seguridad. Los pies adelantados trasladan más carga al cuádriceps.\n❌ Error común: Pies justo debajo de la barra — la rodilla sufre.\n\n🔸 EXTENSIÓN CUÁDRICEPS MÁQUINA (DX)\n✅ 3 Reglas de Oro:\n1. Ajusta el rodillo justo encima de los tobillos\n2. Extiende completamente la pierna y aprieta 1 segundo arriba\n3. Baja controlado 2-3 segundos — la fase excéntrica es clave\n🧬 Ciencia: Único ejercicio de aislamiento puro del cuádriceps. La extensión completa activa el vasto medial (la gota interior de la rodilla) que no se trabaja bien con compuestos.\n❌ Error común: Soltar el peso rápido en la bajada — pierdes la mitad del ejercicio.'],
+
+  posterior:['📌 ISQUIOTIBIALES + GLÚTEO — Guía por ejercicio\n\n🔸 CURL FEMORAL TUMBADO MÁQUINA\n✅ 3 Reglas de Oro:\n1. Rodillo justo encima de los talones, no en la pantorrilla\n2. Caderas PEGADAS al banco — si se levantan, pesa demasiado\n3. Sube hasta 90° y aprieta 1 segundo\n🧬 Ciencia: Trabaja los isquiotibiales en su función de flexión de rodilla. Al estar tumbado, los isquios están en posición neutra — trabajan en el rango medio.\n❌ Error común: Levantar las caderas del banco para ayudarse.\n\n🔸 CURL FEMORAL SENTADO MÁQUINA\n✅ 3 Reglas de Oro:\n1. Ajusta el apoyo del muslo para que quede firme, no suelto\n2. Baja el rodillo hasta que las piernas estén casi extendidas\n3. Flexiona y aprieta 1 segundo — siente el isquio contraerse\n🧬 Ciencia: A diferencia del tumbado, la posición sentada preestira los isquiotibiales (cadera flexionada). Esto activa más la cabeza larga del bíceps femoral — estudios muestran mayor activación que el curl tumbado.\n❌ Error común: No usar rango completo — solo medio recorrido.\n\n🔸 HIP THRUST MÁQUINA (DX)\n✅ 3 Reglas de Oro:\n1. Pies separados a la anchura de caderas, rodillas a 90° arriba\n2. Aprieta los glúteos FUERTE arriba — 2 segundos\n3. Baja controlado hasta que la cadera casi toque el asiento\n🧬 Ciencia: El hip thrust es el ejercicio con MAYOR activación del glúteo mayor según estudios de Bret Contreras. La carga es máxima justo donde el glúteo está más contraído.\n❌ Error común: Extender con la lumbar en lugar del glúteo — si notas dolor lumbar, estás compensando.\n\n🔸 HIP THRUST BARRA EN BANCO\n✅ 3 Reglas de Oro:\n1. Espalda alta apoyada en el borde del banco — las escápulas, no la lumbar\n2. Usa almohadilla en la barra — sin ella duele y arruina la serie\n3. Empuja verticalmente con los talones\n🧬 Ciencia: Mismo patrón motor que la máquina pero con mayor demanda de estabilización del core. La barra libre permite más rango.\n❌ Error común: Apoyar la lumbar en el banco en lugar de las escápulas — cambia completamente el ángulo.'],
+
+  abduccion:['📌 ABDUCCIÓN DE CADERA — Guía\n\n🔸 ABDUCCIÓN CADERA MÁQUINA\n✅ 3 Reglas de Oro:\n1. Siéntate recto — no te inclines hacia delante ni atrás\n2. Abre las piernas de forma controlada, sin rebote\n3. Aprieta 1 segundo en la posición abierta — siente el glúteo medio\n🧬 Ciencia: Trabaja el glúteo medio y menor — músculos fundamentales para estabilidad de cadera y rodilla. Reduce riesgo de lesión de rodilla al correr y en sentadillas. Las mujeres levantan mucho peso aquí porque tienen caderas más anchas con mayor palanca — no te compares.\n❌ Error común: Usar impulso al abrir y cerrar rápido — pierde el estímulo.'],
+
+  gemelo:['📌 GEMELO — Guía por ejercicio\n\n🔸 GEMELO MÁQUINA DE PIE\n✅ 3 Reglas de Oro:\n1. Sube hasta ponerte completamente de puntillas\n2. Baja estirando TODO — talones por debajo de la plataforma\n3. Pausa 1 segundo arriba Y 1 segundo abajo\n🧬 Ciencia: De pie trabaja el gastrocnemio (la bola del gemelo) que es biarticular (cruza rodilla y tobillo). Solo se activa completamente con la rodilla extendida.\n❌ Error común: Hacer medias repeticiones sin rango completo — el gemelo necesita TODO el rango.\n\n🔸 GEMELO SENTADO SÓLEO (DX)\n✅ 3 Reglas de Oro:\n1. Rodillas a 90° debajo de la almohadilla\n2. Mismo rango que de pie — sube y baja completamente\n3. Controla la bajada — el sóleo responde mejor a excéntricas lentas\n🧬 Ciencia: Sentado la rodilla flexionada desactiva el gastrocnemio — solo trabaja el sóleo (músculo profundo). El sóleo es más grande que el gastrocnemio y da el volumen real de la pantorrilla.\n❌ Error común: Pensar que no hace falta entrenar sentado porque ya haces de pie — son músculos diferentes.\n\n🔸 GEMELO EN PRENSA\n✅ 3 Reglas de Oro:\n1. Solo las puntas de los pies en el borde inferior de la plataforma\n2. Desbloquea los seguros y extiende las piernas\n3. Flexiona y extiende los tobillos — rango máximo\n🧬 Ciencia: Piernas extendidas = gastrocnemio activo. Permite usar cargas altas con seguridad.\n❌ Error común: Flexionar las rodillas — convierte el ejercicio en prensa de piernas.'],
+
+  core_flexion:['📌 CORE FLEXIÓN — Crunch máquina\n✅ 3 Reglas de Oro:\n1. Redondea la espalda al bajar — la flexión espinal ES el ejercicio\n2. Aprieta el abdomen 1 segundo en la contracción máxima\n3. Sube controlado — no dejes que el peso tire de ti\n🧬 Ciencia: El recto abdominal flexiona la columna. Sin esa flexión no hay trabajo abdominal real — solo flexión de cadera.\n❌ Error: Tirar con los brazos en lugar de flexionar el tronco.'],
+  core_rotacion:['📌 CORE ROTACIÓN — Oblicuos\n✅ 3 Reglas de Oro:\n1. Gira el torso, no los hombros — la rotación viene de la cintura\n2. Mantén la cadera fija — solo rota la parte superior\n3. Controla ambas direcciones — la vuelta también cuenta\n🧬 Ciencia: Los oblicuos son rotadores y estabilizadores laterales. Entrenarlos mejora la transferencia de fuerza entre tren superior e inferior.\n❌ Error: Mover solo los brazos sin rotar el torso.'],
+  core_lumbar:['📌 CORE LUMBAR — Back extension\n✅ 3 Reglas de Oro:\n1. Baja controlado flexionando la cadera, no la espalda\n2. Sube hasta que el torso esté en línea con las piernas — NO más\n3. Aprieta los glúteos al subir — trabajan junto con los erectores\n🧬 Ciencia: Los erectores espinales mantienen la postura y protegen la columna. Fortalecerlos previene dolor lumbar y mejora todos los ejercicios de pie.\n❌ Error: Hiperextender la espalda más allá de la horizontal — comprime los discos.'],
+  core_inferior:['📌 CORE INFERIOR — Crunch inverso\n✅ 3 Reglas de Oro:\n1. Lleva las rodillas hacia el pecho levantando la cadera del banco\n2. La cadera TIENE que despegarse — si no, solo haces flexión de cadera\n3. Baja controlado hasta que la cadera toque el banco\n🧬 Ciencia: Activa la porción inferior del recto abdominal. La clave es la retroversión pélvica — sin ella el ejercicio lo hacen los flexores de cadera.\n❌ Error: Solo mover las rodillas sin levantar la cadera.'],
+  core_completo:['📌 CORE COMPLETO — Ab coaster\n✅ 3 Reglas de Oro:\n1. Lleva las rodillas al pecho en un movimiento curvo\n2. Aprieta el abdomen durante todo el recorrido\n3. Vuelve controlado — no dejes que la máquina te lleve\n🧬 Ciencia: Combina flexión espinal con retroversión pélvica — trabaja todo el recto abdominal de arriba a abajo en un solo movimiento.\n❌ Error: Usar impulso y dejar que la máquina haga el trabajo de vuelta.']
 };
+
 
 // Muscle group mapping
 const EX_MUSCLE = {
@@ -1265,8 +1002,8 @@ function buildProg(){
     {label:'Cadera y gemelo',exs:[ex('Abducción cadera máquina','2x15-20',15,null,null,'abduccion',60),ex('Gemelo máquina de pie','2x15-20',15,null,null,'gemelo',60)]},
   ]});
   // S9 Push PPHL, S10 Pull PPHL
-  week1.push(rest());
-  week1.push(rest());
+  week1.push(buildPush(1,false));
+  week1.push(buildPull(1,false));
   week1.push(rest());
   week1.push(rest());
   prog.push(week1);
@@ -1381,10 +1118,6 @@ function buildProg(){
   return prog;
 }
 
-let absCompleted=JSON.parse(localStorage.getItem('ft_abs_done')||'[]');
-let absCurSession=0;
-let stepsData=JSON.parse(localStorage.getItem('ft_steps')||'{}');
-let foodData=JSON.parse(localStorage.getItem('ft_food')||'{}');
 const PROG_NESTED=buildProg();
 const PROG=(()=>{const f=[];PROG_NESTED.forEach(w=>w.forEach(d=>{if(d.type!=="rest")f.push(d);}));return f;})();
 // PROG = 20 gym sessions (4 weeks x 5 days, no rest days)
@@ -1392,7 +1125,7 @@ const DAYS=['Lun','Mar','Mie','Jue','Vie','Sab','Dom'];
 const DAYS_F=['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
-let curSession=(function(){var saved=Math.max(8,parseInt(localStorage.getItem('ft_sess')||'10'));var total=PROG.length;var allLogs=JSON.parse(localStorage.getItem('ft4_logs')||'{}');for(var i=saved;i<total;i++){var s=PROG[i];if(!s)break;var done=true;s.blocks.forEach(function(b,bi){b.exs.forEach(function(e,ei){if(e.cardio)return;var lg=allLogs['s'+i+'b'+bi+'e'+ei];if(!lg||!lg.sets||!lg.sets.some(function(st){return st.done;}))done=false;});});if(!done)return Math.min(total-1,Math.max(0,i));}return Math.min(total-1,Math.max(0,saved));})();
+let curSession=(function(){var saved=Math.max(8,parseInt(localStorage.getItem('ft_sess')||'8'));var allLogs=JSON.parse(localStorage.getItem('ft4_logs')||'{}');for(var i=saved;i<PROG.length;i++){var s=PROG[i];if(!s)break;var done=true;s.blocks.forEach(function(b,bi){b.exs.forEach(function(e,ei){if(e.cardio)return;var lg=allLogs['s'+i+'b'+bi+'e'+ei];if(!lg||!lg.sets||!lg.sets.some(function(st){return st.done;}))done=false;});});if(!done)return Math.min(PROG.length-1,Math.max(0,i));}return Math.min(PROG.length-1,Math.max(0,saved));})();
 let curWeek=Math.floor(curSession/5);
 let curDay=curSession%5;
 function saveSess(){localStorage.setItem('ft_sess',curSession);}
@@ -1410,15 +1143,7 @@ let prFilter='all';
 function saveL(){localStorage.setItem('ft4_logs',JSON.stringify(logs));}
 function saveBioD(){localStorage.setItem('ft4_bio',JSON.stringify(bioData));}
 function saveNotes(){localStorage.setItem('ft4_notes',JSON.stringify(sessionNotes));}
-// Detecta ejercicios de mancuerna para multiplicar volumen x2
-function isMancuerna(name){
-  if(!name)return false;
-  var n=name.toLowerCase();
-  return n.includes('mancuerna')||n.includes('arnold')||n.includes('martillo')||
-         n.includes('concentrado')||n.includes('alterno')||n.includes('spider')||
-         n.includes('araña')||n.includes('pajaro')||n.includes('pájaro');
-}
-
+function isMancuerna(name){if(!name)return false;var n=name.toLowerCase();return n.includes("mancuerna")||n.includes("arnold")||n.includes("martillo")||n.includes("concentrado")||n.includes("alterno")||n.includes("spider")||n.includes("araña")||n.includes("pajaro")||n.includes("pájaro");}
 function exKey(w,d,bi,ei){return`s${w*5+d}b${bi}e${ei}`;}
 function noteKey(w,d){return`w${w}d${d}`;}
 
@@ -1447,102 +1172,14 @@ function computePRs(){
   return prs;
 }
 
-
-// ─── EDICIÓN Y LIMPIEZA DE PRs ────────────────────────────────────────────────
-function findLogKeyForExercise(exName){
-  // Busca la clave de log más reciente para un ejercicio dado
-  var foundKey=null,foundSi=null;
-  for(var pi=0;pi<PROG.length;pi++){
-    var sess=PROG[pi];
-    if(!sess||!sess.blocks)continue;
-    var w=Math.floor(pi/5),d=pi%5;
-    sess.blocks.forEach(function(b,bi){
-      b.exs.forEach(function(ex,ei){
-        if(ex.n===exName){
-          var k=exKey(w,d,bi,ei);
-          if(logs[k]&&logs[k].sets){foundKey=k;}
-        }
-      });
-    });
-  }
-  return foundKey;
-}
-
-function editPR(exName){
-  // Encuentra todas las series registradas de este ejercicio y permite editarlas
-  var allEntries=[];
-  for(var pi=0;pi<PROG.length;pi++){
-    var sess=PROG[pi];
-    if(!sess||!sess.blocks)continue;
-    var w=Math.floor(pi/5),d=pi%5;
-    sess.blocks.forEach(function(b,bi){
-      b.exs.forEach(function(ex,ei){
-        if(ex.n===exName){
-          var k=exKey(w,d,bi,ei);
-          if(logs[k]&&logs[k].sets){
-            logs[k].sets.forEach(function(st,si){
-              if(st.done&&st.kg)allEntries.push({key:k,si:si,kg:st.kg,reps:st.reps});
-            });
-          }
-        }
-      });
-    });
-  }
-  if(!allEntries.length){alert('No hay series registradas de '+exName);return;}
-  // Encuentra el valor máximo (el PR)
-  var maxEntry=allEntries.reduce(function(a,b){return parseFloat(b.kg)>parseFloat(a.kg)?b:a;});
-  var nuevo=prompt('Editar récord de '+exName+'\n\nPeso actual del récord: '+maxEntry.kg+'kg x'+maxEntry.reps+' reps\n\nIntroduce el peso correcto (kg):',maxEntry.kg);
-  if(nuevo===null)return;
-  var nuevoKg=parseFloat(nuevo.replace(',','.'));
-  if(isNaN(nuevoKg)||nuevoKg<0){alert('Valor no válido');return;}
-  logs[maxEntry.key].sets[maxEntry.si].kg=String(nuevoKg);
-  saveL();
-  renderPR();
-  alert('Récord actualizado a '+nuevoKg+'kg');
-}
-
-function cleanAnomalousPRs(){
-  // Detecta valores >3x la mediana del ejercicio y los marca para revisión
-  var prs=computePRs();
-  var anomalias=[];
-  Object.keys(prs).forEach(function(name){
-    var hist=prs[name].history;
-    if(hist.length<2)return;
-    var kgs=hist.map(function(h){return parseFloat(h.kg);}).filter(function(x){return x>0;}).sort(function(a,b){return a-b;});
-    if(kgs.length<2)return;
-    var mediana=kgs[Math.floor(kgs.length/2)];
-    var max=Math.max.apply(null,kgs);
-    // Anómalo si el máximo es >3x la mediana
-    if(max>mediana*3&&mediana>0){
-      anomalias.push({name:name,max:max,mediana:mediana});
-    }
-  });
-  if(!anomalias.length){alert('✓ No se han detectado récords anómalos.');return;}
-  var msg='Se han detectado '+anomalias.length+' posibles récords erróneos:\n\n';
-  anomalias.forEach(function(a){
-    msg+='• '+a.name+': '+a.max+'kg (tu media es '+a.mediana+'kg)\n';
-  });
-  msg+='\nPulsa cada récord con ✏️ para corregirlo manualmente.';
-  alert(msg);
-}
-
+function editPR(exName){var allE=[];for(var pi=0;pi<PROG.length;pi++){var ss=PROG[pi];if(!ss||!ss.blocks)continue;var w=Math.floor(pi/5),d=pi%5;ss.blocks.forEach(function(b,bi){b.exs.forEach(function(exx,ei){if(exx.n===exName){var k=exKey(w,d,bi,ei);if(logs[k]&&logs[k].sets){logs[k].sets.forEach(function(st,si){if(st.done&&st.kg)allE.push({key:k,si:si,kg:st.kg,reps:st.reps});});}}});});}
+if(!allE.length)return;var mx=allE.reduce(function(a,b){return parseFloat(b.kg)>parseFloat(a.kg)?b:a;});var nv=prompt("Record "+exName+"\nActual: "+mx.kg+"kg\nCorregir:",mx.kg);if(nv===null)return;var nk=parseFloat(nv.replace(",","."));if(isNaN(nk))return;logs[mx.key].sets[mx.si].kg=String(nk);saveL();renderPR();}
 function renderPR(){
   const prs=computePRs();
   const search=(document.getElementById('pr-search').value||'').toLowerCase();
   const groups=['all','pecho','hombro','biceps','triceps','espalda_v','espalda_h','cuad','posterior','gemelo','abduccion'];
   const groupLabels={all:'Todos',pecho:'Pecho',hombro:'Hombros',biceps:'Biceps',triceps:'Triceps',espalda_v:'Espalda',espalda_h:'Espalda H',cuad:'Cuadriceps',posterior:'Isquios',gemelo:'Gemelos',abduccion:'Gluteo med.'};
   document.getElementById('pr-filters').innerHTML=groups.map(g=>`<button class="pr-filter ${prFilter===g?'active':''}" onclick="prFilter='${g}';renderPR()">${groupLabels[g]}</button>`).join('');
-  // Botón limpiar anómalos
-  var cleanBtn=document.getElementById('pr-clean-btn');
-  if(!cleanBtn){
-    var filtersEl=document.getElementById('pr-filters');
-    var btn=document.createElement('button');
-    btn.id='pr-clean-btn';
-    btn.textContent='🧹 Limpiar récords anómalos';
-    btn.style.cssText='width:100%;margin:8px 0;padding:8px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:12px;font-weight:700;cursor:pointer';
-    btn.onclick=cleanAnomalousPRs;
-    filtersEl.parentNode.insertBefore(btn,filtersEl.nextSibling);
-  }
 
   const entries=Object.entries(prs).filter(([name,data])=>{
     if(search&&!name.toLowerCase().includes(search)) return false;
@@ -1567,10 +1204,7 @@ function renderPR(){
     return`<div class="pr-card">
       <div class="pr-card-top">
         <div class="pr-ex-name">${name}</div>
-        <div style="display:flex;gap:6px;align-items:center">
-          <div class="pr-muscle-tag">${muscleLabel}</div>
-          <button onclick="editPR('${name.replace(/'/g,"\\'")}')" style="background:none;border:1px solid var(--brd);border-radius:6px;padding:2px 8px;font-size:11px;cursor:pointer;color:var(--muted)">✏️</button>
-        </div>
+        <div class="pr-muscle-tag">${muscleLabel}</div>
       </div>
       <div class="pr-record">
         <div class="pr-record-icon">🏆</div>
@@ -1611,22 +1245,12 @@ function startTimer(sec){
   timerSec=sec;timerOn=true;timerEndTime=Date.now()+sec*1000;clearInterval(timerInt);renderTimerArea();
   timerInt=setInterval(()=>{
     if(!timerOn)return;
-    // Calcula tiempo restante por diferencia real de timestamps (sobrevive a cierre de app)
     timerSec=Math.max(0,Math.round((timerEndTime-Date.now())/1000));
     if(timerSec<=0){timerSec=0;timerOn=false;clearInterval(timerInt);if(navigator.vibrate)navigator.vibrate([200,100,200]);}
     const el=document.getElementById('timer-num');
     if(el){const m=Math.floor(timerSec/60),s=timerSec%60;el.textContent=`${m}:${s.toString().padStart(2,'0')}`;el.className='timer-num '+(timerSec<=10?'urgent':'ok');}
   },1000);
 }
-// Al volver a la app (visibilitychange), recalcula el timer
-document.addEventListener('visibilitychange',function(){
-  if(!document.hidden&&timerOn&&timerEndTime>0){
-    timerSec=Math.max(0,Math.round((timerEndTime-Date.now())/1000));
-    if(timerSec<=0){timerSec=0;timerOn=false;clearInterval(timerInt);}
-    const el=document.getElementById('timer-num');
-    if(el){const m=Math.floor(timerSec/60),s=timerSec%60;el.textContent=`${m}:${s.toString().padStart(2,'0')}`;el.className='timer-num '+(timerSec<=10?'urgent':'ok');}
-  }
-});
 function pauseTimer(){timerOn=!timerOn;}
 function resetTimer(){timerOn=false;clearInterval(timerInt);timerSec=0;renderTimerArea();}
 function renderTimerArea(){
@@ -2020,22 +1644,7 @@ function renderDashboard(){
   // ── KPI ROW 1: sesiones y volumen total ──────────────────────────────────
   var totalSess=completedSessions.length;
   var totalVol=0,totalSer=0;
-  for(var pi=0;pi<PROG.length;pi++){
-    var sess=PROG[pi];
-    if(!sess||!sess.blocks)continue;
-    var w=Math.floor(pi/5),d=pi%5;
-    sess.blocks.forEach(function(b,bi){
-      b.exs.forEach(function(ex,ei){
-        if(ex.cardio||!ex.n)return;
-        var lg=logs[exKey(w,d,bi,ei)];
-        if(!lg||!lg.sets)return;
-        var mult=isMancuerna(ex.n)?2:1;
-        lg.sets.forEach(function(st){
-          if(st.done){totalSer++;totalVol+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0)*mult;}
-        });
-      });
-    });
-  }
+  for(var pi=0;pi<PROG.length;pi++){var ss=PROG[pi];if(!ss||!ss.blocks)continue;var w=Math.floor(pi/5),d=pi%5;ss.blocks.forEach(function(b,bi){b.exs.forEach(function(exx,ei){if(exx.cardio||!exx.n)return;var lg=logs[exKey(w,d,bi,ei)];if(!lg||!lg.sets)return;var mult=isMancuerna(exx.n)?2:1;lg.sets.forEach(function(st){if(st.done){totalSer++;totalVol+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0)*mult;}});});});}
   var pct=Math.round(totalSess/PROG.length*100);
   html+='<div class="dash-section">Resumen general</div>';
   html+='<div class="kpi-grid">';
@@ -2171,7 +1780,7 @@ function renderDashboard(){
           '<div style="font-size:11px;color:var(--muted)">de 20 posibles</div></div>'+
         '<div style="margin-left:auto">'+
           '<div style="height:6px;width:100px;background:var(--border);border-radius:3px">'+
-            '<div style="height:100%;background:var(--pu);border-radius:3px;width:'+Math.min(100,Math.round(absCompleted.length/PROG.length*100))+'%"></div>'+
+            '<div style="height:100%;background:var(--pu);border-radius:3px;width:'+Math.min(100,Math.round(absCompleted.length/20*100))+'%"></div>'+
           '</div></div>'+
       '</div>'+
     '</div>';
@@ -2362,37 +1971,16 @@ function generateExport(){
     const goal=stepDays.filter(d=>stepsData[d]>=10000).length;
     lines.push('Media: '+avg.toLocaleString('es-ES')+' pasos/dia | Dias objetivo: '+goal+'/'+stepDays.length);
   } else lines.push('Sin datos de pasos.');
-  // Nuevo diario de comidas con macros
-  lines.push('\nDIARIO DE COMIDAS - MACROS (ultimos 7 dias)');
-  try{
-    var dcStored2=JSON.parse(localStorage.getItem('ft_diario_v1')||'{}');
-    var dcDays=Object.keys(dcStored2).sort().slice(-7);
-    if(dcDays.length){
-      dcDays.forEach(function(d){
-        var day=dcStored2[d];
-        if(!day||!day.comidas||!day.comidas.length)return;
-        var tk=day.comidas.reduce(function(s,c){return s+c.kcal;},0);
-        var tp=day.comidas.reduce(function(s,c){return s+(c.p||0);},0);
-        var tc=day.comidas.reduce(function(s,c){return s+(c.c||0);},0);
-        var tg=day.comidas.reduce(function(s,c){return s+(c.g||0);},0);
-        lines.push('\n--- '+d+' ---');
-        lines.push('Total: '+Math.round(tk)+' kcal | P:'+Math.round(tp)+'g | HC:'+Math.round(tc)+'g | G:'+Math.round(tg)+'g');
-        ['desayuno','almuerzo','comida','merienda','cena','extra'].forEach(function(g){
-          var items=day.comidas.filter(function(c){return c.comida===g;});
-          if(!items.length)return;
-          var sk=items.reduce(function(s,c){return s+c.kcal;},0);
-          var sp=items.reduce(function(s,c){return s+(c.p||0);},0);
-          var gLabel=g.charAt(0).toUpperCase()+g.slice(1);
-          lines.push('  '+gLabel+' ('+Math.round(sk)+' kcal P:'+Math.round(sp)+'g):');
-          items.forEach(function(c){
-            lines.push('    - '+c.nombre+' ('+(c.label||c.gramos+'g')+') '+Math.round(c.kcal)+' kcal P:'+Math.round(c.p||0)+'g');
-          });
-        });
-      });
-    } else {
-      lines.push('Sin registros de comidas.');
-    }
-  }catch(err2){lines.push('Error diario: '+err2.message);}
+  // Food diary
+  lines.push('\nDIARIO DE COMIDAS (ultimos 7 dias)');
+  const foodDays=Object.keys(foodData).sort().slice(-7);
+  if(foodDays.length){
+    foodDays.forEach(d=>{
+      const day=foodData[d];
+      lines.push('\n--- '+d+' ---');
+      FOOD_LABELS.forEach((lbl,i)=>{if(day[i]&&day[i].trim())lines.push(lbl+': '+day[i].trim());});
+    });
+  } else lines.push('Sin diario de comidas.');
   lines.push('\nINSTRUCCIONES PARA CLAUDE:');
   lines.push('Analiza estos datos y programa el siguiente ciclo de 4 semanas.');
   lines.push('Ten en cuenta: records personales, progresion de volumen, biometria y notas.');
@@ -2490,7 +2078,6 @@ function showScr(id,btn){
   if(id==='food'){renderFoodDiary();}
   if(id==='bio'){renderBioHistory();}
   if(id==='suplem'){if(typeof renderSuplem==='function')renderSuplem();}
-  if(id==='diario'){if(typeof initDiario==='function')initDiario();}
   if(id==='diario'){if(typeof initDiario==='function')initDiario();}
 }
 
@@ -3808,7 +3395,7 @@ function showMuscleModal(exName){
 
 function updateBadge(){
   const b=document.getElementById('tb-badge');
-  if(b) b.textContent='S'+(curSession+1)+'/'+PROG.length;
+  if(b) b.textContent='S'+(curSession+1)+'/20';
   const sub=document.getElementById('tb-sub');
   if(sub&&PROG[curSession]) sub.textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
 }
@@ -3842,12 +3429,15 @@ function toggleCalm(key){
 }
 
 function confirmSessionDone(){markSessionDone(curSession);if(curSession<19){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;localStorage.setItem('ft_sess',curSession);}renderDayScroll();renderSession();renderSessionBanner();showToast('Sesion completada. Siguiente: '+PROG[Math.min(curSession,19)].label);}
+let absCompleted=JSON.parse(localStorage.getItem('ft_abs_done')||'[]');
 function saveAbsCompleted(){localStorage.setItem('ft_abs_done',JSON.stringify(absCompleted));}
 function isAbsDone(i){return absCompleted.includes(i);}
 function toggleAbsDone(i){if(isAbsDone(i))absCompleted=absCompleted.filter(function(x){return x!==i;});else absCompleted.push(i);saveAbsCompleted();renderAbsScreen();showToast(isAbsDone(i)?'Abs completado ✓':'Abs desmarcado');}
+let absCurSession=0;
 const ABS_ROUTINES={"Push A": {"focus": "Recto abdominal + Oblicuos", "why": "Push A no fatiga el core. Puedes trabajarlo con intensidad total.", "exercises": [["Crunch en Fitball", "3×15-20", "Fitball", "Tumbado sobre la fitball con la parte baja de la espalda apoyada. Baja hasta hiperextension — el recto trabaja desde su maxima longitud. Sube apretando el abdomen."], ["Rollout en Fitball", "3×10-12", "Fitball", "Rodillas en el suelo, manos sobre la pelota. Rueda hacia adelante manteniendo el core activado. Anti-extension pura."], ["Oblicuos laterales en Fitball", "3×12 c/lado", "Fitball + Sofa", "Cadera apoyada en la pelota, pies contra el sofa o pared. Baja el tronco lateralmente y sube contrayendo el oblicuo."], ["Plancha con pies en Fitball", "3×30s", "Fitball + Suelo", "Antebrazos en el suelo, pies sobre la fitball. El core estabiliza constantemente. Mas dificil que plancha normal."]]}, "Pull A": {"focus": "Core profundo + Lumbar", "why": "Pull activa los erectores. Complementas con transverso y estabilizacion profunda.", "exercises": [["Dead bug", "3×8 c/lado", "Suelo", "Tumbado boca arriba, brazos al techo, rodillas a 90 grados. Extiende brazo derecho y pierna izquierda. La lumbar NO se despega del suelo."], ["Bird dog", "3×10 c/lado", "Suelo", "A cuatro patas. Extiende brazo y pierna contrarios. Aguanta 2s. Activa multifidos y erector de forma unilateral."], ["TRX Fallout", "3×8-10", "TRX", "Agarra el TRX con brazos extendidos al frente. Cae hacia adelante dejando los brazos subir. El core resiste toda la caida. El ejercicio mas exigente para el core profundo."], ["Hollow hold", "3×20-30s", "Suelo", "Tumbado boca arriba, brazos sobre la cabeza, piernas a 45 grados, lumbar pegada al suelo. Isometrico total del core."]]}, "Legs": {"focus": "Movilidad lumbar + Core suave", "why": "Legs ya carga mucho la lumbar. Solo movilidad y core muy ligero hoy.", "exercises": [["Cat-cow lento", "2×10 muy lentos", "Suelo", "A cuatro patas. Inhala arqueando (vaca), exhala redondeando (gato). Muy lento. Moviliza la lumbar despues de la prensa e hip thrust."], ["Dead bug suave", "2×6 c/lado", "Suelo", "Igual que en Pull A pero solo 6 reps, muy lento. No es el momento de exigir al core."], ["Plancha lateral", "2×20s c/lado", "Suelo", "Codo en el suelo, cuerpo recto. Cuadrado lumbar y oblicuo sin carga axial."], ["Estiramiento de psoas", "60s c/lado", "Suelo", "Rodilla en el suelo, pie delantero adelantado. Empuja la cadera hacia adelante. El psoas se tensa mucho en prensa y hip thrust — esto lo libera."]]}, "Push B": {"focus": "Oblicuos + Core lateral y rotacional", "why": "Push B complementa con trabajo lateral y rotacional. El core en distintos planos.", "exercises": [["Russian twist en Fitball", "3×15 c/lado", "Fitball", "Sentado sobre la fitball, reclinado 45 grados. Gira el tronco de lado a lado con los brazos extendidos. La pelota fuerza al core a estabilizar mientras rotas."], ["Pike en Fitball", "3×10", "Fitball", "Posicion de plancha con los pies sobre la pelota. Lleva las caderas hacia arriba formando una V invertida. Serrato anterior y core total. Empieza por plancha con pies en fitball si es muy dificil."], ["TRX Mountain climbers", "3×20", "TRX", "Pies en los anillos del TRX, posicion de plancha. Lleva las rodillas al pecho alternadamente. La inestabilidad multiplica el trabajo del core."], ["Crunch inverso", "3×15", "Suelo + Silla", "Tumbado, manos agarradas a la silla detras de la cabeza. Lleva las rodillas al pecho y eleva la cadera. Trabaja el recto inferior."]]}, "Pull B": {"focus": "Core isometrico + TRX como protagonista", "why": "Pull B usa el TRX al maximo. Core en suspension, el estimulo mas exigente.", "exercises": [["TRX Plank", "3×30-40s", "TRX", "Pies en los anillos del TRX, antebrazos en el suelo. La inestabilidad de los pies fuerza al core a trabajar sin parar. Mucho mas dificil que plancha normal."], ["TRX Fallout", "3×8-10", "TRX", "Brazos extendidos al frente agarrando el TRX. Cae hacia adelante resistiendo con el core. Vuelve. El mas exigente para el core profundo."], ["Bird dog con Fitball", "3×8 c/lado", "Fitball + Suelo", "A cuatro patas con una mano sobre la fitball. Extiende brazo y pierna contrarios. La inestabilidad de la pelota amplia la dificultad."], ["Plancha lateral TRX", "3×20s c/lado", "TRX", "Un pie en el TRX, cuerpo lateral, codo en el suelo. El pie suspendido crea inestabilidad. Oblicuo y cuadrado lumbar al maximo."]]}};
 
 // ── STEPS ─────────────────────────────────────────────────────────────────────
+let stepsData=JSON.parse(localStorage.getItem('ft_steps')||'{}');
 function todayKey(){return new Date().toISOString().split('T')[0];}
 function saveSteps(val){
   const v=Math.max(0,parseInt(val)||0);
@@ -3870,6 +3460,7 @@ function renderStepsWidget(){
 }
 
 // ── FOOD DIARY ─────────────────────────────────────────────────────────────────
+let foodData=JSON.parse(localStorage.getItem('ft_food')||'{}');
 let foodCurDay=new Date().toISOString().split('T')[0];
 const FOOD_LABELS=['Desayuno','Almuerzo','Comida','Merienda','Cena'];
 const FOOD_ICONS=['☀️','🍎','🍽️','🍵','🌙'];
@@ -3922,7 +3513,7 @@ function renderAbsScreen(){
     var absNavHtml='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'+
       '<button onclick="absNav(-1)" style="background:none;border:1.5px solid var(--border);border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;color:var(--pu);line-height:1">&#8249;</button>'+
       '<div style="text-align:center"><div style="font-size:14px;font-weight:800;color:var(--pu)">'+label+'</div>'+
-      '<div style="font-size:10px;color:var(--muted)">'+(absIdx===curSession?'Sesion de hoy':'S'+(absIdx+1)+'/'+PROG.length)+'</div></div>'+
+      '<div style="font-size:10px;color:var(--muted)">'+(absIdx===curSession?'Sesion de hoy':'S'+(absIdx+1)+'/20')+'</div></div>'+
       '<button onclick="absNav(1)" style="background:none;border:1.5px solid var(--border);border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;color:var(--pu);line-height:1">&#8250;</button>'+
     '</div>';
     html+=absNavHtml;
@@ -4023,7 +3614,7 @@ function showMuscleModal(exName){
 
 function updateBadge(){
   const b=document.getElementById('tb-badge');
-  if(b) b.textContent='S'+(curSession+1)+'/'+PROG.length;
+  if(b) b.textContent='S'+(curSession+1)+'/20';
   const sub=document.getElementById('tb-sub');
   if(sub&&PROG[curSession]) sub.textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
 }
@@ -4168,24 +3759,8 @@ function markAllAbsEx(){
 
 function renderSuplem(){}
 
-
-
-
-
-
-
-
-
 </script>
 <script>
-
-
-
-
-
-
-
-
 
 // ─── DIARIO DE COMIDAS ────────────────────────────────────────────────────────
 
@@ -4349,87 +3924,59 @@ function initDiario(){
 }
 
 function renderDiario(){
-  var calculo=calcTDEE();
-  var objetivo=calculo.objetivo;
-  var ingeridas=dcState.comidas.reduce(function(s,c){return s+c.kcal;},0);
-  var quemadas=dcState.ejercicios.reduce(function(s,e){return s+e.kcal;},0);
-  var neto=ingeridas-quemadas;
-  var restante=objetivo-neto;
-  var pct=Math.min(100,Math.round((neto/objetivo)*100));
+  const {objetivo} = calcTDEE();
+  const ingeridas = dcState.comidas.reduce((s,c)=>s+c.kcal,0);
+  const quemadas = dcState.ejercicios.reduce((s,e)=>s+e.kcal,0);
+  const neto = ingeridas - quemadas;
+  const restante = objetivo - neto;
+  const pct = Math.min(100, Math.round((neto/objetivo)*100));
 
-  document.getElementById('dc-ingeridas').textContent=Math.round(ingeridas);
-  document.getElementById('dc-quemadas').textContent=Math.round(quemadas);
-  document.getElementById('dc-neto').textContent=Math.round(neto);
+  document.getElementById('dc-ingeridas').textContent = Math.round(ingeridas);
+  document.getElementById('dc-quemadas').textContent = Math.round(quemadas);
+  document.getElementById('dc-neto').textContent = Math.round(neto);
 
-  var restEl=document.getElementById('dc-restante');
-  restEl.textContent=restante>0?restante+' kcal':'¡Objetivo superado!';
-  restEl.style.color=restante>0?'var(--gr)':'var(--re)';
+  const restEl = document.getElementById('dc-restante');
+  restEl.textContent = restante > 0 ? restante+' kcal' : '¡Objetivo superado!';
+  restEl.style.color = restante > 0 ? 'var(--gr)' : 'var(--re)';
 
-  var barra=document.getElementById('dc-barra');
-  barra.style.width=pct+'%';
-  barra.style.background=pct<80?'var(--gr)':pct<100?'var(--go)':'var(--re)';
-
-  // MACROS PANEL
-  var obj_p=130;
-  var obj_c=Math.round(objetivo*0.40/4);
-  var obj_g=Math.round(objetivo*0.30/9);
-  var tot_p=dcState.comidas.reduce(function(s,c){return s+(c.p||0);},0);
-  var tot_c=dcState.comidas.reduce(function(s,c){return s+(c.c||0);},0);
-  var tot_g=dcState.comidas.reduce(function(s,c){return s+(c.g||0);},0);
-  var macroEl=document.getElementById('dc-macros');
-  if(macroEl){
-    var macros=[
-      {label:'Proteína 💜',tot:tot_p,obj:obj_p,col:'#7c3aed'},
-      {label:'Hidratos 🟠',tot:tot_c,obj:obj_c,col:'#d97706'},
-      {label:'Grasas 🔴',tot:tot_g,obj:obj_g,col:'#dc2626'}
-    ];
-    var html='<div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Macros del día</div>';
-    macros.forEach(function(m){
-      var rest=Math.max(0,m.obj-Math.round(m.tot));
-      var pctm=Math.min(100,Math.round((m.tot/m.obj)*100));
-      var status=rest===0?'✓ objetivo':'faltan '+rest+'g';
-      var statusCol=rest===0?'var(--re)':'var(--gr)';
-      html+='<div style="margin-bottom:10px">';
-      html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">';
-      html+='<span style="font-size:12px;font-weight:700;color:var(--text)">'+m.label+'</span>';
-      html+='<span style="font-size:11px;color:var(--muted)">'+Math.round(m.tot)+'/'+m.obj+'g · <span style="color:'+statusCol+';font-weight:700">'+status+'</span></span>';
-      html+='</div>';
-      html+='<div style="height:8px;background:var(--border);border-radius:4px;overflow:hidden">';
-      html+='<div style="height:100%;width:'+pctm+'%;background:'+m.col+';border-radius:4px;transition:width .3s"></div>';
-      html+='</div></div>';
-    });
-    macroEl.innerHTML=html;
-  }
+  const barra = document.getElementById('dc-barra');
+  barra.style.width = pct+'%';
+  barra.style.background = pct < 80 ? 'var(--gr)' : pct < 100 ? 'var(--go)' : 'var(--re)';
 
   // Ejercicios
-  var exList=document.getElementById('dc-ejercicios-list');
+  const exList = document.getElementById('dc-ejercicios-list');
   if(dcState.ejercicios.length===0){
     exList.innerHTML='';
   } else {
-    exList.innerHTML=dcState.ejercicios.map(function(e,i){
-      return '<div class="dc-item"><span class="dc-item-name">🏋️ '+e.nombre+'</span><span class="dc-item-kcal" style="color:var(--bl)">-'+e.kcal+' kcal</span><button class="dc-del" onclick="delEjercicio('+i+')">×</button></div>';
-    }).join('');
+    exList.innerHTML = dcState.ejercicios.map((e,i)=>`
+      <div class="dc-item">
+        <span class="dc-item-name">🏋️ ${e.nombre}</span>
+        <span class="dc-item-kcal" style="color:var(--bl)">-${e.kcal} kcal</span>
+        <button class="dc-del" onclick="delEjercicio(${i})">×</button>
+      </div>`).join('');
   }
 
   // Comidas por grupo
-  var grupos=['desayuno','almuerzo','comida','merienda','cena','extra'];
-  var emojis={desayuno:'☀️',almuerzo:'🍎',comida:'🍽️',merienda:'🍵',cena:'🌙',extra:'➕'};
-  var nombres={desayuno:'Desayuno',almuerzo:'Almuerzo',comida:'Comida',merienda:'Merienda',cena:'Cena',extra:'Extra'};
-  var total=0;
-  grupos.forEach(function(g){
-    var items=dcState.comidas.filter(function(c){return c.comida===g;});
-    var el=document.getElementById('dc-log-'+g);
+  const grupos = ['desayuno','almuerzo','comida','merienda','cena','extra'];
+  const emojis = {desayuno:'☀️',almuerzo:'🍎',comida:'🍽️',merienda:'🍵',cena:'🌙',extra:'➕'};
+  const nombres = {desayuno:'Desayuno',almuerzo:'Almuerzo',comida:'Comida',merienda:'Merienda',cena:'Cena',extra:'Extra'};
+  let total=0;
+  grupos.forEach(g=>{
+    const items = dcState.comidas.filter(c=>c.comida===g);
+    const el = document.getElementById('dc-log-'+g);
     if(items.length===0){el.innerHTML='';return;}
-    var subtotal=items.reduce(function(s,c){return s+c.kcal;},0);
-    var sub_p=items.reduce(function(s,c){return s+(c.p||0);},0);
+    const subtotal = items.reduce((s,c)=>s+c.kcal,0);
     total+=subtotal;
-    el.innerHTML='<div class="dc-meal-header">'+emojis[g]+' '+nombres[g]+' · '+Math.round(subtotal)+' kcal · P:'+Math.round(sub_p)+'g</div>'+
-      items.map(function(c){
-        var idx=dcState.comidas.indexOf(c);
-        return '<div class="dc-item"><span class="dc-item-name">'+c.nombre+' <span style="color:var(--muted);font-size:11px">('+( c.label||c.gramos+'g')+')</span></span><span class="dc-item-kcal">'+Math.round(c.kcal)+'</span><button class="dc-del" onclick="delComida('+idx+')">×</button></div>';
-      }).join('');
+    el.innerHTML=`
+      <div class="dc-meal-header">${emojis[g]} ${nombres[g]} · ${Math.round(subtotal)} kcal</div>
+      ${items.map((c,i)=>`
+        <div class="dc-item">
+          <span class="dc-item-name">${c.nombre} <span style='color:var(--muted);font-size:11px'>(${c.label||c.gramos+'g'})</span></span>
+          <span class="dc-item-kcal">${Math.round(c.kcal)}</span>
+          <button class="dc-del" onclick="delComida(${dcState.comidas.indexOf(c)})">×</button>
+        </div>`).join('')}`;
   });
-  document.getElementById('dc-log-empty').style.display=total===0?'block':'none';
+  document.getElementById('dc-log-empty').style.display = total===0?'block':'none';
 }
 
 let searchTimer=null;
@@ -4538,16 +4085,17 @@ function updateAddPreview(){
 
 function confirmAddFood(){
   if(!dcState.selectedFood)return;
-  var g=parseFloat(document.getElementById('dc-cantidad').value)||100;
-  var comida=document.getElementById('dc-comida-sel').value;
-  var f=dcState.selectedFood;
-  var kcal=Math.round((f.k/100)*g);
-  var p=Math.round(((f.p||0)/100)*g*10)/10;
-  var c=Math.round(((f.c||0)/100)*g*10)/10;
-  var grasas=Math.round(((f.g||0)/100)*g*10)/10;
-  var label=g+'g';
-  if(f.r){var match=f.r.find(function(r){return r.g===g;});if(match)label=match.l;}
-  dcState.comidas.push({nombre:f.n,gramos:g,label:label,kcal:kcal,comida:comida,p:p,c:c,g:grasas});
+  const g = parseFloat(document.getElementById('dc-cantidad').value)||100;
+  const comida = document.getElementById('dc-comida-sel').value;
+  const kcal = Math.round((dcState.selectedFood.k/100)*g);
+  // Busca si hay una ración que coincida con los gramos para mostrarla
+  const f = dcState.selectedFood;
+  let label = g+'g';
+  if(f.r){
+    const match = f.r.find(r=>r.g===g);
+    if(match) label = match.l;
+  }
+  dcState.comidas.push({nombre:dcState.selectedFood.n, gramos:g, label, kcal, comida});
   dcState.selectedFood=null;
   document.getElementById('dc-add-form').style.display='none';
   document.getElementById('dc-cantidad').value=100;
@@ -4588,14 +4136,268 @@ function clearDiario(){
   renderDiario();
 }
 
-
-
-
-
-
-
-
-
 </script>
+
+
+
+
+<div class="sum-ov" id="sum-ov">
+  <div class="sum-panel">
+    <div class="sum-hdr">
+      <span class="sum-emoji">💪</span>
+      <div class="sum-htitle">Sesion completada</div>
+      <div class="sum-hsub" id="sum-hsub"></div>
+    </div>
+    <div class="sum-sgrid">
+      <div class="sum-sc"><div class="sum-sv" id="sum-time">0:00</div><div class="sum-sl">Tiempo total</div></div>
+      <div class="sum-sc"><div class="sum-sv" id="sum-vol">0</div><div class="sum-sl">kg levantados</div></div>
+      <div class="sum-sc"><div class="sum-sv" id="sum-series">0</div><div class="sum-sl">Series hechas</div></div>
+      <div class="sum-sc"><div class="sum-sv" id="sum-exdone">0</div><div class="sum-sl">Ejercicios</div></div>
+    </div>
+    <div class="sum-prs" id="sum-prs-wrap" style="display:none">
+      <div class="sum-prs-t">Tus records de hoy</div>
+      <div id="sum-prs-list"></div>
+    </div>
+    <button class="btn-cls" onclick="closeSumModal()">Cerrar y guardar</button>
+  </div>
+</div>
+
+
+<!-- MUSCLE / COACHING MODAL -->
+<div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;align-items:flex-end" id="muscle-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div style="background:var(--card);border-radius:14px 14px 0 0;padding:20px 16px 40px;width:100%;max-width:480px;max-height:92vh;overflow-y:auto">
+    <button style="float:right;background:none;border:none;font-size:24px;color:var(--muted);cursor:pointer;margin-top:-4px" onclick="document.getElementById('muscle-modal').classList.remove('open')">&#10005;</button>
+    <div style="font-size:16px;font-weight:700;margin-bottom:4px;padding-right:30px" id="mus-title"></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:14px" id="mus-sub"></div>
+    <div id="mus-diagrams"></div>
+    <div id="mus-tags"></div>
+    <div id="mus-tips"></div>
+  </div>
+</div>
+
+
+>
+
+<div id="diag-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-end;justify-content:center;padding:20px" onclick="if(event.target===this)closeDiag();">
+  <div class="diag-box" style="background:var(--card);border-radius:16px 16px 16px 16px;width:100%;max-width:480px;max-height:80vh;overflow-y:auto;padding:20px;position:relative">
+    <button class="diag-close" onclick="event.stopPropagation();closeDiag();" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);line-height:1">✕</button>
+    <div style="font-size:16px;font-weight:800;margin-bottom:4px;padding-right:30px" id="diag-title"></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:14px" id="diag-muscle"></div>
+    <div id="diag-svg"></div>
+    <div id="diag-steps"></div>
+  </div>
+</div>
+<div id="scr-suplem" class="scr">
+
+  <!-- SUPLEMENTOS ACTUALES -->
+  <div class="dash-section">Suplementación actual</div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">🥛</div>
+      <div>
+        <div style="font-size:14px;font-weight:800">Whey Proteína — Bulk Pure Whey Banana</div>
+        <div style="font-size:11px;color:var(--muted)">Post-entreno · 25-30g proteína por dosis</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
+      <strong>Cuándo:</strong> Dentro de los 30 min post-entreno, con agua o leche.<br>
+      <strong>Por qué:</strong> La proteína de suero es la de absorción más rápida. En la ventana post-entreno el músculo está más receptivo a los aminoácidos.<br>
+      <strong>Dosis:</strong> 1 cacito (25-30g). No necesitas más — el músculo no puede usar más de ~40g de golpe.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">⚡</div>
+      <div>
+        <div style="font-size:14px;font-weight:800">Creatina — GEN Monohidrato Micronizada</div>
+        <div style="font-size:11px;color:var(--muted)">Con el batido post-entreno · 5g/día</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
+      <strong>Cuándo:</strong> Con el batido post-entreno. En días de descanso, con cualquier comida.<br>
+      <strong>Por qué:</strong> El suplemento más estudiado y eficaz que existe. Aumenta la fuerza en un 5-15%, permite más reps con el mismo peso, acelera la recuperación.<br>
+      <strong>Retención de agua:</strong> Los primeros 2-3kg de peso ganado son agua intramuscular — normal y beneficioso.<br>
+      <strong>Dosis:</strong> 5g/día. No hay beneficio en más cantidad.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">☀️</div>
+      <div>
+        <div style="font-size:14px;font-weight:800">Vitamina D3+K2 MK7</div>
+        <div style="font-size:11px;color:var(--muted)">Con desayuno · 2.000 UI/día</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
+      <strong>Cuándo:</strong> Con el desayuno (es liposoluble — se absorbe mejor con grasa).<br>
+      <strong>Por qué:</strong> El 80% de la población española tiene déficit. La D3 regula testosterona, función inmune y absorción de calcio. La K2 dirige el calcio al hueso, no a las arterias.<br>
+      <strong>Dosis:</strong> 2.000 UI de D3 + K2 MK7 incluida. No separes los dos.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:28px">🌙</div>
+      <div>
+        <div style="font-size:14px;font-weight:800">Magnesio — Bisglicinato PharmaZen</div>
+        <div style="font-size:11px;color:var(--muted)">Con la cena · 300-400mg</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text);line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px">
+      <strong>Cuándo:</strong> Con la cena. El magnesio por la noche mejora la calidad del sueño — y el sueño es donde el músculo crece.<br>
+      <strong>Por qué:</strong> El 70% de la población tiene déficit. Interviene en más de 300 reacciones enzimáticas, incluyendo síntesis de proteínas y función muscular.<br>
+      <strong>Forma bisglicinato:</strong> La más absorbible. Evita el óxido de magnesio (barato pero poco absorbible).
+    </div>
+  </div>
+
+  <!-- BARRAS DE PROTEÍNA -->
+  <div class="dash-section" style="margin-top:16px">Barritas proteína — recomendadas</div>
+  <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Para el almuerzo: añaden ~20g proteína y tapan el déficit diario fácilmente.</div>
+
+  <div class="card" style="margin-bottom:8px;border-color:#f59e0b">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">🏆</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">Barebells Protein Bar</div>
+          <div style="font-size:11px;color:var(--muted)">20g proteína · &lt;2g azúcar · 55g · Sin aceite de palma</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:#d97706">~2.02€</div>
+        <div style="font-size:10px;color:var(--muted)">pack 12 Amazon</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;background:#fffbeb;border-radius:6px;padding:8px">
+      La mejor opción. Textura tipo chocolate real, sin el sabor artificial de otras. <strong>Sabores recomendados:</strong> Salty Peanut, Cookies &amp; Cream, White Chocolate Almond.<br>
+      <strong>Contiene maltitol</strong> — si notas malestar digestivo cambia a Quest.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">🥈</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">Quest Bar</div>
+          <div style="font-size:11px;color:var(--muted)">21g proteína · fibra alta · sin maltitol</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:var(--pu)">~2.50€</div>
+        <div style="font-size:10px;color:var(--muted)">Amazon / MASmusculo</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;background:#f8fafc;border-radius:6px;padding:8px">
+      Sin maltitol — mejor tolerada digestivamente. Proteína de aislado de suero puro. Más dura de textura que Barebells. <strong>Sabor recomendado:</strong> Chocolate Chip Cookie Dough.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">⭐</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">Premier Protein High Protein Bar</div>
+          <div style="font-size:11px;color:var(--muted)">20g proteína · &lt;1g azúcar · 40g · 50% proteína · Sin aceite de palma</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:#16a34a">~1.50€</div>
+        <div style="font-size:10px;color:var(--muted)">pack 16 Amazon ES</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;background:#f0fdf4;border-radius:6px;padding:8px">
+      Excelente relación calidad-precio. Pack de 16 unidades, más económica por proteína que Barebells. 50% de proteína — de las más altas del mercado. Barrita más pequeña (40g vs 55g) pero mismo contenido proteico.<br>
+      <strong>Sabores:</strong> Chocolate Caramel y Double Chocolate Cookie.<br>
+      <strong>Contiene maltitol</strong> — igual tolerancia que Barebells. Textura más crujiente y ligera.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">💰</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">Max Protein Real Protein Bar</div>
+          <div style="font-size:11px;color:var(--muted)">20g proteína · marca española</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:#16a34a">~1.80€</div>
+        <div style="font-size:10px;color:var(--muted)">Amazon España</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;background:#f0fdf4;border-radius:6px;padding:8px">
+      La más barata con buen perfil. Marca española, fácil de encontrar. Sabor más convencional que Barebells pero cumple perfectamente su función.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px;border-color:#7c3aed">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">💣</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">Grenade Carb Killa</div>
+          <div style="font-size:11px;color:var(--muted)">23g proteína · 1g azúcar · 60g · Triple capa</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:#7c3aed">~2.20€</div>
+        <div style="font-size:10px;color:var(--muted)">pack 12 Amazon ES</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;background:#faf5ff;border-radius:6px;padding:8px">
+      La <strong>más proteína por barrita</strong> de todas (23g). Triple capa con chocolate europeo — textura y sabor excepcionales, las más valoradas en reseñas.<br>
+      <strong>Sabores recomendados:</strong> Caramel Chaos, White Chocolate Salted Peanut, Fudge Brownie.<br>
+      <strong>Contiene aceite de palma</strong> — única de la lista. Y maltitol como las demás.<br>
+      <strong>Contiene maltitol</strong> — misma tolerancia que Barebells y Premier Protein.
+    </div>
+  </div>
+
+  <!-- PRE-ENTRENO — OPCIONAL (a partir de semana 3) -->
+  <div class="dash-section" style="margin-top:16px">Pre-entreno — opcional 🚀</div>
+  <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Recomendado a partir de S14 (semana 3), cuando el programa esté rodado. No antes.</div>
+
+  <div class="card" style="margin-bottom:8px;border-color:#7c3aed">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">🏅</div>
+        <div>
+          <div style="font-size:13px;font-weight:800">HSN Evopump en Polvo</div>
+          <div style="font-size:11px;color:var(--muted)">600mg nitratos · Citrulina + Arginina · Sin cafeína · Fabricado en España</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:800;color:#7c3aed">~0.80€</div>
+        <div style="font-size:10px;color:var(--muted)">por toma · 500g/25 tomas</div>
+      </div>
+    </div>
+    <div style="font-size:12px;line-height:1.6;background:#faf5ff;border-radius:6px;padding:8px">
+      La mejor opción calidad-precio. 600mg de nitratos garantizados — más que el Beet It Sport. Añade citrulina y arginina que potencian el efecto vasodilatador.<br>
+      <strong>Cómo tomarlo:</strong> 20g en 300ml agua, 90 min antes del entreno. Necesitas cuchara medidora de 20g.<br>
+      <strong>Sabores:</strong> Ponche de Frutas o Grosella Negra.<br>
+      <strong>Sin cafeína</strong> — no interfiere con el sueño aunque entrenes tarde.<br>
+      <strong>Dónde:</strong> hsnstore.com o Amazon España.
+    </div>
+  </div>
+
+  <!-- PROTOCOLO RYBELSUS -->
+  <div class="dash-section">Protocolo Rybelsus 7mg</div>
+  <div class="card" style="margin-bottom:20px">
+    <div style="font-size:12px;line-height:1.8;color:var(--text)">
+      <div style="margin-bottom:6px">⏰ <strong>Despertar</strong> → Rybelsus en ayunas</div>
+      <div style="margin-bottom:6px">⏱️ <strong>30 minutos después</strong> → Desayuno</div>
+      <div style="margin-bottom:6px">⏱️ <strong>Mínimo 2h después del desayuno</strong> → Batido proteína + creatina</div>
+      <div style="margin-top:10px;padding:8px;background:#fff7ed;border-radius:6px;font-size:11px;color:#92400e">
+        ⚠️ El Rybelsus debe tomarse con el estómago vacío y solo con un sorbo de agua (máx. 120ml). Cualquier alimento o bebida antes de los 30 min reduce su absorción hasta un 50%.
+      </div>
+    </div>
+  </div>
+
+</div>
 </body>
 </html>
