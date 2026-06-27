@@ -1122,23 +1122,25 @@ function buildProg(){
 
   // HOMBROS — Deltoides completo + brazo accesorio (~17 series)
   function buildHombros(sw,dl){
-    const ex2=sw===2?'Press banca mancuernas':'Press Arnold mancuernas';
-    const ex3=sw===2?'Face pulls polea':'Rear delt máquina (DX)';
-    const ex4=sw===2?'Elevación frontal mancuernas':'Elevaciones laterales polea baja';
-    const brazo=sw===2?'Curl martillo mancuernas':'Pushdown polea cuerda';
+    const lat=sw===2?'Elevaciones laterales polea baja':'Elevaciones laterales mancuernas';
+    const press2=sw===2?'Press hombros mancuernas sentado':'Press Arnold mancuernas';
+    const rear=sw===1?'Rear delt máquina (DX)':sw===2?'Face pulls polea':'Pájaro en polea baja';
+    const aislam=sw===1?'Elevaciones laterales polea baja':sw===2?'Elevación frontal mancuernas':'Elevación frontal polea baja';
+    const brazo=sw===1?'Pushdown polea cuerda':sw===2?'Curl martillo mancuernas':'Extensión overhead polea cuerda';
     const brazoG=sw===2?'biceps':'triceps';
+    const coreEx=sw===1?'Ab coaster — rodillas al pecho':sw===2?'Crunch máquina abdominal':'Oblicuos lateral máquina';
     return{type:'gym',label:'Hombros',icon:'🎯',color:'gym',calmType:'push',isDeload:dl,
       duration:dl?'Gym ~45 min':'Gym ~50 min + Cardio 20 min',
-      desc:dl?'DESCARGA — Hombros':'Press hombros DX · Laterales · '+ex2+' · '+ex3+' · Brazo · Core',
+      desc:dl?'DESCARGA — Hombros':'Press hombros DX · '+lat+' · '+press2+' · '+rear+' · Brazo · Core',
       blocks:[
         {label:'Hombros — compuesto principal',exs:[ex('Press hombros máquina palancas (DX)',sets(4,'10-12',dl),8,'amrap',null,'hombro',120)]},
         ...(dl?[]:[
-          {label:'Hombros — laterales',exs:[ex('Elevaciones laterales mancuernas','3x15-20',15,'prog',null,'lateral',60)]},
-          {label:'Hombros — press secundario',exs:[ex(ex2,'3x10-12',10,null,null,'hombro',90)]},
-          {label:'Deltoides posterior',exs:[ex(ex3,'3x12-15',12,null,null,'face_pull',60)]},
-          {label:'Hombros — aislamiento',exs:[ex(ex4,'2x15-20',15,null,null,'lateral',60)]},
+          {label:'Hombros — laterales',exs:[ex(lat,'3x15-20',15,'prog',null,'lateral',60)]},
+          {label:'Hombros — press secundario',exs:[ex(press2,'3x10-12',10,null,null,'hombro',90)]},
+          {label:'Deltoides posterior',exs:[ex(rear,'3x12-15',12,null,null,'face_pull',60)]},
+          {label:'Hombros — aislamiento',exs:[ex(aislam,'2x15-20',15,null,null,'lateral',60)]},
           {label:'Brazo accesorio',exs:[ex(brazo,'3x12-15',12,null,null,brazoG,60)]},
-          {label:'Core',exs:[ex('Ab coaster — rodillas al pecho','3x12-15',12,null,null,null,60)]},
+          {label:'Core',exs:[ex(coreEx,'3x12-15',12,null,null,null,60)]},
         ]),
         {label:'Cardio',exs:[cardio('Bici estática Zona 2','20 min — 130-145 ppm')]},
       ]
