@@ -459,200 +459,106 @@ canvas{display:block;width:100%!important;height:100%!important}
 <div id="scr-nutri" class="scr">
   <div class="hero">
     <div class="hero-label">Plan nutricional personalizado</div>
-    <div class="hero-title">Recomposicion<br><em>corporal</em></div>
-    <div class="hero-sub">39 anos · 90 kg · 173 cm · Objetivo: perder grasa y ganar musculo</div>
-    <div class="hero-stats">
-      <div class="hstat"><div class="hstat-v">~2.150</div><div class="hstat-l">kcal gym</div></div>
-      <div class="hstat"><div class="hstat-v">~1.900</div><div class="hstat-l">kcal descanso</div></div>
-      <div class="hstat"><div class="hstat-v">180g</div><div class="hstat-l">proteina/dia</div></div>
-    </div>
-  </div>
-  <div class="n-nav">
-    <button class="n-nav-btn active" onclick="showNutriTab('plan',this)">Plan semanal</button>
-    <button class="n-nav-btn" onclick="showNutriTab('micro',this)">Micronutrientes</button>
-    <button class="n-nav-btn" onclick="showNutriTab('estrategia',this)">Estrategia</button>
-    <button class="n-nav-btn" onclick="showNutriTab('compra',this)">Lista compra</button>
-    <button class="n-nav-btn" onclick="showNutriTab('proteina',this)">Proteína</button>
+    <div class="hero-title">Recomposición<br><em>corporal</em></div>
+    <div class="hero-sub">94kg · Rybelsus 7mg · Déficit moderado · Deshinchar</div>
   </div>
 
-  <div id="n-plan" class="n-scr active">
-    <div class="wk-nav">
-      <button class="wk-btn" onclick="changeNutriWeek(-1)">&#8592;</button>
-      <span class="wk-lbl" id="n-wk-lbl">Semana 1</span>
-      <button class="wk-btn" onclick="changeNutriWeek(1)">&#8594;</button>
-    </div>
-    <div class="dscroll" id="n-day-scroll"></div>
-    <div id="n-day-content"></div>
-  </div>
-
-  <div id="n-micro" class="n-scr">
-    <div class="card">
-      <div class="card-title" style="color:#1b4332">Cobertura de micronutrientes</div>
-      <div class="card-sub">Plan disenado para cubrir el 100% de micronutrientes esenciales con alimentos reales. Solo se recomienda suplementar vitamina D3+K2.</div>
-    </div>
-    <div class="card">
-      <div class="section-label">Vitaminas clave</div>
-      <table class="micro-tbl">
-        <tr><th>Nutriente</th><th>Fuentes en el plan</th></tr>
-        <tr><td><strong>Vitamina D</strong><div class="mbar"><div class="mfill" style="width:70%"></div></div><div class="msrc">Suplemento recomendado 2.000 UI/dia</div></td><td class="msrc">Salmon, sardinas, huevos</td></tr>
-        <tr><td><strong>Vitamina B12</strong><div class="mbar"><div class="mfill" style="width:95%"></div></div></td><td class="msrc">Mejillones, sardinas, huevos, pollo, ternera</td></tr>
-        <tr><td><strong>Vitamina C</strong><div class="mbar"><div class="mfill" style="width:100%"></div></div></td><td class="msrc">Pimiento, brocoli, tomate, kiwi, naranja</td></tr>
-        <tr><td><strong>Vitamina K2</strong><div class="mbar"><div class="mfill" style="width:80%"></div></div><div class="msrc">Salud osea con vit. D</div></td><td class="msrc">Queso curado, huevos, pollo</td></tr>
-        <tr><td><strong>Folato (B9)</strong><div class="mbar"><div class="mfill" style="width:95%"></div></div></td><td class="msrc">Espinacas, lentejas, esparragos, brocoli</td></tr>
-        <tr><td><strong>Vitamina A</strong><div class="mbar"><div class="mfill" style="width:100%"></div></div></td><td class="msrc">Zanahoria, boniato, pimiento rojo</td></tr>
-        <tr><td><strong>Vitamina E</strong><div class="mbar"><div class="mfill" style="width:90%"></div></div></td><td class="msrc">Almendras, aceite oliva, espinacas</td></tr>
-      </table>
-    </div>
-    <div class="card">
-      <div class="section-label">Minerales esenciales</div>
-      <table class="micro-tbl">
-        <tr><th>Nutriente</th><th>Fuentes en el plan</th></tr>
-        <tr><td><strong>Hierro</strong><div class="mbar"><div class="mfill" style="width:85%"></div></div><div class="msrc">Hierro hemo + no hemo con vit. C</div></td><td class="msrc">Ternera, lentejas, almejas, espinacas</td></tr>
-        <tr><td><strong>Zinc</strong><div class="mbar"><div class="mfill" style="width:90%"></div></div><div class="msrc">Clave para testosterona y recuperacion</div></td><td class="msrc">Ternera, almejas, semillas calabaza</td></tr>
-        <tr><td><strong>Magnesio</strong><div class="mbar"><div class="mfill" style="width:85%"></div></div><div class="msrc">Sueno y sintesis proteica</div></td><td class="msrc">Almendras, espinacas, legumbres, platano</td></tr>
-        <tr><td><strong>Calcio</strong><div class="mbar"><div class="mfill" style="width:80%"></div></div></td><td class="msrc">Yogur griego, sardinas, brocoli</td></tr>
-        <tr><td><strong>Selenio</strong><div class="mbar"><div class="mfill" style="width:90%"></div></div><div class="msrc">Antioxidante, tiroides</div></td><td class="msrc">Atun, sardinas, huevos, pollo</td></tr>
-        <tr><td><strong>Potasio</strong><div class="mbar"><div class="mfill" style="width:95%"></div></div></td><td class="msrc">Platano, patata, lentejas, salmon</td></tr>
-      </table>
-    </div>
-    <div class="card">
-      <div class="section-label">Acidos grasos y aminoacidos clave</div>
-      <table class="micro-tbl">
-        <tr><th>Nutriente</th><th>Rol y fuentes</th></tr>
-        <tr><td><strong>Omega-3 EPA/DHA</strong><div class="mbar"><div class="mfill" style="width:85%"></div></div><div class="msrc">Antiinflamatorio, recuperacion muscular</div></td><td class="msrc">Salmon, sardinas, caballa, atun, nueces</td></tr>
-        <tr><td><strong>Leucina</strong><div class="mbar"><div class="mfill" style="width:100%"></div></div><div class="msrc">Activa la sintesis proteica muscular (mTOR)</div></td><td class="msrc">Pollo, huevos, atun, leche, legumbres</td></tr>
-        <tr><td><strong>Triptofano</strong><div class="mbar"><div class="mfill" style="width:95%"></div></div><div class="msrc">Precursor de serotonina y melatonina</div></td><td class="msrc">Pavo, huevos, semillas calabaza, platano</td></tr>
-        <tr><td><strong>Creatina natural</strong><div class="mbar"><div class="mfill" style="width:60%"></div></div><div class="msrc">No llega a niveles optimos. Suplementar: 3-5g/dia</div></td><td class="msrc">Ternera, salmon, sardinas</td></tr>
-      </table>
-    </div>
-    <div class="n-info amber"><strong>Suplementos recomendados:</strong> Vitamina D3 2.000 UI + K2 100mcg (diario, especialmente en invierno). Opcional: creatina monohidrato 5g/dia. Todo lo demas lo cubre el plan.</div>
-  </div>
-
-  <div id="n-estrategia" class="n-scr">
-    <div class="card">
-      <div class="card-title" style="color:#1b4332">Estrategia nutricional</div>
-      <div class="card-sub">Disenada para recomposicion corporal a los 39 anos con entrenamiento de fuerza 6 dias/semana.</div>
-      <div class="strat-row"><div class="strat-ico">📊</div><div class="strat-tx"><strong>Calorias cicladas:</strong> Dias de gym ~2.150 kcal. Dia de descanso ~1.900 kcal. Maximiza la sintesis proteica cuando entrenas y el deficit cuando no.</div></div>
-      <div class="strat-row"><div class="strat-ico">🥩</div><div class="strat-tx"><strong>Proteina 2g/kg = 180g/dia:</strong> Distribuida en 5 comidas. Cada toma contiene minimo 30g. La leucina de cada comida activa el mTOR.</div></div>
-      <div class="strat-row"><div class="strat-ico">🍚</div><div class="strat-tx"><strong>Carbohidratos estrategicos:</strong> Altos pre-entreno (pasta, arroz, avena, boniato). Bajos por la noche para favorecer la oxidacion de grasa durante el sueno.</div></div>
-      <div class="strat-row"><div class="strat-ico">🐟</div><div class="strat-tx"><strong>Rotacion de proteinas:</strong> 4 tipos de pescado azul/semana, 2 pescado blanco, 3 carnes magras distintas, huevos y lacteos fermentados. Maxima variedad de aminoacidos.</div></div>
-      <div class="strat-row"><div class="strat-ico">🫘</div><div class="strat-tx"><strong>Legumbres 3x/semana:</strong> Lentejas, garbanzos y alubias en rotacion. Fibra, folato, hierro y proteina vegetal complementando la animal.</div></div>
-      <div class="strat-row"><div class="strat-ico">🥬</div><div class="strat-tx"><strong>400g de verduras/dia:</strong> Cruciferas (brocoli, coliflor), hojas verdes (espinacas, rucula), raices (zanahoria, boniato) y alliums (ajo, cebolla). Maxima variedad de fitoquimicos.</div></div>
-      <div class="strat-row"><div class="strat-ico">⏰</div><div class="strat-tx"><strong>Timing:</strong> Batido o comida proteica 60 min post-gym. Pre-gym: carbos 1.5-2h antes. Cena: alta proteina, baja carbo para favorecer GH nocturna.</div></div>
-      <div class="strat-row"><div class="strat-ico">🍽️</div><div class="strat-tx"><strong>Comer fuera:</strong> Elige siempre proteina + verdura como base. Salsas aparte. Evita fritos. Cada comida tiene su alternativa de restaurante.</div></div>
-    </div>
-    <div class="card">
-      <div class="card-title" style="color:#1b4332">Los 10 alimentos mas importantes</div>
-      <div class="strat-row"><div class="strat-ico">🐟</div><div class="strat-tx"><strong>Salmon (2-3x/semana):</strong> Omega-3, proteina completa, D3, B12, selenio, potasio. El alimento mas completo del plan.</div></div>
-      <div class="strat-row"><div class="strat-ico">🥚</div><div class="strat-tx"><strong>Huevos (diario):</strong> Colina, leucina, vitaminas liposolubles A/D/E/K2. La proteina mas biodisponible.</div></div>
-      <div class="strat-row"><div class="strat-ico">🍗</div><div class="strat-tx"><strong>Pechuga de pollo:</strong> Mayor ratio proteina/caloria. Leucina alta. Versatil y digestiva.</div></div>
-      <div class="strat-row"><div class="strat-ico">🫛</div><div class="strat-tx"><strong>Lentejas:</strong> Hierro, folato, fibra, proteina vegetal, magnesio. Saciedad prolongada.</div></div>
-      <div class="strat-row"><div class="strat-ico">🥦</div><div class="strat-tx"><strong>Brocoli:</strong> Sulforafano antiinflamatorio, vitamina C, K, folato, calcio. 3-4x/semana.</div></div>
-      <div class="strat-row"><div class="strat-ico">🌿</div><div class="strat-tx"><strong>Espinacas:</strong> Hierro, magnesio, folato, vitamina K, nitratos (mejoran rendimiento en gym).</div></div>
-      <div class="strat-row"><div class="strat-ico">🧘</div><div class="strat-tx"><strong>Yogur griego 0%:</strong> Probioticos, calcio, proteina de suero. Base de desayunos y meriendas.</div></div>
-      <div class="strat-row"><div class="strat-ico">🫒</div><div class="strat-tx"><strong>Aceite de oliva virgen extra:</strong> Oleocantal antiinflamatorio, vitamina E. Base de todas las cocciones.</div></div>
-      <div class="strat-row"><div class="strat-ico">🍠</div><div class="strat-tx"><strong>Boniato:</strong> Betacaroteno, potasio, fibra. El mejor carbo post-gym.</div></div>
-      <div class="strat-row"><div class="strat-ico">🫐</div><div class="strat-tx"><strong>Frutos rojos:</strong> Antocianinas antiinflamatorias, vitamina C, bajo indice glucemico.</div></div>
+  <div class="card" style="margin-bottom:10px;border-left:3px solid #dc2626">
+    <div style="font-size:13px;font-weight:800;margin-bottom:8px">⚠️ Prioridad: reducir retención de líquidos</div>
+    <div style="font-size:12px;line-height:1.7;color:var(--text)">
+      La hinchazón viene de 3 sitios: <strong>exceso de sodio</strong> (aceitunas, picatostes, atún en aceite, queso feta), <strong>digestión lenta por Rybelsus</strong> (enlentece el vaciado gástrico) y <strong>carbohidratos refinados</strong>. No es grasa — es agua e inflamación digestiva.<br><br>
+      <strong>Solución:</strong> reducir sal, aumentar potasio (plátano, aguacate, espinacas), beber 2-2.5L agua/día, y priorizar carbohidratos complejos sobre refinados.
     </div>
   </div>
 
-  <div id="n-proteina" class="n-scr">
-    <div class="card" style="margin-bottom:10px">
-      <div class="card-title">Fuentes de proteína natural — sin batidos</div>
-      <div class="card-sub">Objetivo: 120-130g/día ajustando lo que ya comes</div>
-    </div>
+  <div class="dash-section">Plan Lunes a Viernes</div>
+  <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Fines de semana libres por compromisos sociales</div>
 
-    <div class="card" style="margin-bottom:8px">
-      <div style="font-size:13px;font-weight:800;margin-bottom:6px">🥚 Ajustes en tu dieta actual</div>
-      <div style="font-size:12px;line-height:1.8;color:var(--text)">
-        <div>• <strong>Desayuno:</strong> añade 2 lonchas más de pavo → +6g</div>
-        <div>• <strong>Almuerzo:</strong> cambia yogur griego por skyr Arla → +5g</div>
-        <div>• <strong>Cena:</strong> sube de 2 a 4 huevos → +12g</div>
-        <div style="margin-top:8px;padding:8px;background:#f0fdf4;border-radius:6px;font-size:11px;color:#166534">
-          Con estos 3 cambios: <strong>~120g proteína/día</strong> sin nada artificial
-        </div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:8px">
-      <div style="font-size:13px;font-weight:800;margin-bottom:8px">🌱 Proteína vegetal — mejores opciones</div>
-
-      <div style="border-bottom:1px solid var(--brd);padding-bottom:10px;margin-bottom:10px">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div style="font-size:12px;font-weight:700">Edamame congelado</div>
-          <div style="font-size:12px;font-weight:800;color:#16a34a">11g/100g</div>
-        </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:3px">Proteína completa — todos los aminoácidos esenciales. Hervir 5 min con sal. Mercadona ~2€/400g.</div>
-        <div style="font-size:11px;color:var(--text);margin-top:4px">💡 Añádelo a la comida junto al arroz y el pescado — 150g = 16g proteína extra</div>
-      </div>
-
-      <div style="border-bottom:1px solid var(--brd);padding-bottom:10px;margin-bottom:10px">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div style="font-size:12px;font-weight:700">Skyr Arla (Mercadona)</div>
-          <div style="font-size:12px;font-weight:800;color:#16a34a">11g/100g</div>
-        </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:3px">El doble de proteína que el yogur griego normal. Textura más densa, sabor suave.</div>
-        <div style="font-size:11px;color:var(--text);margin-top:4px">💡 Sustituye el yogur griego del almuerzo directamente</div>
-      </div>
-
-      <div style="border-bottom:1px solid var(--brd);padding-bottom:10px;margin-bottom:10px">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div style="font-size:12px;font-weight:700">Lentejas o garbanzos</div>
-          <div style="font-size:12px;font-weight:800;color:#16a34a">9g/100g cocido</div>
-        </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:3px">2 veces por semana en lugar del arroz. Mucha fibra, hierro y saciedad prolongada — ideal con el Rybelsus.</div>
-      </div>
-
-      <div style="border-bottom:1px solid var(--brd);padding-bottom:10px;margin-bottom:10px">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div style="font-size:12px;font-weight:700">Atún en lata al natural</div>
-          <div style="font-size:12px;font-weight:800;color:#16a34a">25g/lata</div>
-        </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:3px">Cero preparación. Sustituye o complementa el pescado en la comida. ~0.80€/lata.</div>
-      </div>
-
-      <div>
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div style="font-size:12px;font-weight:700">Queso cottage / queso fresco batido 0%</div>
-          <div style="font-size:12px;font-weight:800;color:#16a34a">9g/100g</div>
-        </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:3px">Versátil, va bien con fruta en el almuerzo. Más proteína que el philadelphia light.</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div style="font-size:13px;font-weight:800;margin-bottom:8px">📊 Resumen — sin cambiar tu estilo de comer</div>
-      <div style="font-size:12px;line-height:1.9;color:var(--text)">
-        <div style="display:flex;justify-content:space-between"><span>Desayuno actual</span><span style="color:var(--muted)">~6g</span></div>
-        <div style="display:flex;justify-content:space-between"><span>Desayuno ajustado (+pavo)</span><span style="color:#16a34a;font-weight:700">~14g</span></div>
-        <div style="display:flex;justify-content:space-between;margin-top:4px"><span>Almuerzo actual (yogur)</span><span style="color:var(--muted)">~10g</span></div>
-        <div style="display:flex;justify-content:space-between"><span>Almuerzo ajustado (skyr + edamame)</span><span style="color:#16a34a;font-weight:700">~27g</span></div>
-        <div style="display:flex;justify-content:space-between;margin-top:4px"><span>Comida (igual)</span><span style="color:var(--text)">~30g</span></div>
-        <div style="display:flex;justify-content:space-between;margin-top:4px"><span>Merienda batido (igual)</span><span style="color:var(--text)">~26g</span></div>
-        <div style="display:flex;justify-content:space-between;margin-top:4px"><span>Cena actual (2 huevos)</span><span style="color:var(--muted)">~15g</span></div>
-        <div style="display:flex;justify-content:space-between"><span>Cena ajustada (4 huevos)</span><span style="color:#16a34a;font-weight:700">~22g</span></div>
-        <div style="margin-top:10px;padding:8px;background:#f0fdf4;border-radius:6px;text-align:center;font-weight:800;color:#166534">
-          TOTAL AJUSTADO: ~119g proteína/día ✓
-        </div>
-      </div>
+  <div class="card" style="margin-bottom:8px">
+    <div style="font-size:13px;font-weight:800;margin-bottom:8px">☀️ Desayuno (~300 kcal · P:20g)</div>
+    <div style="font-size:12px;line-height:1.8">
+      • Tostada integral (no Bimbo) con aguacate + pavo (4 lonchas)<br>
+      • Café cortado con leche semidesnatada<br>
+      <span style="color:var(--muted);font-size:11px">Rybelsus 30 min antes. Sin philadelphia — alto en sodio y grasa.</span>
     </div>
   </div>
 
-  <div id="n-compra" class="n-scr">
-    <div class="n-info green" style="margin-bottom:10px">Lista para una semana completa. Marca lo que ya tienes en casa.</div>
-    <div class="card" id="n-shopping-list"></div>
+  <div class="card" style="margin-bottom:8px">
+    <div style="font-size:13px;font-weight:800;margin-bottom:8px">🍎 Media mañana (~200 kcal · P:15g)</div>
+    <div style="font-size:12px;line-height:1.8">
+      • Skyr Arla natural (150g) + puñado nueces (15g) + fruta de temporada<br>
+      <span style="color:var(--muted);font-size:11px">El skyr tiene el doble de proteína que el yogur griego.</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div style="font-size:13px;font-weight:800;margin-bottom:8px">🍽️ Comida (~450 kcal · P:35g)</div>
+    <div style="font-size:12px;line-height:1.8">
+      • Arroz integral o quinoa (60g en seco) + pechuga de pollo/pavo/pescado blanco (150g) + verdura (ensalada, judías, brócoli)<br>
+      • Aliño: aceite de oliva (1 cucharada) + limón<br>
+      <span style="color:var(--muted);font-size:11px">Sin picatostes, sin aceitunas, sin queso feta — todo alto en sodio. Añade edamame (100g) para +11g proteína.</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div style="font-size:13px;font-weight:800;margin-bottom:8px">🍵 Merienda post-entreno (~250 kcal · P:30g)</div>
+    <div style="font-size:12px;line-height:1.8">
+      • Batido whey (30g) + plátano + creatina 5g<br>
+      • Si no entrenas: 2 huevos duros + fruta<br>
+      <span style="color:var(--muted);font-size:11px">El plátano aporta potasio que contrarresta el sodio y ayuda a deshinchar.</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div style="font-size:13px;font-weight:800;margin-bottom:8px">🌙 Cena (~350 kcal · P:30g)</div>
+    <div style="font-size:12px;line-height:1.8">
+      • Revuelto de 3-4 huevos con espinacas y champiñones<br>
+      • O: pescado azul (salmón/sardinas) con verdura al vapor<br>
+      <span style="color:var(--muted);font-size:11px">Sin carbohidratos refinados en la cena. Las espinacas aportan potasio y magnesio.</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px;background:#f0fdf4">
+    <div style="font-size:13px;font-weight:800;margin-bottom:8px">📊 Totales diarios estimados</div>
+    <div style="font-size:12px;line-height:1.8">
+      • Calorías: ~1.550 kcal (déficit moderado con Rybelsus)<br>
+      • Proteína: ~130g ✓<br>
+      • Carbohidratos: ~140g (complejos, no refinados)<br>
+      • Grasas: ~55g (aceite oliva, nueces, huevo, pescado azul)<br>
+      • Agua: 2-2.5L mínimo
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div style="font-size:13px;font-weight:800;margin-bottom:8px">🚫 Alimentos a evitar (L-V) para deshinchar</div>
+    <div style="font-size:12px;line-height:1.8">
+      • <strong>Picatostes fritos</strong> — sodio + grasa trans<br>
+      • <strong>Aceitunas rellenas</strong> — altísimas en sodio<br>
+      • <strong>Queso feta / philadelphia</strong> — sodio + grasa saturada<br>
+      • <strong>Atún en aceite</strong> — cambiar por atún al natural<br>
+      • <strong>Tostadas Bimbo</strong> — pan ultraprocesado, cambiar por integral de panadería<br>
+      • <strong>Embutidos procesados</strong> — sodio y nitritos
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:13px;font-weight:800;margin-bottom:8px">✅ Alimentos que ayudan a deshinchar</div>
+    <div style="font-size:12px;line-height:1.8">
+      • <strong>Plátano</strong> — potasio (contrarresta el sodio)<br>
+      • <strong>Aguacate</strong> — potasio + grasas saludables<br>
+      • <strong>Espinacas</strong> — potasio + magnesio + hierro<br>
+      • <strong>Pepino</strong> — diurético natural<br>
+      • <strong>Jengibre</strong> — antiinflamatorio digestivo<br>
+      • <strong>Agua con limón</strong> — hidratación + digestión<br>
+      • <strong>Edamame</strong> — proteína vegetal + potasio
+    </div>
   </div>
 </div>
-
-
 <div id="scr-guia" class="scr">
   <div class="card"><div class="card-title">Como usar la app</div><div id="guide-list"></div></div>
   <div class="card"><div class="card-title">Glosario</div><div id="glos-list"></div></div>
 </div>
 
-<div id="scr-abs" class="scr">
-  <div id="abs-content"></div>
-</div>
 <div id="scr-food" class="scr">
   <div class="food-day-nav">
     <button onclick="foodPrevDay()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--pu)">‹</button>
@@ -688,7 +594,6 @@ canvas{display:block;width:100%!important;height:100%!important}
   <button class="bn" onclick="showScr('prog',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Progreso</button>
   <button class="bn" onclick="showScr('bio',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Bio</button>
   <button class="bn" onclick="showScr('nutri',this)"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Nutricion</button>
-  <button class="bn" onclick="showScr('abs',this)"><svg viewBox="0 0 24 24"><path d="M6 4h12v4H6zM6 12h12v4H6zM6 20h12"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Abs</button>
   <button class="bn" onclick="showScr('diario',this)"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Comidas</button>
     <button class="bn" onclick="showScr('suplem',this)"><svg viewBox="0 0 24 24"><path d="M8 3h8l1 7H7zm1 7v11m6-11v11M3 10h18"/></svg>Suplem.</button>
 </nav>
