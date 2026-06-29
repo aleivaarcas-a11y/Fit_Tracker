@@ -1001,16 +1001,16 @@ function buildProg(){
   // PUSH — Pecho prioritario + tríceps reforzado (~17 series)
   function buildPush(sw,dl){
     // PUSH — Pecho + Tríceps (~18 series) — VARIEDAD MÁXIMA
-    const comp2=[,'Press inclinado mancuernas','Press banca mancuernas','Press inclinado máquina (DX)','Press inclinado mancuernas'][sw]||'Press inclinado mancuernas';
-    const iso=[,'Pec Deck máquina (DX)','Cruce polea alto','Cruce polea bajo','Pec Deck máquina (DX)'][sw]||'Pec Deck máquina (DX)';
-    const tri1=[,'Pushdown polea cuerda','Fondos en banco (tríceps)','Extensión overhead polea cuerda','Pushdown polea cuerda'][sw]||'Pushdown polea cuerda';
-    const tri2=[,'Extensión overhead polea cuerda','Pushdown polea V','Extensión mancuerna tras nuca','Extensión overhead polea cuerda'][sw]||'Extensión overhead polea cuerda';
-    const coreEx=[,'Crunch máquina abdominal','Back extension máquina','Oblicuos lateral máquina','Crunch máquina abdominal'][sw]||'Crunch máquina abdominal';
+    const comp2=[,'Press banca mancuernas','Press inclinado mancuernas','Press inclinado máquina (DX)','Press banca mancuernas'][sw]||'Press inclinado mancuernas';
+    const iso=[,'Cruce polea alto','Pec Deck máquina (DX)','Cruce polea bajo','Cruce polea alto'][sw]||'Pec Deck máquina (DX)';
+    const tri1=[,'Press tríceps máquina sentado (polea)','Pushdown polea cuerda','Extensión overhead polea cuerda','Press tríceps máquina sentado (polea)'][sw]||'Pushdown polea cuerda';
+    const tri2=[,'Extensión mancuerna tras nuca','Extensión overhead polea cuerda','Pushdown polea V','Extensión mancuerna tras nuca'][sw]||'Extensión overhead polea cuerda';
+    const coreEx=[,'Back extension máquina','Crunch máquina abdominal','Oblicuos lateral máquina','Back extension máquina'][sw]||'Crunch máquina abdominal';
     return{type:'gym',label:'Push',icon:'💪',color:'gym',calmType:'push',isDeload:dl,
       duration:dl?'Gym ~45 min':'Gym ~50 min + Cardio 20 min',
       desc:dl?'DESCARGA — Pecho · Tríceps':'Press pecho DX · '+comp2+' · '+iso+' · '+tri1+' · Core',
       blocks:[
-        {label:'Pecho — compuesto palancas DX',exs:[ex('Press pecho máquina palancas (DX)',sets(4,'10-12',dl),10,'amrap',null,'pecho',120)]},
+        {label:'Pecho — compuesto palancas DX',exs:[ex(sw===1?'Aperturas máquina palancas (DX)':'Press pecho máquina palancas (DX)',sets(4,'10-12',dl),10,'amrap',null,'pecho',120)]},
         ...(dl?[]:[
           {label:'Pecho — 2º compuesto',exs:[ex(comp2,'3x10-12',10,null,null,'pecho',90)]},
           {label:'Pecho — aislamiento',exs:[ex(iso,'3x12-15',12,null,null,'pecho',90)]},
