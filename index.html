@@ -1371,7 +1371,7 @@ function renderSessionBanner(){
   s.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
     if(e.cardio)return;
     const lg=logs[exKey(curWeek,curDay,bi,ei)];
-    if(lg&&lg.sets)lg.sets.forEach(st=>{if(st.done){wSeries++;wVol+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}});
+    if(lg&&lg.sets){var _m=isMancuerna(e.n)?2:1;lg.sets.forEach(st=>{if(st.done){wSeries++;wVol+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0)*_m;}});}
   }));
   area.innerHTML=`
     <div class="session-banner running">
@@ -1415,7 +1415,7 @@ function showSumModal(elapsedSec){
     if(e.cardio)return;
     const lg=logs[exKey(curWeek,curDay,bi,ei)];
     let has=false;
-    if(lg&&lg.sets)lg.sets.forEach(st=>{if(st.done){series++;vol+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);has=true;}});
+    if(lg&&lg.sets){var _m2=isMancuerna(e.n)?2:1;lg.sets.forEach(st=>{if(st.done){series++;vol+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0)*_m2;has=true;}});}
     if(has)exDone++;
   }));
   const vEl=document.getElementById('sum-vol');if(vEl)vEl.textContent=Math.round(vol).toLocaleString('es-ES');
@@ -1495,7 +1495,7 @@ function renderSession(){
   s.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
     if(e.cardio)return;const ps=parseInt(e.s)||3;ts+=ps;
     const lg=logs[exKey(curWeek,curDay,bi,ei)];
-    if(lg&&lg.sets)lg.sets.forEach(st=>{if(st.done){ds++;tv+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}});
+    if(lg&&lg.sets){var _m3=isMancuerna(e.n)?2:1;lg.sets.forEach(st=>{if(st.done){ds++;tv+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0)*_m3;}});}
   }));
   const pct=ts?Math.round(ds/ts*100):0;
   document.getElementById('s-done').textContent=ds;
@@ -1631,7 +1631,7 @@ function updateStats(){
   s.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
     if(e.cardio)return;ts+=parseInt(e.s)||3;
     const lg=logs[exKey(curWeek,curDay,bi,ei)];
-    if(lg&&lg.sets)lg.sets.forEach(st=>{if(st.done){ds++;tv+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}});
+    if(lg&&lg.sets){var _m3=isMancuerna(e.n)?2:1;lg.sets.forEach(st=>{if(st.done){ds++;tv+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0)*_m3;}});}
   }));
   document.getElementById('s-done').textContent=ds;
   document.getElementById('s-total-s').textContent=`de ${ts} series`;
@@ -1695,9 +1695,9 @@ function renderDashboard(){
         b.exs.forEach(function(e,ei){
           if(e.cardio)return;
           var lg=logs['s'+si+'b'+bi+'e'+ei];
-          if(lg&&lg.sets)lg.sets.forEach(function(st){
-            if(st.done){ws++;wv+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}
-          });
+          if(lg&&lg.sets){var _m5=isMancuerna(ex.n)?2:1;lg.sets.forEach(function(st){
+            if(st.done){ws++;wv+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0)*_m5;}
+          });}
         });
       });
     }
@@ -1965,7 +1965,7 @@ function generateExport(){
       sess.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
         if(e.cardio)return;
         const lg=logs['s'+si+'b'+bi+'e'+ei];
-        if(lg&&lg.sets)lg.sets.forEach(st=>{if(st.done){wS++;wV+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0);}});
+        if(lg&&lg.sets){var _m6=isMancuerna(e.n)?2:1;lg.sets.forEach(st=>{if(st.done){wS++;wV+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0)*_m6;}});}
       }));
     });
     lines.push('Semana '+(w+1)+': '+wS+' series - '+Math.round(wV).toLocaleString('es-ES')+' kg');
