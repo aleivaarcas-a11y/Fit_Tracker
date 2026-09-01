@@ -453,7 +453,8 @@ canvas{display:block;width:100%!important;height:100%!important}
       <div id="copy-confirm" style="text-align:center;font-size:13px;color:var(--gr);margin-top:8px;display:none">Copiado. Pega esto en Claude.</div>
     </div>
   </div>
-</di<div id="scr-nutri" class="scr">
+</div>
+<div id="scr-nutri" class="scr">
   <div class="hero">
     <div class="hero-label">Plan nutricional · 1.900 kcal · 130g proteína</div>
     <div class="hero-title">Recomposición<br><em>corporal</em></div>
@@ -735,8 +736,7 @@ canvas{display:block;width:100%!important;height:100%!important}
   <button class="bn" onclick="showScr('prog',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Progreso</button>
   <button class="bn" onclick="showScr('bio',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Bio</button>
   <button class="bn" onclick="showScr('nutri',this)"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Nutricion</button>
-  <button class="bn" onclick="showScr('diario',this)"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Comidas</button>
-    <button class="bn" onclick="showScr('suplem',this)"><svg viewBox="0 0 24 24"><path d="M8 3h8l1 7H7zm1 7v11m6-11v11M3 10h18"/></svg>Suplem.</button>
+  <button class="bn" onclick="showScr('suplem',this)"><svg viewBox="0 0 24 24"><path d="M8 3h8l1 7H7zm1 7v11m6-11v11M3 10h18"/></svg>Suplem.</button>
 </nav>
 
 <div id="scr-diario" class="scr">
@@ -874,7 +874,7 @@ canvas{display:block;width:100%!important;height:100%!important}
 
 
 <script>(function(){try{
-  var flag='ft_clean_20260630';
+  var flag='ft_clean_20260901';
   if(!localStorage.getItem(flag)){
     // Borrar TODOS los datos anteriores
     var keys=[];for(var i=0;i<localStorage.length;i++)keys.push(localStorage.key(i));
@@ -1104,15 +1104,27 @@ function buildProg(){
   // ── MESOCICLO 1 PPHL: semanas 2-5 (S11-S30) ─────────────────────────────────
   // Orden: Push, Pull, Legs, Hombros + 1 hueco (descanso si solo 4 días)
 
-  // ── MESOCICLO 1 PPHL: 4 semanas + deload ─────────────────────────────────
-  for(let w=0;w<=3;w++){
-    const dl=w===3;
-    const sw=w+1;
+  // ── 8 SEMANAS: readapt + progresión + intensidad + deload ────────────────
+  for(let w=0;w<=7;w++){
+    const dl=w===7;
+    const sw=(w%3)+1;
+    const phase=w<2?1:w<4?2:3;
     const week=[];
-    week.push(buildPush(sw,dl));
-    week.push(buildPull(sw,dl));
-    week.push(buildLegs(sw,dl));
-    week.push(buildHombros(sw,dl));
+    var sessions=[buildPush(sw,dl),buildPull(sw,dl),buildLegs(sw,dl),buildHombros(sw,dl)];
+    sessions.forEach(function(sess){
+      if(!dl&&phase<3){
+        sess.blocks.forEach(function(b){
+          b.exs.forEach(function(exx){
+            if(exx.cardio)return;
+            if(phase===1){exx.s='2x12-15';exx.r=12;exx.badge=null;}
+            else{var m2=exx.s.match(/^(\d+)x(.+)/);if(m2)exx.s='3x'+m2[2];if(exx.badge==='amrap')exx.badge='prog';}
+          });
+        });
+        if(phase===1){sess.duration='Gym ~35 min + Cardio 20 min';sess.desc='READAPTACIÓN — '+sess.desc;}
+        else{sess.duration='Gym ~45 min + Cardio 20 min';sess.desc='PROGRESIÓN — '+sess.desc;}
+      }
+      week.push(sess);
+    });
     week.push(rest());
     week.push(rest());
     week.push(rest());
@@ -1486,6 +1498,22 @@ function getExPR(exName){
   const prs=computePRs();return prs[exName]||null;
 }
 
+
+function getSuggestedWeight(exName){
+  try{
+    var refs=JSON.parse(localStorage.getItem('ft_pr_ref')||'{}');
+    if(!refs[exName])return null;
+    var refKg=refs[exName][0];
+    var sess=PROG[curSession];
+    if(!sess)return null;
+    var desc=sess.desc||'';
+    var mult=1;
+    if(desc.indexOf('READAPTACIÓN')>-1)mult=0.65;
+    else if(desc.indexOf('PROGRESIÓN')>-1)mult=0.85;
+    var suggested=Math.round(refKg*mult*2)/2;
+    return{kg:suggested,phase:mult<1?(mult===0.65?'65%':'85%'):'100%'};
+  }catch(ex2){return null;}
+}
 function renderSession(){
   const s=PROG[curSession];
   const bMap={amrap:'<span class="badge b-amrap">AMRAP</span>',super:'<span class="badge b-super">Superserie</span>',prog:'<span class="badge b-prog">Progresion</span>',cardio:'<span class="badge b-cardio">Cardio</span>'};
@@ -1533,7 +1561,11 @@ function renderSession(){
       let prHtml='';
       if(!e.cardio){
         const pr=getExPR(e.n);
-        if(pr&&pr.maxKg>0) prHtml=`<div class="pr-inline" style="margin-top:4px;display:inline-flex">Record: ${pr.maxKg} kg x${pr.maxReps}</div>`;
+        if(pr&&pr.maxKg>0){
+        prHtml=`<div class="pr-inline" style="margin-top:4px;display:inline-flex">Record: ${pr.maxKg} kg x${pr.maxReps}</div>`;
+        var sug=getSuggestedWeight(e.n);
+        if(sug)prHtml+=`<div style="margin-top:4px;padding:2px 8px;border-radius:6px;background:#dbeafe;color:#1d4ed8;font-size:11px;font-weight:700;display:inline-flex">Hoy: ${sug.kg} kg (${sug.phase})</div>`;
+      }
       }
 
       let prevHtml='';
@@ -2093,7 +2125,6 @@ function showScr(id,btn){
   if(id==='food'){renderFoodDiary();}
   if(id==='bio'){renderBioHistory();}
   if(id==='suplem'){if(typeof renderSuplem==='function')renderSuplem();}
-  if(id==='diario'){if(typeof initDiario==='function')initDiario();}
 }
 
 // ─── NUTRITION DATA ───────────────────────────────────────────────────────────
@@ -3683,383 +3714,7 @@ function markAllAbsEx(){
 function renderSuplem(){}
 
 </script>
-<script>
 
-// ─── DIARIO DE COMIDAS ────────────────────────────────────────────────────────
-
-// TDEE auto: varón 39 años, 94.1kg, 173cm, actividad moderada (gym 4-6/sem), déficit 20%
-// Harris-Benedict: BMR = 10*peso + 6.25*altura - 5*edad + 5
-// TDEE = BMR * 1.55 (activo)
-// Objetivo = TDEE * 0.80
-const PERFIL = {peso:94.1, altura:173, edad:39};
-function calcTDEE(){
-  const bmr = 10*PERFIL.peso + 6.25*PERFIL.altura - 5*PERFIL.edad + 5;
-  const tdee = Math.round(bmr * 1.55);
-  const objetivo = Math.round(tdee * 0.80);
-  return {bmr:Math.round(bmr), tdee, objetivo};
-}
-
-// Base de datos de alimentos (kcal por 100g)
-const FOODS_DB = [
-  {n:'Pechuga de pollo',k:165,p:31,c:0,g:3.6,r:[{l:'1 pechuga pequeña',g:120},{l:'1 pechuga grande',g:180},{l:'100g',g:100}]},
-  {n:'Pechuga de pavo',k:135,p:29,c:0,g:1.7,r:[{l:'1 filete',g:100},{l:'2 filetes',g:200},{l:'100g',g:100}]},
-  {n:'Huevo entero',k:155,p:13,c:1.1,g:11,r:[{l:'1 huevo M',g:55},{l:'1 huevo L',g:65},{l:'2 huevos M',g:110},{l:'3 huevos M',g:165}]},
-  {n:'Clara de huevo',k:52,p:11,c:0.7,g:0.2,r:[{l:'1 clara',g:35},{l:'2 claras',g:70},{l:'3 claras',g:105}]},
-  {n:'Salmon',k:208,p:20,c:0,g:13,r:[{l:'1 filete pequeño',g:120},{l:'1 filete grande',g:180},{l:'100g',g:100}]},
-  {n:'Lubina',k:82,p:18,c:0,g:1.2,r:[{l:'1 lubina entera',g:300},{l:'1/2 lubina',g:150},{l:'1 filete',g:120},{l:'100g',g:100}]},
-  {n:'Dorada',k:96,p:20,c:0,g:2.1,r:[{l:'1 dorada entera',g:300},{l:'1/2 dorada',g:150},{l:'1 filete',g:120},{l:'100g',g:100}]},
-  {n:'Merluza',k:79,p:17,c:0,g:0.9,r:[{l:'1 filete',g:130},{l:'1/2 cola',g:200},{l:'100g',g:100}]},
-  {n:'Atun en lata (al natural)',k:116,p:26,c:0,g:1,r:[{l:'1 lata pequeña (80g)',g:80},{l:'1 lata grande (160g)',g:160}]},
-  {n:'Sardinas en lata',k:208,p:24,c:0,g:12,r:[{l:'1 lata',g:90},{l:'100g',g:100}]},
-  {n:'Gambas',k:85,p:18,c:0.9,g:0.5,r:[{l:'Ración (150g)',g:150},{l:'100g',g:100}]},
-  {n:'Ternera (magra)',k:158,p:26,c:0,g:5.4,r:[{l:'1 filete mediano',g:150},{l:'1 filete grande',g:200},{l:'100g',g:100}]},
-  {n:'Lomo de cerdo',k:143,p:22,c:0,g:5.8,r:[{l:'1 lomo',g:130},{l:'2 lomos',g:260},{l:'100g',g:100}]},
-  {n:'Yogur griego 0%',k:59,p:10,c:3.6,g:0.4,r:[{l:'1 tarrina (125g)',g:125},{l:'1 tarrina grande (200g)',g:200}]},
-  {n:'Skyr Arla',k:63,p:11,c:4,g:0.2,r:[{l:'1 tarrina (170g)',g:170},{l:'100g',g:100}]},
-  {n:'Queso cottage 0%',k:72,p:12,c:3.4,g:0.5,r:[{l:'1/2 tarrina (125g)',g:125},{l:'1 tarrina (250g)',g:250}]},
-  {n:'Leche desnatada',k:34,p:3.4,c:4.8,g:0.1,r:[{l:'1 vaso (200ml)',g:200},{l:'1/2 vaso (100ml)',g:100}]},
-  {n:'Whey proteina (polvo)',k:380,p:80,c:6,g:3,r:[{l:'1 cacito (30g)',g:30},{l:'1.5 cacitos (45g)',g:45}]},
-  {n:'Arroz (cocido)',k:130,p:2.7,c:28,g:0.3,r:[{l:'Ración pequeña (60g)',g:60},{l:'Ración media (100g)',g:100},{l:'Ración grande (150g)',g:150}]},
-  {n:'Pasta (cocida)',k:158,p:5.8,c:31,g:0.9,r:[{l:'60g cocida',g:60},{l:'100g cocida',g:100},{l:'150g cocida',g:150},{l:'200g cocida',g:200}]},
-  {n:'Avena',k:389,p:17,c:66,g:7,r:[{l:'40g (1 bol)',g:40},{l:'60g',g:60},{l:'80g',g:80}]},
-  {n:'Boniato (cocido)',k:86,p:1.6,c:20,g:0.1,r:[{l:'1 boniato pequeño (150g)',g:150},{l:'1 boniato grande (250g)',g:250},{l:'100g',g:100}]},
-  {n:'Patata (cocida)',k:87,p:1.9,c:20,g:0.1,r:[{l:'1 patata mediana (150g)',g:150},{l:'2 patatas (300g)',g:300},{l:'100g',g:100}]},
-  {n:'Pan integral',k:247,p:9,c:41,g:3.4,r:[{l:'1 rebanada (30g)',g:30},{l:'2 rebanadas (60g)',g:60}]},
-  {n:'Pan Bimbo (molde)',k:233,p:7,c:43,g:3.5,r:[{l:'1 rebanada (25g)',g:25},{l:'2 rebanadas (50g)',g:50},{l:'3 rebanadas (75g)',g:75}]},
-  {n:'Tostada bimbo',k:380,p:11,c:72,g:5,r:[{l:'1 tostada (25g)',g:25},{l:'2 tostadas (50g)',g:50}]},
-  {n:'Lentejas (cocidas)',k:116,p:9,c:20,g:0.4,r:[{l:'Ración (200g)',g:200},{l:'Ración grande (300g)',g:300},{l:'100g',g:100}]},
-  {n:'Garbanzos (cocidos)',k:164,p:8.9,c:27,g:2.6,r:[{l:'Ración (200g)',g:200},{l:'100g',g:100}]},
-  {n:'Brocoli',k:34,p:2.8,c:6.6,g:0.4,r:[{l:'1/2 brócoli (200g)',g:200},{l:'1 brócoli entero (400g)',g:400},{l:'100g',g:100}]},
-  {n:'Espinacas',k:23,p:2.9,c:3.6,g:0.4,r:[{l:'Ración (80g)',g:80},{l:'Bolsa (200g)',g:200}]},
-  {n:'Zanahoria',k:41,p:0.9,c:9.6,g:0.2,r:[{l:'1 zanahoria (80g)',g:80},{l:'2 zanahorias (160g)',g:160}]},
-  {n:'Pimiento rojo',k:31,p:1,c:6,g:0.3,r:[{l:'1 pimiento (150g)',g:150},{l:'1/2 pimiento (75g)',g:75}]},
-  {n:'Tomate',k:18,p:0.9,c:3.9,g:0.2,r:[{l:'1 tomate mediano (120g)',g:120},{l:'2 tomates (240g)',g:240}]},
-  {n:'Lechuga/Rucula',k:17,p:1.3,c:2.9,g:0.2,r:[{l:'Bol ensalada (60g)',g:60},{l:'100g',g:100}]},
-  {n:'Aguacate',k:160,p:2,c:9,g:15,r:[{l:'1/2 aguacate (70g)',g:70},{l:'1 aguacate (140g)',g:140}]},
-  {n:'Platano',k:89,p:1.1,c:23,g:0.3,r:[{l:'1 plátano pequeño (100g)',g:100},{l:'1 plátano grande (140g)',g:140}]},
-  {n:'Naranja',k:47,p:0.9,c:12,g:0.1,r:[{l:'1 naranja (180g)',g:180},{l:'1 naranja grande (250g)',g:250}]},
-  {n:'Manzana',k:52,p:0.3,c:14,g:0.2,r:[{l:'1 manzana pequeña (130g)',g:130},{l:'1 manzana grande (200g)',g:200}]},
-  {n:'Pera',k:57,p:0.4,c:15,g:0.1,r:[{l:'1 pera (150g)',g:150},{l:'1 pera grande (200g)',g:200}]},
-  {n:'Kiwi',k:61,p:1.1,c:15,g:0.5,r:[{l:'1 kiwi (75g)',g:75},{l:'2 kiwis (150g)',g:150}]},
-  {n:'Melocoton',k:39,p:0.9,c:10,g:0.3,r:[{l:'1 melocotón (150g)',g:150},{l:'2 melocotones (300g)',g:300}]},
-  {n:'Cerezas',k:63,p:1.1,c:16,g:0.2,r:[{l:'10 cerezas (60g)',g:60},{l:'20 cerezas (120g)',g:120},{l:'30 cerezas (180g)',g:180}]},
-  {n:'Fresas',k:32,p:0.7,c:7.7,g:0.3,r:[{l:'1 puñado (100g)',g:100},{l:'200g',g:200}]},
-  {n:'Frutos rojos (mix)',k:57,p:0.7,c:14,g:0.3,r:[{l:'1 puñado (80g)',g:80},{l:'150g',g:150}]},
-  {n:'Almendras',k:579,p:21,c:22,g:50,r:[{l:'10 almendras (12g)',g:12},{l:'20 almendras (24g)',g:24},{l:'30g',g:30}]},
-  {n:'Nueces',k:654,p:15,c:14,g:65,r:[{l:'3 nueces (15g)',g:15},{l:'5 nueces (25g)',g:25},{l:'30g',g:30}]},
-  {n:'Aceite de oliva',k:884,p:0,c:0,g:100,r:[{l:'1 cucharada (10g)',g:10},{l:'2 cucharadas (20g)',g:20}]},
-  {n:'Barrita Barebells',k:215,p:20,c:20,g:7,r:[{l:'1 barrita (55g)',g:55}]},
-  {n:'Barrita Quest',k:200,p:21,c:21,g:8,r:[{l:'1 barrita (60g)',g:60}]},
-  {n:'Barrita Grenade Killa',k:218,p:23,c:17,g:6,r:[{l:'1 barrita (60g)',g:60}]},
-  {n:'Cafe solo',k:2,p:0.3,c:0,g:0,r:[{l:'1 cafe (200ml)',g:200}]},
-  {n:'Tortilla de trigo (wrap)',k:306,p:8,c:55,g:7,r:[{l:'1 wrap (60g)',g:60}]},
-  {n:'Queso mozzarella light',k:149,p:22,c:2.7,g:5.8,r:[{l:'1/4 bola (60g)',g:60},{l:'1/2 bola (120g)',g:120}]},
-  {n:'Salmon ahumado',k:117,p:18,c:0,g:4.3,r:[{l:'2 lonchas (50g)',g:50},{l:'4 lonchas (100g)',g:100}]},
-  {n:'Edamame',k:122,p:11,c:10,g:5,r:[{l:'Ración (150g)',g:150},{l:'100g',g:100}]},
-  {n:'Crema de cacahuete',k:598,p:25,c:20,g:51,r:[{l:'1 cucharada (15g)',g:15},{l:'2 cucharadas (30g)',g:30}]},
-  {n:'Miel',k:304,p:0.3,c:82,g:0,r:[{l:'1 cucharadita (7g)',g:7},{l:'1 cucharada (15g)',g:15}]},
-  {n:'Jamon york / pavo fiambre',k:107,p:18,c:1.5,g:3,r:[{l:'2 lonchas (40g)',g:40},{l:'4 lonchas (80g)',g:80}]},
-  {n:'Jamon serrano',k:241,p:28,c:0,g:14,r:[{l:'2 lonchas (30g)',g:30},{l:'4 lonchas (60g)',g:60}]},
-  {n:'Queso light en lonchas',k:180,p:20,c:2,g:10,r:[{l:'1 loncha (17g)',g:17},{l:'2 lonchas (34g)',g:34}]},
-  {n:'Mantequilla',k:717,p:0.9,c:0.6,g:81,r:[{l:'1 cucharadita (5g)',g:5},{l:'1 cucharada (10g)',g:10}]}
-];
-
-let dcState = {
-  comidas:[],
-  ejercicios:[],
-  selectedFood:null,
-  currentDate: new Date().toISOString().split('T')[0]
-};
-const DC_KEY = 'ft_diario_v1';
-
-function dcDateKey(){ return dcState.currentDate; }
-
-function saveDC(){
-  const stored = JSON.parse(localStorage.getItem(DC_KEY)||'{}');
-  stored[dcDateKey()] = {comidas:dcState.comidas, ejercicios:dcState.ejercicios};
-  const keys = Object.keys(stored).sort().reverse().slice(0,90);
-  const clean = {};
-  keys.forEach(k=>clean[k]=stored[k]);
-  localStorage.setItem(DC_KEY, JSON.stringify(clean));
-}
-
-function loadDC(){
-  const stored = JSON.parse(localStorage.getItem(DC_KEY)||'{}');
-  const day = stored[dcDateKey()];
-  if(day){
-    dcState.comidas = day.comidas||[];
-    dcState.ejercicios = day.ejercicios||[];
-  } else {
-    dcState.comidas = [];
-    dcState.ejercicios = [];
-  }
-}
-
-function dcNavDay(dir){
-  const d = new Date(dcState.currentDate);
-  d.setDate(d.getDate() + dir);
-  const today = new Date().toISOString().split('T')[0];
-  // No navegar al futuro
-  if(d.toISOString().split('T')[0] > today) return;
-  dcState.currentDate = d.toISOString().split('T')[0];
-  loadDC();
-  updateDcDateLabel();
-  renderDiario();
-  // Ocultar añadir si navegamos a otro dia
-  document.getElementById('dc-add-form').style.display='none';
-  document.getElementById('dc-food-results').innerHTML='';
-}
-
-function updateDcDateLabel(){
-  const today = new Date().toISOString().split('T')[0];
-  const d = new Date(dcState.currentDate + 'T12:00:00');
-  const isToday = dcState.currentDate === today;
-  const isYesterday = (() => {
-    const y = new Date(); y.setDate(y.getDate()-1);
-    return dcState.currentDate === y.toISOString().split('T')[0];
-  })();
-  const dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-  let label = isToday ? 'Hoy' : isYesterday ? 'Ayer' : dias[d.getDay()]+' '+d.getDate()+' '+meses[d.getMonth()];
-  let sub = d.getDate()+' de '+['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][d.getMonth()]+' '+d.getFullYear();
-  document.getElementById('dc-fecha-label').textContent = label;
-  document.getElementById('dc-fecha-sub').textContent = sub;
-  // Deshabilitar flecha siguiente si es hoy
-  const nextBtn = document.getElementById('dc-nav-next');
-  nextBtn.style.opacity = isToday ? '0.3' : '1';
-  nextBtn.style.pointerEvents = isToday ? 'none' : 'auto';
-  // Mostrar/ocultar zona de añadir (solo hoy)
-  const addZone = document.getElementById('dc-add-zone');
-  if(addZone) addZone.style.display = isToday ? 'block' : 'none';
-  // Ocultar borrar todo si no es hoy
-  const clearBtn = document.getElementById('dc-clear-btn');
-  if(clearBtn) clearBtn.style.display = isToday ? 'inline' : 'none';
-}
-
-function initDiario(){
-  dcState.currentDate = new Date().toISOString().split('T')[0];
-  loadDC();
-  const {tdee, objetivo, bmr} = calcTDEE();
-  document.getElementById('dc-objetivo').textContent = objetivo+' kcal';
-  document.getElementById('dc-objetivo-sub').textContent = `TDEE ${tdee} kcal · déficit 20% · BMR ${bmr}`;
-  updateDcDateLabel();
-  renderDiario();
-}
-
-function renderDiario(){
-  const {objetivo} = calcTDEE();
-  const ingeridas = dcState.comidas.reduce((s,c)=>s+c.kcal,0);
-  const quemadas = dcState.ejercicios.reduce((s,e)=>s+e.kcal,0);
-  const neto = ingeridas - quemadas;
-  const restante = objetivo - neto;
-  const pct = Math.min(100, Math.round((neto/objetivo)*100));
-
-  document.getElementById('dc-ingeridas').textContent = Math.round(ingeridas);
-  document.getElementById('dc-quemadas').textContent = Math.round(quemadas);
-  document.getElementById('dc-neto').textContent = Math.round(neto);
-
-  const restEl = document.getElementById('dc-restante');
-  restEl.textContent = restante > 0 ? restante+' kcal' : '¡Objetivo superado!';
-  restEl.style.color = restante > 0 ? 'var(--gr)' : 'var(--re)';
-
-  const barra = document.getElementById('dc-barra');
-  barra.style.width = pct+'%';
-  barra.style.background = pct < 80 ? 'var(--gr)' : pct < 100 ? 'var(--go)' : 'var(--re)';
-
-  // Ejercicios
-  const exList = document.getElementById('dc-ejercicios-list');
-  if(dcState.ejercicios.length===0){
-    exList.innerHTML='';
-  } else {
-    exList.innerHTML = dcState.ejercicios.map((e,i)=>`
-      <div class="dc-item">
-        <span class="dc-item-name">🏋️ ${e.nombre}</span>
-        <span class="dc-item-kcal" style="color:var(--bl)">-${e.kcal} kcal</span>
-        <button class="dc-del" onclick="delEjercicio(${i})">×</button>
-      </div>`).join('');
-  }
-
-  // Comidas por grupo
-  const grupos = ['desayuno','almuerzo','comida','merienda','cena','extra'];
-  const emojis = {desayuno:'☀️',almuerzo:'🍎',comida:'🍽️',merienda:'🍵',cena:'🌙',extra:'➕'};
-  const nombres = {desayuno:'Desayuno',almuerzo:'Almuerzo',comida:'Comida',merienda:'Merienda',cena:'Cena',extra:'Extra'};
-  let total=0;
-  grupos.forEach(g=>{
-    const items = dcState.comidas.filter(c=>c.comida===g);
-    const el = document.getElementById('dc-log-'+g);
-    if(items.length===0){el.innerHTML='';return;}
-    const subtotal = items.reduce((s,c)=>s+c.kcal,0);
-    total+=subtotal;
-    el.innerHTML=`
-      <div class="dc-meal-header">${emojis[g]} ${nombres[g]} · ${Math.round(subtotal)} kcal</div>
-      ${items.map((c,i)=>`
-        <div class="dc-item">
-          <span class="dc-item-name">${c.nombre} <span style='color:var(--muted);font-size:11px'>(${c.label||c.gramos+'g'})</span></span>
-          <span class="dc-item-kcal">${Math.round(c.kcal)}</span>
-          <button class="dc-del" onclick="delComida(${dcState.comidas.indexOf(c)})">×</button>
-        </div>`).join('')}`;
-  });
-  document.getElementById('dc-log-empty').style.display = total===0?'block':'none';
-}
-
-let searchTimer=null;
-function searchFood(){
-  const q = document.getElementById('dc-food-search').value.trim();
-  const res = document.getElementById('dc-food-results');
-  document.getElementById('dc-add-form').style.display='none';
-  if(q.length<2){res.innerHTML='';return;}
-
-  // Primero busca en base local
-  const local = FOODS_DB.filter(f=>f.n.toLowerCase().includes(q.toLowerCase())).slice(0,4);
-  let html = '';
-  if(local.length>0){
-    html += '<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:4px 2px 2px">Mis alimentos</div>';
-    html += local.map(f=>`<div class="dc-food-result" onclick='selectFoodObj(${JSON.stringify(f).replace(/'/g,"&apos;")})'>
-      <span class="dc-fr-name">${f.n}</span>
-      <span class="dc-fr-kcal">${f.k} kcal/100g</span>
-    </div>`).join('');
-  }
-  html += '<div id="dc-api-results"><div style="font-size:12px;color:var(--muted);padding:6px 2px">Buscando en base de datos...</div></div>';
-  res.innerHTML = html;
-
-  // Luego busca en Open Food Facts
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(()=>searchOpenFoodFacts(q), 400);
-}
-
-function searchOpenFoodFacts(q){
-  const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(q)}&search_simple=1&action=process&json=1&page_size=10&lc=es&cc=es&fields=product_name,brands,nutriments,serving_size`;
-  fetch(url)
-    .then(r=>r.json())
-    .then(data=>{
-      const el = document.getElementById('dc-api-results');
-      if(!el)return;
-      const products = (data.products||[]).filter(p=>{
-        const k = p.nutriments&&(p.nutriments['energy-kcal_100g']||p.nutriments['energy-kcal']);
-        return p.product_name && k && k>0 && k<1000;
-      }).slice(0,8);
-      if(products.length===0){el.innerHTML='<div style="font-size:12px;color:var(--muted);padding:6px 2px">Sin resultados en base de datos</div>';return;}
-      let html = '<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:6px 2px 2px">Open Food Facts</div>';
-      html += products.map(p=>{
-        const kcal = Math.round(p.nutriments['energy-kcal_100g']||p.nutriments['energy-kcal']||0);
-        const prot = Math.round(p.nutriments['proteins_100g']||0);
-        const carb = Math.round(p.nutriments['carbohydrates_100g']||0);
-        const fat  = Math.round(p.nutriments['fat_100g']||0);
-        const name = p.product_name + (p.brands ? ' · '+p.brands.split(',')[0] : '');
-        const obj = JSON.stringify({n:name,k:kcal,p:prot,c:carb,g:fat}).replace(/'/g,"&apos;");
-        return `<div class="dc-food-result" onclick='selectFoodObj(${obj})'>
-          <span class="dc-fr-name">${name.length>40?name.slice(0,40)+'…':name}</span>
-          <span class="dc-fr-kcal">${kcal} kcal/100g · P:${prot}g C:${carb}g G:${fat}g</span>
-        </div>`;
-      }).join('');
-      el.innerHTML = html;
-    })
-    .catch(()=>{
-      const el = document.getElementById('dc-api-results');
-      if(el)el.innerHTML='<div style="font-size:12px;color:var(--re);padding:6px 2px">Sin conexión — solo resultados locales</div>';
-    });
-}
-
-function selectFoodObj(obj){
-  const f = typeof obj==='string' ? JSON.parse(obj) : obj;
-  dcState.selectedFood = f;
-  document.getElementById('dc-add-food-name').textContent = f.n;
-  document.getElementById('dc-add-form').style.display='block';
-  document.getElementById('dc-food-results').innerHTML='';
-  document.getElementById('dc-food-search').value='';
-  // Mostrar raciones si las tiene
-  const racEl = document.getElementById('dc-raciones');
-  if(f.r && f.r.length>0){
-    racEl.style.display='flex';
-    racEl.innerHTML = f.r.map(r=>`<button onclick="setRacion(${r.g})" style="font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;font-family:inherit;white-space:nowrap">${r.l}</button>`).join('');
-  } else {
-    racEl.style.display='none';
-    racEl.innerHTML='';
-  }
-  updateAddPreview();
-}
-
-function setRacion(g){
-  document.getElementById('dc-cantidad').value = g;
-  // Highlight active ración
-  document.querySelectorAll('#dc-raciones button').forEach(b=>{
-    b.style.background = b.textContent.includes(g+'g') || b.getAttribute('onclick').includes('('+g+')') ? 'var(--pul)' : 'var(--card)';
-    b.style.color = b.getAttribute('onclick').includes('('+g+')') ? 'var(--pud)' : 'var(--text)';
-    b.style.borderColor = b.getAttribute('onclick').includes('('+g+')') ? 'var(--pu)' : 'var(--border)';
-  });
-  updateAddPreview();
-}
-
-function selectFood(idx){
-  dcState.selectedFood = FOODS_DB[idx];
-  document.getElementById('dc-add-food-name').textContent = FOODS_DB[idx].n;
-  document.getElementById('dc-add-form').style.display='block';
-  document.getElementById('dc-food-results').innerHTML='';
-  document.getElementById('dc-food-search').value='';
-  updateAddPreview();
-}
-
-function updateAddPreview(){
-  if(!dcState.selectedFood)return;
-  const g = parseFloat(document.getElementById('dc-cantidad').value)||100;
-  const kcal = Math.round((dcState.selectedFood.k/100)*g);
-  document.getElementById('dc-preview-kcal').textContent = kcal+' kcal';
-}
-
-function confirmAddFood(){
-  if(!dcState.selectedFood)return;
-  const g = parseFloat(document.getElementById('dc-cantidad').value)||100;
-  const comida = document.getElementById('dc-comida-sel').value;
-  const kcal = Math.round((dcState.selectedFood.k/100)*g);
-  // Busca si hay una ración que coincida con los gramos para mostrarla
-  const f = dcState.selectedFood;
-  let label = g+'g';
-  if(f.r){
-    const match = f.r.find(r=>r.g===g);
-    if(match) label = match.l;
-  }
-  dcState.comidas.push({nombre:dcState.selectedFood.n, gramos:g, label, kcal, comida});
-  dcState.selectedFood=null;
-  document.getElementById('dc-add-form').style.display='none';
-  document.getElementById('dc-cantidad').value=100;
-  document.getElementById('dc-raciones').innerHTML='';
-  saveDC();
-  renderDiario();
-}
-
-function addEjercicioDiario(){
-  const nombre = document.getElementById('dc-ex-input').value.trim();
-  const kcal = parseInt(document.getElementById('dc-ex-kcal').value)||0;
-  if(!nombre||kcal<=0)return;
-  dcState.ejercicios.push({nombre,kcal});
-  document.getElementById('dc-ex-input').value='';
-  document.getElementById('dc-ex-kcal').value='';
-  saveDC();
-  renderDiario();
-}
-
-function delComida(i){
-  dcState.comidas.splice(i,1);
-  saveDC();
-  renderDiario();
-}
-
-function delEjercicio(i){
-  dcState.ejercicios.splice(i,1);
-  saveDC();
-  renderDiario();
-}
-
-function clearDiario(){
-  const dLabel = dcState.currentDate===new Date().toISOString().split('T')[0]?'hoy':document.getElementById('dc-fecha-label').textContent;
-  if(!confirm('¿Borrar todos los registros de '+dLabel+'?'))return;
-  dcState.comidas=[];
-  dcState.ejercicios=[];
-  saveDC();
-  renderDiario();
-}
-
-</script>
 
 
 
