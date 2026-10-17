@@ -884,6 +884,15 @@ canvas{display:block;width:100%!important;height:100%!important}
     localStorage.setItem('ft_pr_ref',JSON.stringify({"Aperturas máquina palancas (DX)": [40, 12], "Press pecho máquina palancas (DX)": [50, 10], "Press banca mancuernas": [15, 10], "Press inclinado mancuernas": [15, 10], "Press inclinado máquina (DX)": [30, 10], "Cruce polea alto": [50, 12], "Cruce polea bajo": [30, 12], "Pec Deck máquina (DX)": [60, 12], "Press tríceps máquina sentado (polea)": [20, 12], "Pushdown polea cuerda": [20, 12], "Extensión overhead polea cuerda": [25, 12], "Extensión mancuerna tras nuca": [10, 12], "Pushdown polea V": [20, 12], "Jalón polea agarre neutro": [55, 10], "Jalón polea agarre ancho": [50, 10], "Jalón polea agarre supino": [50, 10], "Remo máquina palancas (DX)": [80, 10], "Remo mancuerna unilateral": [20, 10], "Remo polea agarre neutro": [50, 10], "Face pulls polea": [35, 15], "Rear delt máquina (DX)": [25, 12], "Pájaro en polea baja": [10, 12], "Curl predicador máquina (DX)": [12.5, 10], "Curl predicador mancuerna": [7.5, 10], "Curl inclinado mancuernas (cabeza larga)": [7.5, 10], "Curl martillo mancuernas": [7.5, 12], "Curl concentrado mancuerna": [10, 10], "Curl alterno mancuernas supinando": [7.5, 10], "Sentadilla en Smith": [90, 10], "Prensa de piernas": [102, 12], "Hack squat máquina": [100, 10], "Extensión cuádriceps máquina (DX)": [55, 12], "Curl femoral tumbado máquina": [50, 10], "Curl femoral sentado máquina": [55, 10], "Hip thrust máquina (DX)": [40, 12], "RDL mancuernas": [15, 10], "RDL máquina palancas (DX)": [40, 10], "Gemelo máquina sentado — sóleo (DX)": [50, 15], "Gemelo máquina de pie": [50, 15], "Gemelo prensa de piernas": [40, 15], "Abducción cadera máquina": [50, 15], "Press hombros máquina palancas (DX)": [35, 10], "Elevaciones laterales mancuernas": [7.5, 12], "Elevaciones laterales polea baja": [10, 15], "Elevaciones laterales mancuernas inclinado": [5, 12], "Elevaciones laterales máquina (DX)": [10, 12], "Press Arnold mancuernas": [10, 10], "Press hombros mancuernas sentado": [12.5, 10], "Back extension máquina": [60, 15], "Crunch máquina abdominal": [30, 12], "Oblicuos lateral máquina": [20, 12]}));
     localStorage.setItem(flag,'1');
   }
+  // Vuelta oct-2026: archiva el histórico y empieza el programa desde la sesión 1 (PRs, biometría y pasos se conservan)
+  var flagV='ft_vuelta_20261019';
+  if(!localStorage.getItem(flagV)){
+    ['ft4_logs','ft_done','ft_done_dates','ft_sess','ft4_notes','ft4_warmup'].forEach(function(k){
+      var v=localStorage.getItem(k);
+      if(v!==null){localStorage.setItem(k+'_pre_vuelta',v);localStorage.removeItem(k);}
+    });
+    localStorage.setItem(flagV,'1');
+  }
 }catch(e){}})();</script>
 <script>
 
@@ -1105,6 +1114,43 @@ function buildProg(){
   // ── MESOCICLO 1 PPHL: semanas 2-5 (S11-S30) ─────────────────────────────────
   // Orden: Push, Pull, Legs, Hombros + 1 hueco (descanso si solo 4 días)
 
+  // ── VUELTA: 2 semanas full body x3 (50% y 60% de la referencia) ─────────
+  function buildFB(kind,wk){
+    const st=wk===0?'2x12-15':'3x12-15';
+    const pct=wk===0?'VUELTA 50%':'VUELTA 60%';
+    const L={
+      A:{label:'Full body A',calm:'legs',exs:[
+        ['Pierna — prensa','Prensa de piernas','cuad',120],
+        ['Pecho — press palancas DX','Press pecho máquina palancas (DX)','pecho',90],
+        ['Espalda — jalón','Jalón polea agarre neutro','espalda_v',90],
+        ['Isquiotibiales — curl','Curl femoral tumbado máquina','posterior',90],
+        ['Hombro — laterales','Elevaciones laterales mancuernas','lateral',60],
+        ['Core','Crunch máquina abdominal',null,60]]},
+      B:{label:'Full body B',calm:'pull',exs:[
+        ['Glúteo — hip thrust','Hip thrust máquina (DX)','posterior',90],
+        ['Espalda — remo palancas DX','Remo máquina palancas (DX)','espalda_h',90],
+        ['Hombro — press palancas DX','Press hombros máquina palancas (DX)','hombro',90],
+        ['Cuádriceps — extensión','Extensión cuádriceps máquina (DX)','cuad',60],
+        ['Deltoides posterior','Face pulls polea','face_pull',60],
+        ['Bíceps','Curl predicador máquina (DX)','biceps',60]]},
+      C:{label:'Full body C',calm:'push',exs:[
+        ['Pierna — sentadilla Smith','Sentadilla en Smith','cuad',120],
+        ['Pecho — press inclinado DX','Press inclinado máquina (DX)','pecho',90],
+        ['Espalda — remo polea','Remo polea agarre neutro','espalda_h',90],
+        ['Isquiotibiales — curl sentado','Curl femoral sentado máquina','posterior',90],
+        ['Tríceps','Pushdown polea cuerda','triceps',60],
+        ['Core','Crunch inverso — elevación piernas',null,60]]}
+    }[kind];
+    const blocks=L.exs.map(x=>({label:x[0],exs:[ex(x[1],st,12,null,null,x[2],x[3])]}));
+    blocks.push({label:'Cardio',exs:[cardio('Bici estática Zona 2','15 min — 125-140 ppm')]});
+    return{type:'gym',label:L.label,icon:'🔄',color:'gym',calmType:L.calm,isDeload:false,
+      duration:wk===0?'Gym ~40 min + Cardio 15 min':'Gym ~50 min + Cardio 15 min',
+      desc:pct+' — '+L.exs.map(x=>x[1]).join(' · '),blocks};
+  }
+  for(let wk=0;wk<2;wk++){
+    prog.push([buildFB('A',wk),buildFB('B',wk),buildFB('C',wk),rest(),rest(),rest(),rest()]);
+  }
+
   // ── 8 SEMANAS: readapt + progresión + intensidad + deload ────────────────
   for(let w=0;w<=7;w++){
     const dl=w===7;
@@ -1137,6 +1183,8 @@ function buildProg(){
 
 const PROG_NESTED=buildProg();
 const PROG=(()=>{const f=[];PROG_NESTED.forEach(w=>w.forEach(d=>{if(d.type!=="rest")f.push(d);}));return f;})();
+function semReal(){return (SESS_WD[curSession]||[curWeek+1])[0];}
+const SESS_WD=(()=>{const r=[];PROG_NESTED.forEach((w,wi)=>{let d=0;w.forEach(x=>{if(x.type!=="rest")r.push([wi+1,++d]);});});return r;})();
 // PROG = 20 gym sessions (4 weeks x 5 days, no rest days)
 const DAYS=['Lun','Mar','Mie','Jue','Vie','Sab','Dom'];
 const DAYS_F=['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
@@ -1294,8 +1342,12 @@ function renderTimerArea(){
 
 // ─── SUGGESTION ENGINE ────────────────────────────────────────────────────────
 function getSuggestion(w,d,bi,ei,ps,pr,isLegs){
-  if(w===0) return null;
-  const pk=exKey(w-1,d,bi,ei);const pl=logs[pk];
+  const ci=w*5+d,cs=PROG[ci];if(!cs||!cs.blocks||!cs.blocks[bi])return null;
+  const cn=(cs.blocks[bi].exs[ei]||{}).n;let pk=null;
+  for(let j=ci-1;j>=0&&!pk;j--){const ps2=PROG[j];if(!ps2||ps2.label!==cs.label||!ps2.blocks)continue;
+    ps2.blocks.forEach((b2,bj)=>b2.exs.forEach((e2,ej)=>{if(!pk&&e2.n===cn)pk=exKey(Math.floor(j/5),j%5,bj,ej);}));}
+  if(!pk) return null;
+  const pl=logs[pk];
   if(!pl||!pl.sets||!pl.sets.length) return null;
   const done=pl.sets.filter(s=>s.done&&s.kg&&s.reps);if(!done.length) return null;
   const avgKg=done.reduce((a,s)=>a+(parseFloat(s.kg)||0),0)/done.length;
@@ -1434,7 +1486,7 @@ function showSumModal(elapsedSec){
   const vEl=document.getElementById('sum-vol');if(vEl)vEl.textContent=Math.round(vol).toLocaleString('es-ES');
   const sEl=document.getElementById('sum-series');if(sEl)sEl.textContent=series;
   const eEl=document.getElementById('sum-exdone');if(eEl)eEl.textContent=exDone;
-  const sub=document.getElementById('tb-sub');if(sub&&PROG[curSession])sub.textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
+  const sub=document.getElementById('tb-sub');if(sub&&PROG[curSession])sub.textContent=PROG[curSession].label+' · Sem '+semReal()+(PROG[curSession].isDeload?' · Descarga':'');
   if(sessionPRsToday.length){
     const pw=document.getElementById('sum-prs-wrap');if(pw)pw.style.display='block';
     const pl=document.getElementById('sum-prs-list');if(pl)pl.innerHTML=sessionPRsToday.map(p=>'<div class="sum-pr-r">'+p.name+': '+p.kg+' kg</div>').join('');
@@ -1472,13 +1524,13 @@ function renderDayScroll(){
   const el=document.getElementById('day-scroll');
   if(!el) return;
   el.innerHTML=PROG.map((sess,i)=>{
-    const wk=Math.floor(i/5)+1;
+    const wk=(SESS_WD[i]||[Math.floor(i/5)+1])[0];
     const done=isDayDone(i);
     const isActive=i===curSession;
     const mainEx=sess.blocks&&sess.blocks[0]&&sess.blocks[0].exs&&sess.blocks[0].exs[0];
     const exCode=mainEx?mainEx.n.split(' ').slice(0,2).join(' ').toUpperCase():'';
     return`<div class="dchip ${isActive?'today':(isDayDone(i)?'done-chip':'future-chip')}" onclick="jumpSess(${i})">
-      <span class="dcn">S${wk}·${i%5+1}</span>
+      <span class="dcn">S${wk}·${(SESS_WD[i]||[0,i%5+1])[1]}</span>
       <strong class="dct">${sess.label}</strong>
       <span style="font-size:7px;color:${isActive?'var(--pud)':'var(--pu)'};display:block;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:68px">${exCode}</span>
       <div class="dcd ${sess.type}"></div></div>`;
@@ -1509,10 +1561,12 @@ function getSuggestedWeight(exName){
     if(!sess)return null;
     var desc=sess.desc||'';
     var mult=1;
-    if(desc.indexOf('READAPTACIÓN')>-1)mult=0.65;
+    if(desc.indexOf('VUELTA 50%')>-1)mult=0.5;
+    else if(desc.indexOf('VUELTA 60%')>-1)mult=0.6;
+    else if(desc.indexOf('READAPTACIÓN')>-1)mult=0.65;
     else if(desc.indexOf('PROGRESIÓN')>-1)mult=0.85;
     var suggested=Math.round(refKg*mult*2)/2;
-    return{kg:suggested,phase:mult<1?(mult===0.65?'65%':'85%'):'100%'};
+    return{kg:suggested,phase:Math.round(mult*100)+'%'};
   }catch(ex2){return null;}
 }
 function renderSession(){
@@ -1531,15 +1585,19 @@ function renderSession(){
   document.getElementById('s-total-s').textContent=`de ${ts} series`;
   document.getElementById('s-vol').textContent=Math.round(tv).toLocaleString('es-ES');
   document.getElementById('main-prog').style.width=pct+'%';
-  document.getElementById('tb-sub').textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
-  document.getElementById('tb-badge').textContent=`Sem ${curWeek+1}`;
+  document.getElementById('tb-sub').textContent=PROG[curSession].label+' · Sem '+semReal()+(PROG[curSession].isDeload?' · Descarga':'');
+  document.getElementById('tb-badge').textContent=`Sem ${semReal()}`;
 
   let html='<div id="warmup-block"></div><div class="card">';
-  const sub=document.getElementById('tb-sub');if(sub&&PROG[curSession])sub.textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
+  const sub=document.getElementById('tb-sub');if(sub&&PROG[curSession])sub.textContent=PROG[curSession].label+' · Sem '+semReal()+(PROG[curSession].isDeload?' · Descarga':'');
   html+=`<div class="shdr"><div class="sico ${s.type}">${s.icon}</div><div class="sinfo"><div class="stitle">${s.label}</div><div class="smeta">${s.duration}</div></div></div>`;
-  if(s.isDeload)html+=`<div class="warnbox">Semana 4 — DESCARGA: 60% volumen. El cuerpo consolida y crece durante la recuperación.</div>`;
-  else if(curWeek<2)html+=`<div class="warnbox" style="background:#eff6ff;border-color:#3b82f6;color:#1e40af">Sem ${curWeek+1}/4 — Volumen base: 2 series/ejercicio. Aprende los movimientos, registra tus pesos.</div>`;
-  else html+=`<div class="warnbox" style="background:#f0fdf4;border-color:#16a34a;color:#065f46">Sem ${curWeek+1}/4 — Volumen máximo: 3 series/ejercicio. Aquí es donde se construye el músculo.</div>`;
+  {const _sw=`Sem ${semReal()}/${PROG_NESTED.length}`;const _d=s.desc||'';
+  if(s.isDeload)html+=`<div class="warnbox">${_sw} — DESCARGA: menos volumen. El cuerpo consolida y crece durante la recuperación.</div>`;
+  else if(_d.indexOf('VUELTA 50%')>-1)html+=`<div class="warnbox" style="background:#eff6ff;border-color:#3b82f6;color:#1e40af">${_sw} — Vuelta: 2 series al 50%. Deja 3-4 repeticiones en reserva; hoy manda la técnica, no el peso.</div>`;
+  else if(_d.indexOf('VUELTA 60%')>-1)html+=`<div class="warnbox" style="background:#eff6ff;border-color:#3b82f6;color:#1e40af">${_sw} — Vuelta: 3 series al 60%. Deja 2-3 repeticiones en reserva.</div>`;
+  else if(_d.indexOf('READAPTACIÓN')>-1)html+=`<div class="warnbox" style="background:#eff6ff;border-color:#3b82f6;color:#1e40af">${_sw} — Readaptación PPHL: 2 series al 65%. Registra tus pesos.</div>`;
+  else if(_d.indexOf('PROGRESIÓN')>-1)html+=`<div class="warnbox" style="background:#f0fdf4;border-color:#16a34a;color:#065f46">${_sw} — Progresión: 3 series al 85%.</div>`;
+  else html+=`<div class="warnbox" style="background:#f0fdf4;border-color:#16a34a;color:#065f46">${_sw} — Intensidad completa: aquí es donde se construye el músculo.</div>`;}
   if(s.isDeload)html+=`<div class="warnbox">Semana de descarga - 60% del volumen. Tecnica perfecta.</div>`;
   if(s.spinning)html+=`<div class="tipbox">Doble sesion: gym primero, spinning despues.</div>`;
   if(s.eliptica)html+=`<div class="tipbox">Eliptica 30 min al terminar. Zona 2: 118-127 ppm.</div>`;
@@ -1972,6 +2030,9 @@ function renderBioCharts(){
   dc('bio-chart-grasa',{type:'line',data:{labels,datasets:[{label:'Grasa %',data:bioData.map(b=>b.grasa),borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,0.1)',tension:.3,pointRadius:4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
   dc('bio-chart-comp',{type:'bar',data:{labels,datasets:[{label:'Masa magra',data:bioData.map(b=>b.magra),backgroundColor:'rgba(15,118,110,0.7)',borderRadius:4},{label:'Masa grasa',data:bioData.map(b=>b.grasaKg),backgroundColor:'rgba(220,38,38,0.5)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10},boxWidth:10}}},scales:{x:{ticks:{font:{size:10}}},y:{ticks:{font:{size:10}}}}}});
 }
+// ─── AVISO BREVE (showToast se llamaba pero no existía) ───────
+function showToast(msg){try{var t=document.createElement('div');t.textContent=msg;t.style.cssText='position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;z-index:9999;max-width:90vw;text-align:center';document.body.appendChild(t);setTimeout(function(){t.remove();},2500);}catch(e){}}
+
 // ─── EXPORTAR AL PANEL (solo lectura) ───────
 function exportPanelJSON(){
   try{
@@ -3376,9 +3437,9 @@ function showMuscleModal(exName){
 
 function updateBadge(){
   const b=document.getElementById('tb-badge');
-  if(b) b.textContent='S'+(curSession+1)+'/20';
+  if(b) b.textContent='S'+(curSession+1)+'/'+PROG.length;
   const sub=document.getElementById('tb-sub');
-  if(sub&&PROG[curSession]) sub.textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
+  if(sub&&PROG[curSession]) sub.textContent=PROG[curSession].label+' · Sem '+semReal()+(PROG[curSession].isDeload?' · Descarga':'');
 }
 
 // ─── SESSION NAVIGATION ───────────────────────────────────────────────────────
@@ -3386,7 +3447,7 @@ function prevSession(){
   if(curSession>0){curSession--;curWeek=Math.floor(curSession/5);curDay=curSession%5;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
 }
 function nextSession(){
-  if(curSession<19){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
+  if(curSession<PROG.length-1){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
 }
 
 // ─── RUNNING PROGRAM ──────────────────────────────────────────────────────────
@@ -3409,7 +3470,7 @@ function toggleCalm(key){
   saveL();renderSession();
 }
 
-function confirmSessionDone(){markSessionDone(curSession);if(curSession<19){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;localStorage.setItem('ft_sess',curSession);}renderDayScroll();renderSession();renderSessionBanner();showToast('Sesion completada. Siguiente: '+PROG[Math.min(curSession,19)].label);}
+function confirmSessionDone(){markSessionDone(curSession);if(curSession<PROG.length-1){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;localStorage.setItem('ft_sess',curSession);}renderDayScroll();renderSession();renderSessionBanner();showToast('Sesion completada. Siguiente: '+PROG[Math.min(curSession,PROG.length-1)].label);}
 let absCompleted=JSON.parse(localStorage.getItem('ft_abs_done')||'[]');
 function saveAbsCompleted(){localStorage.setItem('ft_abs_done',JSON.stringify(absCompleted));}
 function isAbsDone(i){return absCompleted.includes(i);}
@@ -3595,9 +3656,9 @@ function showMuscleModal(exName){
 
 function updateBadge(){
   const b=document.getElementById('tb-badge');
-  if(b) b.textContent='S'+(curSession+1)+'/20';
+  if(b) b.textContent='S'+(curSession+1)+'/'+PROG.length;
   const sub=document.getElementById('tb-sub');
-  if(sub&&PROG[curSession]) sub.textContent=PROG[curSession].label+' · Sem '+(curWeek+1)+(PROG[curSession].isDeload?' · Descarga':'');
+  if(sub&&PROG[curSession]) sub.textContent=PROG[curSession].label+' · Sem '+semReal()+(PROG[curSession].isDeload?' · Descarga':'');
 }
 
 // ─── SESSION NAVIGATION ───────────────────────────────────────────────────────
@@ -3605,7 +3666,7 @@ function prevSession(){
   if(curSession>0){curSession--;curWeek=Math.floor(curSession/5);curDay=curSession%5;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
 }
 function nextSession(){
-  if(curSession<19){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
+  if(curSession<PROG.length-1){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;saveSess();updateBadge();renderSession();renderDayScroll();renderSessionBanner();renderWarmupBlock(curWeek,curDay);}
 }
 
 // ─── RUNNING PROGRAM ──────────────────────────────────────────────────────────
@@ -3628,7 +3689,7 @@ function toggleCalm(key){
   saveL();renderSession();
 }
 
-function confirmSessionDone(){markSessionDone(curSession);if(curSession<19){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;localStorage.setItem('ft_sess',curSession);}renderDayScroll();renderSession();renderSessionBanner();showToast('Sesion completada. Siguiente: '+PROG[Math.min(curSession,19)].label);}
+function confirmSessionDone(){markSessionDone(curSession);if(curSession<PROG.length-1){curSession++;curWeek=Math.floor(curSession/5);curDay=curSession%5;localStorage.setItem('ft_sess',curSession);}renderDayScroll();renderSession();renderSessionBanner();showToast('Sesion completada. Siguiente: '+PROG[Math.min(curSession,PROG.length-1)].label);}
 
 function renderBioHistory(){
   if(typeof showBioTab==='function')showBioTab('registro',document.querySelector('#scr-bio .tab-btn'));
