@@ -451,6 +451,7 @@ canvas{display:block;width:100%!important;height:100%!important}
       <textarea class="export-area" id="export-text" placeholder="Pulsa el boton de arriba..." readonly></textarea>
       <button class="btn-outline" onclick="copyExport()">Copiar al portapapeles</button>
       <div id="copy-confirm" style="text-align:center;font-size:13px;color:var(--gr);margin-top:8px;display:none">Copiado. Pega esto en Claude.</div>
+      <button class="btn-export" onclick="exportPanelJSON()" style="margin-top:12px">Exportar datos para el panel</button>
     </div>
   </div>
 </div>
@@ -1148,7 +1149,7 @@ function saveSess(){localStorage.setItem('ft_sess',curSession);}
 function jumpSess(i){curSession=i;curWeek=Math.floor(i/5);curDay=i%5;sessionStartTime=null;clearInterval(sessionTimerInt);renderDayScroll();renderSession();renderSessionBanner();renderWarmupBlock(curWeek,curDay);updateBadge();}
 let logs=JSON.parse(localStorage.getItem('ft4_logs')||'{}');
 let completedSessions=JSON.parse(localStorage.getItem('ft_done')||'[]');
-function markSessionDone(i){if(!completedSessions.includes(i))completedSessions.push(i);localStorage.setItem('ft_done',JSON.stringify(completedSessions));}
+function markSessionDone(i){if(!completedSessions.includes(i))completedSessions.push(i);localStorage.setItem('ft_done',JSON.stringify(completedSessions));try{var dd=JSON.parse(localStorage.getItem('ft_done_dates')||'{}');if(!dd[i]){dd[i]=new Date().toLocaleDateString('en-CA');localStorage.setItem('ft_done_dates',JSON.stringify(dd));}}catch(e){}}
 function isSessionDone(i){return completedSessions.includes(i);}
 let bioData=JSON.parse(localStorage.getItem('ft4_bio')||'[]');
 let sessionNotes=JSON.parse(localStorage.getItem('ft4_notes')||'{}');
@@ -1971,6 +1972,32 @@ function renderBioCharts(){
   dc('bio-chart-grasa',{type:'line',data:{labels,datasets:[{label:'Grasa %',data:bioData.map(b=>b.grasa),borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,0.1)',tension:.3,pointRadius:4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
   dc('bio-chart-comp',{type:'bar',data:{labels,datasets:[{label:'Masa magra',data:bioData.map(b=>b.magra),backgroundColor:'rgba(15,118,110,0.7)',borderRadius:4},{label:'Masa grasa',data:bioData.map(b=>b.grasaKg),backgroundColor:'rgba(220,38,38,0.5)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10},boxWidth:10}}},scales:{x:{ticks:{font:{size:10}}},y:{ticks:{font:{size:10}}}}}});
 }
+// ─── EXPORTAR AL PANEL (solo lectura) ───────
+function exportPanelJSON(){
+  try{
+    let doneDates={};try{doneDates=JSON.parse(localStorage.getItem('ft_done_dates')||'{}');}catch(e){}
+    const wk=[];PROG_NESTED.forEach((w,wi)=>{let d=0;w.forEach(x=>{if(x.type!=="rest")wk.push([wi+1,++d]);});});
+    const sesiones=PROG.map((p,i)=>{
+      let series=0,vol=0;
+      (p.blocks||[]).forEach((b,bi)=>(b.exs||[]).forEach((e,ei)=>{
+        if(e.cardio)return;
+        const lg=logs['s'+i+'b'+bi+'e'+ei];
+        if(lg&&lg.sets){const m=isMancuerna(e.n)?2:1;lg.sets.forEach(st=>{if(st&&st.done){series++;vol+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0)*m;}});}
+      }));
+      return {sesion:i+1,semana:(wk[i]||[0])[0],dia:(wk[i]||[0,0])[1],nombre:p.label||'',descarga:!!p.isDeload,hecha:completedSessions.includes(i),fecha:doneDates[i]||null,series_hechas:series,volumen_kg:Math.round(vol)};
+    });
+    const data={app:'FitTracker Pro',exportado:new Date().toISOString(),sesion_actual:curSession+1,total_sesiones:PROG.length,sesiones,
+      biometria:bioData.slice().sort((a,b)=>a.date<b.date?-1:1),
+      pasos:Object.keys(stepsData).sort().map(d=>({fecha:d,pasos:Number(stepsData[d])||0}))};
+    const json=JSON.stringify(data,null,1);
+    const name='fittracker_panel.json';
+    const file=new File([json],name,{type:'application/json'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],title:name}).catch(()=>{});return;}
+    const url=URL.createObjectURL(new Blob([json],{type:'application/json'}));
+    const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+  }catch(err){alert('No se pudo exportar: '+err.message);}
+}
+
 function generateExport(){
   const prs=computePRs();
   const lines=[];
