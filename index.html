@@ -304,6 +304,10 @@ canvas{display:block;width:100%!important;height:100%!important}
 /* Steps */
 .steps-row{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:var(--r);border:1px solid var(--border);padding:14px;margin-bottom:10px}
 .steps-icon{font-size:28px}
+.cardio-row{background:var(--card);border-radius:var(--r);border:1px solid var(--border);padding:12px 14px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px}
+.cardio-btns{display:flex;gap:8px}
+.cardio-btn{flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--border);background:transparent;font-size:14px;font-weight:600;cursor:pointer;color:inherit}
+.cardio-btn.done{background:var(--pu);border-color:var(--pu);color:#fff}
 .steps-info{flex:1}
 .steps-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 .steps-val{font-size:28px;font-weight:800;color:var(--pu);line-height:1.1}
@@ -396,6 +400,13 @@ canvas{display:block;width:100%!important;height:100%!important}
     <div class="steps-bar"><div class="steps-fill" id="steps-fill" style="width:0%"></div></div>
   </div>
   <input class="steps-input" id="steps-input" type="number" min="0" max="99999" placeholder="0" oninput="saveSteps(this.value)" onclick="this.select()">
+</div>
+<div class="cardio-row">
+  <div class="steps-label">Cardio de hoy</div>
+  <div class="cardio-btns">
+    <button class="cardio-btn" id="cardio-spin" onclick="toggleCardioHoy('spinning')">🚴 Spinning</button>
+    <button class="cardio-btn" id="cardio-walk" onclick="toggleCardioHoy('caminata')">🚶 Caminata</button>
+  </div>
 </div>
 <div id="session-banner-area"></div><div id="timer-area"></div>
   <div id="session-area"></div>
@@ -2050,7 +2061,8 @@ function exportPanelJSON(){
     });
     const data={app:'FitTracker Pro',exportado:new Date().toISOString(),sesion_actual:curSession+1,total_sesiones:PROG.length,sesiones,
       biometria:bioData.slice().sort((a,b)=>a.date<b.date?-1:1),
-      pasos:Object.keys(stepsData).sort().map(d=>({fecha:d,pasos:Number(stepsData[d])||0}))};
+      pasos:Object.keys(stepsData).sort().map(d=>({fecha:d,pasos:Number(stepsData[d])||0})),
+      cardio:(()=>{const c=cardioLog();return Object.keys(c).sort().map(f=>({fecha:f,spinning:!!c[f].spinning,caminata:!!c[f].caminata}));})()};
     const json=JSON.stringify(data,null,1);
     const name='fittracker_panel.json';
     const file=new File([json],name,{type:'application/json'});
@@ -3500,7 +3512,12 @@ function renderStepsWidget(){
   if(g)g.textContent=val.toLocaleString('es-ES')+' / '+goal.toLocaleString('es-ES')+' pasos ('+(val>=goal?'✓ Objetivo!':pct+'%')+')';
   if(f)f.style.width=pct+'%';
   if(inp&&inp!==document.activeElement)inp.value=val||'';
+  renderCardio();
 }
+// ─── CARDIO DE HOY (spinning y caminata) ───────
+function cardioLog(){try{return JSON.parse(localStorage.getItem('ft_cardio')||'{}');}catch(e){return {};}}
+function toggleCardioHoy(t){var d=cardioLog();var k=new Date().toLocaleDateString('en-CA');d[k]=d[k]||{};d[k][t]=!d[k][t];localStorage.setItem('ft_cardio',JSON.stringify(d));renderCardio();}
+function renderCardio(){var d=cardioLog()[new Date().toLocaleDateString('en-CA')]||{};[['spinning','cardio-spin','🚴 Spinning'],['caminata','cardio-walk','🚶 Caminata']].forEach(function(x){var b=document.getElementById(x[1]);if(!b)return;var on=!!d[x[0]];b.classList.toggle('done',on);b.textContent=on?'✓ '+x[2]+' hecho':x[2];});}
 
 // ── FOOD DIARY ─────────────────────────────────────────────────────────────────
 let foodData=JSON.parse(localStorage.getItem('ft_food')||'{}');
