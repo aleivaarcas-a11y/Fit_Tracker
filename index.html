@@ -1758,7 +1758,7 @@ function renderDashboard(){
   // ── Progreso del programa (dots) ─────────────────────────────────────────
   html+='<div class="card" style="margin-bottom:10px"><div class="dash-section" style="margin-top:0">Sesiones del programa</div>';
   html+='<div class="sess-grid">';
-  for(var i=0;i<20;i++){
+  for(var i=0;i<PROG.length;i++){
     var isDone=isSessionDone(i);
     var isCur=i===curSession;
     var cls=isDone?'sess-done':isCur?'sess-today':'sess-future';
@@ -1776,17 +1776,18 @@ function renderDashboard(){
   html+='<div class="card" style="margin-bottom:10px"><div class="dash-section" style="margin-top:0">Volumen por semana</div>';
   var weekVols=[];
   var maxVol=0;
-  for(var w=0;w<4;w++){
+  var nW=PROG_NESTED.length;
+  for(var w=0;w<nW;w++){
     var wv=0,ws=0;
-    for(var d=0;d<5;d++){
-      var si=w*5+d;
+    for(var si=0;si<PROG.length;si++){
+      if((SESS_WD[si]||[0])[0]!==w+1)continue;
       var sess=PROG[si];
       if(!sess||!sess.blocks)continue;
       sess.blocks.forEach(function(b,bi){
         b.exs.forEach(function(e,ei){
           if(e.cardio)return;
           var lg=logs['s'+si+'b'+bi+'e'+ei];
-          if(lg&&lg.sets){var _m5=isMancuerna(ex.n)?2:1;lg.sets.forEach(function(st){
+          if(lg&&lg.sets){var _m5=isMancuerna(e.n)?2:1;lg.sets.forEach(function(st){
             if(st.done){ws++;wv+=(parseFloat(st.kg)||0)*(parseInt(st.reps)||0)*_m5;}
           });}
         });
@@ -1798,7 +1799,7 @@ function renderDashboard(){
   weekVols.forEach(function(wk){
     var pct2=maxVol>0?Math.round(wk.vol/maxVol*100):0;
     html+='<div class="week-bar-wrap">'+
-      '<div class="week-bar-label"><span>Sem '+(wk.w+1)+(wk.w===3?' (deload)':'')+'</span>'+
+      '<div class="week-bar-label"><span>Sem '+(wk.w+1)+(wk.w===nW-1?' (descarga)':'')+'</span>'+
         '<span style="font-weight:700">'+Math.round(wk.vol).toLocaleString('es-ES')+' kg · '+wk.ser+' series</span></div>'+
       '<div class="week-bar-track"><div class="week-bar-fill" style="width:'+pct2+'%;background:'+(wk.vol>0?'var(--pu)':'var(--border)')+'"></div></div>'+
     '</div>';
@@ -1913,12 +1914,12 @@ function renderDashboard(){
 function renderExChart(){
   const sel=document.getElementById('chart-ex-sel');const exName=sel.value;if(!exName)return;
   const pts=[];
-  for(let w=0;w<4;w++)Array.from({length:5},(_,d)=>(PROG[w*5+d]||{})||{blocks:[]}).forEach((day,d)=>day.blocks.forEach((b,bi)=>b.exs.forEach((e,ei)=>{
-    if(e.n!==exName)return;const lg=logs[exKey(w,d,bi,ei)];if(!lg||!lg.sets)return;
+  PROG.forEach((day,i)=>{const wd=SESS_WD[i]||[Math.floor(i/5)+1,i%5+1];const w=wd[0]-1,d=wd[1]-1;(day.blocks||[]).forEach((b,bi)=>b.exs.forEach((e,ei)=>{
+    if(e.n!==exName)return;const lg=logs[exKey(Math.floor(i/5),i%5,bi,ei)];if(!lg||!lg.sets)return;
     const done=lg.sets.filter(s=>s.done&&s.kg&&s.reps);if(!done.length)return;
     const avg=done.reduce((a,s)=>a+(parseFloat(s.kg)||0),0)/done.length;
     pts.push({label:`S${w+1}D${d+1}`,avg:Math.round(avg*10)/10,max:Math.max(...done.map(s=>parseFloat(s.kg)||0))});
-  })));
+  }));});
   const ctx=document.getElementById('prog-chart');
   if(exChart){exChart.destroy();exChart=null;}
   if(!pts.length){ctx.parentElement.innerHTML='<div class="no-data">Sin datos aun para este ejercicio.</div>';return;}
